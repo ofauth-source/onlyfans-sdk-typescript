@@ -1,0 +1,22 @@
+{
+  "name": "@ofauth/sdk-examples",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "basic": "tsx basic.ts",
+    "import-connection": "tsx import-connection.ts",
+    "access-api": "tsx access-api.ts",
+    "pagination": "tsx pagination.ts",
+    "proxy": "tsx proxy.ts",
+    "error-handling": "tsx error-handling.ts"
+  },
+  "dependencies": {
+    "@ofauth/sdk": "file:..",
+    "dotenv": "^16.4.5"
+  },
+  "devDependencies": {
+    "@types/node": "^25.0.10",
+    "tsx": "^4.7.0"
+  }
+}
