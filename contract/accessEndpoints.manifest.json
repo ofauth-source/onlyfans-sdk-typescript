@@ -1,0 +1,632 @@
+[
+  {
+    "method": "get",
+    "route": "/analytics/campaigns/chart",
+    "tag": "Analytics",
+    "summary": "Campaigns chart"
+  },
+  {
+    "method": "get",
+    "route": "/analytics/campaigns/top",
+    "tag": "Analytics",
+    "summary": "Top campaigns"
+  },
+  {
+    "method": "get",
+    "route": "/analytics/earnings/chargebacks",
+    "tag": "Analytics",
+    "summary": "Chargebacks"
+  },
+  {
+    "method": "get",
+    "route": "/analytics/earnings/chart",
+    "tag": "Analytics",
+    "summary": "Earnings chart"
+  },
+  {
+    "method": "get",
+    "route": "/analytics/earnings/transactions",
+    "tag": "Analytics",
+    "summary": "Transactions"
+  },
+  {
+    "method": "get",
+    "route": "/analytics/mass-messages/:massMessageId/buyers",
+    "tag": "Analytics",
+    "summary": "Mass message buyers"
+  },
+  {
+    "method": "get",
+    "route": "/analytics/mass-messages/chart",
+    "tag": "Analytics",
+    "summary": "Mass messages chart"
+  },
+  {
+    "method": "get",
+    "route": "/analytics/mass-messages/purchased",
+    "tag": "Analytics",
+    "summary": "Mass messages purchased"
+  },
+  {
+    "method": "get",
+    "route": "/analytics/posts/:postId",
+    "tag": "Analytics",
+    "summary": "Post stats"
+  },
+  {
+    "method": "get",
+    "route": "/analytics/posts/chart",
+    "tag": "Analytics",
+    "summary": "Posts chart"
+  },
+  {
+    "method": "get",
+    "route": "/analytics/posts/top",
+    "tag": "Analytics",
+    "summary": "Top posts"
+  },
+  {
+    "method": "get",
+    "route": "/analytics/promotions/chart",
+    "tag": "Analytics",
+    "summary": "Promotions chart"
+  },
+  {
+    "method": "get",
+    "route": "/analytics/promotions/top",
+    "tag": "Analytics",
+    "summary": "Top promotions"
+  },
+  {
+    "method": "get",
+    "route": "/analytics/stories/chart",
+    "tag": "Analytics",
+    "summary": "Stories chart"
+  },
+  {
+    "method": "get",
+    "route": "/analytics/stories/top",
+    "tag": "Analytics",
+    "summary": "Top stories"
+  },
+  {
+    "method": "get",
+    "route": "/analytics/streams/chart",
+    "tag": "Analytics",
+    "summary": "Streams chart"
+  },
+  {
+    "method": "get",
+    "route": "/analytics/streams/top",
+    "tag": "Analytics",
+    "summary": "Top streams"
+  },
+  {
+    "method": "get",
+    "route": "/analytics/trials/chart",
+    "tag": "Analytics",
+    "summary": "Trials chart"
+  },
+  {
+    "method": "get",
+    "route": "/analytics/trials/top",
+    "tag": "Analytics",
+    "summary": "Top trials"
+  },
+  {
+    "method": "get",
+    "route": "/analytics/visitor-countries/chart",
+    "tag": "Analytics",
+    "summary": "Visitor countries chart"
+  },
+  {
+    "method": "get",
+    "route": "/analytics/visitor-countries/top",
+    "tag": "Analytics",
+    "summary": "Top visitor countries"
+  },
+  {
+    "method": "get",
+    "route": "/chats",
+    "tag": "Messages",
+    "summary": "Chats list"
+  },
+  {
+    "method": "get",
+    "route": "/chats/:userId/media",
+    "tag": "Messages",
+    "summary": "Get chat media"
+  },
+  {
+    "method": "get",
+    "route": "/chats/:userId/messages",
+    "tag": "Messages",
+    "summary": "Chat messages"
+  },
+  {
+    "method": "post",
+    "route": "/chats/:userId/messages",
+    "tag": "Messages",
+    "summary": "Send chat message"
+  },
+  {
+    "method": "delete",
+    "route": "/chats/:userId/messages/:messageId",
+    "tag": "Messages",
+    "summary": "Unsend chat message"
+  },
+  {
+    "method": "get",
+    "route": "/earnings/chargebacks",
+    "tag": "Earnings",
+    "summary": "List chargebacks"
+  },
+  {
+    "method": "get",
+    "route": "/earnings/chart",
+    "tag": "Earnings",
+    "summary": "Get earnings chart"
+  },
+  {
+    "method": "get",
+    "route": "/earnings/transactions",
+    "tag": "Earnings",
+    "summary": "List transactions"
+  },
+  {
+    "method": "get",
+    "route": "/mass-messages",
+    "tag": "Messages",
+    "summary": "List mass messages"
+  },
+  {
+    "method": "post",
+    "route": "/mass-messages",
+    "tag": "Messages",
+    "summary": "Create mass message"
+  },
+  {
+    "method": "delete",
+    "route": "/mass-messages/:massMessageId",
+    "tag": "Messages",
+    "summary": "Delete mass message"
+  },
+  {
+    "method": "get",
+    "route": "/mass-messages/:massMessageId",
+    "tag": "Messages",
+    "summary": "Get mass message"
+  },
+  {
+    "method": "put",
+    "route": "/mass-messages/:massMessageId",
+    "tag": "Messages",
+    "summary": "Update mass message"
+  },
+  {
+    "method": "get",
+    "route": "/posts",
+    "tag": "Posts",
+    "summary": "List own posts"
+  },
+  {
+    "method": "post",
+    "route": "/posts",
+    "tag": "Posts",
+    "summary": "Create post"
+  },
+  {
+    "method": "delete",
+    "route": "/posts/:postId",
+    "tag": "Posts",
+    "summary": "Delete post"
+  },
+  {
+    "method": "get",
+    "route": "/posts/:postId",
+    "tag": "Posts",
+    "summary": "Get post"
+  },
+  {
+    "method": "put",
+    "route": "/posts/:postId",
+    "tag": "Posts",
+    "summary": "Edit post"
+  },
+  {
+    "method": "get",
+    "route": "/promotions",
+    "tag": "Promotions",
+    "summary": "List promotions"
+  },
+  {
+    "method": "post",
+    "route": "/promotions",
+    "tag": "Promotions",
+    "summary": "Create promotion"
+  },
+  {
+    "method": "delete",
+    "route": "/promotions/:promotionId",
+    "tag": "Promotions",
+    "summary": "Delete promotion"
+  },
+  {
+    "method": "put",
+    "route": "/promotions/:promotionId",
+    "tag": "Promotions",
+    "summary": "Update promotion"
+  },
+  {
+    "method": "post",
+    "route": "/promotions/:promotionId/stop",
+    "tag": "Promotions",
+    "summary": "Stop promotion"
+  },
+  {
+    "method": "get",
+    "route": "/promotions/bundles",
+    "tag": "Promotions",
+    "summary": "List bundles"
+  },
+  {
+    "method": "post",
+    "route": "/promotions/bundles",
+    "tag": "Promotions",
+    "summary": "Create bundle"
+  },
+  {
+    "method": "delete",
+    "route": "/promotions/bundles/:bundleId",
+    "tag": "Promotions",
+    "summary": "Delete bundle"
+  },
+  {
+    "method": "get",
+    "route": "/promotions/bundles/:bundleId",
+    "tag": "Promotions",
+    "summary": "Get bundle"
+  },
+  {
+    "method": "put",
+    "route": "/promotions/bundles/:bundleId",
+    "tag": "Promotions",
+    "summary": "Update bundle"
+  },
+  {
+    "method": "get",
+    "route": "/promotions/tracking-links",
+    "tag": "Promotions",
+    "summary": "List tracking links"
+  },
+  {
+    "method": "post",
+    "route": "/promotions/tracking-links",
+    "tag": "Promotions",
+    "summary": "Create tracking link"
+  },
+  {
+    "method": "delete",
+    "route": "/promotions/tracking-links/:trackingLinkId",
+    "tag": "Promotions",
+    "summary": "Delete tracking link"
+  },
+  {
+    "method": "get",
+    "route": "/promotions/tracking-links/:trackingLinkId",
+    "tag": "Promotions",
+    "summary": "Get tracking link"
+  },
+  {
+    "method": "put",
+    "route": "/promotions/tracking-links/:trackingLinkId",
+    "tag": "Promotions",
+    "summary": "Update tracking link"
+  },
+  {
+    "method": "get",
+    "route": "/promotions/tracking-links/:trackingLinkId/claimers",
+    "tag": "Promotions",
+    "summary": "Get tracking link claimers"
+  },
+  {
+    "method": "delete",
+    "route": "/promotions/tracking-links/share-access",
+    "tag": "Promotions",
+    "summary": "Revoke tracking link access"
+  },
+  {
+    "method": "post",
+    "route": "/promotions/tracking-links/share-access",
+    "tag": "Promotions",
+    "summary": "Share tracking link access"
+  },
+  {
+    "method": "get",
+    "route": "/promotions/trial-links",
+    "tag": "Promotions",
+    "summary": "List trial links"
+  },
+  {
+    "method": "post",
+    "route": "/promotions/trial-links",
+    "tag": "Promotions",
+    "summary": "Create trial link"
+  },
+  {
+    "method": "delete",
+    "route": "/promotions/trial-links/:trialLinkId",
+    "tag": "Promotions",
+    "summary": "Delete trial link"
+  },
+  {
+    "method": "get",
+    "route": "/promotions/trial-links/:trialLinkId",
+    "tag": "Promotions",
+    "summary": "Get trial link"
+  },
+  {
+    "method": "put",
+    "route": "/promotions/trial-links/:trialLinkId",
+    "tag": "Promotions",
+    "summary": "Update trial link"
+  },
+  {
+    "method": "delete",
+    "route": "/promotions/trial-links/share-access",
+    "tag": "Promotions",
+    "summary": "Revoke trial link access"
+  },
+  {
+    "method": "post",
+    "route": "/promotions/trial-links/share-access",
+    "tag": "Promotions",
+    "summary": "Share trial link access"
+  },
+  {
+    "method": "get",
+    "route": "/self",
+    "tag": "Self",
+    "summary": "Get current user"
+  },
+  {
+    "method": "patch",
+    "route": "/self",
+    "tag": "Self",
+    "summary": "Update current user profile"
+  },
+  {
+    "method": "get",
+    "route": "/self/notifications",
+    "tag": "Self",
+    "summary": "List notifications"
+  },
+  {
+    "method": "get",
+    "route": "/self/release-forms",
+    "tag": "Self",
+    "summary": "List release forms"
+  },
+  {
+    "method": "get",
+    "route": "/self/tagged-friend-users",
+    "tag": "Self",
+    "summary": "List tagged friend users"
+  },
+  {
+    "method": "get",
+    "route": "/subscribers",
+    "tag": "Subscribers",
+    "summary": "List subscribers"
+  },
+  {
+    "method": "put",
+    "route": "/subscribers/:userId/custom-name",
+    "tag": "Subscribers",
+    "summary": "Set custom name for subscriber"
+  },
+  {
+    "method": "put",
+    "route": "/subscribers/:userId/discount",
+    "tag": "Subscribers",
+    "summary": "Apply discount to subscriber"
+  },
+  {
+    "method": "put",
+    "route": "/subscribers/:userId/note",
+    "tag": "Subscribers",
+    "summary": "Update subscriber note"
+  },
+  {
+    "method": "get",
+    "route": "/subscriptions",
+    "tag": "Subscriptions",
+    "summary": "List subscriptions"
+  },
+  {
+    "method": "get",
+    "route": "/subscriptions/:subscriptionId/history",
+    "tag": "Subscriptions",
+    "summary": "Get subscription history"
+  },
+  {
+    "method": "get",
+    "route": "/subscriptions/count",
+    "tag": "Subscriptions",
+    "summary": "Get subscription counts"
+  },
+  {
+    "method": "put",
+    "route": "/uploads/:mediaUploadId",
+    "tag": "Upload",
+    "summary": "Upload single-part media and finalize (No need to call /complete after upload if using this endpoint)"
+  },
+  {
+    "method": "put",
+    "route": "/uploads/:mediaUploadId/parts/:partNumber",
+    "tag": "Upload",
+    "summary": "Upload chunk to managed media upload"
+  },
+  {
+    "method": "post",
+    "route": "/uploads/check",
+    "tag": "Upload",
+    "summary": "Check if media already exists in vault"
+  },
+  {
+    "method": "post",
+    "route": "/uploads/complete",
+    "tag": "Upload",
+    "summary": "Finalize media upload"
+  },
+  {
+    "method": "post",
+    "route": "/uploads/init",
+    "tag": "Upload",
+    "summary": "Initialize media upload"
+  },
+  {
+    "method": "get",
+    "route": "/users/:userId",
+    "tag": "Users",
+    "summary": "Get user"
+  },
+  {
+    "method": "post",
+    "route": "/users/:userId/lists",
+    "tag": "User Lists",
+    "summary": "Add user to multiple lists"
+  },
+  {
+    "method": "get",
+    "route": "/users/:userId/posts",
+    "tag": "Posts",
+    "summary": "List user posts"
+  },
+  {
+    "method": "delete",
+    "route": "/users/:userId/restrict",
+    "tag": "Users",
+    "summary": "Unrestrict user"
+  },
+  {
+    "method": "post",
+    "route": "/users/:userId/restrict",
+    "tag": "Users",
+    "summary": "Restrict user"
+  },
+  {
+    "method": "get",
+    "route": "/users/blocked",
+    "tag": "Users",
+    "summary": "List blocked users"
+  },
+  {
+    "method": "get",
+    "route": "/users/list",
+    "tag": "Users",
+    "summary": "List users by IDs"
+  },
+  {
+    "method": "get",
+    "route": "/users/lists",
+    "tag": "User Lists",
+    "summary": "List user lists"
+  },
+  {
+    "method": "post",
+    "route": "/users/lists",
+    "tag": "User Lists",
+    "summary": "Create user list"
+  },
+  {
+    "method": "delete",
+    "route": "/users/lists/:listId",
+    "tag": "User Lists",
+    "summary": "Delete user list"
+  },
+  {
+    "method": "get",
+    "route": "/users/lists/:listId",
+    "tag": "User Lists",
+    "summary": "Get user list"
+  },
+  {
+    "method": "patch",
+    "route": "/users/lists/:listId",
+    "tag": "User Lists",
+    "summary": "Update user list"
+  },
+  {
+    "method": "get",
+    "route": "/users/lists/:listId/users",
+    "tag": "User Lists",
+    "summary": "List users in user list"
+  },
+  {
+    "method": "delete",
+    "route": "/users/lists/:listId/users/:userId",
+    "tag": "User Lists",
+    "summary": "Remove user from user list"
+  },
+  {
+    "method": "post",
+    "route": "/users/lists/:listId/users/:userId",
+    "tag": "User Lists",
+    "summary": "Add user to list"
+  },
+  {
+    "method": "get",
+    "route": "/users/restrict",
+    "tag": "Users",
+    "summary": "List restricted users"
+  },
+  {
+    "method": "get",
+    "route": "/users/search",
+    "tag": "Users",
+    "summary": "Search performers"
+  },
+  {
+    "method": "get",
+    "route": "/vault/lists",
+    "tag": "Vault Lists",
+    "summary": "List vault folders"
+  },
+  {
+    "method": "post",
+    "route": "/vault/lists",
+    "tag": "Vault Lists",
+    "summary": "Create vault list"
+  },
+  {
+    "method": "delete",
+    "route": "/vault/lists/:listId",
+    "tag": "Vault Lists",
+    "summary": "Delete vault list"
+  },
+  {
+    "method": "patch",
+    "route": "/vault/lists/:listId",
+    "tag": "Vault Lists",
+    "summary": "Update vault list"
+  },
+  {
+    "method": "get",
+    "route": "/vault/lists/:listId/media",
+    "tag": "Vault Lists",
+    "summary": "List media in vault list"
+  },
+  {
+    "method": "post",
+    "route": "/vault/lists/:listId/media",
+    "tag": "Vault Lists",
+    "summary": "Add media to vault list"
+  },
+  {
+    "method": "get",
+    "route": "/vault/media",
+    "tag": "Vault",
+    "summary": "List vault media"
+  }
+]
