@@ -31,6 +31,7 @@ export interface PaginatedResponse<T> {
 export interface MarkerPaginatedResponse<T> {
   list: T[];
   hasMore: boolean;
+  nextMarker?: string;
   marker?: string;
 }
 
@@ -55,6 +56,12 @@ export class OFAuthAPIError extends Error {
   }
 }
 
+function isJsonContentType(contentType: string | null): boolean {
+  if (!contentType) return false;
+  const lower = contentType.toLowerCase();
+  return lower.includes("application/json") || lower.includes("+json");
+}
+
 function buildQueryString(params: Record<string, any>): string {
   const entries: string[] = [];
   for (const [key, value] of Object.entries(params)) {
@@ -68,6 +75,30 @@ function buildQueryString(params: Record<string, any>): string {
     }
   }
   return entries.length > 0 ? `?${entries.join('&')}` : '';
+}
+
+async function readErrorBody(response: Response): Promise<{ message?: string; code?: string; details?: unknown } | string> {
+  const contentType = response.headers.get("content-type");
+  if (isJsonContentType(contentType)) {
+    // If the server claims JSON, propagate JSON parsing failures (contract tests should catch bad JSON).
+    const json = (await response.json()) as unknown;
+    const obj = typeof json === "object" && json !== null ? (json as Record<string, unknown>) : null;
+    return {
+      message: typeof obj?.message === "string" ? obj.message : undefined,
+      code: typeof obj?.code === "string" ? obj.code : undefined,
+      details: obj?.details,
+    };
+  }
+  return await response.text();
+}
+
+async function readSuccessBody<T>(response: Response): Promise<T> {
+  const contentType = response.headers.get("content-type");
+  if (isJsonContentType(contentType)) {
+    return (await response.json()) as T;
+  }
+  // Non-JSON responses are returned as text (e.g. some download endpoints).
+  return (await response.text()) as unknown as T;
 }
 
 export async function request<T>(config: OFAuthConfig, reqConfig: RequestConfig): Promise<T> {
@@ -100,18 +131,17 @@ export async function request<T>(config: OFAuthConfig, reqConfig: RequestConfig)
   });
 
   if (!response.ok) {
-    let errorBody: any;
-    try { errorBody = await response.json(); } catch {}
-    throw new OFAuthAPIError(response, errorBody);
+    const body = await readErrorBody(response);
+    const obj = typeof body === "object" && body !== null ? (body as Record<string, unknown>) : undefined;
+    throw new OFAuthAPIError(response, {
+      message: (typeof obj?.message === "string" ? obj.message : undefined) ?? (typeof body === "string" ? body : undefined),
+      code: typeof obj?.code === "string" ? obj.code : undefined,
+      details: obj?.details,
+    });
   }
 
-  const contentType = response.headers.get('content-type');
-  if (contentType?.includes('application/json')) {
-    return response.json();
-  }
-  
   if (response.status === 204) return {} as T;
-  return response.text() as unknown as T;
+  return await readSuccessBody<T>(response);
 }
 
 export type ItemType<T> = T extends { list: Array<infer U> } ? U : never;
@@ -168,16 +198,15 @@ export async function proxy<T = any>(config: OFAuthConfig, opts: ProxyRequestOpt
   });
   
   if (!response.ok) {
-    let errorBody: any;
-    try { errorBody = await response.json(); } catch {}
-    throw new OFAuthAPIError(response, errorBody);
+    const body = await readErrorBody(response);
+    const obj = typeof body === "object" && body !== null ? (body as Record<string, unknown>) : undefined;
+    throw new OFAuthAPIError(response, {
+      message: (typeof obj?.message === "string" ? obj.message : undefined) ?? (typeof body === "string" ? body : undefined),
+      code: typeof obj?.code === "string" ? obj.code : undefined,
+      details: obj?.details,
+    });
   }
-  
-  const contentType = response.headers.get('content-type');
-  if (contentType?.includes('application/json')) {
-    return response.json();
-  }
-  
+
   if (response.status === 204) return {} as T;
-  return response.text() as unknown as T;
+  return await readSuccessBody<T>(response);
 }
