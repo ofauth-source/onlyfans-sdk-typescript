@@ -1,6 +1,6 @@
 {
   "name": "@ofauth-org/onlyfans-sdk",
   "version": "2.2.3",
-  "license": "MIT",
+  "license": "Apache-2.0",
   "exports": "./src/index.ts"
 }
