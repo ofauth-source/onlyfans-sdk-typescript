@@ -13,24 +13,6 @@
   },
   {
     "method": "get",
-    "route": "/analytics/earnings/chargebacks",
-    "tag": "Analytics",
-    "summary": "Chargebacks"
-  },
-  {
-    "method": "get",
-    "route": "/analytics/earnings/chart",
-    "tag": "Analytics",
-    "summary": "Earnings chart"
-  },
-  {
-    "method": "get",
-    "route": "/analytics/earnings/transactions",
-    "tag": "Analytics",
-    "summary": "Transactions"
-  },
-  {
-    "method": "get",
     "route": "/analytics/mass-messages/:massMessageId/buyers",
     "tag": "Analytics",
     "summary": "Mass message buyers"
@@ -46,6 +28,12 @@
     "route": "/analytics/mass-messages/purchased",
     "tag": "Analytics",
     "summary": "Mass messages purchased"
+  },
+  {
+    "method": "get",
+    "route": "/analytics/mass-messages/sent",
+    "tag": "Analytics",
+    "summary": "Sent mass messages"
   },
   {
     "method": "get",
@@ -172,12 +160,6 @@
     "route": "/earnings/transactions",
     "tag": "Earnings",
     "summary": "List transactions"
-  },
-  {
-    "method": "get",
-    "route": "/mass-messages",
-    "tag": "Messages",
-    "summary": "List mass messages"
   },
   {
     "method": "post",

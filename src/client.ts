@@ -7,1867 +7,3816 @@
 import { OFAuthConfig, request, PaginationOptions, proxy, ProxyRequestOptions } from './runtime';
 
 // Response and Request Body Types
-export interface AccessAnalyticsCampaignsGetChartResponseValue {
-  chart: Array<{
-  count: number;
-  date: string;
-}>;
-  delta: number;
-  gross?: number;
-  total: number;
-}
-
-export interface AccessAnalyticsCampaignsGetTopResponse {
-  hasMore: boolean;
+export interface AccountConnectionsListResponse {
   list: Array<{
-  campaignCode: number;
-  campaignName: string;
-  countSubscribers: number;
-  countTransitions: number;
-  createdAt: string;
-  endDate: string;
-  id: number;
-}>;
-}
-
-export interface AccessAnalyticsCampaignsGetTopItem {
-  campaignCode: number;
-  campaignName: string;
-  countSubscribers: number;
-  countTransitions: number;
-  createdAt: string;
-  endDate: string;
-  id: number;
-}
-
-export interface AccessAnalyticsEarningsListChargebacksResponse {
-  hasMore: boolean;
-  list: Array<{
-  createdAt: string;
-  id: number;
-  payment: {
-  amounts: {
-  fee: number;
-  gross: number;
-  net: number;
-  tax: number;
-  vat: number;
-};
-  createdAt: string | null;
-  currency: string | null;
-  description: string | null;
-  id: string | null;
-  status: string | null;
-  user: {
-  avatar: string | null;
-  id: number;
-  name: string;
-  username: string;
-};
-};
-  paymentType: string | null;
-}>;
-  nextMarker: number | null;
-}
-
-export interface AccessAnalyticsEarningsListChargebacksItem {
-  createdAt: string;
-  id: number;
-  payment: {
-  amounts: {
-  fee: number;
-  gross: number;
-  net: number;
-  tax: number;
-  vat: number;
-};
-  createdAt: string | null;
-  currency: string | null;
-  description: string | null;
-  id: string | null;
-  status: string | null;
-  user: {
-  avatar: string | null;
-  id: number;
-  name: string;
-  username: string;
-};
-};
-  paymentType: string | null;
-}
-
-export interface AccessAnalyticsEarningsGetChartResponse {
-  chart: Array<{
-  count: number;
-  date: string;
-}>;
-  delta?: number;
-  gross?: number;
-  total: number;
-}
-
-export interface AccessAnalyticsEarningsListTransactionsResponse {
-  hasMore: boolean;
-  list: Array<{
-  amounts: {
-  fee: number;
-  gross: number;
-  net: number;
-  tax: number;
-  vat: number;
-};
-  createdAt: string;
-  currency: string;
-  description: string | null;
+  status: 'active' | 'expired' | 'awaiting_2fa';
   id: string;
-  payoutPendingDays: number | null;
-  status: string | null;
-  type: string | null;
-  user: {
-  avatar: string | null;
-  id: number;
-  name: string;
-  username: string;
-};
-}>;
-  nextMarker: number | null;
-}
-
-export interface AccessAnalyticsEarningsListTransactionsItem {
-  amounts: {
-  fee: number;
-  gross: number;
-  net: number;
-  tax: number;
-  vat: number;
-};
-  createdAt: string;
-  currency: string;
-  description: string | null;
+  userData: {
   id: string;
-  payoutPendingDays: number | null;
-  status: string | null;
-  type: string | null;
-  user: {
-  avatar: string | null;
-  id: number;
   name: string;
   username: string;
+  avatar: string | null;
+};
+  permissions: Array<string>;
+  expiredAt: string | null;
+  createdAt: string;
+  updatedAt: string;
+  clientReferenceId: string | null;
+  imported: boolean;
+  lastCheckedAt: string | null;
+}>;
+  hasMore: boolean;
+}
+
+export interface AccountConnectionsListItem {
+  status: 'active' | 'expired' | 'awaiting_2fa';
+  id: string;
+  userData: {
+  id: string;
+  name: string;
+  username: string;
+  avatar: string | null;
+};
+  permissions: Array<string>;
+  expiredAt: string | null;
+  createdAt: string;
+  updatedAt: string;
+  clientReferenceId: string | null;
+  imported: boolean;
+  lastCheckedAt: string | null;
+}
+
+export interface AccountConnectionsGetSettingsResponse {
+  connectionId: string;
+  vaultPlus: {
+  enabled: boolean;
+  settingsOverrides: {
+  autoCacheVault?: boolean;
+  autoCacheMessages?: boolean;
+  autoCachePosts?: boolean;
+  autoCacheStories?: boolean;
+  minAccessCountVault?: number;
+  minAccessCountMessages?: number;
+  minAccessCountPosts?: number;
+  minAccessCountStories?: number;
+  cacheImages?: boolean;
+  cacheVideos?: boolean;
+  cacheAudio?: boolean;
+  imageQualities?: Array<'thumb' | 'preview' | 'full'>;
+  videoQualities?: Array<'preview' | '720p' | '1080p' | 'source'>;
+  retentionDays?: number;
+  accessExpiryDays?: number;
+  presignedUrlTtlSeconds?: number;
+  storageLimitBytes?: number;
+  storageLimitPurgeStrategy?: 'purge_oldest' | 'purge_largest' | 'purge_smallest' | 'block_new';
+} | null;
+  stats: {
+  vaultPlusEnabled: boolean;
+  totalStorageBytes: number;
+  storageLimitBytes: number;
+  mediaCount: number;
+  storedCount: number;
+  storageUsagePercent: number;
+};
 };
 }
 
-export interface AccessAnalyticsMassMessagesListBuyersResponse {
-  hasMore: boolean;
-  list: Array<{
+export interface AccountConnectionsUpdateSettingsRequest {
+  vaultPlus?: {
+  enabled?: boolean;
+  settings?: {
+  autoCacheVault?: boolean;
+  autoCacheMessages?: boolean;
+  autoCachePosts?: boolean;
+  autoCacheStories?: boolean;
+  minAccessCountVault?: number;
+  minAccessCountMessages?: number;
+  minAccessCountPosts?: number;
+  minAccessCountStories?: number;
+  cacheImages?: boolean;
+  cacheVideos?: boolean;
+  cacheAudio?: boolean;
+  imageQualities?: Array<'thumb' | 'preview' | 'full'>;
+  videoQualities?: Array<'preview' | '720p' | '1080p' | 'source'>;
+  retentionDays?: number;
+  accessExpiryDays?: number;
+  presignedUrlTtlSeconds?: number;
+  storageLimitBytes?: number;
+  storageLimitPurgeStrategy?: 'purge_oldest' | 'purge_largest' | 'purge_smallest' | 'block_new';
+} | null;
+};
+}
+
+export interface AccountConnectionsUpdateSettingsResponse {
+  settings: {
+  connectionId: string;
+  vaultPlus: {
+  enabled: boolean;
+  settingsOverrides: {
+  autoCacheVault?: boolean;
+  autoCacheMessages?: boolean;
+  autoCachePosts?: boolean;
+  autoCacheStories?: boolean;
+  minAccessCountVault?: number;
+  minAccessCountMessages?: number;
+  minAccessCountPosts?: number;
+  minAccessCountStories?: number;
+  cacheImages?: boolean;
+  cacheVideos?: boolean;
+  cacheAudio?: boolean;
+  imageQualities?: Array<'thumb' | 'preview' | 'full'>;
+  videoQualities?: Array<'preview' | '720p' | '1080p' | 'source'>;
+  retentionDays?: number;
+  accessExpiryDays?: number;
+  presignedUrlTtlSeconds?: number;
+  storageLimitBytes?: number;
+  storageLimitPurgeStrategy?: 'purge_oldest' | 'purge_largest' | 'purge_smallest' | 'block_new';
+} | null;
+  stats: {
+  vaultPlusEnabled: boolean;
+  totalStorageBytes: number;
+  storageLimitBytes: number;
+  mediaCount: number;
+  storedCount: number;
+  storageUsagePercent: number;
+};
+};
+};
+  purgeResult?: {
+  purgedCount: number;
+  freedBytes: number;
+};
+}
+
+export interface AccountConnectionsCreateImportRequest {
+  cookie: string;
+  userAgent: string;
+  permissions?: Array<string>;
+  clientReferenceId?: string | null;
+}
+
+export interface AccountConnectionsCreateImportResponse {
+  status: 'active' | 'expired' | 'awaiting_2fa';
+  id: string;
+  userData: {
+  id: string;
+  name: string;
+  username: string;
+  avatar: string | null;
+};
+  permissions: Array<string>;
+  expiredAt: string | null;
+  createdAt: string;
+  updatedAt: string;
+  clientReferenceId: string | null;
+  imported: boolean;
+  lastCheckedAt: string | null;
+}
+
+export interface AccountConnectionsUpdateImportRequest {
+  cookie: string;
+  userAgent: string;
+}
+
+export interface AccountConnectionsUpdateImportResponse {
+  status: 'active' | 'expired' | 'awaiting_2fa';
+  id: string;
+  userData: {
+  id: string;
+  name: string;
+  username: string;
+  avatar: string | null;
+};
+  permissions: Array<string>;
+  expiredAt: string | null;
+  createdAt: string;
+  updatedAt: string;
+  clientReferenceId: string | null;
+  imported: boolean;
+  lastCheckedAt: string | null;
+}
+
+export interface AccountWhoamiResponse {
+  id: string;
+  name: string | null;
+  permissions: Array<string>;
+}
+
+export interface AccountGetSettingsResponse {
+  vaultPlus: {
+  autoEnableForNewConnections: boolean;
+  defaultSettings: {
+  autoCacheVault: boolean;
+  autoCacheMessages: boolean;
+  autoCachePosts: boolean;
+  autoCacheStories: boolean;
+  minAccessCountVault: number;
+  minAccessCountMessages: number;
+  minAccessCountPosts: number;
+  minAccessCountStories: number;
+  cacheImages: boolean;
+  cacheVideos: boolean;
+  cacheAudio: boolean;
+  imageQualities: Array<string>;
+  videoQualities: Array<string>;
+  retentionDays: number;
+  accessExpiryDays: number;
+  presignedUrlTtlSeconds: number;
+  storageLimitBytes: number;
+  storageLimitPurgeStrategy: string;
+};
+};
+}
+
+export interface AccountUpdateSettingsRequest {
+  vaultPlus?: {
+  autoEnableForNewConnections?: boolean;
+  applyToExistingConnections?: boolean;
+  defaultSettings?: {
+  autoCacheVault?: boolean;
+  autoCacheMessages?: boolean;
+  autoCachePosts?: boolean;
+  autoCacheStories?: boolean;
+  minAccessCountVault?: number;
+  minAccessCountMessages?: number;
+  minAccessCountPosts?: number;
+  minAccessCountStories?: number;
+  cacheImages?: boolean;
+  cacheVideos?: boolean;
+  cacheAudio?: boolean;
+  imageQualities?: Array<'thumb' | 'preview' | 'full'>;
+  videoQualities?: Array<'preview' | '720p' | '1080p' | 'source'>;
+  retentionDays?: number;
+  accessExpiryDays?: number;
+  presignedUrlTtlSeconds?: number;
+  storageLimitBytes?: number;
+  storageLimitPurgeStrategy?: 'purge_oldest' | 'purge_largest' | 'purge_smallest' | 'block_new';
+};
+};
+}
+
+export interface AccountUpdateSettingsResponse {
+  settings: {
+  vaultPlus: {
+  autoEnableForNewConnections: boolean;
+  defaultSettings: {
+  autoCacheVault: boolean;
+  autoCacheMessages: boolean;
+  autoCachePosts: boolean;
+  autoCacheStories: boolean;
+  minAccessCountVault: number;
+  minAccessCountMessages: number;
+  minAccessCountPosts: number;
+  minAccessCountStories: number;
+  cacheImages: boolean;
+  cacheVideos: boolean;
+  cacheAudio: boolean;
+  imageQualities: Array<string>;
+  videoQualities: Array<string>;
+  retentionDays: number;
+  accessExpiryDays: number;
+  presignedUrlTtlSeconds: number;
+  storageLimitBytes: number;
+  storageLimitPurgeStrategy: string;
+};
+};
+};
+  broadcastResult?: {
+  affectedConnections: number;
+  purgeResults: Array<{
+  connectionId: string;
+  purgedCount: number;
+  freedBytes: number;
+}>;
+};
+}
+
+export interface AccessSelfGetResponseOption0 {
+  id: number;
+  username: string;
+  name: string;
+  isAuth: boolean;
+  isVerified: boolean;
+  avatar: string | null;
+  subscribersCount: number | null;
+  postsCount: number;
+  photosCount: number;
+  videosCount: number;
+}
+
+export interface AccessSelfGetResponseOption1 {
+  isAuth: boolean;
+}
+
+export interface AccessSelfUpdateRequest {
+  name?: string;
+  about?: string;
+}
+
+export interface AccessSelfUpdateResponse {
+  id: number;
+  username: string;
+  name: string;
+  isVerified: boolean;
   avatar: string | null;
   avatarThumbs?: {
-  c144: string;
   c50: string;
+  c144: string;
 } | null;
-  id: number;
-  isVerified: boolean;
+  lists: Array<{
+  id: string | number;
+  type: string;
   name: string;
-  username: string;
 }>;
-  nextMarker?: number | null;
-}
-
-export interface AccessAnalyticsMassMessagesListBuyersItem {
-  avatar: string | null;
-  avatarThumbs?: {
-  c144: string;
-  c50: string;
+  displayName?: string;
+  notice?: string;
+  about?: string | null;
+  isMarkdownDisabledForAbout?: boolean;
+  website?: string | null;
+  wishlist?: string | null;
+  location?: string | null;
+  header?: string | null;
+  headerSize?: {
+  width: number;
+  height: number;
 } | null;
+  headerThumbs?: {
+  w480: string;
+  w760: string;
+} | null;
+  subscribersCount?: number | null;
+  postsCount?: number;
+  archivedPostsCount?: number;
+  privateArchivedPostsCount?: number;
+  photosCount?: number;
+  videosCount?: number;
+  audiosCount?: number;
+  mediasCount?: number;
+  favoritesCount?: number;
+  favoritedCount?: number;
+  joinDate?: string;
+  lastSeen?: string | null;
+  subscribedBy?: boolean;
+  subscribedByExpire?: boolean | null;
+  subscribedByExpireDate?: string | null;
+  subscribedByAutoprolong?: boolean | null;
+  subscribedIsExpiredNow?: boolean | null;
+  subscribedByData?: {
+  price: number;
+  newPrice: number;
+  regularPrice: number;
+  subscribePrice: number;
+  discountPercent: number;
+  discountPeriod: number;
+  subscribeAt: string;
+  expiredAt: string;
+  renewedAt: string | null;
+  discountFinishedAt: string | null;
+  discountStartedAt: string | null;
+  status: string | null;
+  isMuted: boolean;
+  unsubscribeReason: string;
+  duration: string;
+  hasActivePaidSubscriptions: boolean;
+  showPostsInFeed: boolean;
+  subscribes: Array<{
   id: number;
-  isVerified: boolean;
-  name: string;
-  username: string;
+  userId: number;
+  subscriberId: number;
+  date: string;
+  duration: number;
+  startDate: string;
+  expireDate: string;
+  cancelDate: string | null;
+  price: number;
+  regularPrice: number;
+  discount: number;
+  earningId: number;
+  action: string;
+  type: string;
+  offerStart: string | null;
+  offerEnd: string | null;
+  isCurrent: boolean;
+}>;
+};
+  subscribedOn?: boolean;
+  subscribedOnExpiredNow?: boolean;
+  subscribedOnDuration?: string;
+  subscribedOnData?: {
+  price: number;
+  newPrice: number;
+  regularPrice: number;
+  subscribePrice: number;
+  discountPercent: number;
+  discountPeriod: number;
+  subscribeAt: string;
+  expiredAt: string;
+  renewedAt: string | null;
+  discountFinishedAt: string | null;
+  discountStartedAt: string | null;
+  status: string | null;
+  isMuted: boolean;
+  unsubscribeReason: string;
+  duration: string;
+  hasActivePaidSubscriptions: boolean;
+  subscribes: Array<{
+  id: number;
+  userId: number;
+  subscriberId: number;
+  date: string;
+  duration: number;
+  startDate: string;
+  expireDate: string;
+  cancelDate: string | null;
+  price: number;
+  regularPrice: number;
+  discount: number;
+  earningId: number;
+  action: string;
+  type: string;
+  offerStart: string | null;
+  offerEnd: string | null;
+  isCurrent: boolean;
+}>;
+  tipsSumm: number;
+  subscribesSumm: number;
+  messagesSumm: number;
+  postsSumm: number;
+  streamsSumm: number;
+  totalSumm: number;
+};
+  subscribePrice?: number;
+  currentSubscribePrice?: number | null;
+  canAddSubscriber?: boolean;
+  tipsEnabled?: boolean;
+  tipsTextEnabled?: boolean;
+  tipsMin?: number;
+  tipsMinInternal?: number;
+  tipsMax?: number;
+  canLookStory?: boolean;
+  canCommentStory?: boolean;
+  hasNotViewedStory?: boolean;
+  hasStories?: boolean;
+  isRestricted?: boolean;
+  canRestrict?: boolean;
+  isBlocked?: boolean;
+  canReport?: boolean;
+  canUnsubscribe?: boolean;
+  isPendingAutoprolong?: boolean;
+  isPerformer?: boolean;
+  isRealPerformer?: boolean;
+  canReceiveChatMessage?: boolean;
+  canChat?: boolean;
+  showPostsInFeed?: boolean;
+  hasPinnedPosts?: boolean;
+  hasLabels?: boolean;
+  isPrivateRestriction?: boolean;
+  showSubscribersCount?: boolean;
+  showMediaCount?: boolean;
+  isReferrerAllowed?: boolean;
+  canCreatePromotion?: boolean;
+  canCreateTrial?: boolean;
+  isAdultContent?: boolean;
+  canTrialSend?: boolean;
+  isFriend?: boolean;
+  hasScheduledStream?: boolean;
+  hasStream?: boolean;
+  canPayInternal?: boolean;
 }
 
-export interface AccessAnalyticsMassMessagesGetChartResponse {
-  messages: {
-  chart: Array<{
-  count: number;
-  date: string;
-}>;
-  delta: number;
-  gross?: number;
-  total: number;
-};
-  purchases: {
-  chart: Array<{
-  count: number;
-  date: string;
-}>;
-  delta: number;
-  gross?: number;
-  total: number;
-};
-}
-
-export interface AccessAnalyticsMassMessagesGetPurchasedResponse {
-  hasMore: boolean;
-  items: Array<{
-  canSendMessageToBuyers?: boolean;
-  canUnsend?: boolean;
-  date: string;
-  giphyId?: string | null;
+export interface AccessSelfListNotificationsResponse {
+  list: Array<{
   id: number;
-  isCanceled?: boolean;
-  isFree?: boolean;
-  isMediaReady?: boolean;
-  isReportedByMe?: boolean;
-  isTip?: boolean;
-  media: Array<{
-  canView: boolean;
-  convertedToVideo: boolean;
+  type: string;
+  subType: string | null;
   createdAt: string;
-  duration?: number;
-  files?: {
-  full: {
-  height?: number;
-  size?: number;
-  sources: Array<{
-  height?: number;
-  type?: string;
-  url: string;
-  width?: number;
-}>;
-  url: string;
-  width?: number;
-};
-  preview?: {
-  height?: number;
-  options: Array<{
-  height?: number;
-  type?: string;
-  url: string;
-  width?: number;
-}>;
-  size?: number;
-  url: string;
-  width?: number;
-};
-  squarePreview?: {
-  height?: number;
-  size?: number;
-  url: string;
-  width?: number;
-};
-  thumb?: {
-  height?: number;
-  size?: number;
-  url: string;
-  width?: number;
-};
-};
-  hasCustomPreview?: boolean;
-  hasError: boolean;
-  id: number;
-  isReady: boolean;
-  releaseForms: Array<{
-  id: number;
-  name: string;
-  partnerSource: string;
-  type: string;
-  user?: {
-  avatar: string;
-  avatarThumbs: {
-  c144: string;
-  c50: string;
-};
-  id: number;
-  isFromGuest: boolean;
-  isVerified: boolean;
-  ivStatus: string;
-  name: string;
-  username: string;
-  view: string;
-};
-}>;
-  type: 'photo' | 'video' | 'gif' | 'audio';
-  videoSources?: {
-  '240'?: string | null;
-  '720'?: string | null;
-};
-}>;
-  mediaCount?: number;
-  previews: Array<{
-  canView: boolean;
-  convertedToVideo: boolean;
-  createdAt: string;
-  duration?: number;
-  files?: {
-  full: {
-  height?: number;
-  size?: number;
-  sources: Array<{
-  height?: number;
-  type?: string;
-  url: string;
-  width?: number;
-}>;
-  url: string;
-  width?: number;
-};
-  preview?: {
-  height?: number;
-  options: Array<{
-  height?: number;
-  type?: string;
-  url: string;
-  width?: number;
-}>;
-  size?: number;
-  url: string;
-  width?: number;
-};
-  squarePreview?: {
-  height?: number;
-  size?: number;
-  url: string;
-  width?: number;
-};
-  thumb?: {
-  height?: number;
-  size?: number;
-  url: string;
-  width?: number;
-};
-};
-  hasCustomPreview?: boolean;
-  hasError: boolean;
-  id: number;
-  isReady: boolean;
-  releaseForms: Array<{
-  id: number;
-  name: string;
-  partnerSource: string;
-  type: string;
-  user?: {
-  avatar: string;
-  avatarThumbs: {
-  c144: string;
-  c50: string;
-};
-  id: number;
-  isFromGuest: boolean;
-  isVerified: boolean;
-  ivStatus: string;
-  name: string;
-  username: string;
-  view: string;
-};
-}>;
-  type: 'photo' | 'video' | 'gif' | 'audio';
-  videoSources?: {
-  '240'?: string | null;
-  '720'?: string | null;
-};
-}>;
-  price?: string;
-  purchasedCount?: number;
-  rawText?: string;
-  releaseForms: Array<{
-  id: number;
-  name: string;
-  partnerSource: string;
-  type: string;
-  user?: {
-  avatar: string;
-  avatarThumbs: {
-  c144: string;
-  c50: string;
-};
-  id: number;
-  isFromGuest: boolean;
-  isVerified: boolean;
-  ivStatus: string;
-  name: string;
-  username: string;
-  view: string;
-};
-}>;
-  responseType?: string;
-  sentCount?: number;
-  template?: string;
+  isRead: boolean;
   text: string;
-  unsendSeconds?: number;
-  viewedCount?: number;
+  replacePairs: Record<string, string> | null;
+  canGoToProfile: boolean;
+  userId: number | null;
 }>;
+  hasMore: boolean;
+}
+
+export interface AccessSelfListNotificationsItem {
+  id: number;
+  type: string;
+  subType: string | null;
+  createdAt: string;
+  isRead: boolean;
+  text: string;
+  replacePairs: Record<string, string> | null;
+  canGoToProfile: boolean;
+  userId: number | null;
+}
+
+export interface AccessSelfListReleaseFormsResponse {
+  list: Array<{
+  id: number;
+  type: string;
+  name: string;
+  partnerId: number | null;
+  code: string | null;
+  status: string | null;
+  createdAt: string | null;
+  approvedAt: string | null;
+  lastChangedAt: string | null;
+  userName: string | null;
+  hasUser: boolean;
+  isHidden: boolean;
+}>;
+  hasMore: boolean;
+}
+
+export interface AccessSelfListReleaseFormsItem {
+  id: number;
+  type: string;
+  name: string;
+  partnerId: number | null;
+  code: string | null;
+  status: string | null;
+  createdAt: string | null;
+  approvedAt: string | null;
+  lastChangedAt: string | null;
+  userName: string | null;
+  hasUser: boolean;
+  isHidden: boolean;
+}
+
+export interface AccessSelfListTaggedFriendUsersResponse {
+  list: Array<{
+  id: number;
+  type: string;
+  name: string;
+  user: {
+  id: number;
+  name: string;
+  username: string;
+  isVerified: boolean;
+  avatar: string | null;
+  isHidden: boolean;
+};
+}>;
+  hasMore: boolean;
+}
+
+export interface AccessSelfListTaggedFriendUsersItem {
+  id: number;
+  type: string;
+  name: string;
+  user: {
+  id: number;
+  name: string;
+  username: string;
+  isVerified: boolean;
+  avatar: string | null;
+  isHidden: boolean;
+};
+}
+
+export interface AccessEarningsGetChartResponse {
+  chart: Array<{
+  date: string;
+  count: number;
+}>;
+  total: number;
+  gross?: number;
+  delta?: number;
+}
+
+export interface AccessEarningsListTransactionsResponse {
+  list: Array<{
+  id: string;
+  type: string | null;
+  createdAt: string;
+  amounts: {
+  gross: number;
+  net: number;
+  fee: number;
+  vat: number;
+  tax: number;
+};
+  currency: string;
+  description: string | null;
+  status: string | null;
+  payoutPendingDays: number | null;
+  user: {
+  id: number;
+  name: string;
+  username: string;
+  avatar: string | null;
+};
+}>;
+  hasMore: boolean;
+  nextMarker: number | null;
+}
+
+export interface AccessEarningsListTransactionsItem {
+  id: string;
+  type: string | null;
+  createdAt: string;
+  amounts: {
+  gross: number;
+  net: number;
+  fee: number;
+  vat: number;
+  tax: number;
+};
+  currency: string;
+  description: string | null;
+  status: string | null;
+  payoutPendingDays: number | null;
+  user: {
+  id: number;
+  name: string;
+  username: string;
+  avatar: string | null;
+};
+}
+
+export interface AccessEarningsListChargebacksResponse {
+  list: Array<{
+  id: number;
+  createdAt: string;
+  paymentType: string | null;
+  payment: {
+  id: string | null;
+  createdAt: string | null;
+  amounts: {
+  gross: number;
+  net: number;
+  fee: number;
+  vat: number;
+  tax: number;
+};
+  currency: string | null;
+  description: string | null;
+  status: string | null;
+  user: {
+  id: number;
+  name: string;
+  username: string;
+  avatar: string | null;
+};
+};
+}>;
+  hasMore: boolean;
+  nextMarker: number | null;
+}
+
+export interface AccessEarningsListChargebacksItem {
+  id: number;
+  createdAt: string;
+  paymentType: string | null;
+  payment: {
+  id: string | null;
+  createdAt: string | null;
+  amounts: {
+  gross: number;
+  net: number;
+  fee: number;
+  vat: number;
+  tax: number;
+};
+  currency: string | null;
+  description: string | null;
+  status: string | null;
+  user: {
+  id: number;
+  name: string;
+  username: string;
+  avatar: string | null;
+};
+};
 }
 
 export interface AccessAnalyticsPostsGetResponse {
-  commentChart: Array<{
-  count: number;
-  date: string;
-}>;
-  commentCount: number;
+  isAvailable: boolean;
   hasStats: boolean;
   hasVideo?: boolean;
-  isAvailable: boolean;
-  likeChart: Array<{
-  count: number;
-  date: string;
-}>;
-  likeCount: number;
-  lookChart: Array<{
-  count: number;
-  date: string;
-}>;
   lookCount: number;
+  uniqueLookCount: number;
+  uniqueLookChart: Array<{
+  date: string;
+  count: number;
+}>;
+  lookChart: Array<{
+  date: string;
+  count: number;
+}>;
   lookDuration: number;
   lookDurationAverage: number;
-  purchasedCount: number;
-  purchasedSumm: number;
-  purchasesChart: Array<{
-  count: number;
+  likeCount: number;
+  likeChart: Array<{
   date: string;
+  count: number;
 }>;
-  tipChart: Array<{
-  count: number;
+  commentCount: number;
+  commentChart: Array<{
   date: string;
+  count: number;
 }>;
   tipCount: number;
+  tipChart: Array<{
+  date: string;
+  count: number;
+}>;
   tipSum: number;
+  purchasedCount: number;
+  purchasedSumm: number;
   tipSumChart: Array<{
-  count: number;
   date: string;
-}>;
-  uniqueLookChart: Array<{
   count: number;
-  date: string;
 }>;
-  uniqueLookCount: number;
+  purchasesChart: Array<{
+  date: string;
+  count: number;
+}>;
 }
 
 export interface AccessAnalyticsPostsGetChartResponseValue {
   chart: Array<{
-  count: number;
   date: string;
+  count: number;
 }>;
+  total: number;
   delta: number;
   gross?: number;
-  total: number;
 }
 
 export interface AccessAnalyticsPostsGetTopResponse {
   hasMore: boolean;
   items: Array<{
-  author?: {
-  _view: string;
   id: number;
-};
-  canComment: boolean;
   canDelete: boolean;
   canEdit: boolean;
-  canToggleFavorite: boolean;
-  canViewMedia: boolean;
-  favoritesCount: number;
-  hasVoting?: boolean;
-  id: number;
-  isFavorite: boolean;
-  isMarkdownDisabled: boolean;
-  isMediaReady: boolean;
-  isOpened: boolean;
+  mediaCount: number;
   media: Array<{
-  canView: boolean;
-  convertedToVideo: boolean;
-  createdAt: string;
-  duration?: number;
-  files?: {
-  full: {
-  height?: number;
-  size?: number;
-  sources: Array<{
-  height?: number;
-  type?: string;
-  url: string;
-  width?: number;
-}>;
-  url: string;
-  width?: number;
-};
-  preview?: {
-  height?: number;
-  options: Array<{
-  height?: number;
-  type?: string;
-  url: string;
-  width?: number;
-}>;
-  size?: number;
-  url: string;
-  width?: number;
-};
-  squarePreview?: {
-  height?: number;
-  size?: number;
-  url: string;
-  width?: number;
-};
-  thumb?: {
-  height?: number;
-  size?: number;
-  url: string;
-  width?: number;
-};
-};
-  hasCustomPreview?: boolean;
-  hasError: boolean;
   id: number;
+  type: 'photo' | 'video' | 'gif' | 'audio';
+  convertedToVideo: boolean;
+  canView: boolean;
+  hasError: boolean;
+  createdAt: string;
   isReady: boolean;
+  duration?: number;
   releaseForms: Array<{
   id: number;
   name: string;
   partnerSource: string;
   type: string;
   user?: {
-  avatar: string;
-  avatarThumbs: {
-  c144: string;
-  c50: string;
-};
+  view: string;
   id: number;
-  isFromGuest: boolean;
-  isVerified: boolean;
-  ivStatus: string;
   name: string;
   username: string;
-  view: string;
+  isVerified: boolean;
+  avatar: string;
+  avatarThumbs: {
+  c50: string;
+  c144: string;
+};
+  ivStatus: string;
+  isFromGuest: boolean;
 };
 }>;
-  type: 'photo' | 'video' | 'gif' | 'audio';
+  hasCustomPreview?: boolean;
   videoSources?: {
   '240'?: string | null;
   '720'?: string | null;
 };
+  files?: {
+  full: {
+  url: string;
+  width?: number;
+  height?: number;
+  size?: number;
+  sources: Array<{
+  url: string;
+  width?: number;
+  height?: number;
+  type?: string;
 }>;
-  mediaCount: number;
+};
+  thumb?: {
+  url: string;
+  width?: number;
+  height?: number;
+  size?: number;
+};
+  preview?: {
+  url: string;
+  width?: number;
+  height?: number;
+  size?: number;
+  options: Array<{
+  url: string;
+  width?: number;
+  height?: number;
+  type?: string;
+}>;
+};
+  squarePreview?: {
+  url: string;
+  width?: number;
+  height?: number;
+  size?: number;
+};
+};
+}>;
+  canViewMedia: boolean;
+  author?: {
+  id: number;
+  _view: string;
+};
+  responseType: string;
   postedAt: string;
   postedAtPrecise: string;
+  isMarkdownDisabled: boolean;
+  isOpened: boolean;
+  canToggleFavorite: boolean;
+  tipsAmount: string;
+  text: string;
+  isFavorite: boolean;
+  canComment: boolean;
+  favoritesCount: number;
+  isMediaReady: boolean;
   rawText: string;
-  responseType: string;
   stats?: {
-  commentChart: Array<{
-  count: number;
-  date: string;
-}>;
-  commentCount: number;
+  isAvailable: boolean;
   hasStats: boolean;
   hasVideo?: boolean;
-  isAvailable: boolean;
-  likeChart: Array<{
-  count: number;
-  date: string;
-}>;
-  likeCount: number;
-  lookChart: Array<{
-  count: number;
-  date: string;
-}>;
   lookCount: number;
+  uniqueLookCount: number;
+  uniqueLookChart: Array<{
+  date: string;
+  count: number;
+}>;
+  lookChart: Array<{
+  date: string;
+  count: number;
+}>;
   lookDuration: number;
   lookDurationAverage: number;
-  purchasedCount: number;
-  purchasedSumm: number;
-  tipChart: Array<{
-  count: number;
+  likeCount: number;
+  likeChart: Array<{
   date: string;
+  count: number;
+}>;
+  commentCount: number;
+  commentChart: Array<{
+  date: string;
+  count: number;
 }>;
   tipCount: number;
-  tipSum: number;
-  uniqueLookChart: Array<{
-  count: number;
+  tipChart: Array<{
   date: string;
+  count: number;
 }>;
-  uniqueLookCount: number;
+  tipSum: number;
+  purchasedCount: number;
+  purchasedSumm: number;
 };
-  text: string;
-  tipsAmount: string;
+  hasVoting?: boolean;
+  votingType?: number;
   voting?: {
   finishedAt: string;
   options: Array<{
-  count?: number;
   id: number;
-  isWinner?: boolean;
-  percent?: number;
   text?: string;
+  count?: number;
+  percent?: number;
+  isWinner?: boolean;
 }>;
   total: number;
 };
-  votingType?: number;
-}>;
-}
-
-export interface AccessAnalyticsPromotionsGetChartResponseValue {
-  chart: Array<{
-  count: number;
-  date: string;
-}>;
-  delta: number;
-  gross?: number;
-  total: number;
-}
-
-export interface AccessAnalyticsPromotionsGetTopResponse {
-  hasMore: boolean;
-  items: Array<{
-  canClaim: boolean;
-  claimsCount: number;
-  createdAt: string;
-  finishedAt: string;
-  hasRelatedPromo: boolean;
-  id: number;
-  isFinished: boolean;
-  message: string;
-  price: number;
-  rawMessage: string;
-  subscribeCounts: number | null;
-  subscribeDays: number;
-  type: string;
-}>;
-}
-
-export interface AccessAnalyticsStoriesGetChartResponseValue {
-  chart: Array<{
-  count: number;
-  date: string;
-}>;
-  delta: number;
-  gross?: number;
-  total: number;
-}
-
-export interface AccessAnalyticsStoriesGetTopResponse {
-  hasMore: boolean;
-  items: Array<{
-  canDelete: boolean;
-  canvasHeight: number;
-  canvasWidth: number;
-  commentsCount: number;
-  createdAt: string;
-  hasPost: boolean;
-  id: number;
-  isHighlightCover: boolean;
-  isLastInHighlight: boolean;
-  isReady: boolean;
-  isWatched: boolean;
-  likesCount: number;
-  media: Array<{
-  canView: boolean;
-  convertedToVideo: boolean;
-  createdAt: string;
-  duration?: number;
-  files?: {
-  full: {
-  height?: number;
-  size?: number;
-  sources: Array<{
-  height?: number;
-  type?: string;
-  url: string;
-  width?: number;
-}>;
-  url: string;
-  width?: number;
-};
-  preview?: {
-  height?: number;
-  options: Array<{
-  height?: number;
-  type?: string;
-  url: string;
-  width?: number;
-}>;
-  size?: number;
-  url: string;
-  width?: number;
-};
-  squarePreview?: {
-  height?: number;
-  size?: number;
-  url: string;
-  width?: number;
-};
-  thumb?: {
-  height?: number;
-  size?: number;
-  url: string;
-  width?: number;
-};
-};
-  hasCustomPreview?: boolean;
-  hasError: boolean;
-  id: number;
-  isReady: boolean;
-  releaseForms: Array<{
-  id: number;
-  name: string;
-  partnerSource: string;
-  type: string;
-  user?: {
-  avatar: string;
-  avatarThumbs: {
-  c144: string;
-  c50: string;
-};
-  id: number;
-  isFromGuest: boolean;
-  isVerified: boolean;
-  ivStatus: string;
-  name: string;
-  username: string;
-  view: string;
-};
-}>;
-  type: 'photo' | 'video' | 'gif' | 'audio';
-  videoSources?: {
-  '240'?: string | null;
-  '720'?: string | null;
-};
-}>;
-  post?: {
-  author?: {
-  _view: string;
-  id: number;
-};
-  coordinateParams?: {
-  angle: number;
-  height: number;
-  left: number;
-  scale: number;
-  top: number;
-  width: number;
-};
-  id: number;
-};
-  question?: {
-  entity: {
-  createdAt: string;
-  id: number;
-  text: string;
-};
-  positions: {
-  angle: number;
-  color: string;
-  height: number;
-  left: number;
-  top: number;
-  width: number;
-  x: number | null;
-  y: number | null;
-  zIndex: number;
-};
-  type: string;
-};
-  releaseForms: Array<{
-  id: number;
-  name: string;
-  partnerSource: string;
-  type: string;
-  user?: {
-  avatar: string;
-  avatarThumbs: {
-  c144: string;
-  c50: string;
-};
-  id: number;
-  isFromGuest: boolean;
-  isVerified: boolean;
-  ivStatus: string;
-  name: string;
-  username: string;
-  view: string;
-};
-}>;
-  texts: Array<{
-  position: {
-  angle: number;
-  height: number;
-  width: number;
-  x: number;
-  y: number;
-};
-  text: string;
-}>;
-  tipsAmount: string;
-  tipsAmountRaw: number;
-  tipsCount: number;
-  userId: number;
-  viewers: Array<{
-  avatar: string;
-  avatarThumbs: {
-  c144: string;
-  c50: string;
-};
-  canCommentStory: boolean;
-  canLookStory: boolean;
-  hasNotViewedStory: boolean;
-  id: number;
-  isStoryBlockedUser: boolean;
-  isStoryLiked: boolean;
-  isVerified: boolean;
-  name: string;
-  username: string;
-}>;
-  viewersCount: number;
 }>;
 }
 
 export interface AccessAnalyticsStreamsGetChartResponseValue {
   chart: Array<{
-  count: number;
   date: string;
+  count: number;
 }>;
+  total: number;
   delta: number;
   gross?: number;
-  total: number;
 }
 
 export interface AccessAnalyticsStreamsGetTopResponse {
   hasMore: boolean;
   items: Array<{
-  author?: {
-  _view: string;
   id: number;
-};
-  canComment: boolean;
   canDelete: boolean;
   canEdit: boolean;
-  canToggleFavorite: boolean;
-  canViewMedia: boolean;
-  favoritesCount: number;
-  id: number;
-  isFavorite: boolean;
-  isMarkdownDisabled: boolean;
-  isMediaReady: boolean;
-  isOpened: boolean;
+  mediaCount: number;
   media: Array<{
-  canView: boolean;
-  convertedToVideo: boolean;
-  createdAt: string;
-  duration?: number;
-  files?: {
-  full: {
-  height?: number;
-  size?: number;
-  sources: Array<{
-  height?: number;
-  type?: string;
-  url: string;
-  width?: number;
-}>;
-  url: string;
-  width?: number;
-};
-  preview?: {
-  height?: number;
-  options: Array<{
-  height?: number;
-  type?: string;
-  url: string;
-  width?: number;
-}>;
-  size?: number;
-  url: string;
-  width?: number;
-};
-  squarePreview?: {
-  height?: number;
-  size?: number;
-  url: string;
-  width?: number;
-};
-  thumb?: {
-  height?: number;
-  size?: number;
-  url: string;
-  width?: number;
-};
-};
-  hasCustomPreview?: boolean;
-  hasError: boolean;
   id: number;
+  type: 'photo' | 'video' | 'gif' | 'audio';
+  convertedToVideo: boolean;
+  canView: boolean;
+  hasError: boolean;
+  createdAt: string;
   isReady: boolean;
+  duration?: number;
   releaseForms: Array<{
   id: number;
   name: string;
   partnerSource: string;
   type: string;
   user?: {
-  avatar: string;
-  avatarThumbs: {
-  c144: string;
-  c50: string;
-};
+  view: string;
   id: number;
-  isFromGuest: boolean;
-  isVerified: boolean;
-  ivStatus: string;
   name: string;
   username: string;
-  view: string;
+  isVerified: boolean;
+  avatar: string;
+  avatarThumbs: {
+  c50: string;
+  c144: string;
+};
+  ivStatus: string;
+  isFromGuest: boolean;
 };
 }>;
-  type: 'photo' | 'video' | 'gif' | 'audio';
+  hasCustomPreview?: boolean;
   videoSources?: {
   '240'?: string | null;
   '720'?: string | null;
 };
+  files?: {
+  full: {
+  url: string;
+  width?: number;
+  height?: number;
+  size?: number;
+  sources: Array<{
+  url: string;
+  width?: number;
+  height?: number;
+  type?: string;
 }>;
-  mediaCount: number;
+};
+  thumb?: {
+  url: string;
+  width?: number;
+  height?: number;
+  size?: number;
+};
+  preview?: {
+  url: string;
+  width?: number;
+  height?: number;
+  size?: number;
+  options: Array<{
+  url: string;
+  width?: number;
+  height?: number;
+  type?: string;
+}>;
+};
+  squarePreview?: {
+  url: string;
+  width?: number;
+  height?: number;
+  size?: number;
+};
+};
+}>;
+  canViewMedia: boolean;
+  author?: {
+  id: number;
+  _view: string;
+};
+  responseType: string;
   postedAt: string;
   postedAtPrecise: string;
+  isMarkdownDisabled: boolean;
+  isOpened: boolean;
+  canToggleFavorite: boolean;
+  tipsAmount: string;
+  text: string;
+  isFavorite: boolean;
+  canComment: boolean;
+  favoritesCount: number;
+  isMediaReady: boolean;
   rawText: string;
-  responseType: string;
   stats?: {
-  commentChart: Array<{
-  count: number;
-  date: string;
-}>;
-  commentCount: number;
+  isAvailable: boolean;
   hasStats: boolean;
   hasVideo?: boolean;
-  isAvailable: boolean;
-  likeChart: Array<{
-  count: number;
-  date: string;
-}>;
-  likeCount: number;
-  lookChart: Array<{
-  count: number;
-  date: string;
-}>;
   lookCount: number;
+  uniqueLookCount: number;
+  uniqueLookChart: Array<{
+  date: string;
+  count: number;
+}>;
+  lookChart: Array<{
+  date: string;
+  count: number;
+}>;
   lookDuration: number;
   lookDurationAverage: number;
-  purchasedCount: number;
-  purchasedSumm: number;
-  tipChart: Array<{
-  count: number;
+  likeCount: number;
+  likeChart: Array<{
   date: string;
+  count: number;
+}>;
+  commentCount: number;
+  commentChart: Array<{
+  date: string;
+  count: number;
 }>;
   tipCount: number;
-  tipSum: number;
-  uniqueLookChart: Array<{
-  count: number;
+  tipChart: Array<{
   date: string;
+  count: number;
 }>;
-  uniqueLookCount: number;
+  tipSum: number;
+  purchasedCount: number;
+  purchasedSumm: number;
 };
+}>;
+}
+
+export interface AccessAnalyticsStoriesGetChartResponseValue {
+  chart: Array<{
+  date: string;
+  count: number;
+}>;
+  total: number;
+  delta: number;
+  gross?: number;
+}
+
+export interface AccessAnalyticsStoriesGetTopResponse {
+  hasMore: boolean;
+  items: Array<{
+  id: number;
+  userId: number;
+  isReady: boolean;
+  hasPost: boolean;
+  isWatched: boolean;
+  media: Array<{
+  id: number;
+  type: 'photo' | 'video' | 'gif' | 'audio';
+  convertedToVideo: boolean;
+  canView: boolean;
+  hasError: boolean;
+  createdAt: string;
+  isReady: boolean;
+  duration?: number;
+  releaseForms: Array<{
+  id: number;
+  name: string;
+  partnerSource: string;
+  type: string;
+  user?: {
+  view: string;
+  id: number;
+  name: string;
+  username: string;
+  isVerified: boolean;
+  avatar: string;
+  avatarThumbs: {
+  c50: string;
+  c144: string;
+};
+  ivStatus: string;
+  isFromGuest: boolean;
+};
+}>;
+  hasCustomPreview?: boolean;
+  videoSources?: {
+  '240'?: string | null;
+  '720'?: string | null;
+};
+  files?: {
+  full: {
+  url: string;
+  width?: number;
+  height?: number;
+  size?: number;
+  sources: Array<{
+  url: string;
+  width?: number;
+  height?: number;
+  type?: string;
+}>;
+};
+  thumb?: {
+  url: string;
+  width?: number;
+  height?: number;
+  size?: number;
+};
+  preview?: {
+  url: string;
+  width?: number;
+  height?: number;
+  size?: number;
+  options: Array<{
+  url: string;
+  width?: number;
+  height?: number;
+  type?: string;
+}>;
+};
+  squarePreview?: {
+  url: string;
+  width?: number;
+  height?: number;
+  size?: number;
+};
+};
+}>;
+  createdAt: string;
+  canvasHeight: number;
+  canvasWidth: number;
+  question?: {
+  entity: {
+  id: number;
   text: string;
+  createdAt: string;
+};
+  type: string;
+  positions: {
+  zIndex: number;
+  x: number | null;
+  y: number | null;
+  top: number;
+  left: number;
+  width: number;
+  height: number;
+  angle: number;
+  color: string;
+};
+};
+  viewersCount: number;
+  viewers: Array<{
+  id: number;
+  name: string;
+  username: string;
+  avatar: string;
+  avatarThumbs: {
+  c50: string;
+  c144: string;
+};
+  isVerified: boolean;
+  canLookStory: boolean;
+  canCommentStory: boolean;
+  hasNotViewedStory: boolean;
+  isStoryLiked: boolean;
+  isStoryBlockedUser: boolean;
+}>;
+  commentsCount: number;
+  canDelete: boolean;
+  isHighlightCover: boolean;
+  isLastInHighlight: boolean;
   tipsAmount: string;
+  tipsAmountRaw: number;
+  tipsCount: number;
+  likesCount: number;
+  releaseForms: Array<{
+  id: number;
+  name: string;
+  partnerSource: string;
+  type: string;
+  user?: {
+  view: string;
+  id: number;
+  name: string;
+  username: string;
+  isVerified: boolean;
+  avatar: string;
+  avatarThumbs: {
+  c50: string;
+  c144: string;
+};
+  ivStatus: string;
+  isFromGuest: boolean;
+};
+}>;
+  post?: {
+  id: number;
+  author?: {
+  id: number;
+  _view: string;
+};
+  coordinateParams?: {
+  top: number;
+  left: number;
+  angle: number;
+  scale: number;
+  width: number;
+  height: number;
+};
+};
+  texts: Array<{
+  text: string;
+  position: {
+  x: number;
+  y: number;
+  width: number;
+  height: number;
+  angle: number;
+};
+}>;
+}>;
+}
+
+export interface AccessAnalyticsMassMessagesGetChartResponse {
+  group_messages: {
+  chart: Array<{
+  date: string;
+  count: number;
+}>;
+  total: number;
+  delta: number;
+  gross?: number;
+};
+  group_messages_purchases: {
+  chart: Array<{
+  date: string;
+  count: number;
+}>;
+  total: number;
+  delta: number;
+  gross?: number;
+};
+  direct_messages: {
+  chart: Array<{
+  date: string;
+  count: number;
+}>;
+  total: number;
+  delta: number;
+  gross?: number;
+};
+  direct_messages_purchases: {
+  chart: Array<{
+  date: string;
+  count: number;
+}>;
+  total: number;
+  delta: number;
+  gross?: number;
+};
+}
+
+export interface AccessAnalyticsMassMessagesGetSentResponse {
+  hasMore: boolean;
+  items: Array<{
+  id: number;
+  date: string;
+  responseType?: string;
+  text: string;
+  rawText?: string;
+  giphyId?: string | null;
+  isFree?: boolean;
+  isMediaReady?: boolean;
+  mediaCount?: number;
+  media: Array<{
+  id: number;
+  type: 'photo' | 'video' | 'gif' | 'audio';
+  convertedToVideo: boolean;
+  canView: boolean;
+  hasError: boolean;
+  createdAt: string;
+  isReady: boolean;
+  duration?: number;
+  releaseForms: Array<{
+  id: number;
+  name: string;
+  partnerSource: string;
+  type: string;
+  user?: {
+  view: string;
+  id: number;
+  name: string;
+  username: string;
+  isVerified: boolean;
+  avatar: string;
+  avatarThumbs: {
+  c50: string;
+  c144: string;
+};
+  ivStatus: string;
+  isFromGuest: boolean;
+};
+}>;
+  hasCustomPreview?: boolean;
+  videoSources?: {
+  '240'?: string | null;
+  '720'?: string | null;
+};
+  files?: {
+  full: {
+  url: string;
+  width?: number;
+  height?: number;
+  size?: number;
+  sources: Array<{
+  url: string;
+  width?: number;
+  height?: number;
+  type?: string;
+}>;
+};
+  thumb?: {
+  url: string;
+  width?: number;
+  height?: number;
+  size?: number;
+};
+  preview?: {
+  url: string;
+  width?: number;
+  height?: number;
+  size?: number;
+  options: Array<{
+  url: string;
+  width?: number;
+  height?: number;
+  type?: string;
+}>;
+};
+  squarePreview?: {
+  url: string;
+  width?: number;
+  height?: number;
+  size?: number;
+};
+};
+}>;
+  previews: Array<{
+  id: number;
+  type: 'photo' | 'video' | 'gif' | 'audio';
+  convertedToVideo: boolean;
+  canView: boolean;
+  hasError: boolean;
+  createdAt: string;
+  isReady: boolean;
+  duration?: number;
+  releaseForms: Array<{
+  id: number;
+  name: string;
+  partnerSource: string;
+  type: string;
+  user?: {
+  view: string;
+  id: number;
+  name: string;
+  username: string;
+  isVerified: boolean;
+  avatar: string;
+  avatarThumbs: {
+  c50: string;
+  c144: string;
+};
+  ivStatus: string;
+  isFromGuest: boolean;
+};
+}>;
+  hasCustomPreview?: boolean;
+  videoSources?: {
+  '240'?: string | null;
+  '720'?: string | null;
+};
+  files?: {
+  full: {
+  url: string;
+  width?: number;
+  height?: number;
+  size?: number;
+  sources: Array<{
+  url: string;
+  width?: number;
+  height?: number;
+  type?: string;
+}>;
+};
+  thumb?: {
+  url: string;
+  width?: number;
+  height?: number;
+  size?: number;
+};
+  preview?: {
+  url: string;
+  width?: number;
+  height?: number;
+  size?: number;
+  options: Array<{
+  url: string;
+  width?: number;
+  height?: number;
+  type?: string;
+}>;
+};
+  squarePreview?: {
+  url: string;
+  width?: number;
+  height?: number;
+  size?: number;
+};
+};
+}>;
+  isTip?: boolean;
+  isReportedByMe?: boolean;
+  viewedCount?: number;
+  sentCount?: number;
+  isCanceled?: boolean;
+  releaseForms: Array<{
+  id: number;
+  name: string;
+  partnerSource: string;
+  type: string;
+  user?: {
+  view: string;
+  id: number;
+  name: string;
+  username: string;
+  isVerified: boolean;
+  avatar: string;
+  avatarThumbs: {
+  c50: string;
+  c144: string;
+};
+  ivStatus: string;
+  isFromGuest: boolean;
+};
+}>;
+  template?: string;
+  canUnsend?: boolean;
+  unsendSeconds?: number;
+  price?: string;
+  purchasedCount?: number;
+  canSendMessageToBuyers?: boolean;
+}>;
+}
+
+export interface AccessAnalyticsMassMessagesGetPurchasedResponse {
+  hasMore: boolean;
+  items: Array<{
+  id: number;
+  date: string;
+  responseType?: string;
+  text: string;
+  rawText?: string;
+  giphyId?: string | null;
+  isFree?: boolean;
+  isMediaReady?: boolean;
+  mediaCount?: number;
+  media: Array<{
+  id: number;
+  type: 'photo' | 'video' | 'gif' | 'audio';
+  convertedToVideo: boolean;
+  canView: boolean;
+  hasError: boolean;
+  createdAt: string;
+  isReady: boolean;
+  duration?: number;
+  releaseForms: Array<{
+  id: number;
+  name: string;
+  partnerSource: string;
+  type: string;
+  user?: {
+  view: string;
+  id: number;
+  name: string;
+  username: string;
+  isVerified: boolean;
+  avatar: string;
+  avatarThumbs: {
+  c50: string;
+  c144: string;
+};
+  ivStatus: string;
+  isFromGuest: boolean;
+};
+}>;
+  hasCustomPreview?: boolean;
+  videoSources?: {
+  '240'?: string | null;
+  '720'?: string | null;
+};
+  files?: {
+  full: {
+  url: string;
+  width?: number;
+  height?: number;
+  size?: number;
+  sources: Array<{
+  url: string;
+  width?: number;
+  height?: number;
+  type?: string;
+}>;
+};
+  thumb?: {
+  url: string;
+  width?: number;
+  height?: number;
+  size?: number;
+};
+  preview?: {
+  url: string;
+  width?: number;
+  height?: number;
+  size?: number;
+  options: Array<{
+  url: string;
+  width?: number;
+  height?: number;
+  type?: string;
+}>;
+};
+  squarePreview?: {
+  url: string;
+  width?: number;
+  height?: number;
+  size?: number;
+};
+};
+}>;
+  previews: Array<{
+  id: number;
+  type: 'photo' | 'video' | 'gif' | 'audio';
+  convertedToVideo: boolean;
+  canView: boolean;
+  hasError: boolean;
+  createdAt: string;
+  isReady: boolean;
+  duration?: number;
+  releaseForms: Array<{
+  id: number;
+  name: string;
+  partnerSource: string;
+  type: string;
+  user?: {
+  view: string;
+  id: number;
+  name: string;
+  username: string;
+  isVerified: boolean;
+  avatar: string;
+  avatarThumbs: {
+  c50: string;
+  c144: string;
+};
+  ivStatus: string;
+  isFromGuest: boolean;
+};
+}>;
+  hasCustomPreview?: boolean;
+  videoSources?: {
+  '240'?: string | null;
+  '720'?: string | null;
+};
+  files?: {
+  full: {
+  url: string;
+  width?: number;
+  height?: number;
+  size?: number;
+  sources: Array<{
+  url: string;
+  width?: number;
+  height?: number;
+  type?: string;
+}>;
+};
+  thumb?: {
+  url: string;
+  width?: number;
+  height?: number;
+  size?: number;
+};
+  preview?: {
+  url: string;
+  width?: number;
+  height?: number;
+  size?: number;
+  options: Array<{
+  url: string;
+  width?: number;
+  height?: number;
+  type?: string;
+}>;
+};
+  squarePreview?: {
+  url: string;
+  width?: number;
+  height?: number;
+  size?: number;
+};
+};
+}>;
+  isTip?: boolean;
+  isReportedByMe?: boolean;
+  viewedCount?: number;
+  sentCount?: number;
+  isCanceled?: boolean;
+  releaseForms: Array<{
+  id: number;
+  name: string;
+  partnerSource: string;
+  type: string;
+  user?: {
+  view: string;
+  id: number;
+  name: string;
+  username: string;
+  isVerified: boolean;
+  avatar: string;
+  avatarThumbs: {
+  c50: string;
+  c144: string;
+};
+  ivStatus: string;
+  isFromGuest: boolean;
+};
+}>;
+  template?: string;
+  canUnsend?: boolean;
+  unsendSeconds?: number;
+  price?: string;
+  purchasedCount?: number;
+  canSendMessageToBuyers?: boolean;
+}>;
+}
+
+export interface AccessAnalyticsMassMessagesListBuyersResponse {
+  list: Array<{
+  id: number;
+  username: string;
+  name: string;
+  isVerified: boolean;
+  avatar: string | null;
+  avatarThumbs?: {
+  c50: string;
+  c144: string;
+} | null;
+}>;
+  hasMore: boolean;
+  nextMarker?: number | null;
+}
+
+export interface AccessAnalyticsMassMessagesListBuyersItem {
+  id: number;
+  username: string;
+  name: string;
+  isVerified: boolean;
+  avatar: string | null;
+  avatarThumbs?: {
+  c50: string;
+  c144: string;
+} | null;
+}
+
+export interface AccessAnalyticsPromotionsGetChartResponseValue {
+  chart: Array<{
+  date: string;
+  count: number;
+}>;
+  total: number;
+  delta: number;
+  gross?: number;
+}
+
+export interface AccessAnalyticsPromotionsGetTopResponse {
+  hasMore: boolean;
+  items: Array<{
+  id: number;
+  message: string;
+  rawMessage: string;
+  hasRelatedPromo: boolean;
+  price: number;
+  type: string;
+  canClaim: boolean;
+  claimsCount: number;
+  subscribeCounts: number | null;
+  subscribeDays: number;
+  createdAt: string;
+  finishedAt: string;
+  isFinished: boolean;
 }>;
 }
 
 export interface AccessAnalyticsTrialsGetChartResponseValue {
   chart: Array<{
-  count: number;
   date: string;
+  count: number;
 }>;
+  total: number;
   delta: number;
   gross?: number;
-  total: number;
 }
 
 export interface AccessAnalyticsTrialsGetTopResponse {
   hasMore: boolean;
   items: Array<{
-  claimCounts: number;
-  createdAt: string;
-  expiredAt: string | null;
   id: number;
-  isFinished: boolean;
-  subscribeCounts: number;
-  subscribeDays: number;
   trialLinkName: string;
   url: string;
+  subscribeDays: number;
+  subscribeCounts: number;
+  claimCounts: number;
+  expiredAt: string | null;
+  createdAt: string;
+  isFinished: boolean;
 }>;
 }
 
-export interface AccessAnalyticsVisitorCountriesGetChartResponse {
-  chart: {
-  duration: Array<{
-  count: number;
+export interface AccessAnalyticsCampaignsGetChartResponseValue {
+  chart: Array<{
   date: string;
+  count: number;
 }>;
+  total: number;
+  delta: number;
+  gross?: number;
+}
+
+export interface AccessAnalyticsCampaignsGetTopResponse {
+  hasMore: boolean;
+  list: Array<{
+  id: number;
+  countSubscribers: number;
+  countTransitions: number;
+  campaignCode: number;
+  campaignName: string;
+  createdAt: string;
+  endDate: string;
+}>;
+}
+
+export interface AccessAnalyticsCampaignsGetTopItem {
+  id: number;
+  countSubscribers: number;
+  countTransitions: number;
+  campaignCode: number;
+  campaignName: string;
+  createdAt: string;
+  endDate: string;
+}
+
+export interface AccessAnalyticsVisitorCountriesGetChartResponse {
+  isAvailable: boolean;
+  chart: {
   visitors: Array<{
-  count: number;
   date: string;
+  count: number;
+}>;
+  duration: Array<{
+  date: string;
+  count: number;
 }>;
 };
-  hasStats: boolean;
-  isAvailable: boolean;
   total: {
   current: string;
   delta: number;
 };
+  hasStats: boolean;
 }
 
 export interface AccessAnalyticsVisitorCountriesGetTopResponse {
-  hasStats: boolean;
   isAvailable: boolean;
+  hasStats: boolean;
   topCountries: {
   hasMore: boolean;
-  rows: Array<{
-  countryCode: string;
-  countryName: string;
-  rank: number;
-  viewsCount: {
-  guests: number;
-  subscribers: number;
+  totals: {
   total: number;
+  guests: string;
+  users: string;
+  subscribers: number;
+};
+  rows: Array<{
+  rank: number;
+  countryName: string;
+  countryCode: string;
+  viewsCount: {
+  total: number;
+  guests: number;
   users: number;
+  subscribers: number;
 };
 }>;
-  totals: {
-  guests: string;
-  subscribers: number;
-  total: number;
-  users: string;
-};
 };
 }
 
-export interface AccessChatsListResponse {
-  hasMore: boolean;
+export interface AccessUsersListsListResponse {
   list: Array<{
-  canGoToProfile?: boolean;
-  canNotSendReason?: boolean | string;
-  canSendMessage?: boolean;
-  countPinnedMessages?: number;
-  hasPurchasedFeed?: boolean;
-  hasUnreadTips?: boolean;
-  isMutedNotifications?: boolean;
-  lastMessage?: {
-  canBePinned?: boolean;
-  canPurchase?: boolean;
-  canPurchaseReason?: string;
-  canReport?: boolean;
-  canUnsendQueue?: boolean;
-  cancelSeconds?: number;
-  changedAt?: string;
-  createdAt?: string;
-  fromUser: {
-  id: number;
+  id: string | number;
+  type: string;
   name: string;
-} | {
-  _view: string;
+  usersCount?: number;
+  postsCount?: number;
+  order?: string;
+  direction?: string;
+  canUpdate?: boolean;
+  canDelete?: boolean;
+  canManageUsers?: boolean;
+  canAddUsers?: boolean;
+  canPinnedToFeed?: boolean;
+  isPinnedToFeed?: boolean;
+  canPinnedToChat?: boolean;
+  isPinnedToChat?: boolean;
+  sortList: Array<{
+  order: string;
+  direction: string;
+}>;
+  users: Array<{
   id: number;
+  username: string;
+  name: string;
+  isVerified: boolean;
+  avatar: string | null;
+  avatarThumbs?: {
+  c50: string;
+  c144: string;
+} | null;
+}>;
+}>;
+  hasMore: boolean;
+  order?: string;
+  sort?: string;
+}
+
+export interface AccessUsersListsListItem {
+  id: string | number;
+  type: string;
+  name: string;
+  usersCount?: number;
+  postsCount?: number;
+  order?: string;
+  direction?: string;
+  canUpdate?: boolean;
+  canDelete?: boolean;
+  canManageUsers?: boolean;
+  canAddUsers?: boolean;
+  canPinnedToFeed?: boolean;
+  isPinnedToFeed?: boolean;
+  canPinnedToChat?: boolean;
+  isPinnedToChat?: boolean;
+  sortList: Array<{
+  order: string;
+  direction: string;
+}>;
+  users: Array<{
+  id: number;
+  username: string;
+  name: string;
+  isVerified: boolean;
+  avatar: string | null;
+  avatarThumbs?: {
+  c50: string;
+  c144: string;
+} | null;
+}>;
+}
+
+export interface AccessUsersListsCreateRequest {
+  name: string;
+}
+
+export interface AccessUsersListsCreateResponse {
+  id: string | number;
+  type: string;
+  name: string;
+  usersCount?: number;
+  postsCount?: number;
+  order?: string;
+  direction?: string;
+  canUpdate?: boolean;
+  canDelete?: boolean;
+  canManageUsers?: boolean;
+  canAddUsers?: boolean;
+  canPinnedToFeed?: boolean;
+  isPinnedToFeed?: boolean;
+  canPinnedToChat?: boolean;
+  isPinnedToChat?: boolean;
+  sortList: Array<{
+  order: string;
+  direction: string;
+}>;
+  users: Array<{
+  id: number;
+  username: string;
+  name: string;
+  isVerified: boolean;
+  avatar: string | null;
+  avatarThumbs?: {
+  c50: string;
+  c144: string;
+} | null;
+}>;
+}
+
+export interface AccessUsersListsGetResponse {
+  id: string | number;
+  type: string;
+  name: string;
+  usersCount?: number;
+  postsCount?: number;
+  order?: string;
+  direction?: string;
+  canUpdate?: boolean;
+  canDelete?: boolean;
+  canManageUsers?: boolean;
+  canAddUsers?: boolean;
+  canPinnedToFeed?: boolean;
+  isPinnedToFeed?: boolean;
+  canPinnedToChat?: boolean;
+  isPinnedToChat?: boolean;
+  sortList: Array<{
+  order: string;
+  direction: string;
+}>;
+  users: Array<{
+  id: number;
+  username: string;
+  name: string;
+  isVerified: boolean;
+  avatar: string | null;
+  avatarThumbs?: {
+  c50: string;
+  c144: string;
+} | null;
+}>;
+}
+
+export interface AccessUsersListsUpdateRequest {
+  name: string;
+}
+
+export interface AccessUsersListsUpdateResponse {
+  id: string | number;
+  type: string;
+  name: string;
+  usersCount?: number;
+  postsCount?: number;
+  order?: string;
+  direction?: string;
+  canUpdate?: boolean;
+  canDelete?: boolean;
+  canManageUsers?: boolean;
+  canAddUsers?: boolean;
+  canPinnedToFeed?: boolean;
+  isPinnedToFeed?: boolean;
+  canPinnedToChat?: boolean;
+  isPinnedToChat?: boolean;
+  sortList: Array<{
+  order: string;
+  direction: string;
+}>;
+  users: Array<{
+  id: number;
+  username: string;
+  name: string;
+  isVerified: boolean;
+  avatar: string | null;
+  avatarThumbs?: {
+  c50: string;
+  c144: string;
+} | null;
+}>;
+}
+
+export interface AccessUsersListsCreate2Request {
+  listIds: Array<number>;
+}
+
+export interface AccessUsersListsCreate2Response {
+  success: Array<{
+  listId: number;
+  success: boolean;
+}>;
+  errors?: Array<{
+  listId: number;
+  error: string;
+}>;
+}
+
+export interface AccessUsersListsListUsersResponse {
+  list: Array<{
+  id: number;
+  username: string;
+  name: string;
+  isVerified: boolean;
+  avatar: string | null;
+  avatarThumbs?: {
+  c50: string;
+  c144: string;
+} | null;
+}>;
+  hasMore: boolean;
+  nextOffset?: number;
+}
+
+export interface AccessUsersListsListUsersItem {
+  id: number;
+  username: string;
+  name: string;
+  isVerified: boolean;
+  avatar: string | null;
+  avatarThumbs?: {
+  c50: string;
+  c144: string;
+} | null;
+}
+
+export interface AccessUsersListsCreateUsersResponseOption0 {
+  list: {
+  id: string | number;
+  type: string;
+  name: string;
+  usersCount?: number;
+  postsCount?: number;
+  order?: string;
+  direction?: string;
+  canUpdate?: boolean;
+  canDelete?: boolean;
+  canManageUsers?: boolean;
+  canAddUsers?: boolean;
+  canPinnedToFeed?: boolean;
+  isPinnedToFeed?: boolean;
+  canPinnedToChat?: boolean;
+  isPinnedToChat?: boolean;
+  sortList: Array<{
+  order: string;
+  direction: string;
+}>;
+  users: Array<{
+  id: number;
+  username: string;
+  name: string;
+  isVerified: boolean;
+  avatar: string | null;
+  avatarThumbs?: {
+  c50: string;
+  c144: string;
+} | null;
+}>;
 };
-  giphyId?: string | null;
+  userState: {
+  id: string | number;
+  type: string;
+  name: string;
+  hasUser: boolean;
+  canAddUser?: boolean;
+  cannotAddUserReason?: string | null;
+};
+}
+
+export interface AccessUsersListsDeleteUsersResponseOption0 {
+  list: Array<{
   id: number;
-  isCouplePeopleMedia?: boolean;
-  isFree?: boolean;
-  isFromQueue?: boolean;
-  isLiked?: boolean;
-  isMarkdownDisabled?: boolean;
-  isMediaReady?: boolean;
-  isNew?: boolean;
-  isOpened?: boolean;
-  isPinned?: boolean;
-  isReportedByMe?: boolean;
-  isTip?: boolean;
-  lockedText?: boolean;
+  username: string;
+  name: string;
+  isVerified: boolean;
+  avatar: string | null;
+  avatarThumbs?: {
+  c50: string;
+  c144: string;
+} | null;
+}>;
+  hasMore: boolean;
+  nextOffset?: number;
+}
+
+export interface AccessUsersGetResponseOption0 {
+  id: number;
+  username: string;
+  name: string;
+  isVerified: boolean;
+  avatar: string | null;
+  avatarThumbs?: {
+  c50: string;
+  c144: string;
+} | null;
+  lists: Array<{
+  id: string | number;
+  type: string;
+  name: string;
+}>;
+  displayName?: string;
+  notice?: string;
+  about?: string | null;
+  isMarkdownDisabledForAbout?: boolean;
+  website?: string | null;
+  wishlist?: string | null;
+  location?: string | null;
+  header?: string | null;
+  headerSize?: {
+  width: number;
+  height: number;
+} | null;
+  headerThumbs?: {
+  w480: string;
+  w760: string;
+} | null;
+  subscribersCount?: number | null;
+  postsCount?: number;
+  archivedPostsCount?: number;
+  privateArchivedPostsCount?: number;
+  photosCount?: number;
+  videosCount?: number;
+  audiosCount?: number;
+  mediasCount?: number;
+  favoritesCount?: number;
+  favoritedCount?: number;
+  joinDate?: string;
+  lastSeen?: string | null;
+  subscribedBy?: boolean;
+  subscribedByExpire?: boolean | null;
+  subscribedByExpireDate?: string | null;
+  subscribedByAutoprolong?: boolean | null;
+  subscribedIsExpiredNow?: boolean | null;
+  subscribedByData?: {
+  price: number;
+  newPrice: number;
+  regularPrice: number;
+  subscribePrice: number;
+  discountPercent: number;
+  discountPeriod: number;
+  subscribeAt: string;
+  expiredAt: string;
+  renewedAt: string | null;
+  discountFinishedAt: string | null;
+  discountStartedAt: string | null;
+  status: string | null;
+  isMuted: boolean;
+  unsubscribeReason: string;
+  duration: string;
+  hasActivePaidSubscriptions: boolean;
+  showPostsInFeed: boolean;
+  subscribes: Array<{
+  id: number;
+  userId: number;
+  subscriberId: number;
+  date: string;
+  duration: number;
+  startDate: string;
+  expireDate: string;
+  cancelDate: string | null;
+  price: number;
+  regularPrice: number;
+  discount: number;
+  earningId: number;
+  action: string;
+  type: string;
+  offerStart: string | null;
+  offerEnd: string | null;
+  isCurrent: boolean;
+}>;
+};
+  subscribedOn?: boolean;
+  subscribedOnExpiredNow?: boolean;
+  subscribedOnDuration?: string;
+  subscribedOnData?: {
+  price: number;
+  newPrice: number;
+  regularPrice: number;
+  subscribePrice: number;
+  discountPercent: number;
+  discountPeriod: number;
+  subscribeAt: string;
+  expiredAt: string;
+  renewedAt: string | null;
+  discountFinishedAt: string | null;
+  discountStartedAt: string | null;
+  status: string | null;
+  isMuted: boolean;
+  unsubscribeReason: string;
+  duration: string;
+  hasActivePaidSubscriptions: boolean;
+  subscribes: Array<{
+  id: number;
+  userId: number;
+  subscriberId: number;
+  date: string;
+  duration: number;
+  startDate: string;
+  expireDate: string;
+  cancelDate: string | null;
+  price: number;
+  regularPrice: number;
+  discount: number;
+  earningId: number;
+  action: string;
+  type: string;
+  offerStart: string | null;
+  offerEnd: string | null;
+  isCurrent: boolean;
+}>;
+  tipsSumm: number;
+  subscribesSumm: number;
+  messagesSumm: number;
+  postsSumm: number;
+  streamsSumm: number;
+  totalSumm: number;
+};
+  subscribePrice?: number;
+  currentSubscribePrice?: number | null;
+  canAddSubscriber?: boolean;
+  tipsEnabled?: boolean;
+  tipsTextEnabled?: boolean;
+  tipsMin?: number;
+  tipsMinInternal?: number;
+  tipsMax?: number;
+  canLookStory?: boolean;
+  canCommentStory?: boolean;
+  hasNotViewedStory?: boolean;
+  hasStories?: boolean;
+  isRestricted?: boolean;
+  canRestrict?: boolean;
+  isBlocked?: boolean;
+  canReport?: boolean;
+  canUnsubscribe?: boolean;
+  isPendingAutoprolong?: boolean;
+  isPerformer?: boolean;
+  isRealPerformer?: boolean;
+  canReceiveChatMessage?: boolean;
+  canChat?: boolean;
+  showPostsInFeed?: boolean;
+  hasPinnedPosts?: boolean;
+  hasLabels?: boolean;
+  isPrivateRestriction?: boolean;
+  showSubscribersCount?: boolean;
+  showMediaCount?: boolean;
+  isReferrerAllowed?: boolean;
+  canCreatePromotion?: boolean;
+  canCreateTrial?: boolean;
+  isAdultContent?: boolean;
+  canTrialSend?: boolean;
+  isFriend?: boolean;
+  hasScheduledStream?: boolean;
+  hasStream?: boolean;
+  canPayInternal?: boolean;
+}
+
+export interface AccessUsersListPostsResponse {
+  list: Array<{
+  id: number;
+  canDelete: boolean;
+  canEdit: boolean;
+  mediaCount: number;
   media: Array<{
-  canView: boolean;
-  convertedToVideo: boolean;
-  createdAt: string;
-  duration?: number;
-  files?: {
-  full: {
-  height?: number;
-  size?: number;
-  sources: Array<{
-  height?: number;
-  type?: string;
-  url: string;
-  width?: number;
-}>;
-  url: string;
-  width?: number;
-};
-  preview?: {
-  height?: number;
-  options: Array<{
-  height?: number;
-  type?: string;
-  url: string;
-  width?: number;
-}>;
-  size?: number;
-  url: string;
-  width?: number;
-};
-  squarePreview?: {
-  height?: number;
-  size?: number;
-  url: string;
-  width?: number;
-};
-  thumb?: {
-  height?: number;
-  size?: number;
-  url: string;
-  width?: number;
-};
-};
-  hasCustomPreview?: boolean;
-  hasError: boolean;
   id: number;
+  type: 'photo' | 'video' | 'gif' | 'audio';
+  convertedToVideo: boolean;
+  canView: boolean;
+  hasError: boolean;
+  createdAt: string;
   isReady: boolean;
+  duration?: number;
   releaseForms: Array<{
   id: number;
   name: string;
   partnerSource: string;
   type: string;
   user?: {
-  avatar: string;
-  avatarThumbs: {
-  c144: string;
-  c50: string;
-};
+  view: string;
   id: number;
-  isFromGuest: boolean;
-  isVerified: boolean;
-  ivStatus: string;
   name: string;
   username: string;
-  view: string;
+  isVerified: boolean;
+  avatar: string;
+  avatarThumbs: {
+  c50: string;
+  c144: string;
+};
+  ivStatus: string;
+  isFromGuest: boolean;
 };
 }>;
-  type: 'photo' | 'video' | 'gif' | 'audio';
+  hasCustomPreview?: boolean;
   videoSources?: {
   '240'?: string | null;
   '720'?: string | null;
 };
+  files?: {
+  full: {
+  url: string;
+  width?: number;
+  height?: number;
+  size?: number;
+  sources: Array<{
+  url: string;
+  width?: number;
+  height?: number;
+  type?: string;
 }>;
+};
+  thumb?: {
+  url: string;
+  width?: number;
+  height?: number;
+  size?: number;
+};
+  preview?: {
+  url: string;
+  width?: number;
+  height?: number;
+  size?: number;
+  options: Array<{
+  url: string;
+  width?: number;
+  height?: number;
+  type?: string;
+}>;
+};
+  squarePreview?: {
+  url: string;
+  width?: number;
+  height?: number;
+  size?: number;
+};
+};
+}>;
+  canViewMedia: boolean;
+  author?: {
+  id: number;
+  _view: string;
+};
+  responseType: string;
+  postedAt: string;
+  postedAtPrecise: string;
+  isMarkdownDisabled: boolean;
+  isOpened: boolean;
+  canToggleFavorite: boolean;
+  tipsAmount: string;
+  text: string;
+  isFavorite: boolean;
+  canComment: boolean;
+  favoritesCount: number;
+  isMediaReady: boolean;
+  rawText: string;
+}>;
+  hasMore: boolean;
+  headMarker: string;
+  tailMarker: string;
+  counters: {
+  audiosCount: number;
+  photosCount: number;
+  videosCount: number;
+  mediasCount: number;
+  postsCount: number;
+  streamsCount: number;
+  archivedPostsCount: number;
+  privateArchivedPostsCount: number;
+};
+}
+
+export interface AccessUsersGetRestrictResponse {
+  list: Array<{
+  id: number;
+  username: string;
+  name: string;
+  isVerified: boolean;
+  avatar: string | null;
+  avatarThumbs?: {
+  c50: string;
+  c144: string;
+} | null;
+  lists: Array<{
+  id: string | number;
+  type: string;
+  name: string;
+}>;
+  displayName?: string;
+  notice?: string;
+  isRestricted?: boolean;
+  canRestrict?: boolean;
+  subscribedBy?: boolean | null;
+  subscribedByExpire?: boolean | null;
+  subscribedByExpireDate?: string | null;
+  subscribedByAutoprolong?: boolean | null;
+  subscribedIsExpiredNow?: boolean;
+  currentSubscribePrice?: number | null;
+  subscribedOn?: boolean;
+  subscribedOnExpiredNow?: boolean;
+  subscribedOnDuration?: string;
+  canReport?: boolean;
+  canReceiveChatMessage?: boolean;
+  hideChat?: boolean;
+  lastSeen?: string | null;
+  isPerformer?: boolean;
+  isRealPerformer?: boolean;
+  subscribedByData?: {
+  price: number;
+  newPrice: number;
+  regularPrice: number;
+  subscribePrice: number;
+  discountPercent: number;
+  discountPeriod: number;
+  subscribeAt: string;
+  expiredAt: string;
+  renewedAt: string | null;
+  discountFinishedAt: string | null;
+  discountStartedAt: string | null;
+  status: string | null;
+  isMuted: boolean;
+  unsubscribeReason: string;
+  duration: string;
+  hasActivePaidSubscriptions: boolean;
+  showPostsInFeed: boolean;
+  subscribes: Array<{
+  id: number;
+  userId: number;
+  subscriberId: number;
+  date: string;
+  duration: number;
+  startDate: string;
+  expireDate: string;
+  cancelDate: string | null;
+  price: number;
+  regularPrice: number;
+  discount: number;
+  earningId: number;
+  action: string;
+  type: string;
+  offerStart: string | null;
+  offerEnd: string | null;
+  isCurrent: boolean;
+}>;
+};
+  subscribedOnData?: {
+  price: number;
+  newPrice: number;
+  regularPrice: number;
+  subscribePrice: number;
+  discountPercent: number;
+  discountPeriod: number;
+  subscribeAt: string;
+  expiredAt: string;
+  renewedAt: string | null;
+  discountFinishedAt: string | null;
+  discountStartedAt: string | null;
+  status: string | null;
+  isMuted: boolean;
+  unsubscribeReason: string;
+  duration: string;
+  hasActivePaidSubscriptions: boolean;
+  subscribes: Array<{
+  id: number;
+  userId: number;
+  subscriberId: number;
+  date: string;
+  duration: number;
+  startDate: string;
+  expireDate: string;
+  cancelDate: string | null;
+  price: number;
+  regularPrice: number;
+  discount: number;
+  earningId: number;
+  action: string;
+  type: string;
+  offerStart: string | null;
+  offerEnd: string | null;
+  isCurrent: boolean;
+}>;
+  tipsSumm: number;
+  subscribesSumm: number;
+  messagesSumm: number;
+  postsSumm: number;
+  streamsSumm: number;
+  totalSumm: number;
+};
+  canTrialSend?: boolean;
+  isBlocked?: boolean;
+  canUnsubscribe?: boolean;
+  isPendingAutoprolong?: boolean;
+}>;
+  hasMore: boolean;
+}
+
+export interface AccessUsersGetRestrictItem {
+  id: number;
+  username: string;
+  name: string;
+  isVerified: boolean;
+  avatar: string | null;
+  avatarThumbs?: {
+  c50: string;
+  c144: string;
+} | null;
+  lists: Array<{
+  id: string | number;
+  type: string;
+  name: string;
+}>;
+  displayName?: string;
+  notice?: string;
+  isRestricted?: boolean;
+  canRestrict?: boolean;
+  subscribedBy?: boolean | null;
+  subscribedByExpire?: boolean | null;
+  subscribedByExpireDate?: string | null;
+  subscribedByAutoprolong?: boolean | null;
+  subscribedIsExpiredNow?: boolean;
+  currentSubscribePrice?: number | null;
+  subscribedOn?: boolean;
+  subscribedOnExpiredNow?: boolean;
+  subscribedOnDuration?: string;
+  canReport?: boolean;
+  canReceiveChatMessage?: boolean;
+  hideChat?: boolean;
+  lastSeen?: string | null;
+  isPerformer?: boolean;
+  isRealPerformer?: boolean;
+  subscribedByData?: {
+  price: number;
+  newPrice: number;
+  regularPrice: number;
+  subscribePrice: number;
+  discountPercent: number;
+  discountPeriod: number;
+  subscribeAt: string;
+  expiredAt: string;
+  renewedAt: string | null;
+  discountFinishedAt: string | null;
+  discountStartedAt: string | null;
+  status: string | null;
+  isMuted: boolean;
+  unsubscribeReason: string;
+  duration: string;
+  hasActivePaidSubscriptions: boolean;
+  showPostsInFeed: boolean;
+  subscribes: Array<{
+  id: number;
+  userId: number;
+  subscriberId: number;
+  date: string;
+  duration: number;
+  startDate: string;
+  expireDate: string;
+  cancelDate: string | null;
+  price: number;
+  regularPrice: number;
+  discount: number;
+  earningId: number;
+  action: string;
+  type: string;
+  offerStart: string | null;
+  offerEnd: string | null;
+  isCurrent: boolean;
+}>;
+};
+  subscribedOnData?: {
+  price: number;
+  newPrice: number;
+  regularPrice: number;
+  subscribePrice: number;
+  discountPercent: number;
+  discountPeriod: number;
+  subscribeAt: string;
+  expiredAt: string;
+  renewedAt: string | null;
+  discountFinishedAt: string | null;
+  discountStartedAt: string | null;
+  status: string | null;
+  isMuted: boolean;
+  unsubscribeReason: string;
+  duration: string;
+  hasActivePaidSubscriptions: boolean;
+  subscribes: Array<{
+  id: number;
+  userId: number;
+  subscriberId: number;
+  date: string;
+  duration: number;
+  startDate: string;
+  expireDate: string;
+  cancelDate: string | null;
+  price: number;
+  regularPrice: number;
+  discount: number;
+  earningId: number;
+  action: string;
+  type: string;
+  offerStart: string | null;
+  offerEnd: string | null;
+  isCurrent: boolean;
+}>;
+  tipsSumm: number;
+  subscribesSumm: number;
+  messagesSumm: number;
+  postsSumm: number;
+  streamsSumm: number;
+  totalSumm: number;
+};
+  canTrialSend?: boolean;
+  isBlocked?: boolean;
+  canUnsubscribe?: boolean;
+  isPendingAutoprolong?: boolean;
+}
+
+export interface AccessUsersGetBlockedResponse {
+  list: Array<{
+  id: number;
+  username: string;
+  name: string;
+  isVerified: boolean;
+  avatar: string | null;
+  avatarThumbs?: {
+  c50: string;
+  c144: string;
+} | null;
+  lists: Array<{
+  id: string | number;
+  type: string;
+  name: string;
+}>;
+  displayName?: string;
+  notice?: string;
+  isRestricted?: boolean;
+  canRestrict?: boolean;
+  subscribedBy?: boolean | null;
+  subscribedByExpire?: boolean | null;
+  subscribedByExpireDate?: string | null;
+  subscribedByAutoprolong?: boolean | null;
+  subscribedIsExpiredNow?: boolean;
+  currentSubscribePrice?: number | null;
+  subscribedOn?: boolean;
+  subscribedOnExpiredNow?: boolean;
+  subscribedOnDuration?: string;
+  canReport?: boolean;
+  canReceiveChatMessage?: boolean;
+  hideChat?: boolean;
+  lastSeen?: string | null;
+  isPerformer?: boolean;
+  isRealPerformer?: boolean;
+  subscribedByData?: {
+  price: number;
+  newPrice: number;
+  regularPrice: number;
+  subscribePrice: number;
+  discountPercent: number;
+  discountPeriod: number;
+  subscribeAt: string;
+  expiredAt: string;
+  renewedAt: string | null;
+  discountFinishedAt: string | null;
+  discountStartedAt: string | null;
+  status: string | null;
+  isMuted: boolean;
+  unsubscribeReason: string;
+  duration: string;
+  hasActivePaidSubscriptions: boolean;
+  showPostsInFeed: boolean;
+  subscribes: Array<{
+  id: number;
+  userId: number;
+  subscriberId: number;
+  date: string;
+  duration: number;
+  startDate: string;
+  expireDate: string;
+  cancelDate: string | null;
+  price: number;
+  regularPrice: number;
+  discount: number;
+  earningId: number;
+  action: string;
+  type: string;
+  offerStart: string | null;
+  offerEnd: string | null;
+  isCurrent: boolean;
+}>;
+};
+  subscribedOnData?: {
+  price: number;
+  newPrice: number;
+  regularPrice: number;
+  subscribePrice: number;
+  discountPercent: number;
+  discountPeriod: number;
+  subscribeAt: string;
+  expiredAt: string;
+  renewedAt: string | null;
+  discountFinishedAt: string | null;
+  discountStartedAt: string | null;
+  status: string | null;
+  isMuted: boolean;
+  unsubscribeReason: string;
+  duration: string;
+  hasActivePaidSubscriptions: boolean;
+  subscribes: Array<{
+  id: number;
+  userId: number;
+  subscriberId: number;
+  date: string;
+  duration: number;
+  startDate: string;
+  expireDate: string;
+  cancelDate: string | null;
+  price: number;
+  regularPrice: number;
+  discount: number;
+  earningId: number;
+  action: string;
+  type: string;
+  offerStart: string | null;
+  offerEnd: string | null;
+  isCurrent: boolean;
+}>;
+  tipsSumm: number;
+  subscribesSumm: number;
+  messagesSumm: number;
+  postsSumm: number;
+  streamsSumm: number;
+  totalSumm: number;
+};
+  canTrialSend?: boolean;
+  isBlocked?: boolean;
+  canUnsubscribe?: boolean;
+  isPendingAutoprolong?: boolean;
+}>;
+  hasMore: boolean;
+}
+
+export interface AccessUsersGetBlockedItem {
+  id: number;
+  username: string;
+  name: string;
+  isVerified: boolean;
+  avatar: string | null;
+  avatarThumbs?: {
+  c50: string;
+  c144: string;
+} | null;
+  lists: Array<{
+  id: string | number;
+  type: string;
+  name: string;
+}>;
+  displayName?: string;
+  notice?: string;
+  isRestricted?: boolean;
+  canRestrict?: boolean;
+  subscribedBy?: boolean | null;
+  subscribedByExpire?: boolean | null;
+  subscribedByExpireDate?: string | null;
+  subscribedByAutoprolong?: boolean | null;
+  subscribedIsExpiredNow?: boolean;
+  currentSubscribePrice?: number | null;
+  subscribedOn?: boolean;
+  subscribedOnExpiredNow?: boolean;
+  subscribedOnDuration?: string;
+  canReport?: boolean;
+  canReceiveChatMessage?: boolean;
+  hideChat?: boolean;
+  lastSeen?: string | null;
+  isPerformer?: boolean;
+  isRealPerformer?: boolean;
+  subscribedByData?: {
+  price: number;
+  newPrice: number;
+  regularPrice: number;
+  subscribePrice: number;
+  discountPercent: number;
+  discountPeriod: number;
+  subscribeAt: string;
+  expiredAt: string;
+  renewedAt: string | null;
+  discountFinishedAt: string | null;
+  discountStartedAt: string | null;
+  status: string | null;
+  isMuted: boolean;
+  unsubscribeReason: string;
+  duration: string;
+  hasActivePaidSubscriptions: boolean;
+  showPostsInFeed: boolean;
+  subscribes: Array<{
+  id: number;
+  userId: number;
+  subscriberId: number;
+  date: string;
+  duration: number;
+  startDate: string;
+  expireDate: string;
+  cancelDate: string | null;
+  price: number;
+  regularPrice: number;
+  discount: number;
+  earningId: number;
+  action: string;
+  type: string;
+  offerStart: string | null;
+  offerEnd: string | null;
+  isCurrent: boolean;
+}>;
+};
+  subscribedOnData?: {
+  price: number;
+  newPrice: number;
+  regularPrice: number;
+  subscribePrice: number;
+  discountPercent: number;
+  discountPeriod: number;
+  subscribeAt: string;
+  expiredAt: string;
+  renewedAt: string | null;
+  discountFinishedAt: string | null;
+  discountStartedAt: string | null;
+  status: string | null;
+  isMuted: boolean;
+  unsubscribeReason: string;
+  duration: string;
+  hasActivePaidSubscriptions: boolean;
+  subscribes: Array<{
+  id: number;
+  userId: number;
+  subscriberId: number;
+  date: string;
+  duration: number;
+  startDate: string;
+  expireDate: string;
+  cancelDate: string | null;
+  price: number;
+  regularPrice: number;
+  discount: number;
+  earningId: number;
+  action: string;
+  type: string;
+  offerStart: string | null;
+  offerEnd: string | null;
+  isCurrent: boolean;
+}>;
+  tipsSumm: number;
+  subscribesSumm: number;
+  messagesSumm: number;
+  postsSumm: number;
+  streamsSumm: number;
+  totalSumm: number;
+};
+  canTrialSend?: boolean;
+  isBlocked?: boolean;
+  canUnsubscribe?: boolean;
+  isPendingAutoprolong?: boolean;
+}
+
+export interface AccessUsersGetListResponse {
+  users: Array<{
+  id: number;
+  username: string;
+  name: string;
+  isVerified: boolean;
+  avatar: string | null;
+  avatarThumbs?: {
+  c50: string;
+  c144: string;
+} | null;
+  lists: Array<{
+  id: string | number;
+  type: string;
+  name: string;
+}>;
+  displayName?: string;
+  notice?: string;
+  about?: string | null;
+  isMarkdownDisabledForAbout?: boolean;
+  website?: string | null;
+  wishlist?: string | null;
+  location?: string | null;
+  header?: string | null;
+  headerSize?: {
+  width: number;
+  height: number;
+} | null;
+  headerThumbs?: {
+  w480: string;
+  w760: string;
+} | null;
+  subscribersCount?: number | null;
+  postsCount?: number;
+  archivedPostsCount?: number;
+  privateArchivedPostsCount?: number;
+  photosCount?: number;
+  videosCount?: number;
+  audiosCount?: number;
+  mediasCount?: number;
+  favoritesCount?: number;
+  favoritedCount?: number;
+  joinDate?: string;
+  lastSeen?: string | null;
+  subscribedBy?: boolean;
+  subscribedByExpire?: boolean | null;
+  subscribedByExpireDate?: string | null;
+  subscribedByAutoprolong?: boolean | null;
+  subscribedIsExpiredNow?: boolean | null;
+  subscribedByData?: {
+  price: number;
+  newPrice: number;
+  regularPrice: number;
+  subscribePrice: number;
+  discountPercent: number;
+  discountPeriod: number;
+  subscribeAt: string;
+  expiredAt: string;
+  renewedAt: string | null;
+  discountFinishedAt: string | null;
+  discountStartedAt: string | null;
+  status: string | null;
+  isMuted: boolean;
+  unsubscribeReason: string;
+  duration: string;
+  hasActivePaidSubscriptions: boolean;
+  showPostsInFeed: boolean;
+  subscribes: Array<{
+  id: number;
+  userId: number;
+  subscriberId: number;
+  date: string;
+  duration: number;
+  startDate: string;
+  expireDate: string;
+  cancelDate: string | null;
+  price: number;
+  regularPrice: number;
+  discount: number;
+  earningId: number;
+  action: string;
+  type: string;
+  offerStart: string | null;
+  offerEnd: string | null;
+  isCurrent: boolean;
+}>;
+};
+  subscribedOn?: boolean;
+  subscribedOnExpiredNow?: boolean;
+  subscribedOnDuration?: string;
+  subscribedOnData?: {
+  price: number;
+  newPrice: number;
+  regularPrice: number;
+  subscribePrice: number;
+  discountPercent: number;
+  discountPeriod: number;
+  subscribeAt: string;
+  expiredAt: string;
+  renewedAt: string | null;
+  discountFinishedAt: string | null;
+  discountStartedAt: string | null;
+  status: string | null;
+  isMuted: boolean;
+  unsubscribeReason: string;
+  duration: string;
+  hasActivePaidSubscriptions: boolean;
+  subscribes: Array<{
+  id: number;
+  userId: number;
+  subscriberId: number;
+  date: string;
+  duration: number;
+  startDate: string;
+  expireDate: string;
+  cancelDate: string | null;
+  price: number;
+  regularPrice: number;
+  discount: number;
+  earningId: number;
+  action: string;
+  type: string;
+  offerStart: string | null;
+  offerEnd: string | null;
+  isCurrent: boolean;
+}>;
+  tipsSumm: number;
+  subscribesSumm: number;
+  messagesSumm: number;
+  postsSumm: number;
+  streamsSumm: number;
+  totalSumm: number;
+};
+  subscribePrice?: number;
+  currentSubscribePrice?: number | null;
+  canAddSubscriber?: boolean;
+  tipsEnabled?: boolean;
+  tipsTextEnabled?: boolean;
+  tipsMin?: number;
+  tipsMinInternal?: number;
+  tipsMax?: number;
+  canLookStory?: boolean;
+  canCommentStory?: boolean;
+  hasNotViewedStory?: boolean;
+  hasStories?: boolean;
+  isRestricted?: boolean;
+  canRestrict?: boolean;
+  isBlocked?: boolean;
+  canReport?: boolean;
+  canUnsubscribe?: boolean;
+  isPendingAutoprolong?: boolean;
+  isPerformer?: boolean;
+  isRealPerformer?: boolean;
+  canReceiveChatMessage?: boolean;
+  canChat?: boolean;
+  showPostsInFeed?: boolean;
+  hasPinnedPosts?: boolean;
+  hasLabels?: boolean;
+  isPrivateRestriction?: boolean;
+  showSubscribersCount?: boolean;
+  showMediaCount?: boolean;
+  isReferrerAllowed?: boolean;
+  canCreatePromotion?: boolean;
+  canCreateTrial?: boolean;
+  isAdultContent?: boolean;
+  canTrialSend?: boolean;
+  isFriend?: boolean;
+  hasScheduledStream?: boolean;
+  hasStream?: boolean;
+  canPayInternal?: boolean;
+}>;
+}
+
+export interface AccessUsersSearchResponseOption0Item {
+  id: number;
+  username: string;
+  name: string;
+  isVerified: boolean;
+  avatar: string | null;
+  avatarThumbs?: {
+  c50: string;
+  c144: string;
+} | null;
+  lists: Array<{
+  id: string | number;
+  type: string;
+  name: string;
+}>;
+  displayName?: string;
+  notice?: string;
+  about?: string | null;
+  isMarkdownDisabledForAbout?: boolean;
+  website?: string | null;
+  wishlist?: string | null;
+  location?: string | null;
+  header?: string | null;
+  headerSize?: {
+  width: number;
+  height: number;
+} | null;
+  headerThumbs?: {
+  w480: string;
+  w760: string;
+} | null;
+  subscribersCount?: number | null;
+  postsCount?: number;
+  archivedPostsCount?: number;
+  privateArchivedPostsCount?: number;
+  photosCount?: number;
+  videosCount?: number;
+  audiosCount?: number;
+  mediasCount?: number;
+  favoritesCount?: number;
+  favoritedCount?: number;
+  joinDate?: string;
+  lastSeen?: string | null;
+  subscribedBy?: boolean;
+  subscribedByExpire?: boolean | null;
+  subscribedByExpireDate?: string | null;
+  subscribedByAutoprolong?: boolean | null;
+  subscribedIsExpiredNow?: boolean | null;
+  subscribedByData?: {
+  price: number;
+  newPrice: number;
+  regularPrice: number;
+  subscribePrice: number;
+  discountPercent: number;
+  discountPeriod: number;
+  subscribeAt: string;
+  expiredAt: string;
+  renewedAt: string | null;
+  discountFinishedAt: string | null;
+  discountStartedAt: string | null;
+  status: string | null;
+  isMuted: boolean;
+  unsubscribeReason: string;
+  duration: string;
+  hasActivePaidSubscriptions: boolean;
+  showPostsInFeed: boolean;
+  subscribes: Array<{
+  id: number;
+  userId: number;
+  subscriberId: number;
+  date: string;
+  duration: number;
+  startDate: string;
+  expireDate: string;
+  cancelDate: string | null;
+  price: number;
+  regularPrice: number;
+  discount: number;
+  earningId: number;
+  action: string;
+  type: string;
+  offerStart: string | null;
+  offerEnd: string | null;
+  isCurrent: boolean;
+}>;
+};
+  subscribedOn?: boolean;
+  subscribedOnExpiredNow?: boolean;
+  subscribedOnDuration?: string;
+  subscribedOnData?: {
+  price: number;
+  newPrice: number;
+  regularPrice: number;
+  subscribePrice: number;
+  discountPercent: number;
+  discountPeriod: number;
+  subscribeAt: string;
+  expiredAt: string;
+  renewedAt: string | null;
+  discountFinishedAt: string | null;
+  discountStartedAt: string | null;
+  status: string | null;
+  isMuted: boolean;
+  unsubscribeReason: string;
+  duration: string;
+  hasActivePaidSubscriptions: boolean;
+  subscribes: Array<{
+  id: number;
+  userId: number;
+  subscriberId: number;
+  date: string;
+  duration: number;
+  startDate: string;
+  expireDate: string;
+  cancelDate: string | null;
+  price: number;
+  regularPrice: number;
+  discount: number;
+  earningId: number;
+  action: string;
+  type: string;
+  offerStart: string | null;
+  offerEnd: string | null;
+  isCurrent: boolean;
+}>;
+  tipsSumm: number;
+  subscribesSumm: number;
+  messagesSumm: number;
+  postsSumm: number;
+  streamsSumm: number;
+  totalSumm: number;
+};
+  subscribePrice?: number;
+  currentSubscribePrice?: number | null;
+  canAddSubscriber?: boolean;
+  tipsEnabled?: boolean;
+  tipsTextEnabled?: boolean;
+  tipsMin?: number;
+  tipsMinInternal?: number;
+  tipsMax?: number;
+  canLookStory?: boolean;
+  canCommentStory?: boolean;
+  hasNotViewedStory?: boolean;
+  hasStories?: boolean;
+  isRestricted?: boolean;
+  canRestrict?: boolean;
+  isBlocked?: boolean;
+  canReport?: boolean;
+  canUnsubscribe?: boolean;
+  isPendingAutoprolong?: boolean;
+  isPerformer?: boolean;
+  isRealPerformer?: boolean;
+  canReceiveChatMessage?: boolean;
+  canChat?: boolean;
+  showPostsInFeed?: boolean;
+  hasPinnedPosts?: boolean;
+  hasLabels?: boolean;
+  isPrivateRestriction?: boolean;
+  showSubscribersCount?: boolean;
+  showMediaCount?: boolean;
+  isReferrerAllowed?: boolean;
+  canCreatePromotion?: boolean;
+  canCreateTrial?: boolean;
+  isAdultContent?: boolean;
+  canTrialSend?: boolean;
+  isFriend?: boolean;
+  hasScheduledStream?: boolean;
+  hasStream?: boolean;
+  canPayInternal?: boolean;
+}
+
+export interface AccessChatsListResponse {
+  list: Array<{
+  withUser: {
+  id: number;
+  _view: string;
+};
+  canNotSendReason?: boolean | string;
+  canSendMessage?: boolean;
+  canGoToProfile?: boolean;
+  unreadMessagesCount?: number;
+  hasUnreadTips?: boolean;
+  isMutedNotifications?: boolean;
+  lastMessage?: {
+  id: number;
+  text: string;
+  fromUser: {
+  id: number;
+  name: string;
+} | {
+  id: number;
+  _view: string;
+};
+  media: Array<{
+  id: number;
+  type: 'photo' | 'video' | 'gif' | 'audio';
+  convertedToVideo: boolean;
+  canView: boolean;
+  hasError: boolean;
+  createdAt: string;
+  isReady: boolean;
+  duration?: number;
+  releaseForms: Array<{
+  id: number;
+  name: string;
+  partnerSource: string;
+  type: string;
+  user?: {
+  view: string;
+  id: number;
+  name: string;
+  username: string;
+  isVerified: boolean;
+  avatar: string;
+  avatarThumbs: {
+  c50: string;
+  c144: string;
+};
+  ivStatus: string;
+  isFromGuest: boolean;
+};
+}>;
+  hasCustomPreview?: boolean;
+  videoSources?: {
+  '240'?: string | null;
+  '720'?: string | null;
+};
+  files?: {
+  full: {
+  url: string;
+  width?: number;
+  height?: number;
+  size?: number;
+  sources: Array<{
+  url: string;
+  width?: number;
+  height?: number;
+  type?: string;
+}>;
+};
+  thumb?: {
+  url: string;
+  width?: number;
+  height?: number;
+  size?: number;
+};
+  preview?: {
+  url: string;
+  width?: number;
+  height?: number;
+  size?: number;
+  options: Array<{
+  url: string;
+  width?: number;
+  height?: number;
+  type?: string;
+}>;
+};
+  squarePreview?: {
+  url: string;
+  width?: number;
+  height?: number;
+  size?: number;
+};
+};
+}>;
+  isMediaReady?: boolean;
   mediaCount?: number;
   previews: Array<number>;
-  queueId?: number;
-  releaseForms?: any | null;
+  lockedText?: boolean;
   responseType?: string;
-  text: string;
+  giphyId?: string | null;
+  isFree?: boolean;
+  isTip?: boolean;
+  isReportedByMe?: boolean;
+  isCouplePeopleMedia?: boolean;
+  queueId?: number;
+  isMarkdownDisabled?: boolean;
+  releaseForms?: any | null;
+  isFromQueue?: boolean;
+  canUnsendQueue?: boolean;
   unsendSecondsQueue?: number;
+  isOpened?: boolean;
+  isNew?: boolean;
+  createdAt?: string;
+  changedAt?: string;
+  cancelSeconds?: number;
+  isLiked?: boolean;
+  canPurchase?: boolean;
+  canPurchaseReason?: string;
+  canReport?: boolean;
+  canBePinned?: boolean;
+  isPinned?: boolean;
 };
   lastReadMessageId?: number;
-  unreadMessagesCount?: number;
-  withUser: {
-  _view: string;
-  id: number;
-};
+  hasPurchasedFeed?: boolean;
+  countPinnedMessages?: number;
 }>;
+  hasMore: boolean;
   nextOffset?: number;
 }
 
 export interface AccessChatsListItem {
-  canGoToProfile?: boolean;
+  withUser: {
+  id: number;
+  _view: string;
+};
   canNotSendReason?: boolean | string;
   canSendMessage?: boolean;
-  countPinnedMessages?: number;
-  hasPurchasedFeed?: boolean;
+  canGoToProfile?: boolean;
+  unreadMessagesCount?: number;
   hasUnreadTips?: boolean;
   isMutedNotifications?: boolean;
   lastMessage?: {
-  canBePinned?: boolean;
-  canPurchase?: boolean;
-  canPurchaseReason?: string;
-  canReport?: boolean;
-  canUnsendQueue?: boolean;
-  cancelSeconds?: number;
-  changedAt?: string;
-  createdAt?: string;
+  id: number;
+  text: string;
   fromUser: {
   id: number;
   name: string;
 } | {
+  id: number;
   _view: string;
-  id: number;
 };
-  giphyId?: string | null;
-  id: number;
-  isCouplePeopleMedia?: boolean;
-  isFree?: boolean;
-  isFromQueue?: boolean;
-  isLiked?: boolean;
-  isMarkdownDisabled?: boolean;
-  isMediaReady?: boolean;
-  isNew?: boolean;
-  isOpened?: boolean;
-  isPinned?: boolean;
-  isReportedByMe?: boolean;
-  isTip?: boolean;
-  lockedText?: boolean;
   media: Array<{
-  canView: boolean;
-  convertedToVideo: boolean;
-  createdAt: string;
-  duration?: number;
-  files?: {
-  full: {
-  height?: number;
-  size?: number;
-  sources: Array<{
-  height?: number;
-  type?: string;
-  url: string;
-  width?: number;
-}>;
-  url: string;
-  width?: number;
-};
-  preview?: {
-  height?: number;
-  options: Array<{
-  height?: number;
-  type?: string;
-  url: string;
-  width?: number;
-}>;
-  size?: number;
-  url: string;
-  width?: number;
-};
-  squarePreview?: {
-  height?: number;
-  size?: number;
-  url: string;
-  width?: number;
-};
-  thumb?: {
-  height?: number;
-  size?: number;
-  url: string;
-  width?: number;
-};
-};
-  hasCustomPreview?: boolean;
-  hasError: boolean;
   id: number;
+  type: 'photo' | 'video' | 'gif' | 'audio';
+  convertedToVideo: boolean;
+  canView: boolean;
+  hasError: boolean;
+  createdAt: string;
   isReady: boolean;
+  duration?: number;
   releaseForms: Array<{
   id: number;
   name: string;
   partnerSource: string;
   type: string;
   user?: {
-  avatar: string;
-  avatarThumbs: {
-  c144: string;
-  c50: string;
-};
+  view: string;
   id: number;
-  isFromGuest: boolean;
-  isVerified: boolean;
-  ivStatus: string;
   name: string;
   username: string;
-  view: string;
+  isVerified: boolean;
+  avatar: string;
+  avatarThumbs: {
+  c50: string;
+  c144: string;
+};
+  ivStatus: string;
+  isFromGuest: boolean;
 };
 }>;
-  type: 'photo' | 'video' | 'gif' | 'audio';
+  hasCustomPreview?: boolean;
   videoSources?: {
   '240'?: string | null;
   '720'?: string | null;
 };
+  files?: {
+  full: {
+  url: string;
+  width?: number;
+  height?: number;
+  size?: number;
+  sources: Array<{
+  url: string;
+  width?: number;
+  height?: number;
+  type?: string;
 }>;
+};
+  thumb?: {
+  url: string;
+  width?: number;
+  height?: number;
+  size?: number;
+};
+  preview?: {
+  url: string;
+  width?: number;
+  height?: number;
+  size?: number;
+  options: Array<{
+  url: string;
+  width?: number;
+  height?: number;
+  type?: string;
+}>;
+};
+  squarePreview?: {
+  url: string;
+  width?: number;
+  height?: number;
+  size?: number;
+};
+};
+}>;
+  isMediaReady?: boolean;
   mediaCount?: number;
   previews: Array<number>;
-  queueId?: number;
-  releaseForms?: any | null;
+  lockedText?: boolean;
   responseType?: string;
-  text: string;
+  giphyId?: string | null;
+  isFree?: boolean;
+  isTip?: boolean;
+  isReportedByMe?: boolean;
+  isCouplePeopleMedia?: boolean;
+  queueId?: number;
+  isMarkdownDisabled?: boolean;
+  releaseForms?: any | null;
+  isFromQueue?: boolean;
+  canUnsendQueue?: boolean;
   unsendSecondsQueue?: number;
+  isOpened?: boolean;
+  isNew?: boolean;
+  createdAt?: string;
+  changedAt?: string;
+  cancelSeconds?: number;
+  isLiked?: boolean;
+  canPurchase?: boolean;
+  canPurchaseReason?: string;
+  canReport?: boolean;
+  canBePinned?: boolean;
+  isPinned?: boolean;
 };
   lastReadMessageId?: number;
-  unreadMessagesCount?: number;
-  withUser: {
-  _view: string;
-  id: number;
-};
-}
-
-export interface AccessChatsListMediaResponse {
-  hasMore: boolean;
-  list: Array<{
-  canBePinned?: boolean;
-  canPurchase?: boolean;
-  canPurchaseReason?: string;
-  canReport?: boolean;
-  canUnsendQueue?: boolean;
-  cancelSeconds?: number;
-  changedAt?: string;
-  createdAt?: string;
-  fromUser: {
-  id: number;
-  name: string;
-} | {
-  _view: string;
-  id: number;
-};
-  giphyId?: string | null;
-  id: number;
-  isCouplePeopleMedia?: boolean;
-  isFree?: boolean;
-  isFromQueue?: boolean;
-  isLiked?: boolean;
-  isMarkdownDisabled?: boolean;
-  isMediaReady?: boolean;
-  isNew?: boolean;
-  isOpened?: boolean;
-  isPinned?: boolean;
-  isReportedByMe?: boolean;
-  isTip?: boolean;
-  lockedText?: boolean;
-  media: Array<{
-  canView: boolean;
-  convertedToVideo: boolean;
-  createdAt: string;
-  duration?: number;
-  files?: {
-  full: {
-  height?: number;
-  size?: number;
-  sources: Array<{
-  height?: number;
-  type?: string;
-  url: string;
-  width?: number;
-}>;
-  url: string;
-  width?: number;
-};
-  preview?: {
-  height?: number;
-  options: Array<{
-  height?: number;
-  type?: string;
-  url: string;
-  width?: number;
-}>;
-  size?: number;
-  url: string;
-  width?: number;
-};
-  squarePreview?: {
-  height?: number;
-  size?: number;
-  url: string;
-  width?: number;
-};
-  thumb?: {
-  height?: number;
-  size?: number;
-  url: string;
-  width?: number;
-};
-};
-  hasCustomPreview?: boolean;
-  hasError: boolean;
-  id: number;
-  isReady: boolean;
-  releaseForms: Array<{
-  id: number;
-  name: string;
-  partnerSource: string;
-  type: string;
-  user?: {
-  avatar: string;
-  avatarThumbs: {
-  c144: string;
-  c50: string;
-};
-  id: number;
-  isFromGuest: boolean;
-  isVerified: boolean;
-  ivStatus: string;
-  name: string;
-  username: string;
-  view: string;
-};
-}>;
-  type: 'photo' | 'video' | 'gif' | 'audio';
-  videoSources?: {
-  '240'?: string | null;
-  '720'?: string | null;
-};
-}>;
-  mediaCount?: number;
-  previews: Array<number>;
-  queueId?: number;
-  releaseForms?: any | null;
-  responseType?: string;
-  text: string;
-  unsendSecondsQueue?: number;
-}>;
-}
-
-export interface AccessChatsListMediaItem {
-  canBePinned?: boolean;
-  canPurchase?: boolean;
-  canPurchaseReason?: string;
-  canReport?: boolean;
-  canUnsendQueue?: boolean;
-  cancelSeconds?: number;
-  changedAt?: string;
-  createdAt?: string;
-  fromUser: {
-  id: number;
-  name: string;
-} | {
-  _view: string;
-  id: number;
-};
-  giphyId?: string | null;
-  id: number;
-  isCouplePeopleMedia?: boolean;
-  isFree?: boolean;
-  isFromQueue?: boolean;
-  isLiked?: boolean;
-  isMarkdownDisabled?: boolean;
-  isMediaReady?: boolean;
-  isNew?: boolean;
-  isOpened?: boolean;
-  isPinned?: boolean;
-  isReportedByMe?: boolean;
-  isTip?: boolean;
-  lockedText?: boolean;
-  media: Array<{
-  canView: boolean;
-  convertedToVideo: boolean;
-  createdAt: string;
-  duration?: number;
-  files?: {
-  full: {
-  height?: number;
-  size?: number;
-  sources: Array<{
-  height?: number;
-  type?: string;
-  url: string;
-  width?: number;
-}>;
-  url: string;
-  width?: number;
-};
-  preview?: {
-  height?: number;
-  options: Array<{
-  height?: number;
-  type?: string;
-  url: string;
-  width?: number;
-}>;
-  size?: number;
-  url: string;
-  width?: number;
-};
-  squarePreview?: {
-  height?: number;
-  size?: number;
-  url: string;
-  width?: number;
-};
-  thumb?: {
-  height?: number;
-  size?: number;
-  url: string;
-  width?: number;
-};
-};
-  hasCustomPreview?: boolean;
-  hasError: boolean;
-  id: number;
-  isReady: boolean;
-  releaseForms: Array<{
-  id: number;
-  name: string;
-  partnerSource: string;
-  type: string;
-  user?: {
-  avatar: string;
-  avatarThumbs: {
-  c144: string;
-  c50: string;
-};
-  id: number;
-  isFromGuest: boolean;
-  isVerified: boolean;
-  ivStatus: string;
-  name: string;
-  username: string;
-  view: string;
-};
-}>;
-  type: 'photo' | 'video' | 'gif' | 'audio';
-  videoSources?: {
-  '240'?: string | null;
-  '720'?: string | null;
-};
-}>;
-  mediaCount?: number;
-  previews: Array<number>;
-  queueId?: number;
-  releaseForms?: any | null;
-  responseType?: string;
-  text: string;
-  unsendSecondsQueue?: number;
+  hasPurchasedFeed?: boolean;
+  countPinnedMessages?: number;
 }
 
 export interface AccessChatsListMessagesResponse {
-  hasMore: boolean;
   list: Array<{
-  canBePinned?: boolean;
-  canPurchase?: boolean;
-  canPurchaseReason?: string;
-  canReport?: boolean;
-  canUnsendQueue?: boolean;
-  cancelSeconds?: number;
-  changedAt?: string;
-  createdAt?: string;
+  id: number;
+  text: string;
   fromUser: {
   id: number;
   name: string;
 } | {
+  id: number;
   _view: string;
-  id: number;
 };
-  giphyId?: string | null;
-  id: number;
-  isCouplePeopleMedia?: boolean;
-  isFree?: boolean;
-  isFromQueue?: boolean;
-  isLiked?: boolean;
-  isMarkdownDisabled?: boolean;
-  isMediaReady?: boolean;
-  isNew?: boolean;
-  isOpened?: boolean;
-  isPinned?: boolean;
-  isReportedByMe?: boolean;
-  isTip?: boolean;
-  lockedText?: boolean;
   media: Array<{
-  canView: boolean;
-  convertedToVideo: boolean;
-  createdAt: string;
-  duration?: number;
-  files?: {
-  full: {
-  height?: number;
-  size?: number;
-  sources: Array<{
-  height?: number;
-  type?: string;
-  url: string;
-  width?: number;
-}>;
-  url: string;
-  width?: number;
-};
-  preview?: {
-  height?: number;
-  options: Array<{
-  height?: number;
-  type?: string;
-  url: string;
-  width?: number;
-}>;
-  size?: number;
-  url: string;
-  width?: number;
-};
-  squarePreview?: {
-  height?: number;
-  size?: number;
-  url: string;
-  width?: number;
-};
-  thumb?: {
-  height?: number;
-  size?: number;
-  url: string;
-  width?: number;
-};
-};
-  hasCustomPreview?: boolean;
-  hasError: boolean;
   id: number;
+  type: 'photo' | 'video' | 'gif' | 'audio';
+  convertedToVideo: boolean;
+  canView: boolean;
+  hasError: boolean;
+  createdAt: string;
   isReady: boolean;
+  duration?: number;
   releaseForms: Array<{
   id: number;
   name: string;
   partnerSource: string;
   type: string;
   user?: {
-  avatar: string;
-  avatarThumbs: {
-  c144: string;
-  c50: string;
-};
+  view: string;
   id: number;
-  isFromGuest: boolean;
-  isVerified: boolean;
-  ivStatus: string;
   name: string;
   username: string;
-  view: string;
+  isVerified: boolean;
+  avatar: string;
+  avatarThumbs: {
+  c50: string;
+  c144: string;
+};
+  ivStatus: string;
+  isFromGuest: boolean;
 };
 }>;
-  type: 'photo' | 'video' | 'gif' | 'audio';
+  hasCustomPreview?: boolean;
   videoSources?: {
   '240'?: string | null;
   '720'?: string | null;
 };
+  files?: {
+  full: {
+  url: string;
+  width?: number;
+  height?: number;
+  size?: number;
+  sources: Array<{
+  url: string;
+  width?: number;
+  height?: number;
+  type?: string;
 }>;
+};
+  thumb?: {
+  url: string;
+  width?: number;
+  height?: number;
+  size?: number;
+};
+  preview?: {
+  url: string;
+  width?: number;
+  height?: number;
+  size?: number;
+  options: Array<{
+  url: string;
+  width?: number;
+  height?: number;
+  type?: string;
+}>;
+};
+  squarePreview?: {
+  url: string;
+  width?: number;
+  height?: number;
+  size?: number;
+};
+};
+}>;
+  isMediaReady?: boolean;
   mediaCount?: number;
   previews: Array<number>;
-  queueId?: number;
-  releaseForms?: any | null;
+  lockedText?: boolean;
   responseType?: string;
-  text: string;
+  giphyId?: string | null;
+  isFree?: boolean;
+  isTip?: boolean;
+  isReportedByMe?: boolean;
+  isCouplePeopleMedia?: boolean;
+  queueId?: number;
+  isMarkdownDisabled?: boolean;
+  releaseForms?: any | null;
+  isFromQueue?: boolean;
+  canUnsendQueue?: boolean;
   unsendSecondsQueue?: number;
+  isOpened?: boolean;
+  isNew?: boolean;
+  createdAt?: string;
+  changedAt?: string;
+  cancelSeconds?: number;
+  isLiked?: boolean;
+  canPurchase?: boolean;
+  canPurchaseReason?: string;
+  canReport?: boolean;
+  canBePinned?: boolean;
+  isPinned?: boolean;
 }>;
+  hasMore: boolean;
 }
 
 export interface AccessChatsListMessagesItem {
-  canBePinned?: boolean;
-  canPurchase?: boolean;
-  canPurchaseReason?: string;
-  canReport?: boolean;
-  canUnsendQueue?: boolean;
-  cancelSeconds?: number;
-  changedAt?: string;
-  createdAt?: string;
+  id: number;
+  text: string;
   fromUser: {
   id: number;
   name: string;
 } | {
+  id: number;
   _view: string;
-  id: number;
 };
-  giphyId?: string | null;
-  id: number;
-  isCouplePeopleMedia?: boolean;
-  isFree?: boolean;
-  isFromQueue?: boolean;
-  isLiked?: boolean;
-  isMarkdownDisabled?: boolean;
-  isMediaReady?: boolean;
-  isNew?: boolean;
-  isOpened?: boolean;
-  isPinned?: boolean;
-  isReportedByMe?: boolean;
-  isTip?: boolean;
-  lockedText?: boolean;
   media: Array<{
-  canView: boolean;
-  convertedToVideo: boolean;
-  createdAt: string;
-  duration?: number;
-  files?: {
-  full: {
-  height?: number;
-  size?: number;
-  sources: Array<{
-  height?: number;
-  type?: string;
-  url: string;
-  width?: number;
-}>;
-  url: string;
-  width?: number;
-};
-  preview?: {
-  height?: number;
-  options: Array<{
-  height?: number;
-  type?: string;
-  url: string;
-  width?: number;
-}>;
-  size?: number;
-  url: string;
-  width?: number;
-};
-  squarePreview?: {
-  height?: number;
-  size?: number;
-  url: string;
-  width?: number;
-};
-  thumb?: {
-  height?: number;
-  size?: number;
-  url: string;
-  width?: number;
-};
-};
-  hasCustomPreview?: boolean;
-  hasError: boolean;
   id: number;
+  type: 'photo' | 'video' | 'gif' | 'audio';
+  convertedToVideo: boolean;
+  canView: boolean;
+  hasError: boolean;
+  createdAt: string;
   isReady: boolean;
+  duration?: number;
   releaseForms: Array<{
   id: number;
   name: string;
   partnerSource: string;
   type: string;
   user?: {
-  avatar: string;
-  avatarThumbs: {
-  c144: string;
-  c50: string;
-};
+  view: string;
   id: number;
-  isFromGuest: boolean;
-  isVerified: boolean;
-  ivStatus: string;
   name: string;
   username: string;
-  view: string;
+  isVerified: boolean;
+  avatar: string;
+  avatarThumbs: {
+  c50: string;
+  c144: string;
+};
+  ivStatus: string;
+  isFromGuest: boolean;
 };
 }>;
-  type: 'photo' | 'video' | 'gif' | 'audio';
+  hasCustomPreview?: boolean;
   videoSources?: {
   '240'?: string | null;
   '720'?: string | null;
 };
+  files?: {
+  full: {
+  url: string;
+  width?: number;
+  height?: number;
+  size?: number;
+  sources: Array<{
+  url: string;
+  width?: number;
+  height?: number;
+  type?: string;
 }>;
+};
+  thumb?: {
+  url: string;
+  width?: number;
+  height?: number;
+  size?: number;
+};
+  preview?: {
+  url: string;
+  width?: number;
+  height?: number;
+  size?: number;
+  options: Array<{
+  url: string;
+  width?: number;
+  height?: number;
+  type?: string;
+}>;
+};
+  squarePreview?: {
+  url: string;
+  width?: number;
+  height?: number;
+  size?: number;
+};
+};
+}>;
+  isMediaReady?: boolean;
   mediaCount?: number;
   previews: Array<number>;
-  queueId?: number;
-  releaseForms?: any | null;
+  lockedText?: boolean;
   responseType?: string;
-  text: string;
+  giphyId?: string | null;
+  isFree?: boolean;
+  isTip?: boolean;
+  isReportedByMe?: boolean;
+  isCouplePeopleMedia?: boolean;
+  queueId?: number;
+  isMarkdownDisabled?: boolean;
+  releaseForms?: any | null;
+  isFromQueue?: boolean;
+  canUnsendQueue?: boolean;
   unsendSecondsQueue?: number;
+  isOpened?: boolean;
+  isNew?: boolean;
+  createdAt?: string;
+  changedAt?: string;
+  cancelSeconds?: number;
+  isLiked?: boolean;
+  canPurchase?: boolean;
+  canPurchaseReason?: string;
+  canReport?: boolean;
+  canBePinned?: boolean;
+  isPinned?: boolean;
 }
 
 export interface AccessChatsCreateMessagesRequest {
   isForwardedMessage?: boolean | null;
-  isLockedText?: boolean | null;
-  isMarkdown?: boolean | null;
-  mediaItems?: Array<number | string>;
-  previewMediaCount?: number | null;
-  price?: number | null;
-  releaseForms?: {
-  guests?: Array<number>;
-  partners?: Array<number>;
-  users?: Array<number>;
-};
   text?: string;
+  mediaItems?: Array<number | string>;
+  isLockedText?: boolean | null;
+  price?: number | null;
+  previewMediaCount?: number | null;
+  releaseForms?: {
+  users?: Array<number>;
+  partners?: Array<number>;
+  guests?: Array<number>;
+};
   userTags?: Array<number>;
+  isMarkdown?: boolean | null;
 }
 
 export interface AccessChatsCreateMessagesResponse {
-  canBePinned?: boolean;
-  canPurchase?: boolean;
-  canPurchaseReason?: string;
-  canReport?: boolean;
-  canUnsendQueue?: boolean;
-  cancelSeconds?: number;
-  changedAt?: string;
-  createdAt?: string;
+  id: number;
+  text: string;
   fromUser: {
   id: number;
   name: string;
 } | {
+  id: number;
   _view: string;
-  id: number;
 };
-  giphyId?: string | null;
-  id: number;
-  isCouplePeopleMedia?: boolean;
-  isFree?: boolean;
-  isFromQueue?: boolean;
-  isLiked?: boolean;
-  isMarkdownDisabled?: boolean;
-  isMediaReady?: boolean;
-  isNew?: boolean;
-  isOpened?: boolean;
-  isPinned?: boolean;
-  isReportedByMe?: boolean;
-  isTip?: boolean;
-  lockedText?: boolean;
   media: Array<{
-  canView: boolean;
-  convertedToVideo: boolean;
-  createdAt: string;
-  duration?: number;
-  files?: {
-  full: {
-  height?: number;
-  size?: number;
-  sources: Array<{
-  height?: number;
-  type?: string;
-  url: string;
-  width?: number;
-}>;
-  url: string;
-  width?: number;
-};
-  preview?: {
-  height?: number;
-  options: Array<{
-  height?: number;
-  type?: string;
-  url: string;
-  width?: number;
-}>;
-  size?: number;
-  url: string;
-  width?: number;
-};
-  squarePreview?: {
-  height?: number;
-  size?: number;
-  url: string;
-  width?: number;
-};
-  thumb?: {
-  height?: number;
-  size?: number;
-  url: string;
-  width?: number;
-};
-};
-  hasCustomPreview?: boolean;
-  hasError: boolean;
   id: number;
+  type: 'photo' | 'video' | 'gif' | 'audio';
+  convertedToVideo: boolean;
+  canView: boolean;
+  hasError: boolean;
+  createdAt: string;
   isReady: boolean;
+  duration?: number;
   releaseForms: Array<{
   id: number;
   name: string;
   partnerSource: string;
   type: string;
   user?: {
-  avatar: string;
-  avatarThumbs: {
-  c144: string;
-  c50: string;
-};
+  view: string;
   id: number;
-  isFromGuest: boolean;
-  isVerified: boolean;
-  ivStatus: string;
   name: string;
   username: string;
-  view: string;
+  isVerified: boolean;
+  avatar: string;
+  avatarThumbs: {
+  c50: string;
+  c144: string;
+};
+  ivStatus: string;
+  isFromGuest: boolean;
 };
 }>;
-  type: 'photo' | 'video' | 'gif' | 'audio';
+  hasCustomPreview?: boolean;
   videoSources?: {
   '240'?: string | null;
   '720'?: string | null;
 };
+  files?: {
+  full: {
+  url: string;
+  width?: number;
+  height?: number;
+  size?: number;
+  sources: Array<{
+  url: string;
+  width?: number;
+  height?: number;
+  type?: string;
 }>;
+};
+  thumb?: {
+  url: string;
+  width?: number;
+  height?: number;
+  size?: number;
+};
+  preview?: {
+  url: string;
+  width?: number;
+  height?: number;
+  size?: number;
+  options: Array<{
+  url: string;
+  width?: number;
+  height?: number;
+  type?: string;
+}>;
+};
+  squarePreview?: {
+  url: string;
+  width?: number;
+  height?: number;
+  size?: number;
+};
+};
+}>;
+  isMediaReady?: boolean;
   mediaCount?: number;
   previews: Array<number>;
-  queueId?: number;
-  releaseForms?: any | null;
+  lockedText?: boolean;
   responseType?: string;
-  text: string;
+  giphyId?: string | null;
+  isFree?: boolean;
+  isTip?: boolean;
+  isReportedByMe?: boolean;
+  isCouplePeopleMedia?: boolean;
+  queueId?: number;
+  isMarkdownDisabled?: boolean;
+  releaseForms?: any | null;
+  isFromQueue?: boolean;
+  canUnsendQueue?: boolean;
   unsendSecondsQueue?: number;
+  isOpened?: boolean;
+  isNew?: boolean;
+  createdAt?: string;
+  changedAt?: string;
+  cancelSeconds?: number;
+  isLiked?: boolean;
+  canPurchase?: boolean;
+  canPurchaseReason?: string;
+  canReport?: boolean;
+  canBePinned?: boolean;
+  isPinned?: boolean;
 }
 
 export interface AccessChatsDeleteMessagesRequest {
@@ -1875,259 +3824,594 @@ export interface AccessChatsDeleteMessagesRequest {
 }
 
 export interface AccessChatsDeleteMessagesResponse {
+  success: boolean;
   queue?: {
-  canBePinned?: boolean;
-  canPurchase?: boolean;
-  canPurchaseReason?: string;
-  canReport?: boolean;
-  canSendMessageToBuyers?: boolean;
-  canUnsend?: boolean;
-  canUnsendQueue?: boolean;
-  cancelSeconds?: number;
-  changedAt?: string;
-  createdAt?: string;
-  date?: string;
+  id: number;
+  text: string;
   fromUser: {
   id: number;
   name: string;
 } | {
+  id: number;
   _view: string;
-  id: number;
 };
-  giphyId?: string | null;
-  hasError?: boolean;
-  id: number;
-  isCanceled?: boolean;
-  isCouplePeopleMedia?: boolean;
-  isFree?: boolean;
-  isFromQueue?: boolean;
-  isLiked?: boolean;
-  isMarkdownDisabled?: boolean;
-  isMediaReady?: boolean;
-  isNew?: boolean;
-  isOpened?: boolean;
-  isPinned?: boolean;
-  isReportedByMe?: boolean;
-  isTip?: boolean;
-  lockedText?: boolean;
   media: Array<{
-  canView: boolean;
-  convertedToVideo: boolean;
-  createdAt: string;
-  duration?: number;
-  files?: {
-  full: {
-  height?: number;
-  size?: number;
-  sources: Array<{
-  height?: number;
-  type?: string;
-  url: string;
-  width?: number;
-}>;
-  url: string;
-  width?: number;
-};
-  preview?: {
-  height?: number;
-  options: Array<{
-  height?: number;
-  type?: string;
-  url: string;
-  width?: number;
-}>;
-  size?: number;
-  url: string;
-  width?: number;
-};
-  squarePreview?: {
-  height?: number;
-  size?: number;
-  url: string;
-  width?: number;
-};
-  thumb?: {
-  height?: number;
-  size?: number;
-  url: string;
-  width?: number;
-};
-};
-  hasCustomPreview?: boolean;
-  hasError: boolean;
   id: number;
+  type: 'photo' | 'video' | 'gif' | 'audio';
+  convertedToVideo: boolean;
+  canView: boolean;
+  hasError: boolean;
+  createdAt: string;
   isReady: boolean;
+  duration?: number;
   releaseForms: Array<{
   id: number;
   name: string;
   partnerSource: string;
   type: string;
   user?: {
-  avatar: string;
-  avatarThumbs: {
-  c144: string;
-  c50: string;
-};
+  view: string;
   id: number;
-  isFromGuest: boolean;
-  isVerified: boolean;
-  ivStatus: string;
   name: string;
   username: string;
-  view: string;
+  isVerified: boolean;
+  avatar: string;
+  avatarThumbs: {
+  c50: string;
+  c144: string;
+};
+  ivStatus: string;
+  isFromGuest: boolean;
 };
 }>;
-  type: 'photo' | 'video' | 'gif' | 'audio';
+  hasCustomPreview?: boolean;
   videoSources?: {
   '240'?: string | null;
   '720'?: string | null;
 };
+  files?: {
+  full: {
+  url: string;
+  width?: number;
+  height?: number;
+  size?: number;
+  sources: Array<{
+  url: string;
+  width?: number;
+  height?: number;
+  type?: string;
 }>;
-  mediaCount?: number;
-  mediaTypes?: {
-  audio?: number;
-  gif?: number;
-  photo?: number;
-  video?: number;
 };
+  thumb?: {
+  url: string;
+  width?: number;
+  height?: number;
+  size?: number;
+};
+  preview?: {
+  url: string;
+  width?: number;
+  height?: number;
+  size?: number;
+  options: Array<{
+  url: string;
+  width?: number;
+  height?: number;
+  type?: string;
+}>;
+};
+  squarePreview?: {
+  url: string;
+  width?: number;
+  height?: number;
+  size?: number;
+};
+};
+}>;
+  isMediaReady?: boolean;
+  mediaCount?: number;
   previews: Array<number>;
+  lockedText?: boolean;
+  responseType?: string;
+  giphyId?: string | null;
+  isFree?: boolean;
+  isTip?: boolean;
+  isReportedByMe?: boolean;
+  isCouplePeopleMedia?: boolean;
+  queueId?: number;
+  isMarkdownDisabled?: boolean;
+  releaseForms?: any | null;
+  isFromQueue?: boolean;
+  canUnsendQueue?: boolean;
+  unsendSecondsQueue?: number;
+  isOpened?: boolean;
+  isNew?: boolean;
+  createdAt?: string;
+  changedAt?: string;
+  cancelSeconds?: number;
+  isLiked?: boolean;
+  canPurchase?: boolean;
+  canPurchaseReason?: string;
+  canReport?: boolean;
+  canBePinned?: boolean;
+  isPinned?: boolean;
+  date?: string;
+  textCropped?: string;
+  sentCount?: number;
+  viewedCount?: number;
+  canUnsend?: boolean;
+  unsendSeconds?: number;
+  isCanceled?: boolean;
+  mediaTypes?: {
+  video?: number;
+  photo?: number;
+  gif?: number;
+  audio?: number;
+};
+  hasError?: boolean;
   price?: string;
   purchasedCount?: number;
-  queueId?: number;
-  releaseForms?: any | null;
-  responseType?: string;
-  sentCount?: number;
+  canSendMessageToBuyers?: boolean;
+};
+}
+
+export interface AccessChatsListMediaResponse {
+  list: Array<{
+  id: number;
   text: string;
-  textCropped?: string;
-  unsendSeconds?: number;
+  fromUser: {
+  id: number;
+  name: string;
+} | {
+  id: number;
+  _view: string;
+};
+  media: Array<{
+  id: number;
+  type: 'photo' | 'video' | 'gif' | 'audio';
+  convertedToVideo: boolean;
+  canView: boolean;
+  hasError: boolean;
+  createdAt: string;
+  isReady: boolean;
+  duration?: number;
+  releaseForms: Array<{
+  id: number;
+  name: string;
+  partnerSource: string;
+  type: string;
+  user?: {
+  view: string;
+  id: number;
+  name: string;
+  username: string;
+  isVerified: boolean;
+  avatar: string;
+  avatarThumbs: {
+  c50: string;
+  c144: string;
+};
+  ivStatus: string;
+  isFromGuest: boolean;
+};
+}>;
+  hasCustomPreview?: boolean;
+  videoSources?: {
+  '240'?: string | null;
+  '720'?: string | null;
+};
+  files?: {
+  full: {
+  url: string;
+  width?: number;
+  height?: number;
+  size?: number;
+  sources: Array<{
+  url: string;
+  width?: number;
+  height?: number;
+  type?: string;
+}>;
+};
+  thumb?: {
+  url: string;
+  width?: number;
+  height?: number;
+  size?: number;
+};
+  preview?: {
+  url: string;
+  width?: number;
+  height?: number;
+  size?: number;
+  options: Array<{
+  url: string;
+  width?: number;
+  height?: number;
+  type?: string;
+}>;
+};
+  squarePreview?: {
+  url: string;
+  width?: number;
+  height?: number;
+  size?: number;
+};
+};
+}>;
+  isMediaReady?: boolean;
+  mediaCount?: number;
+  previews: Array<number>;
+  lockedText?: boolean;
+  responseType?: string;
+  giphyId?: string | null;
+  isFree?: boolean;
+  isTip?: boolean;
+  isReportedByMe?: boolean;
+  isCouplePeopleMedia?: boolean;
+  queueId?: number;
+  isMarkdownDisabled?: boolean;
+  releaseForms?: any | null;
+  isFromQueue?: boolean;
+  canUnsendQueue?: boolean;
   unsendSecondsQueue?: number;
-  viewedCount?: number;
-};
-  success: boolean;
-}
-
-export interface AccessEarningsListChargebacksResponse {
+  isOpened?: boolean;
+  isNew?: boolean;
+  createdAt?: string;
+  changedAt?: string;
+  cancelSeconds?: number;
+  isLiked?: boolean;
+  canPurchase?: boolean;
+  canPurchaseReason?: string;
+  canReport?: boolean;
+  canBePinned?: boolean;
+  isPinned?: boolean;
+}>;
   hasMore: boolean;
+}
+
+export interface AccessChatsListMediaItem {
+  id: number;
+  text: string;
+  fromUser: {
+  id: number;
+  name: string;
+} | {
+  id: number;
+  _view: string;
+};
+  media: Array<{
+  id: number;
+  type: 'photo' | 'video' | 'gif' | 'audio';
+  convertedToVideo: boolean;
+  canView: boolean;
+  hasError: boolean;
+  createdAt: string;
+  isReady: boolean;
+  duration?: number;
+  releaseForms: Array<{
+  id: number;
+  name: string;
+  partnerSource: string;
+  type: string;
+  user?: {
+  view: string;
+  id: number;
+  name: string;
+  username: string;
+  isVerified: boolean;
+  avatar: string;
+  avatarThumbs: {
+  c50: string;
+  c144: string;
+};
+  ivStatus: string;
+  isFromGuest: boolean;
+};
+}>;
+  hasCustomPreview?: boolean;
+  videoSources?: {
+  '240'?: string | null;
+  '720'?: string | null;
+};
+  files?: {
+  full: {
+  url: string;
+  width?: number;
+  height?: number;
+  size?: number;
+  sources: Array<{
+  url: string;
+  width?: number;
+  height?: number;
+  type?: string;
+}>;
+};
+  thumb?: {
+  url: string;
+  width?: number;
+  height?: number;
+  size?: number;
+};
+  preview?: {
+  url: string;
+  width?: number;
+  height?: number;
+  size?: number;
+  options: Array<{
+  url: string;
+  width?: number;
+  height?: number;
+  type?: string;
+}>;
+};
+  squarePreview?: {
+  url: string;
+  width?: number;
+  height?: number;
+  size?: number;
+};
+};
+}>;
+  isMediaReady?: boolean;
+  mediaCount?: number;
+  previews: Array<number>;
+  lockedText?: boolean;
+  responseType?: string;
+  giphyId?: string | null;
+  isFree?: boolean;
+  isTip?: boolean;
+  isReportedByMe?: boolean;
+  isCouplePeopleMedia?: boolean;
+  queueId?: number;
+  isMarkdownDisabled?: boolean;
+  releaseForms?: any | null;
+  isFromQueue?: boolean;
+  canUnsendQueue?: boolean;
+  unsendSecondsQueue?: number;
+  isOpened?: boolean;
+  isNew?: boolean;
+  createdAt?: string;
+  changedAt?: string;
+  cancelSeconds?: number;
+  isLiked?: boolean;
+  canPurchase?: boolean;
+  canPurchaseReason?: string;
+  canReport?: boolean;
+  canBePinned?: boolean;
+  isPinned?: boolean;
+}
+
+export interface AccessSubscribersListResponse {
   list: Array<{
-  createdAt: string;
-  id: number;
-  payment: {
-  amounts: {
-  fee: number;
-  gross: number;
-  net: number;
-  tax: number;
-  vat: number;
-};
-  createdAt: string | null;
-  currency: string | null;
-  description: string | null;
-  id: string | null;
-  status: string | null;
-  user: {
-  avatar: string | null;
   id: number;
   name: string;
   username: string;
-};
-};
-  paymentType: string | null;
-}>;
-  nextMarker: number | null;
-}
-
-export interface AccessEarningsListChargebacksItem {
-  createdAt: string;
-  id: number;
-  payment: {
-  amounts: {
-  fee: number;
-  gross: number;
-  net: number;
-  tax: number;
-  vat: number;
-};
-  createdAt: string | null;
-  currency: string | null;
-  description: string | null;
-  id: string | null;
-  status: string | null;
-  user: {
+  displayName: string;
+  isVerified: boolean;
   avatar: string | null;
+  avatarThumbs: {
+  c50: string;
+  c144: string;
+} | null;
+  lastSeen: string | null;
+  subscription: {
+  isActive: boolean;
+  isExpired: boolean;
+  subscribedAt: string | null;
+  expiresAt: string | null;
+  renewedAt: string | null;
+  price: number | null;
+  regularPrice: number | null;
+  discountPercent: number | null;
+  discountPeriod: number | null;
+  discountStartedAt: string | null;
+  discountFinishedAt: string | null;
+  history: Array<{
   id: number;
-  name: string;
-  username: string;
-};
-};
-  paymentType: string | null;
-}
-
-export interface AccessEarningsGetChartResponse {
-  chart: Array<{
-  count: number;
-  date: string;
+  startDate: string;
+  expireDate: string;
+  price: number;
+  regularPrice: number;
+  discount: number;
+  type: string;
+  action: string;
+  isCurrent: boolean;
 }>;
-  delta?: number;
-  gross?: number;
+};
+  spending: {
   total: number;
-}
-
-export interface AccessEarningsListTransactionsResponse {
-  hasMore: boolean;
-  list: Array<{
-  amounts: {
-  fee: number;
-  gross: number;
-  net: number;
-  tax: number;
-  vat: number;
+  tips: number;
+  subscriptions: number;
+  messages: number;
+  posts: number;
+  streams: number;
 };
-  createdAt: string;
-  currency: string;
-  description: string | null;
-  id: string;
-  payoutPendingDays: number | null;
-  status: string | null;
-  type: string | null;
-  user: {
-  avatar: string | null;
-  id: number;
+  isRestricted: boolean;
+  isBlocked: boolean;
+  capabilities: {
+  canRestrict: boolean;
+  canBlock: boolean;
+  canReport: boolean;
+  canUnsubscribe: boolean;
+  canReceiveMessages: boolean;
+  canSendTrial: boolean;
+};
+  lists: Array<{
+  id: string | number;
   name: string;
-  username: string;
-};
 }>;
-  nextMarker: number | null;
+}>;
+  hasMore: boolean;
 }
 
-export interface AccessEarningsListTransactionsItem {
-  amounts: {
-  fee: number;
-  gross: number;
-  net: number;
-  tax: number;
-  vat: number;
-};
-  createdAt: string;
-  currency: string;
-  description: string | null;
-  id: string;
-  payoutPendingDays: number | null;
-  status: string | null;
-  type: string | null;
-  user: {
-  avatar: string | null;
+export interface AccessSubscribersListItem {
   id: number;
   name: string;
   username: string;
+  displayName: string;
+  isVerified: boolean;
+  avatar: string | null;
+  avatarThumbs: {
+  c50: string;
+  c144: string;
+} | null;
+  lastSeen: string | null;
+  subscription: {
+  isActive: boolean;
+  isExpired: boolean;
+  subscribedAt: string | null;
+  expiresAt: string | null;
+  renewedAt: string | null;
+  price: number | null;
+  regularPrice: number | null;
+  discountPercent: number | null;
+  discountPeriod: number | null;
+  discountStartedAt: string | null;
+  discountFinishedAt: string | null;
+  history: Array<{
+  id: number;
+  startDate: string;
+  expireDate: string;
+  price: number;
+  regularPrice: number;
+  discount: number;
+  type: string;
+  action: string;
+  isCurrent: boolean;
+}>;
 };
+  spending: {
+  total: number;
+  tips: number;
+  subscriptions: number;
+  messages: number;
+  posts: number;
+  streams: number;
+};
+  isRestricted: boolean;
+  isBlocked: boolean;
+  capabilities: {
+  canRestrict: boolean;
+  canBlock: boolean;
+  canReport: boolean;
+  canUnsubscribe: boolean;
+  canReceiveMessages: boolean;
+  canSendTrial: boolean;
+};
+  lists: Array<{
+  id: string | number;
+  name: string;
+}>;
+}
+
+export interface AccessSubscribersSetNoteRequest {
+  notice: string;
+}
+
+export interface AccessSubscribersSetDiscountRequest {
+  discount: number;
+  period: number;
+}
+
+export interface AccessSubscribersSetCustomNameRequest {
+  displayName: string;
+}
+
+export interface AccessSubscriptionsListResponse {
+  list: Array<{
+  id: number;
+  username: string;
+  name: string;
+  avatar: string | null;
+  avatarThumbs?: {
+  c50: string;
+  c144: string;
+} | null;
+  lists: Array<{
+  id: string | number;
+  type: string;
+  name: string;
+}>;
+  subscribedAt: string;
+  expiredAt: string | null;
+  renewedAt: string | null;
+  isActive: boolean;
+  subscriptionPrice: number;
+  tipsSumm?: number;
+  subscribesSumm?: number;
+  messagesSumm?: number;
+  postsSumm?: number;
+  streamsSumm?: number;
+  totalSumm?: number;
+}>;
+  hasMore: boolean;
+}
+
+export interface AccessSubscriptionsListItem {
+  id: number;
+  username: string;
+  name: string;
+  avatar: string | null;
+  avatarThumbs?: {
+  c50: string;
+  c144: string;
+} | null;
+  lists: Array<{
+  id: string | number;
+  type: string;
+  name: string;
+}>;
+  subscribedAt: string;
+  expiredAt: string | null;
+  renewedAt: string | null;
+  isActive: boolean;
+  subscriptionPrice: number;
+  tipsSumm?: number;
+  subscribesSumm?: number;
+  messagesSumm?: number;
+  postsSumm?: number;
+  streamsSumm?: number;
+  totalSumm?: number;
+}
+
+export interface AccessSubscriptionsGetCountResponse {
+  subscriptions: {
+  active: number;
+  muted: number;
+  restricted: number;
+  expired: number;
+  blocked: number;
+  attention: number;
+  all: number;
+};
+  subscribers: {
+  active: number;
+  muted: number;
+  restricted: number;
+  expired: number;
+  blocked: number;
+  all: number;
+  activeOnline: number;
+};
+  bookmarks: number;
+}
+
+export interface AccessSubscriptionsGetHistoryResponse {
+  list: Array<{
+  subscribeDate: string;
+  expireDate: string;
+  price: number;
+}>;
+  hasMore: boolean;
 }
 
 export interface AccessPromotionsTrackingLinksListResponse {
-  hasMore: boolean;
   list: Array<{
   id: number;
   name: string;
 }>;
+  hasMore: boolean;
 }
 
 export interface AccessPromotionsTrackingLinksListItem {
@@ -2167,11 +4451,6 @@ export interface AccessPromotionsTrackingLinksDeleteResponse {
   success: boolean;
 }
 
-export interface AccessPromotionsTrackingLinksListClaimersResponse {
-  hasMore?: boolean;
-  list: Array<any | null>;
-}
-
 export interface AccessPromotionsTrackingLinksCreateShareAccessRequest {
   campaignId: number;
   userId: number;
@@ -2190,81 +4469,86 @@ export interface AccessPromotionsTrackingLinksDeleteShareAccessResponse {
   success: boolean;
 }
 
+export interface AccessPromotionsTrackingLinksListClaimersResponse {
+  list: Array<any | null>;
+  hasMore?: boolean;
+}
+
 export interface AccessPromotionsTrialLinksListResponseOption0 {
-  hasMore: boolean;
   list: Array<{
-  claimCounts: number;
-  clicksCounts: number;
-  createdAt: string;
-  expiredAt: string | null;
   id: number;
-  isFinished: boolean;
-  sharedWith?: string | null;
-  subscribeCounts: number;
-  subscribeDays: number;
   trialLinkName: string;
   url: string;
+  subscribeDays: number;
+  subscribeCounts: number;
+  claimCounts: number;
+  clicksCounts: number;
+  expiredAt: string | null;
+  createdAt: string;
+  isFinished: boolean;
   user?: any | null;
+  sharedWith?: string | null;
 }>;
+  hasMore: boolean;
 }
 
 export interface AccessPromotionsTrialLinksListResponseOption1Item {
-  claimCounts: number;
-  clicksCounts: number;
-  createdAt: string;
-  expiredAt: string | null;
   id: number;
-  isFinished: boolean;
-  sharedWith?: string | null;
-  subscribeCounts: number;
-  subscribeDays: number;
   trialLinkName: string;
   url: string;
+  subscribeDays: number;
+  subscribeCounts: number;
+  claimCounts: number;
+  clicksCounts: number;
+  expiredAt: string | null;
+  createdAt: string;
+  isFinished: boolean;
   user?: any | null;
+  sharedWith?: string | null;
 }
 
 export interface AccessPromotionsTrialLinksCreateRequest {
-  expiredAt?: string;
-  subscribeCounts?: number;
-  subscribeDays: number;
   trialLinkName: string;
+  subscribeDays: number;
+  subscribeCounts?: number;
+  expiredAt?: string;
 }
 
 export interface AccessPromotionsTrialLinksCreateResponse {
-  claimCounts: number;
-  clicksCounts: number;
-  createdAt: string;
-  expiredAt: string | null;
   id: number;
-  isFinished: boolean;
-  sharedWith?: string | null;
-  subscribeCounts: number;
-  subscribeDays: number;
   trialLinkName: string;
   url: string;
+  subscribeDays: number;
+  subscribeCounts: number;
+  claimCounts: number;
+  clicksCounts: number;
+  expiredAt: string | null;
+  createdAt: string;
+  isFinished: boolean;
   user?: any | null;
+  sharedWith?: string | null;
 }
 
 export interface AccessPromotionsTrialLinksGetResponse {
-  claimCounts: number;
-  clicksCounts: number;
-  createdAt: string;
-  expiredAt: string | null;
   id: number;
-  isFinished: boolean;
-  sharedWith?: string | null;
-  subscribeCounts: number;
-  subscribeDays: number;
   trialLinkName: string;
   url: string;
+  subscribeDays: number;
+  subscribeCounts: number;
+  claimCounts: number;
+  clicksCounts: number;
+  expiredAt: string | null;
+  createdAt: string;
+  isFinished: boolean;
   user?: any | null;
+  sharedWith?: string | null;
 }
 
 export interface AccessPromotionsTrialLinksReplaceRequest {
-  expiredAt?: string;
-  subscribeCounts?: number;
-  subscribeDays?: number;
   trialLinkName?: string;
+  subscribeDays?: number;
+  subscribeCounts?: number;
+  expiredAt?: string;
 }
 
 export interface AccessPromotionsTrialLinksReplaceResponse {
@@ -2294,134 +4578,130 @@ export interface AccessPromotionsTrialLinksDeleteShareAccessResponse {
 }
 
 export interface AccessPromotionsListResponseOption0Item {
+  id: number;
+  message: string;
+  rawMessage: string;
+  hasRelatedPromo: boolean;
+  price: number;
+  type: string;
   canClaim: boolean;
   claimsCount: number;
-  createdAt: string;
-  finishedAt: string;
-  hasRelatedPromo: boolean;
-  id: number;
-  isFinished: boolean;
-  message: string;
-  price: number;
-  rawMessage: string;
   subscribeCounts: number;
   subscribeDays: number;
-  type: string;
+  createdAt: string;
+  finishedAt: string;
+  isFinished: boolean;
 }
 
 export interface AccessPromotionsListResponseOption1 {
-  hasMore: boolean;
   list: Array<{
+  id: number;
+  message: string;
+  rawMessage: string;
+  hasRelatedPromo: boolean;
+  price: number;
+  type: string;
   canClaim: boolean;
   claimsCount: number;
-  createdAt: string;
-  finishedAt: string;
-  hasRelatedPromo: boolean;
-  id: number;
-  isFinished: boolean;
-  message: string;
-  price: number;
-  rawMessage: string;
   subscribeCounts: number;
   subscribeDays: number;
-  type: string;
+  createdAt: string;
+  finishedAt: string;
+  isFinished: boolean;
 }>;
+  hasMore: boolean;
 }
 
 export interface AccessPromotionsCreateRequest {
   discount: number;
-  finishDays: number;
   message: string;
+  finishDays: number;
   subscribeCounts: number;
   subscribeDays: number;
   type: Array<string>;
 }
 
 export interface AccessPromotionsCreateResponseOption0Item {
+  id: number;
+  message: string;
+  rawMessage: string;
+  hasRelatedPromo: boolean;
+  price: number;
+  type: string;
   canClaim: boolean;
   claimsCount: number;
-  createdAt: string;
-  finishedAt: string;
-  hasRelatedPromo: boolean;
-  id: number;
-  isFinished: boolean;
-  message: string;
-  price: number;
-  rawMessage: string;
   subscribeCounts: number;
   subscribeDays: number;
-  type: string;
+  createdAt: string;
+  finishedAt: string;
+  isFinished: boolean;
 }
 
 export interface AccessPromotionsCreateResponseOption1 {
-  hasMore: boolean;
   list: Array<{
+  id: number;
+  message: string;
+  rawMessage: string;
+  hasRelatedPromo: boolean;
+  price: number;
+  type: string;
   canClaim: boolean;
   claimsCount: number;
-  createdAt: string;
-  finishedAt: string;
-  hasRelatedPromo: boolean;
-  id: number;
-  isFinished: boolean;
-  message: string;
-  price: number;
-  rawMessage: string;
   subscribeCounts: number;
   subscribeDays: number;
-  type: string;
+  createdAt: string;
+  finishedAt: string;
+  isFinished: boolean;
 }>;
+  hasMore: boolean;
 }
 
 export interface AccessPromotionsReplaceRequest {
   discount?: number;
-  finishDays?: number;
   message?: string;
+  finishDays?: number;
   subscribeCounts?: number;
   subscribeDays?: number;
   type?: Array<string>;
 }
 
 export interface AccessPromotionsReplaceResponse {
+  id: number;
+  message: string;
+  rawMessage: string;
+  hasRelatedPromo: boolean;
+  price: number;
+  type: string;
   canClaim: boolean;
   claimsCount: number;
-  createdAt: string;
-  finishedAt: string;
-  hasRelatedPromo: boolean;
-  id: number;
-  isFinished: boolean;
-  message: string;
-  price: number;
-  rawMessage: string;
   subscribeCounts: number;
   subscribeDays: number;
-  type: string;
+  createdAt: string;
+  finishedAt: string;
+  isFinished: boolean;
 }
 
 export interface AccessPromotionsDeleteResponse {
   success: boolean;
 }
 
-export interface AccessPromotionsCreateStopResponse {
-  success: boolean;
-}
-
 export interface AccessPromotionsListBundlesResponseOption0Item {
-  canBuy: boolean;
+  id: number;
   discount: number;
   duration: number;
-  id: number;
   price: number;
+  canBuy: boolean;
 }
 
 export interface AccessPromotionsListBundlesResponseOption1 {
-  hasMore: boolean;
   list: Array<{
-  canBuy: boolean;
+  id: number;
   discount: number;
   duration: number;
-  id: number;
   price: number;
+  canBuy: boolean;
 }>;
+  hasMore: boolean;
 }
 
 export interface AccessPromotionsCreateBundlesRequest {
@@ -2430,19 +4710,19 @@ export interface AccessPromotionsCreateBundlesRequest {
 }
 
 export interface AccessPromotionsCreateBundlesResponse {
-  canBuy: boolean;
+  id: number;
   discount: number;
   duration: number;
-  id: number;
   price: number;
+  canBuy: boolean;
 }
 
 export interface AccessPromotionsGetBundlesResponse {
-  canBuy: boolean;
+  id: number;
   discount: number;
   duration: number;
-  id: number;
   price: number;
+  canBuy: boolean;
 }
 
 export interface AccessPromotionsReplaceBundlesRequest {
@@ -2451,610 +4731,535 @@ export interface AccessPromotionsReplaceBundlesRequest {
 }
 
 export interface AccessPromotionsReplaceBundlesResponse {
-  canBuy: boolean;
+  id: number;
   discount: number;
   duration: number;
-  id: number;
   price: number;
+  canBuy: boolean;
 }
 
 export interface AccessPromotionsDeleteBundlesResponse {
+  id: number;
+  discount: number;
+  duration: number;
+  price: number;
   canBuy: boolean;
-  discount: number;
-  duration: number;
-  id: number;
-  price: number;
 }
 
-export interface AccessSelfGetResponseOption0 {
-  avatar: string | null;
+export interface AccessPromotionsCreateStopResponse {
+  success: boolean;
+}
+
+export interface AccessVaultListsListResponse {
+  list: Array<{
   id: number;
-  isAuth: boolean;
-  isVerified: boolean;
+  type: 'custom' | 'messages' | 'posts' | 'stories' | 'streams' | 'media_stickers';
   name: string;
-  photosCount: number;
-  postsCount: number;
-  subscribersCount: number | null;
-  username: string;
+  hasMedia: boolean;
+  canUpdate: boolean;
+  canDelete: boolean;
+  medias: Array<{
+  type: 'photo' | 'video' | 'gif' | 'audio' | null;
+  url?: string;
+}>;
+}>;
+  all: {
   videosCount: number;
-}
-
-export interface AccessSelfGetResponseOption1 {
-  isAuth: boolean;
-}
-
-export interface AccessSelfUpdateRequest {
-  about?: string;
-  name?: string;
-}
-
-export interface AccessSelfUpdateResponse {
-  about?: string | null;
-  archivedPostsCount?: number;
-  audiosCount?: number;
-  avatar: string | null;
-  avatarThumbs?: {
-  c144: string;
-  c50: string;
-} | null;
-  canAddSubscriber?: boolean;
-  canChat?: boolean;
-  canCommentStory?: boolean;
-  canCreatePromotion?: boolean;
-  canCreateTrial?: boolean;
-  canLookStory?: boolean;
-  canPayInternal?: boolean;
-  canReceiveChatMessage?: boolean;
-  canReport?: boolean;
-  canRestrict?: boolean;
-  canTrialSend?: boolean;
-  canUnsubscribe?: boolean;
-  currentSubscribePrice?: number | null;
-  displayName?: string;
-  favoritedCount?: number;
-  favoritesCount?: number;
-  hasLabels?: boolean;
-  hasNotViewedStory?: boolean;
-  hasPinnedPosts?: boolean;
-  hasScheduledStream?: boolean;
-  hasStories?: boolean;
-  hasStream?: boolean;
-  header?: string | null;
-  headerSize?: {
-  height: number;
-  width: number;
-} | null;
-  headerThumbs?: {
-  w480: string;
-  w760: string;
-} | null;
-  id: number;
-  isAdultContent?: boolean;
-  isBlocked?: boolean;
-  isFriend?: boolean;
-  isMarkdownDisabledForAbout?: boolean;
-  isPendingAutoprolong?: boolean;
-  isPerformer?: boolean;
-  isPrivateRestriction?: boolean;
-  isRealPerformer?: boolean;
-  isReferrerAllowed?: boolean;
-  isRestricted?: boolean;
-  isVerified: boolean;
-  joinDate?: string;
-  lastSeen?: string | null;
-  lists: Array<{
-  id: string | number;
-  name: string;
-  type: string;
+  photosCount: number;
+  gifsCount: number;
+  audiosCount: number;
+  medias: Array<{
+  type: any | null;
 }>;
-  location?: string | null;
-  mediasCount?: number;
-  name: string;
-  notice?: string;
-  photosCount?: number;
-  postsCount?: number;
-  privateArchivedPostsCount?: number;
-  showMediaCount?: boolean;
-  showPostsInFeed?: boolean;
-  showSubscribersCount?: boolean;
-  subscribePrice?: number;
-  subscribedBy?: boolean;
-  subscribedByAutoprolong?: boolean | null;
-  subscribedByData?: {
-  discountFinishedAt: string | null;
-  discountPercent: number;
-  discountPeriod: number;
-  discountStartedAt: string | null;
-  duration: string;
-  expiredAt: string;
-  hasActivePaidSubscriptions: boolean;
-  isMuted: boolean;
-  newPrice: number;
-  price: number;
-  regularPrice: number;
-  renewedAt: string | null;
-  showPostsInFeed: boolean;
-  status: string | null;
-  subscribeAt: string;
-  subscribePrice: number;
-  subscribes: Array<{
-  action: string;
-  cancelDate: string | null;
-  date: string;
-  discount: number;
-  duration: number;
-  earningId: number;
-  expireDate: string;
-  id: number;
-  isCurrent: boolean;
-  offerEnd: string | null;
-  offerStart: string | null;
-  price: number;
-  regularPrice: number;
-  startDate: string;
-  subscriberId: number;
-  type: string;
-  userId: number;
-}>;
-  unsubscribeReason: string;
 };
-  subscribedByExpire?: boolean | null;
-  subscribedByExpireDate?: string | null;
-  subscribedIsExpiredNow?: boolean | null;
-  subscribedOn?: boolean;
-  subscribedOnData?: {
-  discountFinishedAt: string | null;
-  discountPercent: number;
-  discountPeriod: number;
-  discountStartedAt: string | null;
-  duration: string;
-  expiredAt: string;
-  hasActivePaidSubscriptions: boolean;
-  isMuted: boolean;
-  messagesSumm: number;
-  newPrice: number;
-  postsSumm: number;
-  price: number;
-  regularPrice: number;
-  renewedAt: string | null;
-  status: string | null;
-  streamsSumm: number;
-  subscribeAt: string;
-  subscribePrice: number;
-  subscribes: Array<{
-  action: string;
-  cancelDate: string | null;
-  date: string;
-  discount: number;
-  duration: number;
-  earningId: number;
-  expireDate: string;
-  id: number;
-  isCurrent: boolean;
-  offerEnd: string | null;
-  offerStart: string | null;
-  price: number;
-  regularPrice: number;
-  startDate: string;
-  subscriberId: number;
-  type: string;
-  userId: number;
-}>;
-  subscribesSumm: number;
-  tipsSumm: number;
-  totalSumm: number;
-  unsubscribeReason: string;
-};
-  subscribedOnDuration?: string;
-  subscribedOnExpiredNow?: boolean;
-  subscribersCount?: number | null;
-  tipsEnabled?: boolean;
-  tipsMax?: number;
-  tipsMin?: number;
-  tipsMinInternal?: number;
-  tipsTextEnabled?: boolean;
-  username: string;
-  videosCount?: number;
-  website?: string | null;
-  wishlist?: string | null;
-}
-
-export interface AccessSelfListNotificationsResponse {
   hasMore: boolean;
-  list: Array<{
-  canGoToProfile: boolean;
-  createdAt: string;
-  id: number;
-  isRead: boolean;
-  replacePairs: Record<string, string> | null;
-  subType: string | null;
-  text: string;
-  type: string;
-  userId: number | null;
-}>;
+  canCreateVaultLists: boolean;
+  order: string;
+  sort: string;
 }
 
-export interface AccessSelfListNotificationsItem {
-  canGoToProfile: boolean;
-  createdAt: string;
+export interface AccessVaultListsListItem {
   id: number;
-  isRead: boolean;
-  replacePairs: Record<string, string> | null;
-  subType: string | null;
-  text: string;
-  type: string;
-  userId: number | null;
-}
-
-export interface AccessSelfListReleaseFormsResponse {
-  hasMore: boolean;
-  list: Array<{
-  approvedAt: string | null;
-  code: string | null;
-  createdAt: string | null;
-  hasUser: boolean;
-  id: number;
-  isHidden: boolean;
-  lastChangedAt: string | null;
+  type: 'custom' | 'messages' | 'posts' | 'stories' | 'streams' | 'media_stickers';
   name: string;
-  partnerId: number | null;
-  status: string | null;
-  type: string;
-  userName: string | null;
+  hasMedia: boolean;
+  canUpdate: boolean;
+  canDelete: boolean;
+  medias: Array<{
+  type: 'photo' | 'video' | 'gif' | 'audio' | null;
+  url?: string;
 }>;
 }
 
-export interface AccessSelfListReleaseFormsItem {
-  approvedAt: string | null;
-  code: string | null;
-  createdAt: string | null;
-  hasUser: boolean;
-  id: number;
-  isHidden: boolean;
-  lastChangedAt: string | null;
+export interface AccessVaultListsCreateRequest {
   name: string;
-  partnerId: number | null;
-  status: string | null;
-  type: string;
-  userName: string | null;
 }
 
-export interface AccessSelfListTaggedFriendUsersResponse {
-  hasMore: boolean;
+export interface AccessVaultListsCreateResponse {
+  id: number;
+  type: 'custom' | 'messages' | 'posts' | 'stories' | 'streams' | 'media_stickers';
+  name: string;
+  hasMedia: boolean;
+  canUpdate: boolean;
+  canDelete: boolean;
+  medias: Array<{
+  type: 'photo' | 'video' | 'gif' | 'audio' | null;
+  url?: string;
+}>;
+}
+
+export interface AccessVaultListsUpdateRequest {
+  name: string;
+  clearMedia?: boolean | null;
+}
+
+export interface AccessVaultListsUpdateResponse {
+  id: number;
+  type: 'custom' | 'messages' | 'posts' | 'stories' | 'streams' | 'media_stickers';
+  name: string;
+  hasMedia: boolean;
+  canUpdate: boolean;
+  canDelete: boolean;
+  medias: Array<{
+  type: 'photo' | 'video' | 'gif' | 'audio' | null;
+  url?: string;
+}>;
+}
+
+export interface AccessVaultListsListMediaResponse {
   list: Array<{
   id: number;
-  name: string;
-  type: string;
-  user: {
-  avatar: string | null;
-  id: number;
-  isHidden: boolean;
-  isVerified: boolean;
-  name: string;
-  username: string;
-};
-}>;
-}
-
-export interface AccessSelfListTaggedFriendUsersItem {
-  id: number;
-  name: string;
-  type: string;
-  user: {
-  avatar: string | null;
-  id: number;
-  isHidden: boolean;
-  isVerified: boolean;
-  name: string;
-  username: string;
-};
-}
-
-export interface AccessSubscribersListResponse {
-  hasMore: boolean;
-  list: Array<{
-  avatar: string | null;
-  avatarThumbs: {
-  c144: string;
-  c50: string;
-} | null;
-  capabilities: {
-  canBlock: boolean;
-  canReceiveMessages: boolean;
-  canReport: boolean;
-  canRestrict: boolean;
-  canSendTrial: boolean;
-  canUnsubscribe: boolean;
-};
-  displayName: string;
-  id: number;
-  isBlocked: boolean;
-  isRestricted: boolean;
-  isVerified: boolean;
-  lastSeen: string | null;
-  lists: Array<{
-  id: string | number;
-  name: string;
-}>;
-  name: string;
-  spending: {
-  messages: number;
-  posts: number;
-  streams: number;
-  subscriptions: number;
-  tips: number;
-  total: number;
-};
-  subscription: {
-  discountFinishedAt: string | null;
-  discountPercent: number | null;
-  discountPeriod: number | null;
-  discountStartedAt: string | null;
-  expiresAt: string | null;
-  history: Array<{
-  action: string;
-  discount: number;
-  expireDate: string;
-  id: number;
-  isCurrent: boolean;
-  price: number;
-  regularPrice: number;
-  startDate: string;
-  type: string;
-}>;
-  isActive: boolean;
-  isExpired: boolean;
-  price: number | null;
-  regularPrice: number | null;
-  renewedAt: string | null;
-  subscribedAt: string | null;
-};
-  username: string;
-}>;
-}
-
-export interface AccessSubscribersListItem {
-  avatar: string | null;
-  avatarThumbs: {
-  c144: string;
-  c50: string;
-} | null;
-  capabilities: {
-  canBlock: boolean;
-  canReceiveMessages: boolean;
-  canReport: boolean;
-  canRestrict: boolean;
-  canSendTrial: boolean;
-  canUnsubscribe: boolean;
-};
-  displayName: string;
-  id: number;
-  isBlocked: boolean;
-  isRestricted: boolean;
-  isVerified: boolean;
-  lastSeen: string | null;
-  lists: Array<{
-  id: string | number;
-  name: string;
-}>;
-  name: string;
-  spending: {
-  messages: number;
-  posts: number;
-  streams: number;
-  subscriptions: number;
-  tips: number;
-  total: number;
-};
-  subscription: {
-  discountFinishedAt: string | null;
-  discountPercent: number | null;
-  discountPeriod: number | null;
-  discountStartedAt: string | null;
-  expiresAt: string | null;
-  history: Array<{
-  action: string;
-  discount: number;
-  expireDate: string;
-  id: number;
-  isCurrent: boolean;
-  price: number;
-  regularPrice: number;
-  startDate: string;
-  type: string;
-}>;
-  isActive: boolean;
-  isExpired: boolean;
-  price: number | null;
-  regularPrice: number | null;
-  renewedAt: string | null;
-  subscribedAt: string | null;
-};
-  username: string;
-}
-
-export interface AccessSubscribersSetCustomNameRequest {
-  displayName: string;
-}
-
-export interface AccessSubscribersSetDiscountRequest {
-  discount: number;
-  period: number;
-}
-
-export interface AccessSubscribersSetNoteRequest {
-  notice: string;
-}
-
-export interface AccessSubscriptionsListResponse {
-  hasMore: boolean;
-  list: Array<{
-  avatar: string | null;
-  avatarThumbs?: {
-  c144: string;
-  c50: string;
-} | null;
-  expiredAt: string | null;
-  id: number;
-  isActive: boolean;
-  lists: Array<{
-  id: string | number;
-  name: string;
-  type: string;
-}>;
-  messagesSumm?: number;
-  name: string;
-  postsSumm?: number;
-  renewedAt: string | null;
-  streamsSumm?: number;
-  subscribedAt: string;
-  subscribesSumm?: number;
-  subscriptionPrice: number;
-  tipsSumm?: number;
-  totalSumm?: number;
-  username: string;
-}>;
-}
-
-export interface AccessSubscriptionsListItem {
-  avatar: string | null;
-  avatarThumbs?: {
-  c144: string;
-  c50: string;
-} | null;
-  expiredAt: string | null;
-  id: number;
-  isActive: boolean;
-  lists: Array<{
-  id: string | number;
-  name: string;
-  type: string;
-}>;
-  messagesSumm?: number;
-  name: string;
-  postsSumm?: number;
-  renewedAt: string | null;
-  streamsSumm?: number;
-  subscribedAt: string;
-  subscribesSumm?: number;
-  subscriptionPrice: number;
-  tipsSumm?: number;
-  totalSumm?: number;
-  username: string;
-}
-
-export interface AccessSubscriptionsGetHistoryResponse {
-  hasMore: boolean;
-  list: Array<{
-  expireDate: string;
-  price: number;
-  subscribeDate: string;
-}>;
-}
-
-export interface AccessSubscriptionsGetCountResponse {
-  bookmarks: number;
-  subscribers: {
-  active: number;
-  activeOnline: number;
-  all: number;
-  blocked: number;
-  expired: number;
-  muted: number;
-  restricted: number;
-};
-  subscriptions: {
-  active: number;
-  all: number;
-  attention: number;
-  blocked: number;
-  expired: number;
-  muted: number;
-  restricted: number;
-};
-}
-
-export interface AccessUploadsReplaceResponse {
-  media?: {
-  canView: boolean;
+  type: 'photo' | 'video' | 'gif' | 'audio';
   convertedToVideo: boolean;
-  createdAt: string;
-  duration?: number;
-  files?: {
-  full: {
-  height?: number;
-  size?: number;
-  sources: Array<{
-  height?: number;
-  type?: string;
-  url: string;
-  width?: number;
-}>;
-  url: string;
-  width?: number;
-};
-  preview?: {
-  height?: number;
-  options: Array<{
-  height?: number;
-  type?: string;
-  url: string;
-  width?: number;
-}>;
-  size?: number;
-  url: string;
-  width?: number;
-};
-  squarePreview?: {
-  height?: number;
-  size?: number;
-  url: string;
-  width?: number;
-};
-  thumb?: {
-  height?: number;
-  size?: number;
-  url: string;
-  width?: number;
-};
-};
-  hasCustomPreview?: boolean;
+  canView: boolean;
   hasError: boolean;
-  id: number;
+  createdAt: string;
   isReady: boolean;
+  duration?: number;
   releaseForms: Array<{
   id: number;
   name: string;
   partnerSource: string;
   type: string;
   user?: {
-  avatar: string;
-  avatarThumbs: {
-  c144: string;
-  c50: string;
-};
+  view: string;
   id: number;
-  isFromGuest: boolean;
-  isVerified: boolean;
-  ivStatus: string;
   name: string;
   username: string;
-  view: string;
+  isVerified: boolean;
+  avatar: string;
+  avatarThumbs: {
+  c50: string;
+  c144: string;
+};
+  ivStatus: string;
+  isFromGuest: boolean;
 };
 }>;
-  type: 'photo' | 'video' | 'gif' | 'audio';
+  hasCustomPreview?: boolean;
   videoSources?: {
   '240'?: string | null;
   '720'?: string | null;
 };
+  files?: {
+  full: {
+  url: string;
+  width?: number;
+  height?: number;
+  size?: number;
+  sources: Array<{
+  url: string;
+  width?: number;
+  height?: number;
+  type?: string;
+}>;
 };
-  mediaUploadId: string;
+  thumb?: {
+  url: string;
+  width?: number;
+  height?: number;
+  size?: number;
+};
+  preview?: {
+  url: string;
+  width?: number;
+  height?: number;
+  size?: number;
+  options: Array<{
+  url: string;
+  width?: number;
+  height?: number;
+  type?: string;
+}>;
+};
+  squarePreview?: {
+  url: string;
+  width?: number;
+  height?: number;
+  size?: number;
+};
+};
+  counters: {
+  likesCount: number;
+  tipsSumm: number;
+};
+  hasPosts?: boolean;
+  lists: Array<{
+  id: number;
+  type: string;
+  name: string;
+}>;
+}>;
+  hasMore: boolean;
 }
 
-export interface AccessUploadsReplacePartsResponse {
-  etag: string;
+export interface AccessVaultListsListMediaItem {
+  id: number;
+  type: 'photo' | 'video' | 'gif' | 'audio';
+  convertedToVideo: boolean;
+  canView: boolean;
+  hasError: boolean;
+  createdAt: string;
+  isReady: boolean;
+  duration?: number;
+  releaseForms: Array<{
+  id: number;
+  name: string;
+  partnerSource: string;
+  type: string;
+  user?: {
+  view: string;
+  id: number;
+  name: string;
+  username: string;
+  isVerified: boolean;
+  avatar: string;
+  avatarThumbs: {
+  c50: string;
+  c144: string;
+};
+  ivStatus: string;
+  isFromGuest: boolean;
+};
+}>;
+  hasCustomPreview?: boolean;
+  videoSources?: {
+  '240'?: string | null;
+  '720'?: string | null;
+};
+  files?: {
+  full: {
+  url: string;
+  width?: number;
+  height?: number;
+  size?: number;
+  sources: Array<{
+  url: string;
+  width?: number;
+  height?: number;
+  type?: string;
+}>;
+};
+  thumb?: {
+  url: string;
+  width?: number;
+  height?: number;
+  size?: number;
+};
+  preview?: {
+  url: string;
+  width?: number;
+  height?: number;
+  size?: number;
+  options: Array<{
+  url: string;
+  width?: number;
+  height?: number;
+  type?: string;
+}>;
+};
+  squarePreview?: {
+  url: string;
+  width?: number;
+  height?: number;
+  size?: number;
+};
+};
+  counters: {
+  likesCount: number;
+  tipsSumm: number;
+};
+  hasPosts?: boolean;
+  lists: Array<{
+  id: number;
+  type: string;
+  name: string;
+}>;
+}
+
+export interface AccessVaultListsCreateMediaRequest {
+  mediaIds: Array<number>;
+}
+
+export interface AccessVaultListsCreateMediaResponse {
+  id: number;
+  type: 'custom' | 'messages' | 'posts' | 'stories' | 'streams' | 'media_stickers';
+  name: string;
+  hasMedia: boolean;
+  canUpdate: boolean;
+  canDelete: boolean;
+  medias: Array<{
+  type: 'photo' | 'video' | 'gif' | 'audio' | null;
+  url?: string;
+}>;
+}
+
+export interface AccessVaultListMediaResponse {
+  list: Array<{
+  id: number;
+  type: 'photo' | 'video' | 'gif' | 'audio';
+  convertedToVideo: boolean;
+  canView: boolean;
+  hasError: boolean;
+  createdAt: string;
+  isReady: boolean;
+  duration?: number;
+  releaseForms: Array<{
+  id: number;
+  name: string;
+  partnerSource: string;
+  type: string;
+  user?: {
+  view: string;
+  id: number;
+  name: string;
+  username: string;
+  isVerified: boolean;
+  avatar: string;
+  avatarThumbs: {
+  c50: string;
+  c144: string;
+};
+  ivStatus: string;
+  isFromGuest: boolean;
+};
+}>;
+  hasCustomPreview?: boolean;
+  videoSources?: {
+  '240'?: string | null;
+  '720'?: string | null;
+};
+  files?: {
+  full: {
+  url: string;
+  width?: number;
+  height?: number;
+  size?: number;
+  sources: Array<{
+  url: string;
+  width?: number;
+  height?: number;
+  type?: string;
+}>;
+};
+  thumb?: {
+  url: string;
+  width?: number;
+  height?: number;
+  size?: number;
+};
+  preview?: {
+  url: string;
+  width?: number;
+  height?: number;
+  size?: number;
+  options: Array<{
+  url: string;
+  width?: number;
+  height?: number;
+  type?: string;
+}>;
+};
+  squarePreview?: {
+  url: string;
+  width?: number;
+  height?: number;
+  size?: number;
+};
+};
+  counters: {
+  likesCount: number;
+  tipsSumm: number;
+};
+  hasPosts?: boolean;
+  lists: Array<{
+  id: number;
+  type: string;
+  name: string;
+}>;
+}>;
+  hasMore: boolean;
+}
+
+export interface AccessVaultListMediaItem {
+  id: number;
+  type: 'photo' | 'video' | 'gif' | 'audio';
+  convertedToVideo: boolean;
+  canView: boolean;
+  hasError: boolean;
+  createdAt: string;
+  isReady: boolean;
+  duration?: number;
+  releaseForms: Array<{
+  id: number;
+  name: string;
+  partnerSource: string;
+  type: string;
+  user?: {
+  view: string;
+  id: number;
+  name: string;
+  username: string;
+  isVerified: boolean;
+  avatar: string;
+  avatarThumbs: {
+  c50: string;
+  c144: string;
+};
+  ivStatus: string;
+  isFromGuest: boolean;
+};
+}>;
+  hasCustomPreview?: boolean;
+  videoSources?: {
+  '240'?: string | null;
+  '720'?: string | null;
+};
+  files?: {
+  full: {
+  url: string;
+  width?: number;
+  height?: number;
+  size?: number;
+  sources: Array<{
+  url: string;
+  width?: number;
+  height?: number;
+  type?: string;
+}>;
+};
+  thumb?: {
+  url: string;
+  width?: number;
+  height?: number;
+  size?: number;
+};
+  preview?: {
+  url: string;
+  width?: number;
+  height?: number;
+  size?: number;
+  options: Array<{
+  url: string;
+  width?: number;
+  height?: number;
+  type?: string;
+}>;
+};
+  squarePreview?: {
+  url: string;
+  width?: number;
+  height?: number;
+  size?: number;
+};
+};
+  counters: {
+  likesCount: number;
+  tipsSumm: number;
+};
+  hasPosts?: boolean;
+  lists: Array<{
+  id: number;
+  type: string;
+  name: string;
+}>;
+}
+
+export interface AccessUploadsReplaceResponse {
   mediaUploadId: string;
-  partNumber: number;
+  media?: {
+  id: number;
+  type: 'photo' | 'video' | 'gif' | 'audio';
+  convertedToVideo: boolean;
+  canView: boolean;
+  hasError: boolean;
+  createdAt: string;
+  isReady: boolean;
+  duration?: number;
+  releaseForms: Array<{
+  id: number;
+  name: string;
+  partnerSource: string;
+  type: string;
+  user?: {
+  view: string;
+  id: number;
+  name: string;
+  username: string;
+  isVerified: boolean;
+  avatar: string;
+  avatarThumbs: {
+  c50: string;
+  c144: string;
+};
+  ivStatus: string;
+  isFromGuest: boolean;
+};
+}>;
+  hasCustomPreview?: boolean;
+  videoSources?: {
+  '240'?: string | null;
+  '720'?: string | null;
+};
+  files?: {
+  full: {
+  url: string;
+  width?: number;
+  height?: number;
+  size?: number;
+  sources: Array<{
+  url: string;
+  width?: number;
+  height?: number;
+  type?: string;
+}>;
+};
+  thumb?: {
+  url: string;
+  width?: number;
+  height?: number;
+  size?: number;
+};
+  preview?: {
+  url: string;
+  width?: number;
+  height?: number;
+  size?: number;
+  options: Array<{
+  url: string;
+  width?: number;
+  height?: number;
+  type?: string;
+}>;
+};
+  squarePreview?: {
+  url: string;
+  width?: number;
+  height?: number;
+  size?: number;
+};
+};
+};
 }
 
 export interface AccessUploadsCheckRequest {
@@ -3065,165 +5270,84 @@ export interface AccessUploadsCheckRequest {
 export interface AccessUploadsCheckResponse {
   exists: boolean;
   media?: {
-  canView: boolean;
-  convertedToVideo: boolean;
-  createdAt: string;
-  duration?: number;
-  files?: {
-  full: {
-  height?: number;
-  size?: number;
-  sources: Array<{
-  height?: number;
-  type?: string;
-  url: string;
-  width?: number;
-}>;
-  url: string;
-  width?: number;
-};
-  preview?: {
-  height?: number;
-  options: Array<{
-  height?: number;
-  type?: string;
-  url: string;
-  width?: number;
-}>;
-  size?: number;
-  url: string;
-  width?: number;
-};
-  squarePreview?: {
-  height?: number;
-  size?: number;
-  url: string;
-  width?: number;
-};
-  thumb?: {
-  height?: number;
-  size?: number;
-  url: string;
-  width?: number;
-};
-};
-  hasCustomPreview?: boolean;
-  hasError: boolean;
   id: number;
+  type: 'photo' | 'video' | 'gif' | 'audio';
+  convertedToVideo: boolean;
+  canView: boolean;
+  hasError: boolean;
+  createdAt: string;
   isReady: boolean;
+  duration?: number;
   releaseForms: Array<{
   id: number;
   name: string;
   partnerSource: string;
   type: string;
   user?: {
-  avatar: string;
-  avatarThumbs: {
-  c144: string;
-  c50: string;
-};
+  view: string;
   id: number;
-  isFromGuest: boolean;
-  isVerified: boolean;
-  ivStatus: string;
   name: string;
   username: string;
-  view: string;
+  isVerified: boolean;
+  avatar: string;
+  avatarThumbs: {
+  c50: string;
+  c144: string;
+};
+  ivStatus: string;
+  isFromGuest: boolean;
 };
 }>;
-  type: 'photo' | 'video' | 'gif' | 'audio';
+  hasCustomPreview?: boolean;
   videoSources?: {
   '240'?: string | null;
   '720'?: string | null;
 };
-};
-}
-
-export interface AccessUploadsCompleteRequest {
-  mediaUploadId: string;
-}
-
-export interface AccessUploadsCompleteResponse {
-  media?: {
-  canView: boolean;
-  convertedToVideo: boolean;
-  createdAt: string;
-  duration?: number;
   files?: {
   full: {
+  url: string;
+  width?: number;
   height?: number;
   size?: number;
   sources: Array<{
+  url: string;
+  width?: number;
   height?: number;
   type?: string;
-  url: string;
-  width?: number;
 }>;
-  url: string;
-  width?: number;
-};
-  preview?: {
-  height?: number;
-  options: Array<{
-  height?: number;
-  type?: string;
-  url: string;
-  width?: number;
-}>;
-  size?: number;
-  url: string;
-  width?: number;
-};
-  squarePreview?: {
-  height?: number;
-  size?: number;
-  url: string;
-  width?: number;
 };
   thumb?: {
-  height?: number;
-  size?: number;
   url: string;
   width?: number;
+  height?: number;
+  size?: number;
 };
-};
-  hasCustomPreview?: boolean;
-  hasError: boolean;
-  id: number;
-  isReady: boolean;
-  releaseForms: Array<{
-  id: number;
-  name: string;
-  partnerSource: string;
-  type: string;
-  user?: {
-  avatar: string;
-  avatarThumbs: {
-  c144: string;
-  c50: string;
-};
-  id: number;
-  isFromGuest: boolean;
-  isVerified: boolean;
-  ivStatus: string;
-  name: string;
-  username: string;
-  view: string;
-};
+  preview?: {
+  url: string;
+  width?: number;
+  height?: number;
+  size?: number;
+  options: Array<{
+  url: string;
+  width?: number;
+  height?: number;
+  type?: string;
 }>;
-  type: 'photo' | 'video' | 'gif' | 'audio';
-  videoSources?: {
-  '240'?: string | null;
-  '720'?: string | null;
+};
+  squarePreview?: {
+  url: string;
+  width?: number;
+  height?: number;
+  size?: number;
 };
 };
-  mediaUploadId: string;
+};
 }
 
 export interface AccessUploadsInitRequest {
-  contentType: string;
   filename: string;
   size: number;
+  contentType: string;
   vaultUpload?: {
   mode?: 'message';
   userId?: string | null;
@@ -3234,2738 +5358,414 @@ export interface AccessUploadsInitResponse {
   mediaUploadId: string;
 }
 
-export interface AccessUsersListsCreateRequest {
-  listIds: Array<number>;
+export interface AccessUploadsReplacePartsResponse {
+  mediaUploadId: string;
+  partNumber: number;
+  etag: string;
 }
 
-export interface AccessUsersListsCreateResponse {
-  errors?: Array<{
-  error: string;
-  listId: number;
-}>;
-  success: Array<{
-  listId: number;
-  success: boolean;
-}>;
+export interface AccessUploadsCompleteRequest {
+  mediaUploadId: string;
 }
 
-export interface AccessUsersListsListResponse {
-  hasMore: boolean;
-  list: Array<{
-  canAddUsers?: boolean;
-  canDelete?: boolean;
-  canManageUsers?: boolean;
-  canPinnedToChat?: boolean;
-  canPinnedToFeed?: boolean;
-  canUpdate?: boolean;
-  direction?: string;
-  id: string | number;
-  isPinnedToChat?: boolean;
-  isPinnedToFeed?: boolean;
-  name: string;
-  order?: string;
-  postsCount?: number;
-  sortList: Array<{
-  direction: string;
-  order: string;
-}>;
-  type: string;
-  users: Array<{
-  avatar: string | null;
-  avatarThumbs?: {
-  c144: string;
-  c50: string;
-} | null;
+export interface AccessUploadsCompleteResponse {
+  mediaUploadId: string;
+  media?: {
   id: number;
-  isVerified: boolean;
-  name: string;
-  username: string;
-}>;
-  usersCount?: number;
-}>;
-  order?: string;
-  sort?: string;
-}
-
-export interface AccessUsersListsListItem {
-  canAddUsers?: boolean;
-  canDelete?: boolean;
-  canManageUsers?: boolean;
-  canPinnedToChat?: boolean;
-  canPinnedToFeed?: boolean;
-  canUpdate?: boolean;
-  direction?: string;
-  id: string | number;
-  isPinnedToChat?: boolean;
-  isPinnedToFeed?: boolean;
-  name: string;
-  order?: string;
-  postsCount?: number;
-  sortList: Array<{
-  direction: string;
-  order: string;
-}>;
-  type: string;
-  users: Array<{
-  avatar: string | null;
-  avatarThumbs?: {
-  c144: string;
-  c50: string;
-} | null;
-  id: number;
-  isVerified: boolean;
-  name: string;
-  username: string;
-}>;
-  usersCount?: number;
-}
-
-export interface AccessUsersListsCreate2Request {
-  name: string;
-}
-
-export interface AccessUsersListsCreate2Response {
-  canAddUsers?: boolean;
-  canDelete?: boolean;
-  canManageUsers?: boolean;
-  canPinnedToChat?: boolean;
-  canPinnedToFeed?: boolean;
-  canUpdate?: boolean;
-  direction?: string;
-  id: string | number;
-  isPinnedToChat?: boolean;
-  isPinnedToFeed?: boolean;
-  name: string;
-  order?: string;
-  postsCount?: number;
-  sortList: Array<{
-  direction: string;
-  order: string;
-}>;
-  type: string;
-  users: Array<{
-  avatar: string | null;
-  avatarThumbs?: {
-  c144: string;
-  c50: string;
-} | null;
-  id: number;
-  isVerified: boolean;
-  name: string;
-  username: string;
-}>;
-  usersCount?: number;
-}
-
-export interface AccessUsersListsGetResponse {
-  canAddUsers?: boolean;
-  canDelete?: boolean;
-  canManageUsers?: boolean;
-  canPinnedToChat?: boolean;
-  canPinnedToFeed?: boolean;
-  canUpdate?: boolean;
-  direction?: string;
-  id: string | number;
-  isPinnedToChat?: boolean;
-  isPinnedToFeed?: boolean;
-  name: string;
-  order?: string;
-  postsCount?: number;
-  sortList: Array<{
-  direction: string;
-  order: string;
-}>;
-  type: string;
-  users: Array<{
-  avatar: string | null;
-  avatarThumbs?: {
-  c144: string;
-  c50: string;
-} | null;
-  id: number;
-  isVerified: boolean;
-  name: string;
-  username: string;
-}>;
-  usersCount?: number;
-}
-
-export interface AccessUsersListsUpdateRequest {
-  name: string;
-}
-
-export interface AccessUsersListsUpdateResponse {
-  canAddUsers?: boolean;
-  canDelete?: boolean;
-  canManageUsers?: boolean;
-  canPinnedToChat?: boolean;
-  canPinnedToFeed?: boolean;
-  canUpdate?: boolean;
-  direction?: string;
-  id: string | number;
-  isPinnedToChat?: boolean;
-  isPinnedToFeed?: boolean;
-  name: string;
-  order?: string;
-  postsCount?: number;
-  sortList: Array<{
-  direction: string;
-  order: string;
-}>;
-  type: string;
-  users: Array<{
-  avatar: string | null;
-  avatarThumbs?: {
-  c144: string;
-  c50: string;
-} | null;
-  id: number;
-  isVerified: boolean;
-  name: string;
-  username: string;
-}>;
-  usersCount?: number;
-}
-
-export interface AccessUsersListsListUsersResponse {
-  hasMore: boolean;
-  list: Array<{
-  avatar: string | null;
-  avatarThumbs?: {
-  c144: string;
-  c50: string;
-} | null;
-  id: number;
-  isVerified: boolean;
-  name: string;
-  username: string;
-}>;
-  nextOffset?: number;
-}
-
-export interface AccessUsersListsListUsersItem {
-  avatar: string | null;
-  avatarThumbs?: {
-  c144: string;
-  c50: string;
-} | null;
-  id: number;
-  isVerified: boolean;
-  name: string;
-  username: string;
-}
-
-export interface AccessUsersListsCreateUsersResponseOption0 {
-  list: {
-  canAddUsers?: boolean;
-  canDelete?: boolean;
-  canManageUsers?: boolean;
-  canPinnedToChat?: boolean;
-  canPinnedToFeed?: boolean;
-  canUpdate?: boolean;
-  direction?: string;
-  id: string | number;
-  isPinnedToChat?: boolean;
-  isPinnedToFeed?: boolean;
-  name: string;
-  order?: string;
-  postsCount?: number;
-  sortList: Array<{
-  direction: string;
-  order: string;
-}>;
-  type: string;
-  users: Array<{
-  avatar: string | null;
-  avatarThumbs?: {
-  c144: string;
-  c50: string;
-} | null;
-  id: number;
-  isVerified: boolean;
-  name: string;
-  username: string;
-}>;
-  usersCount?: number;
-};
-  userState: {
-  canAddUser?: boolean;
-  cannotAddUserReason?: string | null;
-  hasUser: boolean;
-  id: string | number;
-  name: string;
-  type: string;
-};
-}
-
-export interface AccessUsersListsDeleteUsersResponseOption0 {
-  hasMore: boolean;
-  list: Array<{
-  avatar: string | null;
-  avatarThumbs?: {
-  c144: string;
-  c50: string;
-} | null;
-  id: number;
-  isVerified: boolean;
-  name: string;
-  username: string;
-}>;
-  nextOffset?: number;
-}
-
-export interface AccessUsersGetResponseOption0 {
-  about?: string | null;
-  archivedPostsCount?: number;
-  audiosCount?: number;
-  avatar: string | null;
-  avatarThumbs?: {
-  c144: string;
-  c50: string;
-} | null;
-  canAddSubscriber?: boolean;
-  canChat?: boolean;
-  canCommentStory?: boolean;
-  canCreatePromotion?: boolean;
-  canCreateTrial?: boolean;
-  canLookStory?: boolean;
-  canPayInternal?: boolean;
-  canReceiveChatMessage?: boolean;
-  canReport?: boolean;
-  canRestrict?: boolean;
-  canTrialSend?: boolean;
-  canUnsubscribe?: boolean;
-  currentSubscribePrice?: number | null;
-  displayName?: string;
-  favoritedCount?: number;
-  favoritesCount?: number;
-  hasLabels?: boolean;
-  hasNotViewedStory?: boolean;
-  hasPinnedPosts?: boolean;
-  hasScheduledStream?: boolean;
-  hasStories?: boolean;
-  hasStream?: boolean;
-  header?: string | null;
-  headerSize?: {
-  height: number;
-  width: number;
-} | null;
-  headerThumbs?: {
-  w480: string;
-  w760: string;
-} | null;
-  id: number;
-  isAdultContent?: boolean;
-  isBlocked?: boolean;
-  isFriend?: boolean;
-  isMarkdownDisabledForAbout?: boolean;
-  isPendingAutoprolong?: boolean;
-  isPerformer?: boolean;
-  isPrivateRestriction?: boolean;
-  isRealPerformer?: boolean;
-  isReferrerAllowed?: boolean;
-  isRestricted?: boolean;
-  isVerified: boolean;
-  joinDate?: string;
-  lastSeen?: string | null;
-  lists: Array<{
-  id: string | number;
-  name: string;
-  type: string;
-}>;
-  location?: string | null;
-  mediasCount?: number;
-  name: string;
-  notice?: string;
-  photosCount?: number;
-  postsCount?: number;
-  privateArchivedPostsCount?: number;
-  showMediaCount?: boolean;
-  showPostsInFeed?: boolean;
-  showSubscribersCount?: boolean;
-  subscribePrice?: number;
-  subscribedBy?: boolean;
-  subscribedByAutoprolong?: boolean | null;
-  subscribedByData?: {
-  discountFinishedAt: string | null;
-  discountPercent: number;
-  discountPeriod: number;
-  discountStartedAt: string | null;
-  duration: string;
-  expiredAt: string;
-  hasActivePaidSubscriptions: boolean;
-  isMuted: boolean;
-  newPrice: number;
-  price: number;
-  regularPrice: number;
-  renewedAt: string | null;
-  showPostsInFeed: boolean;
-  status: string | null;
-  subscribeAt: string;
-  subscribePrice: number;
-  subscribes: Array<{
-  action: string;
-  cancelDate: string | null;
-  date: string;
-  discount: number;
-  duration: number;
-  earningId: number;
-  expireDate: string;
-  id: number;
-  isCurrent: boolean;
-  offerEnd: string | null;
-  offerStart: string | null;
-  price: number;
-  regularPrice: number;
-  startDate: string;
-  subscriberId: number;
-  type: string;
-  userId: number;
-}>;
-  unsubscribeReason: string;
-};
-  subscribedByExpire?: boolean | null;
-  subscribedByExpireDate?: string | null;
-  subscribedIsExpiredNow?: boolean | null;
-  subscribedOn?: boolean;
-  subscribedOnData?: {
-  discountFinishedAt: string | null;
-  discountPercent: number;
-  discountPeriod: number;
-  discountStartedAt: string | null;
-  duration: string;
-  expiredAt: string;
-  hasActivePaidSubscriptions: boolean;
-  isMuted: boolean;
-  messagesSumm: number;
-  newPrice: number;
-  postsSumm: number;
-  price: number;
-  regularPrice: number;
-  renewedAt: string | null;
-  status: string | null;
-  streamsSumm: number;
-  subscribeAt: string;
-  subscribePrice: number;
-  subscribes: Array<{
-  action: string;
-  cancelDate: string | null;
-  date: string;
-  discount: number;
-  duration: number;
-  earningId: number;
-  expireDate: string;
-  id: number;
-  isCurrent: boolean;
-  offerEnd: string | null;
-  offerStart: string | null;
-  price: number;
-  regularPrice: number;
-  startDate: string;
-  subscriberId: number;
-  type: string;
-  userId: number;
-}>;
-  subscribesSumm: number;
-  tipsSumm: number;
-  totalSumm: number;
-  unsubscribeReason: string;
-};
-  subscribedOnDuration?: string;
-  subscribedOnExpiredNow?: boolean;
-  subscribersCount?: number | null;
-  tipsEnabled?: boolean;
-  tipsMax?: number;
-  tipsMin?: number;
-  tipsMinInternal?: number;
-  tipsTextEnabled?: boolean;
-  username: string;
-  videosCount?: number;
-  website?: string | null;
-  wishlist?: string | null;
-}
-
-export interface AccessUsersListPostsResponse {
-  counters: {
-  archivedPostsCount: number;
-  audiosCount: number;
-  mediasCount: number;
-  photosCount: number;
-  postsCount: number;
-  privateArchivedPostsCount: number;
-  streamsCount: number;
-  videosCount: number;
-};
-  hasMore: boolean;
-  headMarker: string;
-  list: Array<{
-  author?: {
-  _view: string;
-  id: number;
-};
-  canComment: boolean;
-  canDelete: boolean;
-  canEdit: boolean;
-  canToggleFavorite: boolean;
-  canViewMedia: boolean;
-  favoritesCount: number;
-  id: number;
-  isFavorite: boolean;
-  isMarkdownDisabled: boolean;
-  isMediaReady: boolean;
-  isOpened: boolean;
-  media: Array<{
-  canView: boolean;
+  type: 'photo' | 'video' | 'gif' | 'audio';
   convertedToVideo: boolean;
-  createdAt: string;
-  duration?: number;
-  files?: {
-  full: {
-  height?: number;
-  size?: number;
-  sources: Array<{
-  height?: number;
-  type?: string;
-  url: string;
-  width?: number;
-}>;
-  url: string;
-  width?: number;
-};
-  preview?: {
-  height?: number;
-  options: Array<{
-  height?: number;
-  type?: string;
-  url: string;
-  width?: number;
-}>;
-  size?: number;
-  url: string;
-  width?: number;
-};
-  squarePreview?: {
-  height?: number;
-  size?: number;
-  url: string;
-  width?: number;
-};
-  thumb?: {
-  height?: number;
-  size?: number;
-  url: string;
-  width?: number;
-};
-};
-  hasCustomPreview?: boolean;
+  canView: boolean;
   hasError: boolean;
-  id: number;
+  createdAt: string;
   isReady: boolean;
+  duration?: number;
   releaseForms: Array<{
   id: number;
   name: string;
   partnerSource: string;
   type: string;
   user?: {
-  avatar: string;
-  avatarThumbs: {
-  c144: string;
-  c50: string;
-};
+  view: string;
   id: number;
-  isFromGuest: boolean;
-  isVerified: boolean;
-  ivStatus: string;
   name: string;
   username: string;
-  view: string;
+  isVerified: boolean;
+  avatar: string;
+  avatarThumbs: {
+  c50: string;
+  c144: string;
+};
+  ivStatus: string;
+  isFromGuest: boolean;
 };
 }>;
-  type: 'photo' | 'video' | 'gif' | 'audio';
+  hasCustomPreview?: boolean;
   videoSources?: {
   '240'?: string | null;
   '720'?: string | null;
 };
-}>;
-  mediaCount: number;
-  postedAt: string;
-  postedAtPrecise: string;
-  rawText: string;
-  responseType: string;
-  text: string;
-  tipsAmount: string;
-}>;
-  tailMarker: string;
-}
-
-export interface AccessUsersGetRestrictResponse {
-  hasMore: boolean;
-  list: Array<{
-  avatar: string | null;
-  avatarThumbs?: {
-  c144: string;
-  c50: string;
-} | null;
-  canReceiveChatMessage?: boolean;
-  canReport?: boolean;
-  canRestrict?: boolean;
-  canTrialSend?: boolean;
-  canUnsubscribe?: boolean;
-  currentSubscribePrice?: number | null;
-  displayName?: string;
-  hideChat?: boolean;
-  id: number;
-  isBlocked?: boolean;
-  isPendingAutoprolong?: boolean;
-  isPerformer?: boolean;
-  isRealPerformer?: boolean;
-  isRestricted?: boolean;
-  isVerified: boolean;
-  lastSeen?: string | null;
-  lists: Array<{
-  id: string | number;
-  name: string;
-  type: string;
-}>;
-  name: string;
-  notice?: string;
-  subscribedBy?: boolean | null;
-  subscribedByAutoprolong?: boolean | null;
-  subscribedByData?: {
-  discountFinishedAt: string | null;
-  discountPercent: number;
-  discountPeriod: number;
-  discountStartedAt: string | null;
-  duration: string;
-  expiredAt: string;
-  hasActivePaidSubscriptions: boolean;
-  isMuted: boolean;
-  newPrice: number;
-  price: number;
-  regularPrice: number;
-  renewedAt: string | null;
-  showPostsInFeed: boolean;
-  status: string | null;
-  subscribeAt: string;
-  subscribePrice: number;
-  subscribes: Array<{
-  action: string;
-  cancelDate: string | null;
-  date: string;
-  discount: number;
-  duration: number;
-  earningId: number;
-  expireDate: string;
-  id: number;
-  isCurrent: boolean;
-  offerEnd: string | null;
-  offerStart: string | null;
-  price: number;
-  regularPrice: number;
-  startDate: string;
-  subscriberId: number;
-  type: string;
-  userId: number;
-}>;
-  unsubscribeReason: string;
-};
-  subscribedByExpire?: boolean | null;
-  subscribedByExpireDate?: string | null;
-  subscribedIsExpiredNow?: boolean;
-  subscribedOn?: boolean;
-  subscribedOnData?: {
-  discountFinishedAt: string | null;
-  discountPercent: number;
-  discountPeriod: number;
-  discountStartedAt: string | null;
-  duration: string;
-  expiredAt: string;
-  hasActivePaidSubscriptions: boolean;
-  isMuted: boolean;
-  messagesSumm: number;
-  newPrice: number;
-  postsSumm: number;
-  price: number;
-  regularPrice: number;
-  renewedAt: string | null;
-  status: string | null;
-  streamsSumm: number;
-  subscribeAt: string;
-  subscribePrice: number;
-  subscribes: Array<{
-  action: string;
-  cancelDate: string | null;
-  date: string;
-  discount: number;
-  duration: number;
-  earningId: number;
-  expireDate: string;
-  id: number;
-  isCurrent: boolean;
-  offerEnd: string | null;
-  offerStart: string | null;
-  price: number;
-  regularPrice: number;
-  startDate: string;
-  subscriberId: number;
-  type: string;
-  userId: number;
-}>;
-  subscribesSumm: number;
-  tipsSumm: number;
-  totalSumm: number;
-  unsubscribeReason: string;
-};
-  subscribedOnDuration?: string;
-  subscribedOnExpiredNow?: boolean;
-  username: string;
-}>;
-}
-
-export interface AccessUsersGetRestrictItem {
-  avatar: string | null;
-  avatarThumbs?: {
-  c144: string;
-  c50: string;
-} | null;
-  canReceiveChatMessage?: boolean;
-  canReport?: boolean;
-  canRestrict?: boolean;
-  canTrialSend?: boolean;
-  canUnsubscribe?: boolean;
-  currentSubscribePrice?: number | null;
-  displayName?: string;
-  hideChat?: boolean;
-  id: number;
-  isBlocked?: boolean;
-  isPendingAutoprolong?: boolean;
-  isPerformer?: boolean;
-  isRealPerformer?: boolean;
-  isRestricted?: boolean;
-  isVerified: boolean;
-  lastSeen?: string | null;
-  lists: Array<{
-  id: string | number;
-  name: string;
-  type: string;
-}>;
-  name: string;
-  notice?: string;
-  subscribedBy?: boolean | null;
-  subscribedByAutoprolong?: boolean | null;
-  subscribedByData?: {
-  discountFinishedAt: string | null;
-  discountPercent: number;
-  discountPeriod: number;
-  discountStartedAt: string | null;
-  duration: string;
-  expiredAt: string;
-  hasActivePaidSubscriptions: boolean;
-  isMuted: boolean;
-  newPrice: number;
-  price: number;
-  regularPrice: number;
-  renewedAt: string | null;
-  showPostsInFeed: boolean;
-  status: string | null;
-  subscribeAt: string;
-  subscribePrice: number;
-  subscribes: Array<{
-  action: string;
-  cancelDate: string | null;
-  date: string;
-  discount: number;
-  duration: number;
-  earningId: number;
-  expireDate: string;
-  id: number;
-  isCurrent: boolean;
-  offerEnd: string | null;
-  offerStart: string | null;
-  price: number;
-  regularPrice: number;
-  startDate: string;
-  subscriberId: number;
-  type: string;
-  userId: number;
-}>;
-  unsubscribeReason: string;
-};
-  subscribedByExpire?: boolean | null;
-  subscribedByExpireDate?: string | null;
-  subscribedIsExpiredNow?: boolean;
-  subscribedOn?: boolean;
-  subscribedOnData?: {
-  discountFinishedAt: string | null;
-  discountPercent: number;
-  discountPeriod: number;
-  discountStartedAt: string | null;
-  duration: string;
-  expiredAt: string;
-  hasActivePaidSubscriptions: boolean;
-  isMuted: boolean;
-  messagesSumm: number;
-  newPrice: number;
-  postsSumm: number;
-  price: number;
-  regularPrice: number;
-  renewedAt: string | null;
-  status: string | null;
-  streamsSumm: number;
-  subscribeAt: string;
-  subscribePrice: number;
-  subscribes: Array<{
-  action: string;
-  cancelDate: string | null;
-  date: string;
-  discount: number;
-  duration: number;
-  earningId: number;
-  expireDate: string;
-  id: number;
-  isCurrent: boolean;
-  offerEnd: string | null;
-  offerStart: string | null;
-  price: number;
-  regularPrice: number;
-  startDate: string;
-  subscriberId: number;
-  type: string;
-  userId: number;
-}>;
-  subscribesSumm: number;
-  tipsSumm: number;
-  totalSumm: number;
-  unsubscribeReason: string;
-};
-  subscribedOnDuration?: string;
-  subscribedOnExpiredNow?: boolean;
-  username: string;
-}
-
-export interface AccessUsersGetBlockedResponse {
-  hasMore: boolean;
-  list: Array<{
-  avatar: string | null;
-  avatarThumbs?: {
-  c144: string;
-  c50: string;
-} | null;
-  canReceiveChatMessage?: boolean;
-  canReport?: boolean;
-  canRestrict?: boolean;
-  canTrialSend?: boolean;
-  canUnsubscribe?: boolean;
-  currentSubscribePrice?: number | null;
-  displayName?: string;
-  hideChat?: boolean;
-  id: number;
-  isBlocked?: boolean;
-  isPendingAutoprolong?: boolean;
-  isPerformer?: boolean;
-  isRealPerformer?: boolean;
-  isRestricted?: boolean;
-  isVerified: boolean;
-  lastSeen?: string | null;
-  lists: Array<{
-  id: string | number;
-  name: string;
-  type: string;
-}>;
-  name: string;
-  notice?: string;
-  subscribedBy?: boolean | null;
-  subscribedByAutoprolong?: boolean | null;
-  subscribedByData?: {
-  discountFinishedAt: string | null;
-  discountPercent: number;
-  discountPeriod: number;
-  discountStartedAt: string | null;
-  duration: string;
-  expiredAt: string;
-  hasActivePaidSubscriptions: boolean;
-  isMuted: boolean;
-  newPrice: number;
-  price: number;
-  regularPrice: number;
-  renewedAt: string | null;
-  showPostsInFeed: boolean;
-  status: string | null;
-  subscribeAt: string;
-  subscribePrice: number;
-  subscribes: Array<{
-  action: string;
-  cancelDate: string | null;
-  date: string;
-  discount: number;
-  duration: number;
-  earningId: number;
-  expireDate: string;
-  id: number;
-  isCurrent: boolean;
-  offerEnd: string | null;
-  offerStart: string | null;
-  price: number;
-  regularPrice: number;
-  startDate: string;
-  subscriberId: number;
-  type: string;
-  userId: number;
-}>;
-  unsubscribeReason: string;
-};
-  subscribedByExpire?: boolean | null;
-  subscribedByExpireDate?: string | null;
-  subscribedIsExpiredNow?: boolean;
-  subscribedOn?: boolean;
-  subscribedOnData?: {
-  discountFinishedAt: string | null;
-  discountPercent: number;
-  discountPeriod: number;
-  discountStartedAt: string | null;
-  duration: string;
-  expiredAt: string;
-  hasActivePaidSubscriptions: boolean;
-  isMuted: boolean;
-  messagesSumm: number;
-  newPrice: number;
-  postsSumm: number;
-  price: number;
-  regularPrice: number;
-  renewedAt: string | null;
-  status: string | null;
-  streamsSumm: number;
-  subscribeAt: string;
-  subscribePrice: number;
-  subscribes: Array<{
-  action: string;
-  cancelDate: string | null;
-  date: string;
-  discount: number;
-  duration: number;
-  earningId: number;
-  expireDate: string;
-  id: number;
-  isCurrent: boolean;
-  offerEnd: string | null;
-  offerStart: string | null;
-  price: number;
-  regularPrice: number;
-  startDate: string;
-  subscriberId: number;
-  type: string;
-  userId: number;
-}>;
-  subscribesSumm: number;
-  tipsSumm: number;
-  totalSumm: number;
-  unsubscribeReason: string;
-};
-  subscribedOnDuration?: string;
-  subscribedOnExpiredNow?: boolean;
-  username: string;
-}>;
-}
-
-export interface AccessUsersGetBlockedItem {
-  avatar: string | null;
-  avatarThumbs?: {
-  c144: string;
-  c50: string;
-} | null;
-  canReceiveChatMessage?: boolean;
-  canReport?: boolean;
-  canRestrict?: boolean;
-  canTrialSend?: boolean;
-  canUnsubscribe?: boolean;
-  currentSubscribePrice?: number | null;
-  displayName?: string;
-  hideChat?: boolean;
-  id: number;
-  isBlocked?: boolean;
-  isPendingAutoprolong?: boolean;
-  isPerformer?: boolean;
-  isRealPerformer?: boolean;
-  isRestricted?: boolean;
-  isVerified: boolean;
-  lastSeen?: string | null;
-  lists: Array<{
-  id: string | number;
-  name: string;
-  type: string;
-}>;
-  name: string;
-  notice?: string;
-  subscribedBy?: boolean | null;
-  subscribedByAutoprolong?: boolean | null;
-  subscribedByData?: {
-  discountFinishedAt: string | null;
-  discountPercent: number;
-  discountPeriod: number;
-  discountStartedAt: string | null;
-  duration: string;
-  expiredAt: string;
-  hasActivePaidSubscriptions: boolean;
-  isMuted: boolean;
-  newPrice: number;
-  price: number;
-  regularPrice: number;
-  renewedAt: string | null;
-  showPostsInFeed: boolean;
-  status: string | null;
-  subscribeAt: string;
-  subscribePrice: number;
-  subscribes: Array<{
-  action: string;
-  cancelDate: string | null;
-  date: string;
-  discount: number;
-  duration: number;
-  earningId: number;
-  expireDate: string;
-  id: number;
-  isCurrent: boolean;
-  offerEnd: string | null;
-  offerStart: string | null;
-  price: number;
-  regularPrice: number;
-  startDate: string;
-  subscriberId: number;
-  type: string;
-  userId: number;
-}>;
-  unsubscribeReason: string;
-};
-  subscribedByExpire?: boolean | null;
-  subscribedByExpireDate?: string | null;
-  subscribedIsExpiredNow?: boolean;
-  subscribedOn?: boolean;
-  subscribedOnData?: {
-  discountFinishedAt: string | null;
-  discountPercent: number;
-  discountPeriod: number;
-  discountStartedAt: string | null;
-  duration: string;
-  expiredAt: string;
-  hasActivePaidSubscriptions: boolean;
-  isMuted: boolean;
-  messagesSumm: number;
-  newPrice: number;
-  postsSumm: number;
-  price: number;
-  regularPrice: number;
-  renewedAt: string | null;
-  status: string | null;
-  streamsSumm: number;
-  subscribeAt: string;
-  subscribePrice: number;
-  subscribes: Array<{
-  action: string;
-  cancelDate: string | null;
-  date: string;
-  discount: number;
-  duration: number;
-  earningId: number;
-  expireDate: string;
-  id: number;
-  isCurrent: boolean;
-  offerEnd: string | null;
-  offerStart: string | null;
-  price: number;
-  regularPrice: number;
-  startDate: string;
-  subscriberId: number;
-  type: string;
-  userId: number;
-}>;
-  subscribesSumm: number;
-  tipsSumm: number;
-  totalSumm: number;
-  unsubscribeReason: string;
-};
-  subscribedOnDuration?: string;
-  subscribedOnExpiredNow?: boolean;
-  username: string;
-}
-
-export interface AccessUsersGetListResponse {
-  users: Array<{
-  about?: string | null;
-  archivedPostsCount?: number;
-  audiosCount?: number;
-  avatar: string | null;
-  avatarThumbs?: {
-  c144: string;
-  c50: string;
-} | null;
-  canAddSubscriber?: boolean;
-  canChat?: boolean;
-  canCommentStory?: boolean;
-  canCreatePromotion?: boolean;
-  canCreateTrial?: boolean;
-  canLookStory?: boolean;
-  canPayInternal?: boolean;
-  canReceiveChatMessage?: boolean;
-  canReport?: boolean;
-  canRestrict?: boolean;
-  canTrialSend?: boolean;
-  canUnsubscribe?: boolean;
-  currentSubscribePrice?: number | null;
-  displayName?: string;
-  favoritedCount?: number;
-  favoritesCount?: number;
-  hasLabels?: boolean;
-  hasNotViewedStory?: boolean;
-  hasPinnedPosts?: boolean;
-  hasScheduledStream?: boolean;
-  hasStories?: boolean;
-  hasStream?: boolean;
-  header?: string | null;
-  headerSize?: {
-  height: number;
-  width: number;
-} | null;
-  headerThumbs?: {
-  w480: string;
-  w760: string;
-} | null;
-  id: number;
-  isAdultContent?: boolean;
-  isBlocked?: boolean;
-  isFriend?: boolean;
-  isMarkdownDisabledForAbout?: boolean;
-  isPendingAutoprolong?: boolean;
-  isPerformer?: boolean;
-  isPrivateRestriction?: boolean;
-  isRealPerformer?: boolean;
-  isReferrerAllowed?: boolean;
-  isRestricted?: boolean;
-  isVerified: boolean;
-  joinDate?: string;
-  lastSeen?: string | null;
-  lists: Array<{
-  id: string | number;
-  name: string;
-  type: string;
-}>;
-  location?: string | null;
-  mediasCount?: number;
-  name: string;
-  notice?: string;
-  photosCount?: number;
-  postsCount?: number;
-  privateArchivedPostsCount?: number;
-  showMediaCount?: boolean;
-  showPostsInFeed?: boolean;
-  showSubscribersCount?: boolean;
-  subscribePrice?: number;
-  subscribedBy?: boolean;
-  subscribedByAutoprolong?: boolean | null;
-  subscribedByData?: {
-  discountFinishedAt: string | null;
-  discountPercent: number;
-  discountPeriod: number;
-  discountStartedAt: string | null;
-  duration: string;
-  expiredAt: string;
-  hasActivePaidSubscriptions: boolean;
-  isMuted: boolean;
-  newPrice: number;
-  price: number;
-  regularPrice: number;
-  renewedAt: string | null;
-  showPostsInFeed: boolean;
-  status: string | null;
-  subscribeAt: string;
-  subscribePrice: number;
-  subscribes: Array<{
-  action: string;
-  cancelDate: string | null;
-  date: string;
-  discount: number;
-  duration: number;
-  earningId: number;
-  expireDate: string;
-  id: number;
-  isCurrent: boolean;
-  offerEnd: string | null;
-  offerStart: string | null;
-  price: number;
-  regularPrice: number;
-  startDate: string;
-  subscriberId: number;
-  type: string;
-  userId: number;
-}>;
-  unsubscribeReason: string;
-};
-  subscribedByExpire?: boolean | null;
-  subscribedByExpireDate?: string | null;
-  subscribedIsExpiredNow?: boolean | null;
-  subscribedOn?: boolean;
-  subscribedOnData?: {
-  discountFinishedAt: string | null;
-  discountPercent: number;
-  discountPeriod: number;
-  discountStartedAt: string | null;
-  duration: string;
-  expiredAt: string;
-  hasActivePaidSubscriptions: boolean;
-  isMuted: boolean;
-  messagesSumm: number;
-  newPrice: number;
-  postsSumm: number;
-  price: number;
-  regularPrice: number;
-  renewedAt: string | null;
-  status: string | null;
-  streamsSumm: number;
-  subscribeAt: string;
-  subscribePrice: number;
-  subscribes: Array<{
-  action: string;
-  cancelDate: string | null;
-  date: string;
-  discount: number;
-  duration: number;
-  earningId: number;
-  expireDate: string;
-  id: number;
-  isCurrent: boolean;
-  offerEnd: string | null;
-  offerStart: string | null;
-  price: number;
-  regularPrice: number;
-  startDate: string;
-  subscriberId: number;
-  type: string;
-  userId: number;
-}>;
-  subscribesSumm: number;
-  tipsSumm: number;
-  totalSumm: number;
-  unsubscribeReason: string;
-};
-  subscribedOnDuration?: string;
-  subscribedOnExpiredNow?: boolean;
-  subscribersCount?: number | null;
-  tipsEnabled?: boolean;
-  tipsMax?: number;
-  tipsMin?: number;
-  tipsMinInternal?: number;
-  tipsTextEnabled?: boolean;
-  username: string;
-  videosCount?: number;
-  website?: string | null;
-  wishlist?: string | null;
-}>;
-}
-
-export interface AccessUsersSearchResponseOption0Item {
-  about?: string | null;
-  archivedPostsCount?: number;
-  audiosCount?: number;
-  avatar: string | null;
-  avatarThumbs?: {
-  c144: string;
-  c50: string;
-} | null;
-  canAddSubscriber?: boolean;
-  canChat?: boolean;
-  canCommentStory?: boolean;
-  canCreatePromotion?: boolean;
-  canCreateTrial?: boolean;
-  canLookStory?: boolean;
-  canPayInternal?: boolean;
-  canReceiveChatMessage?: boolean;
-  canReport?: boolean;
-  canRestrict?: boolean;
-  canTrialSend?: boolean;
-  canUnsubscribe?: boolean;
-  currentSubscribePrice?: number | null;
-  displayName?: string;
-  favoritedCount?: number;
-  favoritesCount?: number;
-  hasLabels?: boolean;
-  hasNotViewedStory?: boolean;
-  hasPinnedPosts?: boolean;
-  hasScheduledStream?: boolean;
-  hasStories?: boolean;
-  hasStream?: boolean;
-  header?: string | null;
-  headerSize?: {
-  height: number;
-  width: number;
-} | null;
-  headerThumbs?: {
-  w480: string;
-  w760: string;
-} | null;
-  id: number;
-  isAdultContent?: boolean;
-  isBlocked?: boolean;
-  isFriend?: boolean;
-  isMarkdownDisabledForAbout?: boolean;
-  isPendingAutoprolong?: boolean;
-  isPerformer?: boolean;
-  isPrivateRestriction?: boolean;
-  isRealPerformer?: boolean;
-  isReferrerAllowed?: boolean;
-  isRestricted?: boolean;
-  isVerified: boolean;
-  joinDate?: string;
-  lastSeen?: string | null;
-  lists: Array<{
-  id: string | number;
-  name: string;
-  type: string;
-}>;
-  location?: string | null;
-  mediasCount?: number;
-  name: string;
-  notice?: string;
-  photosCount?: number;
-  postsCount?: number;
-  privateArchivedPostsCount?: number;
-  showMediaCount?: boolean;
-  showPostsInFeed?: boolean;
-  showSubscribersCount?: boolean;
-  subscribePrice?: number;
-  subscribedBy?: boolean;
-  subscribedByAutoprolong?: boolean | null;
-  subscribedByData?: {
-  discountFinishedAt: string | null;
-  discountPercent: number;
-  discountPeriod: number;
-  discountStartedAt: string | null;
-  duration: string;
-  expiredAt: string;
-  hasActivePaidSubscriptions: boolean;
-  isMuted: boolean;
-  newPrice: number;
-  price: number;
-  regularPrice: number;
-  renewedAt: string | null;
-  showPostsInFeed: boolean;
-  status: string | null;
-  subscribeAt: string;
-  subscribePrice: number;
-  subscribes: Array<{
-  action: string;
-  cancelDate: string | null;
-  date: string;
-  discount: number;
-  duration: number;
-  earningId: number;
-  expireDate: string;
-  id: number;
-  isCurrent: boolean;
-  offerEnd: string | null;
-  offerStart: string | null;
-  price: number;
-  regularPrice: number;
-  startDate: string;
-  subscriberId: number;
-  type: string;
-  userId: number;
-}>;
-  unsubscribeReason: string;
-};
-  subscribedByExpire?: boolean | null;
-  subscribedByExpireDate?: string | null;
-  subscribedIsExpiredNow?: boolean | null;
-  subscribedOn?: boolean;
-  subscribedOnData?: {
-  discountFinishedAt: string | null;
-  discountPercent: number;
-  discountPeriod: number;
-  discountStartedAt: string | null;
-  duration: string;
-  expiredAt: string;
-  hasActivePaidSubscriptions: boolean;
-  isMuted: boolean;
-  messagesSumm: number;
-  newPrice: number;
-  postsSumm: number;
-  price: number;
-  regularPrice: number;
-  renewedAt: string | null;
-  status: string | null;
-  streamsSumm: number;
-  subscribeAt: string;
-  subscribePrice: number;
-  subscribes: Array<{
-  action: string;
-  cancelDate: string | null;
-  date: string;
-  discount: number;
-  duration: number;
-  earningId: number;
-  expireDate: string;
-  id: number;
-  isCurrent: boolean;
-  offerEnd: string | null;
-  offerStart: string | null;
-  price: number;
-  regularPrice: number;
-  startDate: string;
-  subscriberId: number;
-  type: string;
-  userId: number;
-}>;
-  subscribesSumm: number;
-  tipsSumm: number;
-  totalSumm: number;
-  unsubscribeReason: string;
-};
-  subscribedOnDuration?: string;
-  subscribedOnExpiredNow?: boolean;
-  subscribersCount?: number | null;
-  tipsEnabled?: boolean;
-  tipsMax?: number;
-  tipsMin?: number;
-  tipsMinInternal?: number;
-  tipsTextEnabled?: boolean;
-  username: string;
-  videosCount?: number;
-  website?: string | null;
-  wishlist?: string | null;
-}
-
-export interface AccessVaultListsListResponse {
-  all: {
-  audiosCount: number;
-  gifsCount: number;
-  medias: Array<{
-  type: any | null;
-}>;
-  photosCount: number;
-  videosCount: number;
-};
-  canCreateVaultLists: boolean;
-  hasMore: boolean;
-  list: Array<{
-  canDelete: boolean;
-  canUpdate: boolean;
-  hasMedia: boolean;
-  id: number;
-  medias: Array<{
-  type: 'photo' | 'video' | 'gif' | 'audio' | null;
-  url?: string;
-}>;
-  name: string;
-  type: 'custom' | 'messages' | 'posts' | 'stories' | 'streams' | 'media_stickers';
-}>;
-  order: string;
-  sort: string;
-}
-
-export interface AccessVaultListsListItem {
-  canDelete: boolean;
-  canUpdate: boolean;
-  hasMedia: boolean;
-  id: number;
-  medias: Array<{
-  type: 'photo' | 'video' | 'gif' | 'audio' | null;
-  url?: string;
-}>;
-  name: string;
-  type: 'custom' | 'messages' | 'posts' | 'stories' | 'streams' | 'media_stickers';
-}
-
-export interface AccessVaultListsCreateRequest {
-  name: string;
-}
-
-export interface AccessVaultListsCreateResponse {
-  canDelete: boolean;
-  canUpdate: boolean;
-  hasMedia: boolean;
-  id: number;
-  medias: Array<{
-  type: 'photo' | 'video' | 'gif' | 'audio' | null;
-  url?: string;
-}>;
-  name: string;
-  type: 'custom' | 'messages' | 'posts' | 'stories' | 'streams' | 'media_stickers';
-}
-
-export interface AccessVaultListsUpdateRequest {
-  clearMedia?: boolean | null;
-  name: string;
-}
-
-export interface AccessVaultListsUpdateResponse {
-  canDelete: boolean;
-  canUpdate: boolean;
-  hasMedia: boolean;
-  id: number;
-  medias: Array<{
-  type: 'photo' | 'video' | 'gif' | 'audio' | null;
-  url?: string;
-}>;
-  name: string;
-  type: 'custom' | 'messages' | 'posts' | 'stories' | 'streams' | 'media_stickers';
-}
-
-export interface AccessVaultListsListMediaResponse {
-  hasMore: boolean;
-  list: Array<{
-  canView: boolean;
-  convertedToVideo: boolean;
-  counters: {
-  likesCount: number;
-  tipsSumm: number;
-};
-  createdAt: string;
-  duration?: number;
   files?: {
   full: {
+  url: string;
+  width?: number;
   height?: number;
   size?: number;
   sources: Array<{
+  url: string;
+  width?: number;
   height?: number;
   type?: string;
-  url: string;
-  width?: number;
 }>;
-  url: string;
-  width?: number;
-};
-  preview?: {
-  height?: number;
-  options: Array<{
-  height?: number;
-  type?: string;
-  url: string;
-  width?: number;
-}>;
-  size?: number;
-  url: string;
-  width?: number;
-};
-  squarePreview?: {
-  height?: number;
-  size?: number;
-  url: string;
-  width?: number;
 };
   thumb?: {
+  url: string;
+  width?: number;
   height?: number;
   size?: number;
-  url: string;
-  width?: number;
-};
-};
-  hasCustomPreview?: boolean;
-  hasError: boolean;
-  hasPosts?: boolean;
-  id: number;
-  isReady: boolean;
-  lists: Array<{
-  id: number;
-  name: string;
-  type: string;
-}>;
-  releaseForms: Array<{
-  id: number;
-  name: string;
-  partnerSource: string;
-  type: string;
-  user?: {
-  avatar: string;
-  avatarThumbs: {
-  c144: string;
-  c50: string;
-};
-  id: number;
-  isFromGuest: boolean;
-  isVerified: boolean;
-  ivStatus: string;
-  name: string;
-  username: string;
-  view: string;
-};
-}>;
-  type: 'photo' | 'video' | 'gif' | 'audio';
-  videoSources?: {
-  '240'?: string | null;
-  '720'?: string | null;
-};
-}>;
-}
-
-export interface AccessVaultListsListMediaItem {
-  canView: boolean;
-  convertedToVideo: boolean;
-  counters: {
-  likesCount: number;
-  tipsSumm: number;
-};
-  createdAt: string;
-  duration?: number;
-  files?: {
-  full: {
-  height?: number;
-  size?: number;
-  sources: Array<{
-  height?: number;
-  type?: string;
-  url: string;
-  width?: number;
-}>;
-  url: string;
-  width?: number;
 };
   preview?: {
+  url: string;
+  width?: number;
   height?: number;
+  size?: number;
   options: Array<{
+  url: string;
+  width?: number;
   height?: number;
   type?: string;
-  url: string;
-  width?: number;
 }>;
-  size?: number;
-  url: string;
-  width?: number;
 };
   squarePreview?: {
+  url: string;
+  width?: number;
   height?: number;
   size?: number;
-  url: string;
-  width?: number;
 };
-  thumb?: {
-  height?: number;
-  size?: number;
-  url: string;
-  width?: number;
 };
 };
-  hasCustomPreview?: boolean;
-  hasError: boolean;
-  hasPosts?: boolean;
-  id: number;
-  isReady: boolean;
-  lists: Array<{
-  id: number;
-  name: string;
-  type: string;
-}>;
-  releaseForms: Array<{
-  id: number;
-  name: string;
-  partnerSource: string;
-  type: string;
-  user?: {
-  avatar: string;
-  avatarThumbs: {
-  c144: string;
-  c50: string;
-};
-  id: number;
-  isFromGuest: boolean;
-  isVerified: boolean;
-  ivStatus: string;
-  name: string;
-  username: string;
-  view: string;
-};
-}>;
-  type: 'photo' | 'video' | 'gif' | 'audio';
-  videoSources?: {
-  '240'?: string | null;
-  '720'?: string | null;
-};
-}
-
-export interface AccessVaultListsCreateMediaRequest {
-  mediaIds: Array<number>;
-}
-
-export interface AccessVaultListsCreateMediaResponse {
-  canDelete: boolean;
-  canUpdate: boolean;
-  hasMedia: boolean;
-  id: number;
-  medias: Array<{
-  type: 'photo' | 'video' | 'gif' | 'audio' | null;
-  url?: string;
-}>;
-  name: string;
-  type: 'custom' | 'messages' | 'posts' | 'stories' | 'streams' | 'media_stickers';
-}
-
-export interface AccessVaultListMediaResponse {
-  hasMore: boolean;
-  list: Array<{
-  canView: boolean;
-  convertedToVideo: boolean;
-  counters: {
-  likesCount: number;
-  tipsSumm: number;
-};
-  createdAt: string;
-  duration?: number;
-  files?: {
-  full: {
-  height?: number;
-  size?: number;
-  sources: Array<{
-  height?: number;
-  type?: string;
-  url: string;
-  width?: number;
-}>;
-  url: string;
-  width?: number;
-};
-  preview?: {
-  height?: number;
-  options: Array<{
-  height?: number;
-  type?: string;
-  url: string;
-  width?: number;
-}>;
-  size?: number;
-  url: string;
-  width?: number;
-};
-  squarePreview?: {
-  height?: number;
-  size?: number;
-  url: string;
-  width?: number;
-};
-  thumb?: {
-  height?: number;
-  size?: number;
-  url: string;
-  width?: number;
-};
-};
-  hasCustomPreview?: boolean;
-  hasError: boolean;
-  hasPosts?: boolean;
-  id: number;
-  isReady: boolean;
-  lists: Array<{
-  id: number;
-  name: string;
-  type: string;
-}>;
-  releaseForms: Array<{
-  id: number;
-  name: string;
-  partnerSource: string;
-  type: string;
-  user?: {
-  avatar: string;
-  avatarThumbs: {
-  c144: string;
-  c50: string;
-};
-  id: number;
-  isFromGuest: boolean;
-  isVerified: boolean;
-  ivStatus: string;
-  name: string;
-  username: string;
-  view: string;
-};
-}>;
-  type: 'photo' | 'video' | 'gif' | 'audio';
-  videoSources?: {
-  '240'?: string | null;
-  '720'?: string | null;
-};
-}>;
-}
-
-export interface AccessVaultListMediaItem {
-  canView: boolean;
-  convertedToVideo: boolean;
-  counters: {
-  likesCount: number;
-  tipsSumm: number;
-};
-  createdAt: string;
-  duration?: number;
-  files?: {
-  full: {
-  height?: number;
-  size?: number;
-  sources: Array<{
-  height?: number;
-  type?: string;
-  url: string;
-  width?: number;
-}>;
-  url: string;
-  width?: number;
-};
-  preview?: {
-  height?: number;
-  options: Array<{
-  height?: number;
-  type?: string;
-  url: string;
-  width?: number;
-}>;
-  size?: number;
-  url: string;
-  width?: number;
-};
-  squarePreview?: {
-  height?: number;
-  size?: number;
-  url: string;
-  width?: number;
-};
-  thumb?: {
-  height?: number;
-  size?: number;
-  url: string;
-  width?: number;
-};
-};
-  hasCustomPreview?: boolean;
-  hasError: boolean;
-  hasPosts?: boolean;
-  id: number;
-  isReady: boolean;
-  lists: Array<{
-  id: number;
-  name: string;
-  type: string;
-}>;
-  releaseForms: Array<{
-  id: number;
-  name: string;
-  partnerSource: string;
-  type: string;
-  user?: {
-  avatar: string;
-  avatarThumbs: {
-  c144: string;
-  c50: string;
-};
-  id: number;
-  isFromGuest: boolean;
-  isVerified: boolean;
-  ivStatus: string;
-  name: string;
-  username: string;
-  view: string;
-};
-}>;
-  type: 'photo' | 'video' | 'gif' | 'audio';
-  videoSources?: {
-  '240'?: string | null;
-  '720'?: string | null;
-};
-}
-
-export interface AccessListMassMessagesResponse {
-  hasMore: boolean;
-  list: Array<{
-  canBePinned?: boolean;
-  canPurchase?: boolean;
-  canPurchaseReason?: string;
-  canReport?: boolean;
-  canSendMessageToBuyers?: boolean;
-  canUnsend?: boolean;
-  canUnsendQueue?: boolean;
-  cancelSeconds?: number;
-  changedAt?: string;
-  createdAt?: string;
-  date?: string;
-  fromUser: {
-  id: number;
-  name: string;
-} | {
-  _view: string;
-  id: number;
-};
-  giphyId?: string | null;
-  hasError?: boolean;
-  id: number;
-  isCanceled?: boolean;
-  isCouplePeopleMedia?: boolean;
-  isFree?: boolean;
-  isFromQueue?: boolean;
-  isLiked?: boolean;
-  isMarkdownDisabled?: boolean;
-  isMediaReady?: boolean;
-  isNew?: boolean;
-  isOpened?: boolean;
-  isPinned?: boolean;
-  isReportedByMe?: boolean;
-  isTip?: boolean;
-  lockedText?: boolean;
-  media: Array<{
-  canView: boolean;
-  convertedToVideo: boolean;
-  createdAt: string;
-  duration?: number;
-  files?: {
-  full: {
-  height?: number;
-  size?: number;
-  sources: Array<{
-  height?: number;
-  type?: string;
-  url: string;
-  width?: number;
-}>;
-  url: string;
-  width?: number;
-};
-  preview?: {
-  height?: number;
-  options: Array<{
-  height?: number;
-  type?: string;
-  url: string;
-  width?: number;
-}>;
-  size?: number;
-  url: string;
-  width?: number;
-};
-  squarePreview?: {
-  height?: number;
-  size?: number;
-  url: string;
-  width?: number;
-};
-  thumb?: {
-  height?: number;
-  size?: number;
-  url: string;
-  width?: number;
-};
-};
-  hasCustomPreview?: boolean;
-  hasError: boolean;
-  id: number;
-  isReady: boolean;
-  releaseForms: Array<{
-  id: number;
-  name: string;
-  partnerSource: string;
-  type: string;
-  user?: {
-  avatar: string;
-  avatarThumbs: {
-  c144: string;
-  c50: string;
-};
-  id: number;
-  isFromGuest: boolean;
-  isVerified: boolean;
-  ivStatus: string;
-  name: string;
-  username: string;
-  view: string;
-};
-}>;
-  type: 'photo' | 'video' | 'gif' | 'audio';
-  videoSources?: {
-  '240'?: string | null;
-  '720'?: string | null;
-};
-}>;
-  mediaCount?: number;
-  mediaTypes?: {
-  audio?: number;
-  gif?: number;
-  photo?: number;
-  video?: number;
-};
-  previews: Array<number>;
-  price?: string;
-  purchasedCount?: number;
-  queueId?: number;
-  releaseForms?: any | null;
-  responseType?: string;
-  sentCount?: number;
-  text: string;
-  textCropped?: string;
-  unsendSeconds?: number;
-  unsendSecondsQueue?: number;
-  viewedCount?: number;
-}>;
-}
-
-export interface AccessListMassMessagesItem {
-  canBePinned?: boolean;
-  canPurchase?: boolean;
-  canPurchaseReason?: string;
-  canReport?: boolean;
-  canSendMessageToBuyers?: boolean;
-  canUnsend?: boolean;
-  canUnsendQueue?: boolean;
-  cancelSeconds?: number;
-  changedAt?: string;
-  createdAt?: string;
-  date?: string;
-  fromUser: {
-  id: number;
-  name: string;
-} | {
-  _view: string;
-  id: number;
-};
-  giphyId?: string | null;
-  hasError?: boolean;
-  id: number;
-  isCanceled?: boolean;
-  isCouplePeopleMedia?: boolean;
-  isFree?: boolean;
-  isFromQueue?: boolean;
-  isLiked?: boolean;
-  isMarkdownDisabled?: boolean;
-  isMediaReady?: boolean;
-  isNew?: boolean;
-  isOpened?: boolean;
-  isPinned?: boolean;
-  isReportedByMe?: boolean;
-  isTip?: boolean;
-  lockedText?: boolean;
-  media: Array<{
-  canView: boolean;
-  convertedToVideo: boolean;
-  createdAt: string;
-  duration?: number;
-  files?: {
-  full: {
-  height?: number;
-  size?: number;
-  sources: Array<{
-  height?: number;
-  type?: string;
-  url: string;
-  width?: number;
-}>;
-  url: string;
-  width?: number;
-};
-  preview?: {
-  height?: number;
-  options: Array<{
-  height?: number;
-  type?: string;
-  url: string;
-  width?: number;
-}>;
-  size?: number;
-  url: string;
-  width?: number;
-};
-  squarePreview?: {
-  height?: number;
-  size?: number;
-  url: string;
-  width?: number;
-};
-  thumb?: {
-  height?: number;
-  size?: number;
-  url: string;
-  width?: number;
-};
-};
-  hasCustomPreview?: boolean;
-  hasError: boolean;
-  id: number;
-  isReady: boolean;
-  releaseForms: Array<{
-  id: number;
-  name: string;
-  partnerSource: string;
-  type: string;
-  user?: {
-  avatar: string;
-  avatarThumbs: {
-  c144: string;
-  c50: string;
-};
-  id: number;
-  isFromGuest: boolean;
-  isVerified: boolean;
-  ivStatus: string;
-  name: string;
-  username: string;
-  view: string;
-};
-}>;
-  type: 'photo' | 'video' | 'gif' | 'audio';
-  videoSources?: {
-  '240'?: string | null;
-  '720'?: string | null;
-};
-}>;
-  mediaCount?: number;
-  mediaTypes?: {
-  audio?: number;
-  gif?: number;
-  photo?: number;
-  video?: number;
-};
-  previews: Array<number>;
-  price?: string;
-  purchasedCount?: number;
-  queueId?: number;
-  releaseForms?: any | null;
-  responseType?: string;
-  sentCount?: number;
-  text: string;
-  textCropped?: string;
-  unsendSeconds?: number;
-  unsendSecondsQueue?: number;
-  viewedCount?: number;
-}
-
-export interface AccessCreateMassMessagesRequest {
-  excludeUserLists?: Array<number | string>;
-  isForwardedMessage?: boolean | null;
-  isLockedText?: boolean | null;
-  isMarkdown?: boolean | null;
-  mediaItems?: Array<number | string>;
-  previewMediaCount?: number | null;
-  price?: number | null;
-  releaseForms?: {
-  guests?: Array<number>;
-  partners?: Array<number>;
-  users?: Array<number>;
-};
-  scheduledDate?: string | any | null;
-  subscribedAfterDate?: string | any | null;
-  text?: string;
-  userIds?: Array<number | string>;
-  userLists?: Array<number | string>;
-  userTags?: Array<number>;
-}
-
-export interface AccessCreateMassMessagesResponse {
-  canUnsend?: boolean;
-  date: string;
-  hasError?: boolean;
-  id: number;
-  isCanceled?: boolean;
-  isCouplePeopleMedia?: boolean;
-  isDone?: boolean;
-  isReady?: boolean;
-  pending?: number;
-  total?: number;
-  unsendSeconds?: number;
-}
-
-export interface AccessGetMassMessagesResponse {
-  canBePinned?: boolean;
-  canPurchase?: boolean;
-  canPurchaseReason?: string;
-  canReport?: boolean;
-  canUnsendQueue?: boolean;
-  cancelSeconds?: number;
-  changedAt?: string;
-  createdAt?: string;
-  fromUser: {
-  id: number;
-  name: string;
-} | {
-  _view: string;
-  id: number;
-};
-  giphyId?: string | null;
-  id: number;
-  isCouplePeopleMedia?: boolean;
-  isFree?: boolean;
-  isFromQueue?: boolean;
-  isLiked?: boolean;
-  isMarkdownDisabled?: boolean;
-  isMediaReady?: boolean;
-  isNew?: boolean;
-  isOpened?: boolean;
-  isPinned?: boolean;
-  isReportedByMe?: boolean;
-  isTip?: boolean;
-  lockedText?: boolean;
-  media: Array<{
-  canView: boolean;
-  convertedToVideo: boolean;
-  createdAt: string;
-  duration?: number;
-  files?: {
-  full: {
-  height?: number;
-  size?: number;
-  sources: Array<{
-  height?: number;
-  type?: string;
-  url: string;
-  width?: number;
-}>;
-  url: string;
-  width?: number;
-};
-  preview?: {
-  height?: number;
-  options: Array<{
-  height?: number;
-  type?: string;
-  url: string;
-  width?: number;
-}>;
-  size?: number;
-  url: string;
-  width?: number;
-};
-  squarePreview?: {
-  height?: number;
-  size?: number;
-  url: string;
-  width?: number;
-};
-  thumb?: {
-  height?: number;
-  size?: number;
-  url: string;
-  width?: number;
-};
-};
-  hasCustomPreview?: boolean;
-  hasError: boolean;
-  id: number;
-  isReady: boolean;
-  releaseForms: Array<{
-  id: number;
-  name: string;
-  partnerSource: string;
-  type: string;
-  user?: {
-  avatar: string;
-  avatarThumbs: {
-  c144: string;
-  c50: string;
-};
-  id: number;
-  isFromGuest: boolean;
-  isVerified: boolean;
-  ivStatus: string;
-  name: string;
-  username: string;
-  view: string;
-};
-}>;
-  type: 'photo' | 'video' | 'gif' | 'audio';
-  videoSources?: {
-  '240'?: string | null;
-  '720'?: string | null;
-};
-}>;
-  mediaCount?: number;
-  previews: Array<number>;
-  queueId?: number;
-  releaseForms?: any | null;
-  responseType?: string;
-  text: string;
-  unsendSecondsQueue?: number;
-}
-
-export interface AccessReplaceMassMessagesRequest {
-  excludeUserLists?: Array<number | string>;
-  isForwardedMessage?: boolean | null;
-  isLockedText?: boolean | null;
-  isMarkdown?: boolean | null;
-  mediaItems?: Array<number | string>;
-  previewMediaCount?: number | null;
-  price?: number | null;
-  releaseForms?: {
-  guests?: Array<number>;
-  partners?: Array<number>;
-  users?: Array<number>;
-};
-  scheduledDate?: string | any | null;
-  subscribedAfterDate?: string | any | null;
-  text?: string;
-  userIds?: Array<number | string>;
-  userLists?: Array<number | string>;
-  userTags?: Array<number>;
-}
-
-export interface AccessReplaceMassMessagesResponse {
-  canUnsend?: boolean;
-  date: string;
-  hasError?: boolean;
-  id: number;
-  isCanceled?: boolean;
-  isCouplePeopleMedia?: boolean;
-  isDone?: boolean;
-  isReady?: boolean;
-  pending?: number;
-  total?: number;
-  unsendSeconds?: number;
-}
-
-export interface AccessDeleteMassMessagesResponse {
-  queue?: {
-  canBePinned?: boolean;
-  canPurchase?: boolean;
-  canPurchaseReason?: string;
-  canReport?: boolean;
-  canSendMessageToBuyers?: boolean;
-  canUnsend?: boolean;
-  canUnsendQueue?: boolean;
-  cancelSeconds?: number;
-  changedAt?: string;
-  createdAt?: string;
-  date?: string;
-  fromUser: {
-  id: number;
-  name: string;
-} | {
-  _view: string;
-  id: number;
-};
-  giphyId?: string | null;
-  hasError?: boolean;
-  id: number;
-  isCanceled?: boolean;
-  isCouplePeopleMedia?: boolean;
-  isFree?: boolean;
-  isFromQueue?: boolean;
-  isLiked?: boolean;
-  isMarkdownDisabled?: boolean;
-  isMediaReady?: boolean;
-  isNew?: boolean;
-  isOpened?: boolean;
-  isPinned?: boolean;
-  isReportedByMe?: boolean;
-  isTip?: boolean;
-  lockedText?: boolean;
-  media: Array<{
-  canView: boolean;
-  convertedToVideo: boolean;
-  createdAt: string;
-  duration?: number;
-  files?: {
-  full: {
-  height?: number;
-  size?: number;
-  sources: Array<{
-  height?: number;
-  type?: string;
-  url: string;
-  width?: number;
-}>;
-  url: string;
-  width?: number;
-};
-  preview?: {
-  height?: number;
-  options: Array<{
-  height?: number;
-  type?: string;
-  url: string;
-  width?: number;
-}>;
-  size?: number;
-  url: string;
-  width?: number;
-};
-  squarePreview?: {
-  height?: number;
-  size?: number;
-  url: string;
-  width?: number;
-};
-  thumb?: {
-  height?: number;
-  size?: number;
-  url: string;
-  width?: number;
-};
-};
-  hasCustomPreview?: boolean;
-  hasError: boolean;
-  id: number;
-  isReady: boolean;
-  releaseForms: Array<{
-  id: number;
-  name: string;
-  partnerSource: string;
-  type: string;
-  user?: {
-  avatar: string;
-  avatarThumbs: {
-  c144: string;
-  c50: string;
-};
-  id: number;
-  isFromGuest: boolean;
-  isVerified: boolean;
-  ivStatus: string;
-  name: string;
-  username: string;
-  view: string;
-};
-}>;
-  type: 'photo' | 'video' | 'gif' | 'audio';
-  videoSources?: {
-  '240'?: string | null;
-  '720'?: string | null;
-};
-}>;
-  mediaCount?: number;
-  mediaTypes?: {
-  audio?: number;
-  gif?: number;
-  photo?: number;
-  video?: number;
-};
-  previews: Array<number>;
-  price?: string;
-  purchasedCount?: number;
-  queueId?: number;
-  releaseForms?: any | null;
-  responseType?: string;
-  sentCount?: number;
-  text: string;
-  textCropped?: string;
-  unsendSeconds?: number;
-  unsendSecondsQueue?: number;
-  viewedCount?: number;
-};
-  success: boolean;
 }
 
 export interface AccessListPostsResponse {
-  counters: {
-  archivedPostsCount: number;
-  audiosCount: number;
-  mediasCount: number;
-  photosCount: number;
-  postsCount: number;
-  privateArchivedPostsCount: number;
-  streamsCount: number;
-  videosCount: number;
-};
-  hasMore: boolean;
-  headMarker: string;
   list: Array<{
-  author?: {
-  _view: string;
   id: number;
-};
-  canComment: boolean;
   canDelete: boolean;
   canEdit: boolean;
-  canToggleFavorite: boolean;
-  canViewMedia: boolean;
-  favoritesCount: number;
-  id: number;
-  isFavorite: boolean;
-  isMarkdownDisabled: boolean;
-  isMediaReady: boolean;
-  isOpened: boolean;
+  mediaCount: number;
   media: Array<{
-  canView: boolean;
-  convertedToVideo: boolean;
-  createdAt: string;
-  duration?: number;
-  files?: {
-  full: {
-  height?: number;
-  size?: number;
-  sources: Array<{
-  height?: number;
-  type?: string;
-  url: string;
-  width?: number;
-}>;
-  url: string;
-  width?: number;
-};
-  preview?: {
-  height?: number;
-  options: Array<{
-  height?: number;
-  type?: string;
-  url: string;
-  width?: number;
-}>;
-  size?: number;
-  url: string;
-  width?: number;
-};
-  squarePreview?: {
-  height?: number;
-  size?: number;
-  url: string;
-  width?: number;
-};
-  thumb?: {
-  height?: number;
-  size?: number;
-  url: string;
-  width?: number;
-};
-};
-  hasCustomPreview?: boolean;
-  hasError: boolean;
   id: number;
+  type: 'photo' | 'video' | 'gif' | 'audio';
+  convertedToVideo: boolean;
+  canView: boolean;
+  hasError: boolean;
+  createdAt: string;
   isReady: boolean;
+  duration?: number;
   releaseForms: Array<{
   id: number;
   name: string;
   partnerSource: string;
   type: string;
   user?: {
-  avatar: string;
-  avatarThumbs: {
-  c144: string;
-  c50: string;
-};
+  view: string;
   id: number;
-  isFromGuest: boolean;
-  isVerified: boolean;
-  ivStatus: string;
   name: string;
   username: string;
-  view: string;
+  isVerified: boolean;
+  avatar: string;
+  avatarThumbs: {
+  c50: string;
+  c144: string;
+};
+  ivStatus: string;
+  isFromGuest: boolean;
 };
 }>;
-  type: 'photo' | 'video' | 'gif' | 'audio';
+  hasCustomPreview?: boolean;
   videoSources?: {
   '240'?: string | null;
   '720'?: string | null;
 };
+  files?: {
+  full: {
+  url: string;
+  width?: number;
+  height?: number;
+  size?: number;
+  sources: Array<{
+  url: string;
+  width?: number;
+  height?: number;
+  type?: string;
 }>;
-  mediaCount: number;
+};
+  thumb?: {
+  url: string;
+  width?: number;
+  height?: number;
+  size?: number;
+};
+  preview?: {
+  url: string;
+  width?: number;
+  height?: number;
+  size?: number;
+  options: Array<{
+  url: string;
+  width?: number;
+  height?: number;
+  type?: string;
+}>;
+};
+  squarePreview?: {
+  url: string;
+  width?: number;
+  height?: number;
+  size?: number;
+};
+};
+}>;
+  canViewMedia: boolean;
+  author?: {
+  id: number;
+  _view: string;
+};
+  responseType: string;
   postedAt: string;
   postedAtPrecise: string;
-  rawText: string;
-  responseType: string;
-  text: string;
+  isMarkdownDisabled: boolean;
+  isOpened: boolean;
+  canToggleFavorite: boolean;
   tipsAmount: string;
+  text: string;
+  isFavorite: boolean;
+  canComment: boolean;
+  favoritesCount: number;
+  isMediaReady: boolean;
+  rawText: string;
 }>;
+  hasMore: boolean;
+  headMarker: string;
   tailMarker: string;
+  counters: {
+  audiosCount: number;
+  photosCount: number;
+  videosCount: number;
+  mediasCount: number;
+  postsCount: number;
+  streamsCount: number;
+  archivedPostsCount: number;
+  privateArchivedPostsCount: number;
+};
 }
 
 export interface AccessCreatePostsRequest {
-  expireAfter?: number;
+  text?: string;
+  mediaItems?: Array<number | string>;
+  isLockedText?: boolean | null;
+  price?: number | null;
+  previewMediaCount?: number | null;
+  releaseForms?: {
+  users?: Array<number>;
+  partners?: Array<number>;
+  guests?: Array<number>;
+};
+  userTags?: Array<number>;
+  isMarkdown?: boolean | null;
+  scheduledDate?: string;
   fundRaisingTargetAmount?: number;
   fundRaisingTipsPresets?: Array<number>;
-  isLockedText?: boolean | null;
-  isMarkdown?: boolean | null;
-  mediaItems?: Array<number | string>;
-  previewMediaCount?: number | null;
-  price?: number | null;
-  releaseForms?: {
-  guests?: Array<number>;
-  partners?: Array<number>;
-  users?: Array<number>;
-};
-  scheduledDate?: string;
-  text?: string;
-  userTags?: Array<number>;
+  expireAfter?: number;
 }
 
 export interface AccessCreatePostsResponse {
-  author?: {
-  _view: string;
   id: number;
-};
-  canComment: boolean;
   canDelete: boolean;
   canEdit: boolean;
-  canToggleFavorite: boolean;
-  canViewMedia: boolean;
-  favoritesCount: number;
-  id: number;
-  isFavorite: boolean;
-  isMarkdownDisabled: boolean;
-  isMediaReady: boolean;
-  isOpened: boolean;
+  mediaCount: number;
   media: Array<{
-  canView: boolean;
-  convertedToVideo: boolean;
-  createdAt: string;
-  duration?: number;
-  files?: {
-  full: {
-  height?: number;
-  size?: number;
-  sources: Array<{
-  height?: number;
-  type?: string;
-  url: string;
-  width?: number;
-}>;
-  url: string;
-  width?: number;
-};
-  preview?: {
-  height?: number;
-  options: Array<{
-  height?: number;
-  type?: string;
-  url: string;
-  width?: number;
-}>;
-  size?: number;
-  url: string;
-  width?: number;
-};
-  squarePreview?: {
-  height?: number;
-  size?: number;
-  url: string;
-  width?: number;
-};
-  thumb?: {
-  height?: number;
-  size?: number;
-  url: string;
-  width?: number;
-};
-};
-  hasCustomPreview?: boolean;
-  hasError: boolean;
   id: number;
+  type: 'photo' | 'video' | 'gif' | 'audio';
+  convertedToVideo: boolean;
+  canView: boolean;
+  hasError: boolean;
+  createdAt: string;
   isReady: boolean;
+  duration?: number;
   releaseForms: Array<{
   id: number;
   name: string;
   partnerSource: string;
   type: string;
   user?: {
-  avatar: string;
-  avatarThumbs: {
-  c144: string;
-  c50: string;
-};
+  view: string;
   id: number;
-  isFromGuest: boolean;
-  isVerified: boolean;
-  ivStatus: string;
   name: string;
   username: string;
-  view: string;
+  isVerified: boolean;
+  avatar: string;
+  avatarThumbs: {
+  c50: string;
+  c144: string;
+};
+  ivStatus: string;
+  isFromGuest: boolean;
 };
 }>;
-  type: 'photo' | 'video' | 'gif' | 'audio';
+  hasCustomPreview?: boolean;
   videoSources?: {
   '240'?: string | null;
   '720'?: string | null;
 };
+  files?: {
+  full: {
+  url: string;
+  width?: number;
+  height?: number;
+  size?: number;
+  sources: Array<{
+  url: string;
+  width?: number;
+  height?: number;
+  type?: string;
 }>;
-  mediaCount: number;
+};
+  thumb?: {
+  url: string;
+  width?: number;
+  height?: number;
+  size?: number;
+};
+  preview?: {
+  url: string;
+  width?: number;
+  height?: number;
+  size?: number;
+  options: Array<{
+  url: string;
+  width?: number;
+  height?: number;
+  type?: string;
+}>;
+};
+  squarePreview?: {
+  url: string;
+  width?: number;
+  height?: number;
+  size?: number;
+};
+};
+}>;
+  canViewMedia: boolean;
+  author?: {
+  id: number;
+  _view: string;
+};
+  responseType: string;
   postedAt: string;
   postedAtPrecise: string;
-  rawText: string;
-  responseType: string;
-  text: string;
+  isMarkdownDisabled: boolean;
+  isOpened: boolean;
+  canToggleFavorite: boolean;
   tipsAmount: string;
+  text: string;
+  isFavorite: boolean;
+  canComment: boolean;
+  favoritesCount: number;
+  isMediaReady: boolean;
+  rawText: string;
 }
 
 export interface AccessGetPostsResponseOption0 {
-  author?: {
-  _view: string;
   id: number;
-};
   canDelete: boolean;
   canEdit: boolean;
-  canEditMedia: boolean;
-  canEditSchedule: boolean;
-  canEditText: boolean;
-  canEditVote: boolean;
-  canToggleFavorite: boolean;
-  canViewMedia: boolean;
-  id: number;
-  isMarkdownDisabled: boolean;
-  isMediaReady: boolean;
-  isOpened: boolean;
+  mediaCount: number;
   media: Array<{
-  canView: boolean;
-  convertedToVideo: boolean;
-  createdAt: string;
-  duration?: number;
-  files?: {
-  full: {
-  height?: number;
-  size?: number;
-  sources: Array<{
-  height?: number;
-  type?: string;
-  url: string;
-  width?: number;
-}>;
-  url: string;
-  width?: number;
-};
-  preview?: {
-  height?: number;
-  options: Array<{
-  height?: number;
-  type?: string;
-  url: string;
-  width?: number;
-}>;
-  size?: number;
-  url: string;
-  width?: number;
-};
-  squarePreview?: {
-  height?: number;
-  size?: number;
-  url: string;
-  width?: number;
-};
-  thumb?: {
-  height?: number;
-  size?: number;
-  url: string;
-  width?: number;
-};
-};
-  hasCustomPreview?: boolean;
-  hasError: boolean;
   id: number;
+  type: 'photo' | 'video' | 'gif' | 'audio';
+  convertedToVideo: boolean;
+  canView: boolean;
+  hasError: boolean;
+  createdAt: string;
   isReady: boolean;
+  duration?: number;
   releaseForms: Array<{
   id: number;
   name: string;
   partnerSource: string;
   type: string;
   user?: {
-  avatar: string;
-  avatarThumbs: {
-  c144: string;
-  c50: string;
-};
+  view: string;
   id: number;
-  isFromGuest: boolean;
-  isVerified: boolean;
-  ivStatus: string;
   name: string;
   username: string;
-  view: string;
+  isVerified: boolean;
+  avatar: string;
+  avatarThumbs: {
+  c50: string;
+  c144: string;
+};
+  ivStatus: string;
+  isFromGuest: boolean;
 };
 }>;
-  type: 'photo' | 'video' | 'gif' | 'audio';
+  hasCustomPreview?: boolean;
   videoSources?: {
   '240'?: string | null;
   '720'?: string | null;
 };
+  files?: {
+  full: {
+  url: string;
+  width?: number;
+  height?: number;
+  size?: number;
+  sources: Array<{
+  url: string;
+  width?: number;
+  height?: number;
+  type?: string;
 }>;
-  mediaCount: number;
+};
+  thumb?: {
+  url: string;
+  width?: number;
+  height?: number;
+  size?: number;
+};
+  preview?: {
+  url: string;
+  width?: number;
+  height?: number;
+  size?: number;
+  options: Array<{
+  url: string;
+  width?: number;
+  height?: number;
+  type?: string;
+}>;
+};
+  squarePreview?: {
+  url: string;
+  width?: number;
+  height?: number;
+  size?: number;
+};
+};
+}>;
+  canViewMedia: boolean;
+  author?: {
+  id: number;
+  _view: string;
+};
+  responseType: string;
   postedAt: string;
   postedAtPrecise: string;
-  preview: Array<number>;
+  isMarkdownDisabled: boolean;
+  isOpened: boolean;
+  canToggleFavorite: boolean;
+  tipsAmount: string;
+  isMediaReady: boolean;
   price?: number;
   releaseForms: Array<{
   id: number;
@@ -5973,441 +5773,527 @@ export interface AccessGetPostsResponseOption0 {
   partnerSource: string;
   type: string;
   user?: {
-  avatar: string;
-  avatarThumbs: {
-  c144: string;
-  c50: string;
-};
+  view: string;
   id: number;
-  isFromGuest: boolean;
-  isVerified: boolean;
-  ivStatus: string;
   name: string;
   username: string;
-  view: string;
+  isVerified: boolean;
+  avatar: string;
+  avatarThumbs: {
+  c50: string;
+  c144: string;
+};
+  ivStatus: string;
+  isFromGuest: boolean;
 };
 }>;
-  responseType: string;
-  tipsAmount: string;
+  canEditText: boolean;
+  canEditMedia: boolean;
+  canEditSchedule: boolean;
+  canEditVote: boolean;
+  preview: Array<number>;
 }
 
 export interface AccessReplacePostsRequest {
-  expireAfter?: number;
+  text?: string;
+  mediaItems?: Array<number | string>;
+  isLockedText?: boolean | null;
+  price?: number | null;
+  previewMediaCount?: number | null;
+  releaseForms?: {
+  users?: Array<number>;
+  partners?: Array<number>;
+  guests?: Array<number>;
+};
+  userTags?: Array<number>;
+  isMarkdown?: boolean | null;
+  scheduledDate?: string;
   fundRaisingTargetAmount?: number;
   fundRaisingTipsPresets?: Array<number>;
-  isLockedText?: boolean | null;
-  isMarkdown?: boolean | null;
-  mediaItems?: Array<number | string>;
-  previewMediaCount?: number | null;
-  price?: number | null;
-  releaseForms?: {
-  guests?: Array<number>;
-  partners?: Array<number>;
-  users?: Array<number>;
-};
-  scheduledDate?: string;
-  text?: string;
-  userTags?: Array<number>;
+  expireAfter?: number;
 }
 
 export interface AccessReplacePostsResponse {
-  author?: {
-  _view: string;
   id: number;
-};
-  canComment: boolean;
   canDelete: boolean;
   canEdit: boolean;
-  canToggleFavorite: boolean;
-  canViewMedia: boolean;
-  favoritesCount: number;
-  id: number;
-  isFavorite: boolean;
-  isMarkdownDisabled: boolean;
-  isMediaReady: boolean;
-  isOpened: boolean;
+  mediaCount: number;
   media: Array<{
-  canView: boolean;
-  convertedToVideo: boolean;
-  createdAt: string;
-  duration?: number;
-  files?: {
-  full: {
-  height?: number;
-  size?: number;
-  sources: Array<{
-  height?: number;
-  type?: string;
-  url: string;
-  width?: number;
-}>;
-  url: string;
-  width?: number;
-};
-  preview?: {
-  height?: number;
-  options: Array<{
-  height?: number;
-  type?: string;
-  url: string;
-  width?: number;
-}>;
-  size?: number;
-  url: string;
-  width?: number;
-};
-  squarePreview?: {
-  height?: number;
-  size?: number;
-  url: string;
-  width?: number;
-};
-  thumb?: {
-  height?: number;
-  size?: number;
-  url: string;
-  width?: number;
-};
-};
-  hasCustomPreview?: boolean;
-  hasError: boolean;
   id: number;
+  type: 'photo' | 'video' | 'gif' | 'audio';
+  convertedToVideo: boolean;
+  canView: boolean;
+  hasError: boolean;
+  createdAt: string;
   isReady: boolean;
+  duration?: number;
   releaseForms: Array<{
   id: number;
   name: string;
   partnerSource: string;
   type: string;
   user?: {
-  avatar: string;
-  avatarThumbs: {
-  c144: string;
-  c50: string;
-};
+  view: string;
   id: number;
-  isFromGuest: boolean;
-  isVerified: boolean;
-  ivStatus: string;
   name: string;
   username: string;
-  view: string;
+  isVerified: boolean;
+  avatar: string;
+  avatarThumbs: {
+  c50: string;
+  c144: string;
+};
+  ivStatus: string;
+  isFromGuest: boolean;
 };
 }>;
-  type: 'photo' | 'video' | 'gif' | 'audio';
+  hasCustomPreview?: boolean;
   videoSources?: {
   '240'?: string | null;
   '720'?: string | null;
 };
+  files?: {
+  full: {
+  url: string;
+  width?: number;
+  height?: number;
+  size?: number;
+  sources: Array<{
+  url: string;
+  width?: number;
+  height?: number;
+  type?: string;
 }>;
-  mediaCount: number;
+};
+  thumb?: {
+  url: string;
+  width?: number;
+  height?: number;
+  size?: number;
+};
+  preview?: {
+  url: string;
+  width?: number;
+  height?: number;
+  size?: number;
+  options: Array<{
+  url: string;
+  width?: number;
+  height?: number;
+  type?: string;
+}>;
+};
+  squarePreview?: {
+  url: string;
+  width?: number;
+  height?: number;
+  size?: number;
+};
+};
+}>;
+  canViewMedia: boolean;
+  author?: {
+  id: number;
+  _view: string;
+};
+  responseType: string;
   postedAt: string;
   postedAtPrecise: string;
-  rawText: string;
-  responseType: string;
-  text: string;
+  isMarkdownDisabled: boolean;
+  isOpened: boolean;
+  canToggleFavorite: boolean;
   tipsAmount: string;
+  text: string;
+  isFavorite: boolean;
+  canComment: boolean;
+  favoritesCount: number;
+  isMediaReady: boolean;
+  rawText: string;
 }
 
-export interface AccountConnectionsListResponse {
-  hasMore: boolean;
-  list: Array<{
-  clientReferenceId: string | null;
+export interface AccessCreateMassMessagesRequest {
+  isForwardedMessage?: boolean | null;
+  text?: string;
+  mediaItems?: Array<number | string>;
+  isLockedText?: boolean | null;
+  price?: number | null;
+  previewMediaCount?: number | null;
+  releaseForms?: {
+  users?: Array<number>;
+  partners?: Array<number>;
+  guests?: Array<number>;
+};
+  userTags?: Array<number>;
+  isMarkdown?: boolean | null;
+  scheduledDate?: string | any | null;
+  userIds?: Array<number | string>;
+  userLists?: Array<number | string>;
+  subscribedAfterDate?: string | any | null;
+  excludeUserLists?: Array<number | string>;
+}
+
+export interface AccessCreateMassMessagesResponse {
+  id: number;
+  date: string;
+  isReady?: boolean;
+  isDone?: boolean;
+  total?: number;
+  pending?: number;
+  canUnsend?: boolean;
+  unsendSeconds?: number;
+  hasError?: boolean;
+  isCanceled?: boolean;
+  isCouplePeopleMedia?: boolean;
+}
+
+export interface AccessGetMassMessagesResponse {
+  id: number;
+  text: string;
+  fromUser: {
+  id: number;
+  name: string;
+} | {
+  id: number;
+  _view: string;
+};
+  media: Array<{
+  id: number;
+  type: 'photo' | 'video' | 'gif' | 'audio';
+  convertedToVideo: boolean;
+  canView: boolean;
+  hasError: boolean;
   createdAt: string;
-  expiredAt: string | null;
-  id: string;
-  imported: boolean;
-  lastCheckedAt: string | null;
-  permissions: Array<string>;
-  status: 'active' | 'expired' | 'awaiting_2fa';
-  updatedAt: string;
-  userData: {
-  avatar: string | null;
-  id: string;
+  isReady: boolean;
+  duration?: number;
+  releaseForms: Array<{
+  id: number;
+  name: string;
+  partnerSource: string;
+  type: string;
+  user?: {
+  view: string;
+  id: number;
   name: string;
   username: string;
+  isVerified: boolean;
+  avatar: string;
+  avatarThumbs: {
+  c50: string;
+  c144: string;
+};
+  ivStatus: string;
+  isFromGuest: boolean;
 };
 }>;
-}
-
-export interface AccountConnectionsListItem {
-  clientReferenceId: string | null;
-  createdAt: string;
-  expiredAt: string | null;
-  id: string;
-  imported: boolean;
-  lastCheckedAt: string | null;
-  permissions: Array<string>;
-  status: 'active' | 'expired' | 'awaiting_2fa';
-  updatedAt: string;
-  userData: {
-  avatar: string | null;
-  id: string;
-  name: string;
-  username: string;
+  hasCustomPreview?: boolean;
+  videoSources?: {
+  '240'?: string | null;
+  '720'?: string | null;
 };
-}
-
-export interface AccountConnectionsCreateImportRequest {
-  clientReferenceId?: string | null;
-  cookie: string;
-  permissions?: Array<string>;
-  userAgent: string;
-}
-
-export interface AccountConnectionsCreateImportResponse {
-  clientReferenceId: string | null;
-  createdAt: string;
-  expiredAt: string | null;
-  id: string;
-  imported: boolean;
-  lastCheckedAt: string | null;
-  permissions: Array<string>;
-  status: 'active' | 'expired' | 'awaiting_2fa';
-  updatedAt: string;
-  userData: {
-  avatar: string | null;
-  id: string;
-  name: string;
-  username: string;
-};
-}
-
-export interface AccountConnectionsUpdateImportRequest {
-  cookie: string;
-  userAgent: string;
-}
-
-export interface AccountConnectionsUpdateImportResponse {
-  clientReferenceId: string | null;
-  createdAt: string;
-  expiredAt: string | null;
-  id: string;
-  imported: boolean;
-  lastCheckedAt: string | null;
-  permissions: Array<string>;
-  status: 'active' | 'expired' | 'awaiting_2fa';
-  updatedAt: string;
-  userData: {
-  avatar: string | null;
-  id: string;
-  name: string;
-  username: string;
-};
-}
-
-export interface AccountConnectionsGetSettingsResponse {
-  connectionId: string;
-  vaultPlus: {
-  enabled: boolean;
-  settingsOverrides: {
-  accessExpiryDays?: number;
-  autoCacheMessages?: boolean;
-  autoCachePosts?: boolean;
-  autoCacheStories?: boolean;
-  autoCacheVault?: boolean;
-  cacheAudio?: boolean;
-  cacheImages?: boolean;
-  cacheVideos?: boolean;
-  imageQualities?: Array<'thumb' | 'preview' | 'full'>;
-  minAccessCountMessages?: number;
-  minAccessCountPosts?: number;
-  minAccessCountStories?: number;
-  minAccessCountVault?: number;
-  presignedUrlTtlSeconds?: number;
-  retentionDays?: number;
-  storageLimitBytes?: number;
-  storageLimitPurgeStrategy?: 'purge_oldest' | 'purge_largest' | 'purge_smallest' | 'block_new';
-  videoQualities?: Array<'preview' | '720p' | '1080p' | 'source'>;
-} | null;
-  stats: {
-  mediaCount: number;
-  storageLimitBytes: number;
-  storageUsagePercent: number;
-  storedCount: number;
-  totalStorageBytes: number;
-  vaultPlusEnabled: boolean;
-};
-};
-}
-
-export interface AccountConnectionsUpdateSettingsRequest {
-  vaultPlus?: {
-  enabled?: boolean;
-  settings?: {
-  accessExpiryDays?: number;
-  autoCacheMessages?: boolean;
-  autoCachePosts?: boolean;
-  autoCacheStories?: boolean;
-  autoCacheVault?: boolean;
-  cacheAudio?: boolean;
-  cacheImages?: boolean;
-  cacheVideos?: boolean;
-  imageQualities?: Array<'thumb' | 'preview' | 'full'>;
-  minAccessCountMessages?: number;
-  minAccessCountPosts?: number;
-  minAccessCountStories?: number;
-  minAccessCountVault?: number;
-  presignedUrlTtlSeconds?: number;
-  retentionDays?: number;
-  storageLimitBytes?: number;
-  storageLimitPurgeStrategy?: 'purge_oldest' | 'purge_largest' | 'purge_smallest' | 'block_new';
-  videoQualities?: Array<'preview' | '720p' | '1080p' | 'source'>;
-} | null;
-};
-}
-
-export interface AccountConnectionsUpdateSettingsResponse {
-  purgeResult?: {
-  freedBytes: number;
-  purgedCount: number;
-};
-  settings: {
-  connectionId: string;
-  vaultPlus: {
-  enabled: boolean;
-  settingsOverrides: {
-  accessExpiryDays?: number;
-  autoCacheMessages?: boolean;
-  autoCachePosts?: boolean;
-  autoCacheStories?: boolean;
-  autoCacheVault?: boolean;
-  cacheAudio?: boolean;
-  cacheImages?: boolean;
-  cacheVideos?: boolean;
-  imageQualities?: Array<'thumb' | 'preview' | 'full'>;
-  minAccessCountMessages?: number;
-  minAccessCountPosts?: number;
-  minAccessCountStories?: number;
-  minAccessCountVault?: number;
-  presignedUrlTtlSeconds?: number;
-  retentionDays?: number;
-  storageLimitBytes?: number;
-  storageLimitPurgeStrategy?: 'purge_oldest' | 'purge_largest' | 'purge_smallest' | 'block_new';
-  videoQualities?: Array<'preview' | '720p' | '1080p' | 'source'>;
-} | null;
-  stats: {
-  mediaCount: number;
-  storageLimitBytes: number;
-  storageUsagePercent: number;
-  storedCount: number;
-  totalStorageBytes: number;
-  vaultPlusEnabled: boolean;
-};
-};
-};
-}
-
-export interface AccountGetSettingsResponse {
-  vaultPlus: {
-  autoEnableForNewConnections: boolean;
-  defaultSettings: {
-  accessExpiryDays: number;
-  autoCacheMessages: boolean;
-  autoCachePosts: boolean;
-  autoCacheStories: boolean;
-  autoCacheVault: boolean;
-  cacheAudio: boolean;
-  cacheImages: boolean;
-  cacheVideos: boolean;
-  imageQualities: Array<string>;
-  minAccessCountMessages: number;
-  minAccessCountPosts: number;
-  minAccessCountStories: number;
-  minAccessCountVault: number;
-  presignedUrlTtlSeconds: number;
-  retentionDays: number;
-  storageLimitBytes: number;
-  storageLimitPurgeStrategy: string;
-  videoQualities: Array<string>;
-};
-};
-}
-
-export interface AccountUpdateSettingsRequest {
-  vaultPlus?: {
-  applyToExistingConnections?: boolean;
-  autoEnableForNewConnections?: boolean;
-  defaultSettings?: {
-  accessExpiryDays?: number;
-  autoCacheMessages?: boolean;
-  autoCachePosts?: boolean;
-  autoCacheStories?: boolean;
-  autoCacheVault?: boolean;
-  cacheAudio?: boolean;
-  cacheImages?: boolean;
-  cacheVideos?: boolean;
-  imageQualities?: Array<'thumb' | 'preview' | 'full'>;
-  minAccessCountMessages?: number;
-  minAccessCountPosts?: number;
-  minAccessCountStories?: number;
-  minAccessCountVault?: number;
-  presignedUrlTtlSeconds?: number;
-  retentionDays?: number;
-  storageLimitBytes?: number;
-  storageLimitPurgeStrategy?: 'purge_oldest' | 'purge_largest' | 'purge_smallest' | 'block_new';
-  videoQualities?: Array<'preview' | '720p' | '1080p' | 'source'>;
-};
-};
-}
-
-export interface AccountUpdateSettingsResponse {
-  broadcastResult?: {
-  affectedConnections: number;
-  purgeResults: Array<{
-  connectionId: string;
-  freedBytes: number;
-  purgedCount: number;
+  files?: {
+  full: {
+  url: string;
+  width?: number;
+  height?: number;
+  size?: number;
+  sources: Array<{
+  url: string;
+  width?: number;
+  height?: number;
+  type?: string;
 }>;
 };
-  settings: {
-  vaultPlus: {
-  autoEnableForNewConnections: boolean;
-  defaultSettings: {
-  accessExpiryDays: number;
-  autoCacheMessages: boolean;
-  autoCachePosts: boolean;
-  autoCacheStories: boolean;
-  autoCacheVault: boolean;
-  cacheAudio: boolean;
-  cacheImages: boolean;
-  cacheVideos: boolean;
-  imageQualities: Array<string>;
-  minAccessCountMessages: number;
-  minAccessCountPosts: number;
-  minAccessCountStories: number;
-  minAccessCountVault: number;
-  presignedUrlTtlSeconds: number;
-  retentionDays: number;
-  storageLimitBytes: number;
-  storageLimitPurgeStrategy: string;
-  videoQualities: Array<string>;
+  thumb?: {
+  url: string;
+  width?: number;
+  height?: number;
+  size?: number;
 };
+  preview?: {
+  url: string;
+  width?: number;
+  height?: number;
+  size?: number;
+  options: Array<{
+  url: string;
+  width?: number;
+  height?: number;
+  type?: string;
+}>;
+};
+  squarePreview?: {
+  url: string;
+  width?: number;
+  height?: number;
+  size?: number;
+};
+};
+}>;
+  isMediaReady?: boolean;
+  mediaCount?: number;
+  previews: Array<number>;
+  lockedText?: boolean;
+  responseType?: string;
+  giphyId?: string | null;
+  isFree?: boolean;
+  isTip?: boolean;
+  isReportedByMe?: boolean;
+  isCouplePeopleMedia?: boolean;
+  queueId?: number;
+  isMarkdownDisabled?: boolean;
+  releaseForms?: any | null;
+  isFromQueue?: boolean;
+  canUnsendQueue?: boolean;
+  unsendSecondsQueue?: number;
+  isOpened?: boolean;
+  isNew?: boolean;
+  createdAt?: string;
+  changedAt?: string;
+  cancelSeconds?: number;
+  isLiked?: boolean;
+  canPurchase?: boolean;
+  canPurchaseReason?: string;
+  canReport?: boolean;
+  canBePinned?: boolean;
+  isPinned?: boolean;
+}
+
+export interface AccessReplaceMassMessagesRequest {
+  isForwardedMessage?: boolean | null;
+  text?: string;
+  mediaItems?: Array<number | string>;
+  isLockedText?: boolean | null;
+  price?: number | null;
+  previewMediaCount?: number | null;
+  releaseForms?: {
+  users?: Array<number>;
+  partners?: Array<number>;
+  guests?: Array<number>;
+};
+  userTags?: Array<number>;
+  isMarkdown?: boolean | null;
+  scheduledDate?: string | any | null;
+  userIds?: Array<number | string>;
+  userLists?: Array<number | string>;
+  subscribedAfterDate?: string | any | null;
+  excludeUserLists?: Array<number | string>;
+}
+
+export interface AccessReplaceMassMessagesResponse {
+  id: number;
+  date: string;
+  isReady?: boolean;
+  isDone?: boolean;
+  total?: number;
+  pending?: number;
+  canUnsend?: boolean;
+  unsendSeconds?: number;
+  hasError?: boolean;
+  isCanceled?: boolean;
+  isCouplePeopleMedia?: boolean;
+}
+
+export interface AccessDeleteMassMessagesResponse {
+  success: boolean;
+  queue?: {
+  id: number;
+  text: string;
+  fromUser: {
+  id: number;
+  name: string;
+} | {
+  id: number;
+  _view: string;
+};
+  media: Array<{
+  id: number;
+  type: 'photo' | 'video' | 'gif' | 'audio';
+  convertedToVideo: boolean;
+  canView: boolean;
+  hasError: boolean;
+  createdAt: string;
+  isReady: boolean;
+  duration?: number;
+  releaseForms: Array<{
+  id: number;
+  name: string;
+  partnerSource: string;
+  type: string;
+  user?: {
+  view: string;
+  id: number;
+  name: string;
+  username: string;
+  isVerified: boolean;
+  avatar: string;
+  avatarThumbs: {
+  c50: string;
+  c144: string;
+};
+  ivStatus: string;
+  isFromGuest: boolean;
+};
+}>;
+  hasCustomPreview?: boolean;
+  videoSources?: {
+  '240'?: string | null;
+  '720'?: string | null;
+};
+  files?: {
+  full: {
+  url: string;
+  width?: number;
+  height?: number;
+  size?: number;
+  sources: Array<{
+  url: string;
+  width?: number;
+  height?: number;
+  type?: string;
+}>;
+};
+  thumb?: {
+  url: string;
+  width?: number;
+  height?: number;
+  size?: number;
+};
+  preview?: {
+  url: string;
+  width?: number;
+  height?: number;
+  size?: number;
+  options: Array<{
+  url: string;
+  width?: number;
+  height?: number;
+  type?: string;
+}>;
+};
+  squarePreview?: {
+  url: string;
+  width?: number;
+  height?: number;
+  size?: number;
+};
+};
+}>;
+  isMediaReady?: boolean;
+  mediaCount?: number;
+  previews: Array<number>;
+  lockedText?: boolean;
+  responseType?: string;
+  giphyId?: string | null;
+  isFree?: boolean;
+  isTip?: boolean;
+  isReportedByMe?: boolean;
+  isCouplePeopleMedia?: boolean;
+  queueId?: number;
+  isMarkdownDisabled?: boolean;
+  releaseForms?: any | null;
+  isFromQueue?: boolean;
+  canUnsendQueue?: boolean;
+  unsendSecondsQueue?: number;
+  isOpened?: boolean;
+  isNew?: boolean;
+  createdAt?: string;
+  changedAt?: string;
+  cancelSeconds?: number;
+  isLiked?: boolean;
+  canPurchase?: boolean;
+  canPurchaseReason?: string;
+  canReport?: boolean;
+  canBePinned?: boolean;
+  isPinned?: boolean;
+  date?: string;
+  textCropped?: string;
+  sentCount?: number;
+  viewedCount?: number;
+  canUnsend?: boolean;
+  unsendSeconds?: number;
+  isCanceled?: boolean;
+  mediaTypes?: {
+  video?: number;
+  photo?: number;
+  gif?: number;
+  audio?: number;
+};
+  hasError?: boolean;
+  price?: string;
+  purchasedCount?: number;
+  canSendMessageToBuyers?: boolean;
+};
+}
+
+export interface LinkGetResponse {
+  status: 'initialized' | 'pending' | 'awaiting_2fa' | 'denied' | 'completed' | 'invalid_credentials' | 'failed' | 'not_found';
+  data?: {
+  twoFactorState: {
+  options: Array<'phone' | 'app' | 'face' | 'forceFace'>;
+  phoneCode?: {
+  requestAttemptsLimit: number;
+  requestAttemptsLeft: number;
+  checkAttemptsLimit?: number;
+  checkAttemptsLeft?: number;
+  expirationDate?: string;
+  expirationSeconds?: number;
+  lastSentDate?: string;
+};
+  faceCode?: {
+  requestAttemptsLimit: number;
+  requestAttemptsLeft: number;
+};
+  phoneLast4?: string;
+};
+} | {
+  id: string;
+  session: {
+  'user-id': string;
+  'user-agent': string;
+  cookie: string;
+  'x-bc': string;
+};
+  userData: {
+  id: string;
+  name: string;
+  username: string;
+  avatar: string;
 };
 };
 }
 
-export interface AccountWhoamiResponse {
-  id: string;
-  name: string | null;
-  permissions: Array<string>;
+export interface LinkInitRequest {
+  redirectUrl?: string;
+  clientReferenceId?: string;
+  connectionId?: string;
+  geolocation?: {
+  country: string;
+  state?: string;
+  city?: string;
+};
+}
+
+export interface LinkInitResponse {
+  url: string;
+  expiresAt: string;
 }
 
 export interface DynamicRulesListResponse {
-  is_current: boolean;
-  is_early_access: boolean;
-  is_public: boolean;
   rules: {
-  app_token: string;
+  static_param: string;
+  format: string;
+  start: string;
+  end: string;
+  prefix: string;
+  suffix: string;
   checksum_constant: number;
   checksum_indexes: Array<number>;
-  end: string;
-  format: string;
-  prefix: string;
+  app_token: string;
   revision: string;
-  start: string;
-  static_param: string;
-  suffix: string;
 };
+  is_current: boolean;
+  is_public: boolean;
+  is_early_access: boolean;
 }
 
 export interface DynamicRulesSignRequest {
@@ -6417,124 +6303,71 @@ export interface DynamicRulesSignRequest {
 }
 
 export interface DynamicRulesSignResponse {
-  is_early_access: boolean;
-  is_public: boolean;
   signed: {
-  'app-token': string;
   sign: string;
   time: string;
   'user-id'?: string;
+  'app-token': string;
 };
+  is_public: boolean;
+  is_early_access: boolean;
 }
 
 export interface DynamicRulesGetStatusResponse {
-  access_granted: boolean;
+  revision: string;
   early_access_revision: string;
+  public_revision: string;
   is_current: boolean;
   is_early_access: boolean;
   is_public: boolean;
-  public_revision: string;
-  revision: string;
-}
-
-export interface LinkGetResponse {
-  data?: {
-  twoFactorState: {
-  faceCode?: {
-  requestAttemptsLeft: number;
-  requestAttemptsLimit: number;
-};
-  options: Array<'phone' | 'app' | 'face' | 'forceFace'>;
-  phoneCode?: {
-  checkAttemptsLeft?: number;
-  checkAttemptsLimit?: number;
-  expirationDate?: string;
-  expirationSeconds?: number;
-  lastSentDate?: string;
-  requestAttemptsLeft: number;
-  requestAttemptsLimit: number;
-};
-  phoneLast4?: string;
-};
-} | {
-  id: string;
-  session: {
-  cookie: string;
-  'user-agent': string;
-  'user-id': string;
-  'x-bc': string;
-};
-  userData: {
-  avatar: string;
-  id: string;
-  name: string;
-  username: string;
-};
-};
-  status: 'initialized' | 'pending' | 'awaiting_2fa' | 'denied' | 'completed' | 'invalid_credentials' | 'failed' | 'not_found';
-}
-
-export interface LinkInitRequest {
-  clientReferenceId?: string;
-  connectionId?: string;
-  geolocation?: {
-  city?: string;
-  country: string;
-  state?: string;
-};
-  redirectUrl?: string;
-}
-
-export interface LinkInitResponse {
-  expiresAt: string;
-  url: string;
+  access_granted: boolean;
 }
 
 export interface VaultPlusStoreCreateListResponse {
-  estimatedItems?: number;
-  listId: string;
   queued: boolean;
-}
-
-export interface VaultPlusStoreGetStatsResponse {
-  connectionsWithVaultPlus: number;
-  totalConnections: number;
-  totalMediaCount: number;
-  totalStorageBytes: number;
+  listId: string;
+  estimatedItems?: number;
 }
 
 export interface VaultPlusStoreGetStatusResponse {
   connectionId: string;
-  pendingCount: number;
-  storedCount: number;
   totalMedia: number;
+  storedCount: number;
+  pendingCount: number;
   totalSizeBytes: number;
 }
 
+export interface VaultPlusStoreGetStatsResponse {
+  totalConnections: number;
+  connectionsWithVaultPlus: number;
+  totalStorageBytes: number;
+  totalMediaCount: number;
+}
+
 export interface VaultPlusGetResponse {
+  id: string;
+  type: 'image' | 'video' | 'audio';
   duration: number | null;
-  id: string;
   media: Record<string, {
-  accessCount: number;
-  contentType: string;
-  createdAt: number;
-  expiresAt: number;
   id: string;
-  lastAccessedAt: number;
+  status: 'edge_only' | 'pending' | 'storing' | 'stored' | 'removed';
   quality: string;
   sizeBytes: number;
+  contentType: string;
   source: 'vault' | 'messages' | 'posts' | 'stories';
-  status: 'edge_only' | 'pending' | 'storing' | 'stored' | 'removed';
+  accessCount: number;
+  createdAt: number;
+  expiresAt: number;
   storedAt: number | null;
+  lastAccessedAt: number;
   url: string;
 }>;
-  type: 'image' | 'video' | 'audio';
 }
 
 export interface VaultPlusDeleteResponse {
-  freedBytes: number;
-  mediaId: string;
   success: boolean;
+  mediaId: string;
+  freedBytes: number;
 }
 
 export interface VaultPlusCreateBatchRequest {
@@ -6543,86 +6376,153 @@ export interface VaultPlusCreateBatchRequest {
 
 export interface VaultPlusCreateBatchResponse {
   items: Array<{
+  id: string;
+  type: 'image' | 'video' | 'audio';
   duration: number | null;
-  id: string;
   media: Record<string, {
-  accessCount: number;
-  contentType: string;
-  createdAt: number;
-  expiresAt: number;
   id: string;
-  lastAccessedAt: number;
+  status: 'edge_only' | 'pending' | 'storing' | 'stored' | 'removed';
   quality: string;
   sizeBytes: number;
+  contentType: string;
   source: 'vault' | 'messages' | 'posts' | 'stories';
-  status: 'edge_only' | 'pending' | 'storing' | 'stored' | 'removed';
+  accessCount: number;
+  createdAt: number;
+  expiresAt: number;
   storedAt: number | null;
+  lastAccessedAt: number;
   url: string;
 }>;
-  type: 'image' | 'video' | 'audio';
 }>;
 }
 
 export interface VaultPlusGetListResponse {
   items: Array<{
+  id: string;
+  type: 'image' | 'video' | 'audio';
   duration: number | null;
-  id: string;
   media: Record<string, {
-  accessCount: number;
-  contentType: string;
-  createdAt: number;
-  expiresAt: number;
   id: string;
-  lastAccessedAt: number;
+  status: 'edge_only' | 'pending' | 'storing' | 'stored' | 'removed';
   quality: string;
   sizeBytes: number;
+  contentType: string;
   source: 'vault' | 'messages' | 'posts' | 'stories';
-  status: 'edge_only' | 'pending' | 'storing' | 'stored' | 'removed';
+  accessCount: number;
+  createdAt: number;
+  expiresAt: number;
   storedAt: number | null;
+  lastAccessedAt: number;
   url: string;
 }>;
-  type: 'image' | 'video' | 'audio';
 }>;
   nextCursor?: string;
 }
 
 export interface VaultPlusPurgeResponse {
-  freedBytes: number;
-  purgedCount: number;
   success: boolean;
+  purgedCount: number;
+  freedBytes: number;
 }
 
 // Parameter interfaces
-export interface AccessAnalyticsCampaignsGetChartParams {
-  /** Start of date range (ISO 8601) */
-  startDate?: string | any;
-  /** End of date range (ISO 8601) */
-  endDate?: string | any;
-  /** Include total count in response */
-  withTotal?: boolean;
+export interface AccountConnectionsDeleteParams {
+  /** connectionId */
+  connectionId: string;
 }
 
-export interface AccessAnalyticsCampaignsGetTopParams {
-  /** Number of items to return (1-100, default: 20) */
+export interface AccountConnectionsListParams {
+  /** status */
+  status?: 'active' | 'expired' | 'awaiting_2fa';
+  /** imported */
+  imported?: 'true' | 'false';
+  /** limit */
+  limit?: number;
+  /** offset */
+  offset?: number;
+}
+
+export interface AccountConnectionsInvalidateParams {
+  /** connectionId */
+  connectionId: string;
+}
+
+export interface AccountConnectionsGetSettingsParams {
+  /** connectionId */
+  connectionId: string;
+}
+
+export interface AccountConnectionsUpdateSettingsParams {
+  /** connectionId */
+  connectionId: string;
+  /** Request body */
+  body?: AccountConnectionsUpdateSettingsRequest;
+}
+
+export interface AccountConnectionsCreateImportParams {
+  /** Request body */
+  body?: AccountConnectionsCreateImportRequest;
+}
+
+export interface AccountConnectionsUpdateImportParams {
+  /** connectionId */
+  connectionId: string;
+  /** Request body */
+  body?: AccountConnectionsUpdateImportRequest;
+}
+
+export interface AccountUpdateSettingsParams {
+  /** Request body */
+  body?: AccountUpdateSettingsRequest;
+}
+
+export interface AccessSelfUpdateParams {
+  /** Request body */
+  body?: AccessSelfUpdateRequest;
+}
+
+export interface AccessSelfListNotificationsParams {
+  /** Number of items to return (1-20, default: 10) */
   limit?: number;
   /** Number of items to skip (default: 0) */
   offset?: number;
-  /** Start of date range (ISO 8601) */
-  startDate?: string | any;
-  /** End of date range (ISO 8601) */
-  endDate?: string | any;
+  /** Filter by notification type */
+  type?: 'subscribed' | 'purchases' | 'tip' | 'post' | 'commented' | 'mentioned' | 'favorited' | 'message';
+  /** Filter notifications related to this user */
+  relatedUsername?: string;
 }
 
-export interface AccessAnalyticsEarningsListChargebacksParams {
-  /** Start of date range (ISO 8601) */
-  startDate?: string | any;
-  /** End of date range (ISO 8601) */
-  endDate?: string | any;
-  /** Pagination marker from previous response */
-  marker?: string;
+export interface AccessSelfListReleaseFormsParams {
+  /** Number of items to return (1-20, default: 10) */
+  limit?: number;
+  /** Number of items to skip (default: 0) */
+  offset?: number;
+  /** Filter: all forms or only pending */
+  filter?: 'all' | 'pending';
+  /** Sort by date or name */
+  sortBy?: 'date' | 'name';
+  /** Sort direction */
+  sortDirection?: 'asc' | 'desc';
+  /** Search/filter text */
+  search?: string;
 }
 
-export interface AccessAnalyticsEarningsGetChartParams {
+export interface AccessSelfListTaggedFriendUsersParams {
+  /** Number of items to return (1-20, default: 10) */
+  limit?: number;
+  /** Number of items to skip (default: 0) */
+  offset?: number;
+  /** Filter: all forms or only pending */
+  filter?: 'all' | 'pending';
+  /** Sort by date or name */
+  sortBy?: 'date' | 'name';
+  /** Sort direction */
+  sortDirection?: 'asc' | 'desc';
+  /** Search/filter text */
+  search?: string;
+}
+
+export interface AccessEarningsGetChartParams {
   /** Start of date range (ISO 8601) */
   startDate?: string | any;
   /** End of date range (ISO 8601) */
@@ -6635,7 +6535,7 @@ export interface AccessAnalyticsEarningsGetChartParams {
   monthlyTotal?: boolean;
 }
 
-export interface AccessAnalyticsEarningsListTransactionsParams {
+export interface AccessEarningsListTransactionsParams {
   /** Start date for transactions */
   startDate?: string;
   /** Pagination marker from previous response */
@@ -6646,31 +6546,13 @@ export interface AccessAnalyticsEarningsListTransactionsParams {
   tipsSource?: 'chat' | 'post_all' | 'profile' | 'story' | 'stream';
 }
 
-export interface AccessAnalyticsMassMessagesListBuyersParams {
-  /** Mass message ID */
-  massMessageId?: string;
-  /** Number of items to return (1-20, default: 10) */
-  limit?: number;
-  /** Number of items to skip (default: 0) */
-  offset?: number;
-  /** Pagination marker from previous response */
-  marker?: number;
-}
-
-export interface AccessAnalyticsMassMessagesGetChartParams {
+export interface AccessEarningsListChargebacksParams {
   /** Start of date range (ISO 8601) */
   startDate?: string | any;
   /** End of date range (ISO 8601) */
   endDate?: string | any;
-  /** Include total count in response */
-  withTotal?: boolean;
-}
-
-export interface AccessAnalyticsMassMessagesGetPurchasedParams {
-  /** Number of items to return (1-100, default: 20) */
-  limit?: number;
-  /** Number of items to skip (default: 0) */
-  offset?: number;
+  /** Pagination marker from previous response */
+  marker?: string;
 }
 
 export interface AccessAnalyticsPostsGetParams {
@@ -6692,50 +6574,6 @@ export interface AccessAnalyticsPostsGetChartParams {
 export interface AccessAnalyticsPostsGetTopParams {
   /** Metric to rank by */
   by?: 'purchases' | 'tips' | 'views' | 'likes' | 'comments';
-  /** Start of date range (ISO 8601) */
-  startDate?: string | any;
-  /** End of date range (ISO 8601) */
-  endDate?: string | any;
-  /** Number of items to return (1-20, default: 20) */
-  limit?: number;
-  /** Number of items to skip (default: 0) */
-  offset?: number;
-}
-
-export interface AccessAnalyticsPromotionsGetChartParams {
-  /** Start of date range (ISO 8601) */
-  startDate?: string | any;
-  /** End of date range (ISO 8601) */
-  endDate?: string | any;
-  /** Include total count in response */
-  withTotal?: boolean;
-}
-
-export interface AccessAnalyticsPromotionsGetTopParams {
-  /** Number of items to return (1-100, default: 20) */
-  limit?: number;
-  /** Number of items to skip (default: 0) */
-  offset?: number;
-  /** Start of date range (ISO 8601) */
-  startDate?: string | any;
-  /** End of date range (ISO 8601) */
-  endDate?: string | any;
-}
-
-export interface AccessAnalyticsStoriesGetChartParams {
-  /** Start of date range (ISO 8601) */
-  startDate?: string | any;
-  /** End of date range (ISO 8601) */
-  endDate?: string | any;
-  /** Include total count in response */
-  withTotal?: boolean;
-  /** Metric to chart */
-  by?: 'tips' | 'stories' | 'views' | 'likes' | 'comments';
-}
-
-export interface AccessAnalyticsStoriesGetTopParams {
-  /** Metric to rank by */
-  by?: 'tips' | 'views' | 'likes' | 'comments';
   /** Start of date range (ISO 8601) */
   startDate?: string | any;
   /** End of date range (ISO 8601) */
@@ -6770,6 +6608,86 @@ export interface AccessAnalyticsStreamsGetTopParams {
   offset?: number;
 }
 
+export interface AccessAnalyticsStoriesGetChartParams {
+  /** Start of date range (ISO 8601) */
+  startDate?: string | any;
+  /** End of date range (ISO 8601) */
+  endDate?: string | any;
+  /** Include total count in response */
+  withTotal?: boolean;
+  /** Metric to chart */
+  by?: 'tips' | 'stories' | 'views' | 'likes' | 'comments';
+}
+
+export interface AccessAnalyticsStoriesGetTopParams {
+  /** Metric to rank by */
+  by?: 'tips' | 'views' | 'likes' | 'comments';
+  /** Start of date range (ISO 8601) */
+  startDate?: string | any;
+  /** End of date range (ISO 8601) */
+  endDate?: string | any;
+  /** Number of items to return (1-20, default: 20) */
+  limit?: number;
+  /** Number of items to skip (default: 0) */
+  offset?: number;
+}
+
+export interface AccessAnalyticsMassMessagesGetChartParams {
+  /** Start of date range (ISO 8601) */
+  startDate?: string | any;
+  /** End of date range (ISO 8601) */
+  endDate?: string | any;
+  /** Include total count in response */
+  withTotal?: boolean;
+}
+
+export interface AccessAnalyticsMassMessagesGetSentParams {
+  /** Start of date range (ISO 8601) */
+  startDate?: string | any;
+  /** End of date range (ISO 8601) */
+  endDate?: string | any;
+  /** Max number of items to return */
+  limit?: number;
+}
+
+export interface AccessAnalyticsMassMessagesGetPurchasedParams {
+  /** Number of items to return (1-100, default: 20) */
+  limit?: number;
+  /** Number of items to skip (default: 0) */
+  offset?: number;
+}
+
+export interface AccessAnalyticsMassMessagesListBuyersParams {
+  /** Mass message ID */
+  massMessageId?: string;
+  /** Number of items to return (1-20, default: 10) */
+  limit?: number;
+  /** Number of items to skip (default: 0) */
+  offset?: number;
+  /** Pagination marker from previous response */
+  marker?: number;
+}
+
+export interface AccessAnalyticsPromotionsGetChartParams {
+  /** Start of date range (ISO 8601) */
+  startDate?: string | any;
+  /** End of date range (ISO 8601) */
+  endDate?: string | any;
+  /** Include total count in response */
+  withTotal?: boolean;
+}
+
+export interface AccessAnalyticsPromotionsGetTopParams {
+  /** Number of items to return (1-100, default: 20) */
+  limit?: number;
+  /** Number of items to skip (default: 0) */
+  offset?: number;
+  /** Start of date range (ISO 8601) */
+  startDate?: string | any;
+  /** End of date range (ISO 8601) */
+  endDate?: string | any;
+}
+
 export interface AccessAnalyticsTrialsGetChartParams {
   /** Start of date range (ISO 8601) */
   startDate?: string | any;
@@ -6780,6 +6698,26 @@ export interface AccessAnalyticsTrialsGetChartParams {
 }
 
 export interface AccessAnalyticsTrialsGetTopParams {
+  /** Number of items to return (1-100, default: 20) */
+  limit?: number;
+  /** Number of items to skip (default: 0) */
+  offset?: number;
+  /** Start of date range (ISO 8601) */
+  startDate?: string | any;
+  /** End of date range (ISO 8601) */
+  endDate?: string | any;
+}
+
+export interface AccessAnalyticsCampaignsGetChartParams {
+  /** Start of date range (ISO 8601) */
+  startDate?: string | any;
+  /** End of date range (ISO 8601) */
+  endDate?: string | any;
+  /** Include total count in response */
+  withTotal?: boolean;
+}
+
+export interface AccessAnalyticsCampaignsGetTopParams {
   /** Number of items to return (1-100, default: 20) */
   limit?: number;
   /** Number of items to skip (default: 0) */
@@ -6808,6 +6746,127 @@ export interface AccessAnalyticsVisitorCountriesGetTopParams {
   by?: 'guests' | 'total' | 'users';
 }
 
+export interface AccessUsersListsListParams {
+  /** Number of items to return (1-100, default: 10) */
+  limit?: number;
+  /** Number of items to skip (default: 0) */
+  offset?: number;
+  /** Search/filter text */
+  query?: string;
+}
+
+export interface AccessUsersListsCreateParams {
+  /** Request body */
+  body?: AccessUsersListsCreateRequest;
+}
+
+export interface AccessUsersListsGetParams {
+  /** listId */
+  listId: string;
+}
+
+export interface AccessUsersListsUpdateParams {
+  /** listId */
+  listId: string;
+  /** Request body */
+  body?: AccessUsersListsUpdateRequest;
+}
+
+export interface AccessUsersListsDeleteParams {
+  /** listId */
+  listId: string;
+}
+
+export interface AccessUsersListsCreate2Params {
+  /** userId */
+  userId: string;
+  /** Request body */
+  body?: AccessUsersListsCreate2Request;
+}
+
+export interface AccessUsersListsListUsersParams {
+  /** listId */
+  listId: string;
+  /** Number of items to return (1-100, default: 10) */
+  limit?: number;
+  /** Number of items to skip (default: 0) */
+  offset?: number;
+}
+
+export interface AccessUsersListsCreateUsersParams {
+  /** listId */
+  listId: string;
+  /** userId */
+  userId: string;
+}
+
+export interface AccessUsersListsDeleteUsersParams {
+  /** listId */
+  listId: string;
+  /** userId */
+  userId: string;
+}
+
+export interface AccessUsersGetParams {
+  /** User ID (numeric or username) */
+  userId?: string;
+}
+
+export interface AccessUsersListPostsParams {
+  /** User ID (numeric or username) */
+  userId?: string;
+  /** Number of posts to return (1-10) */
+  limit?: number;
+  /** Sort posts by: publish_date, tips, or favorites_count */
+  sortBy?: 'publish_date' | 'tips' | 'favorites_count';
+  /** Sort direction */
+  sortDirection?: 'asc' | 'desc';
+  /** Include pinned posts */
+  pinned?: boolean;
+  /** Include engagement counts */
+  includePostCounts?: boolean;
+  /** Pagination cursor: get posts before this time */
+  beforePublishTime?: string;
+}
+
+export interface AccessUsersGetRestrictParams {
+  /** Number of items to return (1-20, default: 10) */
+  limit?: number;
+  /** Number of items to skip (default: 0) */
+  offset?: number;
+}
+
+export interface AccessUsersRestrictParams {
+  /** User ID (numeric or username) */
+  userId?: string;
+}
+
+export interface AccessUsersRestrict2Params {
+  /** User ID (numeric or username) */
+  userId?: string;
+}
+
+export interface AccessUsersGetBlockedParams {
+  /** Number of items to return (1-20, default: 10) */
+  limit?: number;
+  /** Number of items to skip (default: 0) */
+  offset?: number;
+}
+
+export interface AccessUsersGetListParams {
+  /** User IDs to fetch (comma-separated string or array) */
+  userIds: Array<string> | string;
+}
+
+export interface AccessUsersSearchParams {
+  /** Number of items to return (1-100, default: 20) */
+  limit?: number;
+  /** Number of items to skip (default: 0) */
+  offset?: number;
+  /** Search/filter text */
+  query?: string;
+}
+
 export interface AccessChatsListParams {
   /** Number of items to return (1-20, default: 10) */
   limit?: number;
@@ -6821,6 +6880,39 @@ export interface AccessChatsListParams {
   query?: string;
   /** Filter to specific user list */
   userListId?: number;
+}
+
+export interface AccessChatsListMessagesParams {
+  /** userId */
+  userId: string;
+  /** Number of messages to return (max 10) */
+  limit?: number;
+  /** Number of messages to skip (for pagination) */
+  offset?: number;
+  /** Search/filter text */
+  query?: string;
+  /** ID of the last message from previous page. Used for cursor pagination. */
+  lastId?: string;
+  /** Include this message ID as the first message in the results. Used to retrieve messages from e.g. the Search Chat Messages endpoint IDs. */
+  firstId?: string;
+  /** Include user data in the response */
+  includeUsers?: boolean;
+}
+
+export interface AccessChatsCreateMessagesParams {
+  /** userId */
+  userId: string;
+  /** Request body */
+  body?: AccessChatsCreateMessagesRequest;
+}
+
+export interface AccessChatsDeleteMessagesParams {
+  /** userId */
+  userId: string;
+  /** messageId */
+  messageId: string;
+  /** Request body */
+  body?: AccessChatsDeleteMessagesRequest;
 }
 
 export interface AccessChatsListMediaParams {
@@ -6840,68 +6932,74 @@ export interface AccessChatsListMediaParams {
   type?: 'photos' | 'videos' | 'audios';
 }
 
-export interface AccessChatsListMessagesParams {
-  /** userId */
-  userId: string;
-  /** Number of items to return (1-20, default: 10) */
+export interface AccessSubscribersListParams {
+  /** Search/filter text */
+  query?: string;
+  /** Advanced filters */
+  filter?: {
+  'promoId'?: string;
+  'trial_id'?: string;
+  'duration'?: string;
+  'tips'?: string;
+  'total_spent'?: string;
+  'online'?: '0' | '1' | 'true' | 'false';
+};
+  /** Subscriber type filter */
+  type?: 'all' | 'active' | 'expired' | 'latest';
+  /** Filter subscribers from this date (for type=latest) */
+  startDate?: string;
+  /** Filter subscribers until this date (for type=latest) */
+  endDate?: string;
+  /** Sub-filter for latest: total, new subscribers, or renewals only */
+  latestType?: 'total' | 'new' | 'renewals';
+  /** Number of items to return (1-100, default: 10) */
+  limit?: number;
+  /** Number of items to skip (default: 0) */
+  offset?: number;
+}
+
+export interface AccessSubscribersSetNoteParams {
+  /** User ID (numeric or username) */
+  userId?: string;
+  /** Request body */
+  body?: AccessSubscribersSetNoteRequest;
+}
+
+export interface AccessSubscribersSetDiscountParams {
+  /** User ID (numeric or username) */
+  userId?: string;
+  /** Request body */
+  body?: AccessSubscribersSetDiscountRequest;
+}
+
+export interface AccessSubscribersSetCustomNameParams {
+  /** User ID (numeric or username) */
+  userId?: string;
+  /** Request body */
+  body?: AccessSubscribersSetCustomNameRequest;
+}
+
+export interface AccessSubscriptionsListParams {
+  /** Number of subscriptions to return (1-50) */
   limit?: number;
   /** Number of items to skip (default: 0) */
   offset?: number;
   /** Search/filter text */
   query?: string;
-  /** ID of the last message from previous page. Used for cursor pagination. */
-  id?: string;
-  /** Include this message ID as the first message in the results. Used to retrieve messages from e.g. the Search Chat Messages endpoint IDs. */
-  firstId?: string;
+  /** Advanced filters */
+  filter?: {
+  'online'?: '0' | '1' | 'true' | 'false';
+  'paid'?: '0' | '1' | 'true' | 'false';
+};
+  /** Subscription status filter */
+  type?: 'all' | 'active' | 'expired';
 }
 
-export interface AccessChatsCreateMessagesParams {
-  /** userId */
-  userId: string;
-  /** Request body */
-  body?: AccessChatsCreateMessagesRequest;
-}
-
-export interface AccessChatsDeleteMessagesParams {
-  /** userId */
-  userId: string;
-  /** messageId */
-  messageId: string;
-  /** Request body */
-  body?: AccessChatsDeleteMessagesRequest;
-}
-
-export interface AccessEarningsListChargebacksParams {
-  /** Start of date range (ISO 8601) */
-  startDate?: string | any;
-  /** End of date range (ISO 8601) */
-  endDate?: string | any;
-  /** Pagination marker from previous response */
-  marker?: string;
-}
-
-export interface AccessEarningsGetChartParams {
-  /** Start of date range (ISO 8601) */
-  startDate?: string | any;
-  /** End of date range (ISO 8601) */
-  endDate?: string | any;
-  /** Earnings type to chart */
-  by?: 'total' | 'messages' | 'tips' | 'stream' | 'post' | 'subscribes' | 'tips_profile' | 'tips_post' | 'tips_chat' | 'tips_stream' | 'tips_story' | 'ref';
-  /** Include total in response */
-  withTotal?: boolean;
-  /** Include monthly totals */
-  monthlyTotal?: boolean;
-}
-
-export interface AccessEarningsListTransactionsParams {
-  /** Start date for transactions */
-  startDate?: string;
-  /** Pagination marker from previous response */
-  marker?: string;
-  /** Transaction type filter */
-  type?: 'subscribes' | 'chat_messages' | 'post' | 'stream' | 'tips';
-  /** Tips source filter (when type=tips) */
-  tipsSource?: 'chat' | 'post_all' | 'profile' | 'story' | 'stream';
+export interface AccessSubscriptionsGetHistoryParams {
+  /** Subscription ID */
+  subscriptionId?: string;
+  /** Include all history (not just recent) */
+  all?: '0' | '1' | 'true' | 'false';
 }
 
 export interface AccessPromotionsTrackingLinksListParams {
@@ -6941,11 +7039,6 @@ export interface AccessPromotionsTrackingLinksDeleteParams {
   trackingLinkId?: string;
 }
 
-export interface AccessPromotionsTrackingLinksListClaimersParams {
-  /** Tracking link ID */
-  trackingLinkId?: string;
-}
-
 export interface AccessPromotionsTrackingLinksCreateShareAccessParams {
   /** Request body */
   body?: AccessPromotionsTrackingLinksCreateShareAccessRequest;
@@ -6954,6 +7047,11 @@ export interface AccessPromotionsTrackingLinksCreateShareAccessParams {
 export interface AccessPromotionsTrackingLinksDeleteShareAccessParams {
   /** Request body */
   body?: AccessPromotionsTrackingLinksDeleteShareAccessRequest;
+}
+
+export interface AccessPromotionsTrackingLinksListClaimersParams {
+  /** Tracking link ID */
+  trackingLinkId?: string;
 }
 
 export interface AccessPromotionsTrialLinksListParams {
@@ -7019,11 +7117,6 @@ export interface AccessPromotionsDeleteParams {
   promotionId?: string;
 }
 
-export interface AccessPromotionsCreateStopParams {
-  /** Promotion ID */
-  promotionId?: string;
-}
-
 export interface AccessPromotionsListBundlesParams {
   /** Number of items to return (1-100, default: 20) */
   limit?: number;
@@ -7053,268 +7146,9 @@ export interface AccessPromotionsDeleteBundlesParams {
   bundleId?: string;
 }
 
-export interface AccessSelfUpdateParams {
-  /** Request body */
-  body?: AccessSelfUpdateRequest;
-}
-
-export interface AccessSelfListNotificationsParams {
-  /** Number of items to return (1-20, default: 10) */
-  limit?: number;
-  /** Number of items to skip (default: 0) */
-  offset?: number;
-  /** Filter by notification type */
-  type?: 'subscribed' | 'purchases' | 'tip' | 'post' | 'commented' | 'mentioned' | 'favorited' | 'message';
-  /** Filter notifications related to this user */
-  relatedUsername?: string;
-}
-
-export interface AccessSelfListReleaseFormsParams {
-  /** Number of items to return (1-20, default: 10) */
-  limit?: number;
-  /** Number of items to skip (default: 0) */
-  offset?: number;
-  /** Filter: all forms or only pending */
-  filter?: 'all' | 'pending';
-  /** Sort by date or name */
-  sortBy?: 'date' | 'name';
-  /** Sort direction */
-  sortDirection?: 'asc' | 'desc';
-  /** Search/filter text */
-  search?: string;
-}
-
-export interface AccessSelfListTaggedFriendUsersParams {
-  /** Number of items to return (1-20, default: 10) */
-  limit?: number;
-  /** Number of items to skip (default: 0) */
-  offset?: number;
-  /** Filter: all forms or only pending */
-  filter?: 'all' | 'pending';
-  /** Sort by date or name */
-  sortBy?: 'date' | 'name';
-  /** Sort direction */
-  sortDirection?: 'asc' | 'desc';
-  /** Search/filter text */
-  search?: string;
-}
-
-export interface AccessSubscribersListParams {
-  /** Search/filter text */
-  query?: string;
-  /** Advanced filters */
-  filter?: {
-  'duration'?: string;
-  'online'?: '0' | '1' | 'true' | 'false';
-  'promoId'?: string;
-  'tips'?: string;
-  'total_spent'?: string;
-  'trial_id'?: string;
-};
-  /** Subscriber type filter */
-  type?: 'all' | 'active' | 'expired' | 'latest';
-  /** Filter subscribers from this date (for type=latest) */
-  startDate?: string;
-  /** Filter subscribers until this date (for type=latest) */
-  endDate?: string;
-  /** Sub-filter for latest: total, new subscribers, or renewals only */
-  latestType?: 'total' | 'new' | 'renewals';
-  /** Number of items to return (1-100, default: 10) */
-  limit?: number;
-  /** Number of items to skip (default: 0) */
-  offset?: number;
-}
-
-export interface AccessSubscribersSetCustomNameParams {
-  /** User ID (numeric or username) */
-  userId?: string;
-  /** Request body */
-  body?: AccessSubscribersSetCustomNameRequest;
-}
-
-export interface AccessSubscribersSetDiscountParams {
-  /** User ID (numeric or username) */
-  userId?: string;
-  /** Request body */
-  body?: AccessSubscribersSetDiscountRequest;
-}
-
-export interface AccessSubscribersSetNoteParams {
-  /** User ID (numeric or username) */
-  userId?: string;
-  /** Request body */
-  body?: AccessSubscribersSetNoteRequest;
-}
-
-export interface AccessSubscriptionsListParams {
-  /** Number of subscriptions to return (1-50) */
-  limit?: number;
-  /** Number of items to skip (default: 0) */
-  offset?: number;
-  /** Search/filter text */
-  query?: string;
-  /** Advanced filters */
-  filter?: {
-  'online'?: '0' | '1' | 'true' | 'false';
-  'paid'?: '0' | '1' | 'true' | 'false';
-};
-  /** Subscription status filter */
-  type?: 'all' | 'active' | 'expired';
-}
-
-export interface AccessSubscriptionsGetHistoryParams {
-  /** Subscription ID */
-  subscriptionId?: string;
-  /** Include all history (not just recent) */
-  all?: '0' | '1' | 'true' | 'false';
-}
-
-export interface AccessUploadsReplaceParams {
-  /** Upload session ID */
-  mediaUploadId: string;
-}
-
-export interface AccessUploadsReplacePartsParams {
-  /** Upload session ID from init */
-  mediaUploadId: string;
-  /** Part number for multipart upload (starts at 1) */
-  partNumber: number;
-}
-
-export interface AccessUploadsCheckParams {
-  /** Request body */
-  body?: AccessUploadsCheckRequest;
-}
-
-export interface AccessUploadsCompleteParams {
-  /** Request body */
-  body?: AccessUploadsCompleteRequest;
-}
-
-export interface AccessUploadsInitParams {
-  /** Request body */
-  body?: AccessUploadsInitRequest;
-}
-
-export interface AccessUsersListsCreateParams {
-  /** userId */
-  userId: string;
-  /** Request body */
-  body?: AccessUsersListsCreateRequest;
-}
-
-export interface AccessUsersListsListParams {
-  /** Number of items to return (1-100, default: 10) */
-  limit?: number;
-  /** Number of items to skip (default: 0) */
-  offset?: number;
-  /** Search/filter text */
-  query?: string;
-}
-
-export interface AccessUsersListsCreate2Params {
-  /** Request body */
-  body?: AccessUsersListsCreate2Request;
-}
-
-export interface AccessUsersListsGetParams {
-  /** listId */
-  listId: string;
-}
-
-export interface AccessUsersListsUpdateParams {
-  /** listId */
-  listId: string;
-  /** Request body */
-  body?: AccessUsersListsUpdateRequest;
-}
-
-export interface AccessUsersListsDeleteParams {
-  /** listId */
-  listId: string;
-}
-
-export interface AccessUsersListsListUsersParams {
-  /** listId */
-  listId: string;
-  /** Number of items to return (1-100, default: 10) */
-  limit?: number;
-  /** Number of items to skip (default: 0) */
-  offset?: number;
-}
-
-export interface AccessUsersListsCreateUsersParams {
-  /** listId */
-  listId: string;
-  /** userId */
-  userId: string;
-}
-
-export interface AccessUsersListsDeleteUsersParams {
-  /** listId */
-  listId: string;
-  /** userId */
-  userId: string;
-}
-
-export interface AccessUsersGetParams {
-  /** User ID (numeric or username) */
-  userId?: string;
-}
-
-export interface AccessUsersListPostsParams {
-  /** User ID (numeric or username) */
-  userId?: string;
-  /** Number of posts to return (1-10) */
-  limit?: number;
-  /** Sort posts by: publish_date, tips, or favorites_count */
-  sortBy?: 'publish_date' | 'tips' | 'favorites_count';
-  /** Sort direction */
-  sortDirection?: 'asc' | 'desc';
-  /** Include pinned posts */
-  pinned?: boolean;
-  /** Include engagement counts */
-  includePostCounts?: boolean;
-  /** Pagination cursor: get posts before this time */
-  beforePublishTime?: string;
-}
-
-export interface AccessUsersRestrictParams {
-  /** User ID (numeric or username) */
-  userId?: string;
-}
-
-export interface AccessUsersRestrict2Params {
-  /** User ID (numeric or username) */
-  userId?: string;
-}
-
-export interface AccessUsersGetRestrictParams {
-  /** Number of items to return (1-20, default: 10) */
-  limit?: number;
-  /** Number of items to skip (default: 0) */
-  offset?: number;
-}
-
-export interface AccessUsersGetBlockedParams {
-  /** Number of items to return (1-20, default: 10) */
-  limit?: number;
-  /** Number of items to skip (default: 0) */
-  offset?: number;
-}
-
-export interface AccessUsersGetListParams {
-  /** User IDs to fetch (comma-separated string or array) */
-  userIds: Array<string> | string;
-}
-
-export interface AccessUsersSearchParams {
-  /** Number of items to return (1-100, default: 20) */
-  limit?: number;
-  /** Number of items to skip (default: 0) */
-  offset?: number;
-  /** Search/filter text */
-  query?: string;
+export interface AccessPromotionsCreateStopParams {
+  /** Promotion ID */
+  promotionId?: string;
 }
 
 export interface AccessVaultListsListParams {
@@ -7384,35 +7218,31 @@ export interface AccessVaultListMediaParams {
   mediaType?: 'photo' | 'video' | 'audio' | 'gif';
 }
 
-export interface AccessListMassMessagesParams {
-  /** Number of items to return (1-20, default: 10) */
-  limit?: number;
-  /** Number of items to skip (default: 0) */
-  offset?: number;
-  /** Filter by message status */
-  type?: 'sent' | 'unsent' | 'scheduled';
+export interface AccessUploadsReplaceParams {
+  /** Upload session ID */
+  mediaUploadId: string;
 }
 
-export interface AccessCreateMassMessagesParams {
+export interface AccessUploadsCheckParams {
   /** Request body */
-  body?: AccessCreateMassMessagesRequest;
+  body?: AccessUploadsCheckRequest;
 }
 
-export interface AccessGetMassMessagesParams {
-  /** massMessageId */
-  massMessageId: string;
-}
-
-export interface AccessReplaceMassMessagesParams {
-  /** massMessageId */
-  massMessageId: string;
+export interface AccessUploadsInitParams {
   /** Request body */
-  body?: AccessReplaceMassMessagesRequest;
+  body?: AccessUploadsInitRequest;
 }
 
-export interface AccessDeleteMassMessagesParams {
-  /** massMessageId */
-  massMessageId: string;
+export interface AccessUploadsReplacePartsParams {
+  /** Upload session ID from init */
+  mediaUploadId: string;
+  /** Part number for multipart upload (starts at 1) */
+  partNumber: number;
+}
+
+export interface AccessUploadsCompleteParams {
+  /** Request body */
+  body?: AccessUploadsCompleteRequest;
 }
 
 export interface AccessListPostsParams {
@@ -7452,59 +7282,26 @@ export interface AccessDeletePostsParams {
   postId?: string;
 }
 
-export interface AccountConnectionsListParams {
-  /** status */
-  status?: 'active' | 'expired' | 'awaiting_2fa';
-  /** imported */
-  imported?: 'true' | 'false';
-  /** limit */
-  limit?: number;
-  /** offset */
-  offset?: number;
-}
-
-export interface AccountConnectionsDeleteParams {
-  /** connectionId */
-  connectionId: string;
-}
-
-export interface AccountConnectionsCreateImportParams {
+export interface AccessCreateMassMessagesParams {
   /** Request body */
-  body?: AccountConnectionsCreateImportRequest;
+  body?: AccessCreateMassMessagesRequest;
 }
 
-export interface AccountConnectionsUpdateImportParams {
-  /** connectionId */
-  connectionId: string;
+export interface AccessGetMassMessagesParams {
+  /** massMessageId */
+  massMessageId: string;
+}
+
+export interface AccessReplaceMassMessagesParams {
+  /** massMessageId */
+  massMessageId: string;
   /** Request body */
-  body?: AccountConnectionsUpdateImportRequest;
+  body?: AccessReplaceMassMessagesRequest;
 }
 
-export interface AccountConnectionsInvalidateParams {
-  /** connectionId */
-  connectionId: string;
-}
-
-export interface AccountConnectionsGetSettingsParams {
-  /** connectionId */
-  connectionId: string;
-}
-
-export interface AccountConnectionsUpdateSettingsParams {
-  /** connectionId */
-  connectionId: string;
-  /** Request body */
-  body?: AccountConnectionsUpdateSettingsRequest;
-}
-
-export interface AccountUpdateSettingsParams {
-  /** Request body */
-  body?: AccountUpdateSettingsRequest;
-}
-
-export interface DynamicRulesSignParams {
-  /** Request body */
-  body?: DynamicRulesSignRequest;
+export interface AccessDeleteMassMessagesParams {
+  /** massMessageId */
+  massMessageId: string;
 }
 
 export interface LinkGetParams {
@@ -7520,6 +7317,11 @@ export interface LinkDeleteParams {
 export interface LinkInitParams {
   /** Request body */
   body: LinkInitRequest;
+}
+
+export interface DynamicRulesSignParams {
+  /** Request body */
+  body?: DynamicRulesSignRequest;
 }
 
 export interface VaultPlusStoreCreateListParams {
@@ -7577,7 +7379,7 @@ export interface VaultPlusPurgeParams {
 
 
 // Namespace classes
-class AccessAnalyticsCampaignsNamespace {
+class AccountConnectionsNamespace {
   private _config: OFAuthConfig;
 
   constructor(config: OFAuthConfig) {
@@ -7585,568 +7387,37 @@ class AccessAnalyticsCampaignsNamespace {
   }
 
     /**
-     * Campaigns chart
+     * Disconnect connection
      */
-    getChart(params: AccessAnalyticsCampaignsGetChartParams): Promise<Record<string, AccessAnalyticsCampaignsGetChartResponseValue>> {
-      return request<Record<string, AccessAnalyticsCampaignsGetChartResponseValue>>(this._config, {
-        path: '/v2/access/analytics/campaigns/chart',
-        method: 'GET',
-        query: {
-          'startDate': params.startDate,
-          'endDate': params.endDate,
-          'withTotal': params.withTotal,
-        },
+    delete(params: AccountConnectionsDeleteParams): Promise<unknown> {
+      return request<unknown>(this._config, {
+        path: `/v2/account/connections/${encodeURIComponent(String(params.connectionId))}`,
+        method: 'DELETE',
       });
     }
 
     /**
-     * Top campaigns
+     * List connections
      */
-    getTop(params: AccessAnalyticsCampaignsGetTopParams): Promise<AccessAnalyticsCampaignsGetTopResponse> {
-      return request<AccessAnalyticsCampaignsGetTopResponse>(this._config, {
-        path: '/v2/access/analytics/campaigns/top',
+    list(params: AccountConnectionsListParams): Promise<AccountConnectionsListResponse> {
+      return request<AccountConnectionsListResponse>(this._config, {
+        path: '/v2/account/connections',
         method: 'GET',
         query: {
+          'status': params.status,
+          'imported': params.imported,
           'limit': params.limit,
           'offset': params.offset,
-          'startDate': params.startDate,
-          'endDate': params.endDate,
         },
       });
     }
 	
 	    /**
-	     * Top campaigns
+	     * List connections
      * 
      * Returns an async iterator that automatically paginates through all results.
      */
-    async *iterateTop(params: Omit<AccessAnalyticsCampaignsGetTopParams, 'limit' | 'offset' | 'marker'> & PaginationOptions): AsyncGenerator<AccessAnalyticsCampaignsGetTopItem, void, unknown> {
-      let offset = 0;
-      let fetched = 0;
-      const limit = params?.pageSize ?? 20;
-      const maxItems = params?.maxItems ?? Infinity;
-      
-      while (fetched < maxItems) {
-        const response = await this.getTop({
-          ...params,
-          limit: Math.min(limit, maxItems - fetched),
-          offset,
-        } as AccessAnalyticsCampaignsGetTopParams);
-        
-        for (const item of response.list) {
-          if (fetched >= maxItems) return;
-          yield item;
-          fetched++;
-	        }
-	        
-	        if (!response.hasMore) return;
-	        const nextOffset = (response as { nextOffset?: number | string | null }).nextOffset;
-	        offset =
-	          typeof nextOffset === 'number'
-	            ? nextOffset
-	            : typeof nextOffset === 'string' && nextOffset.trim() !== '' && Number.isFinite(Number(nextOffset))
-	              ? Number(nextOffset)
-	              : offset + response.list.length;
-	      }
-	    }
-}
-
-class AccessAnalyticsEarningsNamespace {
-  private _config: OFAuthConfig;
-
-  constructor(config: OFAuthConfig) {
-    this._config = config;
-  }
-
-    /**
-     * Chargebacks
-     */
-    listChargebacks(params: AccessAnalyticsEarningsListChargebacksParams): Promise<AccessAnalyticsEarningsListChargebacksResponse> {
-      return request<AccessAnalyticsEarningsListChargebacksResponse>(this._config, {
-        path: '/v2/access/analytics/earnings/chargebacks',
-        method: 'GET',
-        query: {
-          'startDate': params.startDate,
-          'endDate': params.endDate,
-          'marker': params.marker,
-        },
-      });
-    }
-	
-	    /**
-	     * Chargebacks
-     * 
-     * Returns an async iterator that automatically paginates through all results.
-     */
-    async *iterateChargebacks(params: Omit<AccessAnalyticsEarningsListChargebacksParams, 'limit' | 'offset' | 'marker'> & PaginationOptions): AsyncGenerator<AccessAnalyticsEarningsListChargebacksItem, void, unknown> {
-      let marker: string | undefined;
-      let fetched = 0;
-      const maxItems = params?.maxItems ?? Infinity;
-      
-      while (fetched < maxItems) {
-        const response = await this.listChargebacks({
-          ...params,
-          marker,
-        } as AccessAnalyticsEarningsListChargebacksParams);
-        
-        for (const item of response.list) {
-          if (fetched >= maxItems) return;
-          yield item;
-          fetched++;
-	        }
-	        
-	        if (!response.hasMore) return;
-	        marker = response.nextMarker == null ? undefined : String(response.nextMarker);
-	      }
-	    }
-
-    /**
-     * Earnings chart
-     */
-    getChart(params: AccessAnalyticsEarningsGetChartParams): Promise<AccessAnalyticsEarningsGetChartResponse> {
-      return request<AccessAnalyticsEarningsGetChartResponse>(this._config, {
-        path: '/v2/access/analytics/earnings/chart',
-        method: 'GET',
-        query: {
-          'startDate': params.startDate,
-          'endDate': params.endDate,
-          'by': params.by,
-          'withTotal': params.withTotal,
-          'monthlyTotal': params.monthlyTotal,
-        },
-      });
-    }
-
-    /**
-     * Transactions
-     */
-    listTransactions(params: AccessAnalyticsEarningsListTransactionsParams): Promise<AccessAnalyticsEarningsListTransactionsResponse> {
-      return request<AccessAnalyticsEarningsListTransactionsResponse>(this._config, {
-        path: '/v2/access/analytics/earnings/transactions',
-        method: 'GET',
-        query: {
-          'startDate': params.startDate,
-          'marker': params.marker,
-          'type': params.type,
-          'tipsSource': params.tipsSource,
-        },
-      });
-    }
-	
-	    /**
-	     * Transactions
-     * 
-     * Returns an async iterator that automatically paginates through all results.
-     */
-    async *iterateTransactions(params: Omit<AccessAnalyticsEarningsListTransactionsParams, 'limit' | 'offset' | 'marker'> & PaginationOptions): AsyncGenerator<AccessAnalyticsEarningsListTransactionsItem, void, unknown> {
-      let marker: string | undefined;
-      let fetched = 0;
-      const maxItems = params?.maxItems ?? Infinity;
-      
-      while (fetched < maxItems) {
-        const response = await this.listTransactions({
-          ...params,
-          marker,
-        } as AccessAnalyticsEarningsListTransactionsParams);
-        
-        for (const item of response.list) {
-          if (fetched >= maxItems) return;
-          yield item;
-          fetched++;
-	        }
-	        
-	        if (!response.hasMore) return;
-	        marker = response.nextMarker == null ? undefined : String(response.nextMarker);
-	      }
-	    }
-}
-
-class AccessAnalyticsMassMessagesNamespace {
-  private _config: OFAuthConfig;
-
-  constructor(config: OFAuthConfig) {
-    this._config = config;
-  }
-
-    /**
-     * Mass message buyers
-     */
-    listBuyers(params: AccessAnalyticsMassMessagesListBuyersParams): Promise<AccessAnalyticsMassMessagesListBuyersResponse> {
-      return request<AccessAnalyticsMassMessagesListBuyersResponse>(this._config, {
-        path: `/v2/access/analytics/mass-messages/${encodeURIComponent(String(params.massMessageId))}/buyers`,
-        method: 'GET',
-        query: {
-          'limit': params.limit,
-          'offset': params.offset,
-          'marker': params.marker,
-        },
-      });
-    }
-	
-	    /**
-	     * Mass message buyers
-     * 
-     * Returns an async iterator that automatically paginates through all results.
-     */
-    async *iterateBuyers(params: Omit<AccessAnalyticsMassMessagesListBuyersParams, 'limit' | 'offset' | 'marker'> & PaginationOptions): AsyncGenerator<AccessAnalyticsMassMessagesListBuyersItem, void, unknown> {
-      let marker: string | undefined;
-      let fetched = 0;
-      const maxItems = params?.maxItems ?? Infinity;
-      
-      while (fetched < maxItems) {
-        const response = await this.listBuyers({
-          ...params,
-          marker,
-        } as AccessAnalyticsMassMessagesListBuyersParams);
-        
-        for (const item of response.list) {
-          if (fetched >= maxItems) return;
-          yield item;
-          fetched++;
-	        }
-	        
-	        if (!response.hasMore) return;
-	        marker = response.nextMarker == null ? undefined : String(response.nextMarker);
-	      }
-	    }
-
-    /**
-     * Mass messages chart
-     */
-    getChart(params: AccessAnalyticsMassMessagesGetChartParams): Promise<AccessAnalyticsMassMessagesGetChartResponse> {
-      return request<AccessAnalyticsMassMessagesGetChartResponse>(this._config, {
-        path: '/v2/access/analytics/mass-messages/chart',
-        method: 'GET',
-        query: {
-          'startDate': params.startDate,
-          'endDate': params.endDate,
-          'withTotal': params.withTotal,
-        },
-      });
-    }
-
-    /**
-     * Mass messages purchased
-     */
-    getPurchased(params: AccessAnalyticsMassMessagesGetPurchasedParams): Promise<AccessAnalyticsMassMessagesGetPurchasedResponse> {
-      return request<AccessAnalyticsMassMessagesGetPurchasedResponse>(this._config, {
-        path: '/v2/access/analytics/mass-messages/purchased',
-        method: 'GET',
-        query: {
-          'limit': params.limit,
-          'offset': params.offset,
-        },
-      });
-    }
-}
-
-class AccessAnalyticsPostsNamespace {
-  private _config: OFAuthConfig;
-
-  constructor(config: OFAuthConfig) {
-    this._config = config;
-  }
-
-    /**
-     * Post stats
-     */
-    get(params: AccessAnalyticsPostsGetParams): Promise<AccessAnalyticsPostsGetResponse> {
-      return request<AccessAnalyticsPostsGetResponse>(this._config, {
-        path: `/v2/access/analytics/posts/${encodeURIComponent(String(params.postId))}`,
-        method: 'GET',
-      });
-    }
-
-    /**
-     * Posts chart
-     */
-    getChart(params: AccessAnalyticsPostsGetChartParams): Promise<Record<string, AccessAnalyticsPostsGetChartResponseValue>> {
-      return request<Record<string, AccessAnalyticsPostsGetChartResponseValue>>(this._config, {
-        path: '/v2/access/analytics/posts/chart',
-        method: 'GET',
-        query: {
-          'startDate': params.startDate,
-          'endDate': params.endDate,
-          'withTotal': params.withTotal,
-          'by': params.by,
-        },
-      });
-    }
-
-    /**
-     * Top posts
-     */
-    getTop(params: AccessAnalyticsPostsGetTopParams): Promise<AccessAnalyticsPostsGetTopResponse> {
-      return request<AccessAnalyticsPostsGetTopResponse>(this._config, {
-        path: '/v2/access/analytics/posts/top',
-        method: 'GET',
-        query: {
-          'by': params.by,
-          'startDate': params.startDate,
-          'endDate': params.endDate,
-          'limit': params.limit,
-          'offset': params.offset,
-        },
-      });
-    }
-}
-
-class AccessAnalyticsPromotionsNamespace {
-  private _config: OFAuthConfig;
-
-  constructor(config: OFAuthConfig) {
-    this._config = config;
-  }
-
-    /**
-     * Promotions chart
-     */
-    getChart(params: AccessAnalyticsPromotionsGetChartParams): Promise<Record<string, AccessAnalyticsPromotionsGetChartResponseValue>> {
-      return request<Record<string, AccessAnalyticsPromotionsGetChartResponseValue>>(this._config, {
-        path: '/v2/access/analytics/promotions/chart',
-        method: 'GET',
-        query: {
-          'startDate': params.startDate,
-          'endDate': params.endDate,
-          'withTotal': params.withTotal,
-        },
-      });
-    }
-
-    /**
-     * Top promotions
-     */
-    getTop(params: AccessAnalyticsPromotionsGetTopParams): Promise<AccessAnalyticsPromotionsGetTopResponse> {
-      return request<AccessAnalyticsPromotionsGetTopResponse>(this._config, {
-        path: '/v2/access/analytics/promotions/top',
-        method: 'GET',
-        query: {
-          'limit': params.limit,
-          'offset': params.offset,
-          'startDate': params.startDate,
-          'endDate': params.endDate,
-        },
-      });
-    }
-}
-
-class AccessAnalyticsStoriesNamespace {
-  private _config: OFAuthConfig;
-
-  constructor(config: OFAuthConfig) {
-    this._config = config;
-  }
-
-    /**
-     * Stories chart
-     */
-    getChart(params: AccessAnalyticsStoriesGetChartParams): Promise<Record<string, AccessAnalyticsStoriesGetChartResponseValue>> {
-      return request<Record<string, AccessAnalyticsStoriesGetChartResponseValue>>(this._config, {
-        path: '/v2/access/analytics/stories/chart',
-        method: 'GET',
-        query: {
-          'startDate': params.startDate,
-          'endDate': params.endDate,
-          'withTotal': params.withTotal,
-          'by': params.by,
-        },
-      });
-    }
-
-    /**
-     * Top stories
-     */
-    getTop(params: AccessAnalyticsStoriesGetTopParams): Promise<AccessAnalyticsStoriesGetTopResponse> {
-      return request<AccessAnalyticsStoriesGetTopResponse>(this._config, {
-        path: '/v2/access/analytics/stories/top',
-        method: 'GET',
-        query: {
-          'by': params.by,
-          'startDate': params.startDate,
-          'endDate': params.endDate,
-          'limit': params.limit,
-          'offset': params.offset,
-        },
-      });
-    }
-}
-
-class AccessAnalyticsStreamsNamespace {
-  private _config: OFAuthConfig;
-
-  constructor(config: OFAuthConfig) {
-    this._config = config;
-  }
-
-    /**
-     * Streams chart
-     */
-    getChart(params: AccessAnalyticsStreamsGetChartParams): Promise<Record<string, AccessAnalyticsStreamsGetChartResponseValue>> {
-      return request<Record<string, AccessAnalyticsStreamsGetChartResponseValue>>(this._config, {
-        path: '/v2/access/analytics/streams/chart',
-        method: 'GET',
-        query: {
-          'startDate': params.startDate,
-          'endDate': params.endDate,
-          'withTotal': params.withTotal,
-          'by': params.by,
-        },
-      });
-    }
-
-    /**
-     * Top streams
-     */
-    getTop(params: AccessAnalyticsStreamsGetTopParams): Promise<AccessAnalyticsStreamsGetTopResponse> {
-      return request<AccessAnalyticsStreamsGetTopResponse>(this._config, {
-        path: '/v2/access/analytics/streams/top',
-        method: 'GET',
-        query: {
-          'by': params.by,
-          'startDate': params.startDate,
-          'endDate': params.endDate,
-          'limit': params.limit,
-          'offset': params.offset,
-        },
-      });
-    }
-}
-
-class AccessAnalyticsTrialsNamespace {
-  private _config: OFAuthConfig;
-
-  constructor(config: OFAuthConfig) {
-    this._config = config;
-  }
-
-    /**
-     * Trials chart
-     */
-    getChart(params: AccessAnalyticsTrialsGetChartParams): Promise<Record<string, AccessAnalyticsTrialsGetChartResponseValue>> {
-      return request<Record<string, AccessAnalyticsTrialsGetChartResponseValue>>(this._config, {
-        path: '/v2/access/analytics/trials/chart',
-        method: 'GET',
-        query: {
-          'startDate': params.startDate,
-          'endDate': params.endDate,
-          'withTotal': params.withTotal,
-        },
-      });
-    }
-
-    /**
-     * Top trials
-     */
-    getTop(params: AccessAnalyticsTrialsGetTopParams): Promise<AccessAnalyticsTrialsGetTopResponse> {
-      return request<AccessAnalyticsTrialsGetTopResponse>(this._config, {
-        path: '/v2/access/analytics/trials/top',
-        method: 'GET',
-        query: {
-          'limit': params.limit,
-          'offset': params.offset,
-          'startDate': params.startDate,
-          'endDate': params.endDate,
-        },
-      });
-    }
-}
-
-class AccessAnalyticsVisitorCountriesNamespace {
-  private _config: OFAuthConfig;
-
-  constructor(config: OFAuthConfig) {
-    this._config = config;
-  }
-
-    /**
-     * Visitor countries chart
-     */
-    getChart(params: AccessAnalyticsVisitorCountriesGetChartParams): Promise<AccessAnalyticsVisitorCountriesGetChartResponse> {
-      return request<AccessAnalyticsVisitorCountriesGetChartResponse>(this._config, {
-        path: '/v2/access/analytics/visitor-countries/chart',
-        method: 'GET',
-        query: {
-          'startDate': params.startDate,
-          'endDate': params.endDate,
-          'by': params.by,
-        },
-      });
-    }
-
-    /**
-     * Top visitor countries
-     */
-    getTop(params: AccessAnalyticsVisitorCountriesGetTopParams): Promise<AccessAnalyticsVisitorCountriesGetTopResponse> {
-      return request<AccessAnalyticsVisitorCountriesGetTopResponse>(this._config, {
-        path: '/v2/access/analytics/visitor-countries/top',
-        method: 'GET',
-        query: {
-          'startDate': params.startDate,
-          'endDate': params.endDate,
-          'by': params.by,
-        },
-      });
-    }
-}
-
-class AccessAnalyticsNamespace {
-  private _config: OFAuthConfig;
-
-  readonly campaigns: AccessAnalyticsCampaignsNamespace;
-  readonly earnings: AccessAnalyticsEarningsNamespace;
-  readonly massMessages: AccessAnalyticsMassMessagesNamespace;
-  readonly posts: AccessAnalyticsPostsNamespace;
-  readonly promotions: AccessAnalyticsPromotionsNamespace;
-  readonly stories: AccessAnalyticsStoriesNamespace;
-  readonly streams: AccessAnalyticsStreamsNamespace;
-  readonly trials: AccessAnalyticsTrialsNamespace;
-  readonly visitorCountries: AccessAnalyticsVisitorCountriesNamespace;
-
-  constructor(config: OFAuthConfig) {
-    this._config = config;
-    this.campaigns = new AccessAnalyticsCampaignsNamespace(config);
-    this.earnings = new AccessAnalyticsEarningsNamespace(config);
-    this.massMessages = new AccessAnalyticsMassMessagesNamespace(config);
-    this.posts = new AccessAnalyticsPostsNamespace(config);
-    this.promotions = new AccessAnalyticsPromotionsNamespace(config);
-    this.stories = new AccessAnalyticsStoriesNamespace(config);
-    this.streams = new AccessAnalyticsStreamsNamespace(config);
-    this.trials = new AccessAnalyticsTrialsNamespace(config);
-    this.visitorCountries = new AccessAnalyticsVisitorCountriesNamespace(config);
-  }
-}
-
-class AccessChatsNamespace {
-  private _config: OFAuthConfig;
-
-  constructor(config: OFAuthConfig) {
-    this._config = config;
-  }
-
-    /**
-     * Chats list
-     */
-    list(params: AccessChatsListParams): Promise<AccessChatsListResponse> {
-      return request<AccessChatsListResponse>(this._config, {
-        path: '/v2/access/chats',
-        method: 'GET',
-        query: {
-          'limit': params.limit,
-          'offset': params.offset,
-          'order': params.order,
-          'filter': params.filter,
-          'query': params.query,
-          'userListId': params.userListId,
-        },
-      });
-    }
-	
-	    /**
-	     * Chats list
-     * 
-     * Returns an async iterator that automatically paginates through all results.
-     */
-    async *iterate(params: Omit<AccessChatsListParams, 'limit' | 'offset' | 'marker'> & PaginationOptions): AsyncGenerator<AccessChatsListItem, void, unknown> {
+    async *iterate(params: Omit<AccountConnectionsListParams, 'limit' | 'offset' | 'marker'> & PaginationOptions): AsyncGenerator<AccountConnectionsListItem, void, unknown> {
       let offset = 0;
       let fetched = 0;
       const limit = params?.pageSize ?? 20;
@@ -8157,7 +7428,7 @@ class AccessChatsNamespace {
           ...params,
           limit: Math.min(limit, maxItems - fetched),
           offset,
-        } as AccessChatsListParams);
+        } as AccountConnectionsListParams);
         
         for (const item of response.list) {
           if (fetched >= maxItems) return;
@@ -8177,585 +7448,97 @@ class AccessChatsNamespace {
 	    }
 
     /**
-     * Get chat media
+     * Invalidate connection
      */
-    listMedia(params: AccessChatsListMediaParams): Promise<AccessChatsListMediaResponse> {
-      return request<AccessChatsListMediaResponse>(this._config, {
-        path: `/v2/access/chats/${encodeURIComponent(String(params.userId))}/media`,
-        method: 'GET',
-        query: {
-          'limit': params.limit,
-          'offset': params.offset,
-          'skip_users': params.skipUsers,
-          'last_id': params.lastId,
-          'opened': params.opened,
-          'type': params.type,
-        },
+    invalidate(params: AccountConnectionsInvalidateParams): Promise<unknown> {
+      return request<unknown>(this._config, {
+        path: `/v2/account/connections/${encodeURIComponent(String(params.connectionId))}/invalidate`,
+        method: 'POST',
       });
     }
-	
-	    /**
-	     * Get chat media
-     * 
-     * Returns an async iterator that automatically paginates through all results.
-     */
-    async *iterateMedia(params: Omit<AccessChatsListMediaParams, 'limit' | 'offset' | 'marker'> & PaginationOptions): AsyncGenerator<AccessChatsListMediaItem, void, unknown> {
-      let offset = 0;
-      let fetched = 0;
-      const limit = params?.pageSize ?? 20;
-      const maxItems = params?.maxItems ?? Infinity;
-      
-      while (fetched < maxItems) {
-        const response = await this.listMedia({
-          ...params,
-          limit: Math.min(limit, maxItems - fetched),
-          offset,
-        } as AccessChatsListMediaParams);
-        
-        for (const item of response.list) {
-          if (fetched >= maxItems) return;
-          yield item;
-          fetched++;
-	        }
-	        
-	        if (!response.hasMore) return;
-	        const nextOffset = (response as { nextOffset?: number | string | null }).nextOffset;
-	        offset =
-	          typeof nextOffset === 'number'
-	            ? nextOffset
-	            : typeof nextOffset === 'string' && nextOffset.trim() !== '' && Number.isFinite(Number(nextOffset))
-	              ? Number(nextOffset)
-	              : offset + response.list.length;
-	      }
-	    }
 
     /**
-     * Chat messages
+     * Get connection settings
      */
-    listMessages(params: AccessChatsListMessagesParams): Promise<AccessChatsListMessagesResponse> {
-      return request<AccessChatsListMessagesResponse>(this._config, {
-        path: `/v2/access/chats/${encodeURIComponent(String(params.userId))}/messages`,
+    getSettings(params: AccountConnectionsGetSettingsParams): Promise<AccountConnectionsGetSettingsResponse> {
+      return request<AccountConnectionsGetSettingsResponse>(this._config, {
+        path: `/v2/account/connections/${encodeURIComponent(String(params.connectionId))}/settings`,
         method: 'GET',
-        query: {
-          'limit': params.limit,
-          'offset': params.offset,
-          'query': params.query,
-          'id': params.id,
-          'first_id': params.firstId,
-        },
       });
     }
-	
-	    /**
-	     * Chat messages
-     * 
-     * Returns an async iterator that automatically paginates through all results.
-     */
-    async *iterateMessages(params: Omit<AccessChatsListMessagesParams, 'limit' | 'offset' | 'marker'> & PaginationOptions): AsyncGenerator<AccessChatsListMessagesItem, void, unknown> {
-      let offset = 0;
-      let fetched = 0;
-      const limit = params?.pageSize ?? 20;
-      const maxItems = params?.maxItems ?? Infinity;
-      
-      while (fetched < maxItems) {
-        const response = await this.listMessages({
-          ...params,
-          limit: Math.min(limit, maxItems - fetched),
-          offset,
-        } as AccessChatsListMessagesParams);
-        
-        for (const item of response.list) {
-          if (fetched >= maxItems) return;
-          yield item;
-          fetched++;
-	        }
-	        
-	        if (!response.hasMore) return;
-	        const nextOffset = (response as { nextOffset?: number | string | null }).nextOffset;
-	        offset =
-	          typeof nextOffset === 'number'
-	            ? nextOffset
-	            : typeof nextOffset === 'string' && nextOffset.trim() !== '' && Number.isFinite(Number(nextOffset))
-	              ? Number(nextOffset)
-	              : offset + response.list.length;
-	      }
-	    }
 
     /**
-     * Send chat message
+     * Update connection settings
      */
-    createMessages(params: AccessChatsCreateMessagesParams): Promise<AccessChatsCreateMessagesResponse> {
-      return request<AccessChatsCreateMessagesResponse>(this._config, {
-        path: `/v2/access/chats/${encodeURIComponent(String(params.userId))}/messages`,
+    updateSettings(params: AccountConnectionsUpdateSettingsParams): Promise<AccountConnectionsUpdateSettingsResponse> {
+      return request<AccountConnectionsUpdateSettingsResponse>(this._config, {
+        path: `/v2/account/connections/${encodeURIComponent(String(params.connectionId))}/settings`,
+        method: 'PATCH',
+        body: params.body,
+      });
+    }
+
+    /**
+     * Import connection
+     */
+    createImport(params: AccountConnectionsCreateImportParams): Promise<AccountConnectionsCreateImportResponse> {
+      return request<AccountConnectionsCreateImportResponse>(this._config, {
+        path: '/v2/account/connections/import',
         method: 'POST',
         body: params.body,
       });
     }
 
     /**
-     * Unsend chat message
+     * Update imported connection session
      */
-    deleteMessages(params: AccessChatsDeleteMessagesParams): Promise<AccessChatsDeleteMessagesResponse> {
-      return request<AccessChatsDeleteMessagesResponse>(this._config, {
-        path: `/v2/access/chats/${encodeURIComponent(String(params.userId))}/messages/${encodeURIComponent(String(params.messageId))}`,
-        method: 'DELETE',
+    updateImport(params: AccountConnectionsUpdateImportParams): Promise<AccountConnectionsUpdateImportResponse> {
+      return request<AccountConnectionsUpdateImportResponse>(this._config, {
+        path: `/v2/account/connections/import/${encodeURIComponent(String(params.connectionId))}`,
+        method: 'PATCH',
         body: params.body,
       });
     }
 }
 
-class AccessEarningsNamespace {
+class AccountNamespace {
   private _config: OFAuthConfig;
+
+  readonly connections: AccountConnectionsNamespace;
 
   constructor(config: OFAuthConfig) {
     this._config = config;
+    this.connections = new AccountConnectionsNamespace(config);
   }
 
     /**
-     * List chargebacks
+     * Whoami
      */
-    listChargebacks(params: AccessEarningsListChargebacksParams): Promise<AccessEarningsListChargebacksResponse> {
-      return request<AccessEarningsListChargebacksResponse>(this._config, {
-        path: '/v2/access/earnings/chargebacks',
-        method: 'GET',
-        query: {
-          'startDate': params.startDate,
-          'endDate': params.endDate,
-          'marker': params.marker,
-        },
-      });
-    }
-	
-	    /**
-	     * List chargebacks
-     * 
-     * Returns an async iterator that automatically paginates through all results.
-     */
-    async *iterateChargebacks(params: Omit<AccessEarningsListChargebacksParams, 'limit' | 'offset' | 'marker'> & PaginationOptions): AsyncGenerator<AccessEarningsListChargebacksItem, void, unknown> {
-      let marker: string | undefined;
-      let fetched = 0;
-      const maxItems = params?.maxItems ?? Infinity;
-      
-      while (fetched < maxItems) {
-        const response = await this.listChargebacks({
-          ...params,
-          marker,
-        } as AccessEarningsListChargebacksParams);
-        
-        for (const item of response.list) {
-          if (fetched >= maxItems) return;
-          yield item;
-          fetched++;
-	        }
-	        
-	        if (!response.hasMore) return;
-	        marker = response.nextMarker == null ? undefined : String(response.nextMarker);
-	      }
-	    }
-
-    /**
-     * Get earnings chart
-     */
-    getChart(params: AccessEarningsGetChartParams): Promise<AccessEarningsGetChartResponse> {
-      return request<AccessEarningsGetChartResponse>(this._config, {
-        path: '/v2/access/earnings/chart',
-        method: 'GET',
-        query: {
-          'startDate': params.startDate,
-          'endDate': params.endDate,
-          'by': params.by,
-          'withTotal': params.withTotal,
-          'monthlyTotal': params.monthlyTotal,
-        },
-      });
-    }
-
-    /**
-     * List transactions
-     */
-    listTransactions(params: AccessEarningsListTransactionsParams): Promise<AccessEarningsListTransactionsResponse> {
-      return request<AccessEarningsListTransactionsResponse>(this._config, {
-        path: '/v2/access/earnings/transactions',
-        method: 'GET',
-        query: {
-          'startDate': params.startDate,
-          'marker': params.marker,
-          'type': params.type,
-          'tipsSource': params.tipsSource,
-        },
-      });
-    }
-	
-	    /**
-	     * List transactions
-     * 
-     * Returns an async iterator that automatically paginates through all results.
-     */
-    async *iterateTransactions(params: Omit<AccessEarningsListTransactionsParams, 'limit' | 'offset' | 'marker'> & PaginationOptions): AsyncGenerator<AccessEarningsListTransactionsItem, void, unknown> {
-      let marker: string | undefined;
-      let fetched = 0;
-      const maxItems = params?.maxItems ?? Infinity;
-      
-      while (fetched < maxItems) {
-        const response = await this.listTransactions({
-          ...params,
-          marker,
-        } as AccessEarningsListTransactionsParams);
-        
-        for (const item of response.list) {
-          if (fetched >= maxItems) return;
-          yield item;
-          fetched++;
-	        }
-	        
-	        if (!response.hasMore) return;
-	        marker = response.nextMarker == null ? undefined : String(response.nextMarker);
-	      }
-	    }
-}
-
-class AccessPromotionsTrackingLinksNamespace {
-  private _config: OFAuthConfig;
-
-  constructor(config: OFAuthConfig) {
-    this._config = config;
-  }
-
-    /**
-     * List tracking links
-     */
-    list(params: AccessPromotionsTrackingLinksListParams): Promise<AccessPromotionsTrackingLinksListResponse> {
-      return request<AccessPromotionsTrackingLinksListResponse>(this._config, {
-        path: '/v2/access/promotions/tracking-links',
-        method: 'GET',
-        query: {
-          'limit': params.limit,
-          'offset': params.offset,
-          'pagination': params.pagination,
-          'with_deleted': params.withDeleted,
-          'sorting_deleted': params.sortingDeleted,
-          'stats': params.stats,
-        },
-      });
-    }
-	
-	    /**
-	     * List tracking links
-     * 
-     * Returns an async iterator that automatically paginates through all results.
-     */
-    async *iterate(params: Omit<AccessPromotionsTrackingLinksListParams, 'limit' | 'offset' | 'marker'> & PaginationOptions): AsyncGenerator<AccessPromotionsTrackingLinksListItem, void, unknown> {
-      let offset = 0;
-      let fetched = 0;
-      const limit = params?.pageSize ?? 20;
-      const maxItems = params?.maxItems ?? Infinity;
-      
-      while (fetched < maxItems) {
-        const response = await this.list({
-          ...params,
-          limit: Math.min(limit, maxItems - fetched),
-          offset,
-        } as AccessPromotionsTrackingLinksListParams);
-        
-        for (const item of response.list) {
-          if (fetched >= maxItems) return;
-          yield item;
-          fetched++;
-	        }
-	        
-	        if (!response.hasMore) return;
-	        const nextOffset = (response as { nextOffset?: number | string | null }).nextOffset;
-	        offset =
-	          typeof nextOffset === 'number'
-	            ? nextOffset
-	            : typeof nextOffset === 'string' && nextOffset.trim() !== '' && Number.isFinite(Number(nextOffset))
-	              ? Number(nextOffset)
-	              : offset + response.list.length;
-	      }
-	    }
-
-    /**
-     * Create tracking link
-     */
-    create(params: AccessPromotionsTrackingLinksCreateParams): Promise<Array<AccessPromotionsTrackingLinksCreateResponseOption0Item> | AccessPromotionsTrackingLinksCreateResponseOption1> {
-      return request<Array<AccessPromotionsTrackingLinksCreateResponseOption0Item> | AccessPromotionsTrackingLinksCreateResponseOption1>(this._config, {
-        path: '/v2/access/promotions/tracking-links',
-        method: 'POST',
-        body: params.body,
-      });
-    }
-
-    /**
-     * Get tracking link
-     */
-    get(params: AccessPromotionsTrackingLinksGetParams): Promise<AccessPromotionsTrackingLinksGetResponse> {
-      return request<AccessPromotionsTrackingLinksGetResponse>(this._config, {
-        path: `/v2/access/promotions/tracking-links/${encodeURIComponent(String(params.trackingLinkId))}`,
+    whoami(): Promise<AccountWhoamiResponse> {
+      return request<AccountWhoamiResponse>(this._config, {
+        path: '/v2/account/whoami',
         method: 'GET',
       });
     }
 
     /**
-     * Update tracking link
+     * Get organization settings
      */
-    replace(params: AccessPromotionsTrackingLinksReplaceParams): Promise<AccessPromotionsTrackingLinksReplaceResponse> {
-      return request<AccessPromotionsTrackingLinksReplaceResponse>(this._config, {
-        path: `/v2/access/promotions/tracking-links/${encodeURIComponent(String(params.trackingLinkId))}`,
-        method: 'PUT',
-        body: params.body,
-      });
-    }
-
-    /**
-     * Delete tracking link
-     */
-    delete(params: AccessPromotionsTrackingLinksDeleteParams): Promise<AccessPromotionsTrackingLinksDeleteResponse> {
-      return request<AccessPromotionsTrackingLinksDeleteResponse>(this._config, {
-        path: `/v2/access/promotions/tracking-links/${encodeURIComponent(String(params.trackingLinkId))}`,
-        method: 'DELETE',
-      });
-    }
-
-    /**
-     * Get tracking link claimers
-     */
-    listClaimers(params: AccessPromotionsTrackingLinksListClaimersParams): Promise<AccessPromotionsTrackingLinksListClaimersResponse> {
-      return request<AccessPromotionsTrackingLinksListClaimersResponse>(this._config, {
-        path: `/v2/access/promotions/tracking-links/${encodeURIComponent(String(params.trackingLinkId))}/claimers`,
+    getSettings(): Promise<AccountGetSettingsResponse> {
+      return request<AccountGetSettingsResponse>(this._config, {
+        path: '/v2/account/settings',
         method: 'GET',
       });
     }
 
     /**
-     * Share tracking link access
+     * Update organization settings
      */
-    createShareAccess(params: AccessPromotionsTrackingLinksCreateShareAccessParams): Promise<AccessPromotionsTrackingLinksCreateShareAccessResponse> {
-      return request<AccessPromotionsTrackingLinksCreateShareAccessResponse>(this._config, {
-        path: '/v2/access/promotions/tracking-links/share-access',
-        method: 'POST',
+    updateSettings(params: AccountUpdateSettingsParams): Promise<AccountUpdateSettingsResponse> {
+      return request<AccountUpdateSettingsResponse>(this._config, {
+        path: '/v2/account/settings',
+        method: 'PATCH',
         body: params.body,
-      });
-    }
-
-    /**
-     * Revoke tracking link access
-     */
-    deleteShareAccess(params: AccessPromotionsTrackingLinksDeleteShareAccessParams): Promise<AccessPromotionsTrackingLinksDeleteShareAccessResponse> {
-      return request<AccessPromotionsTrackingLinksDeleteShareAccessResponse>(this._config, {
-        path: '/v2/access/promotions/tracking-links/share-access',
-        method: 'DELETE',
-        body: params.body,
-      });
-    }
-}
-
-class AccessPromotionsTrialLinksNamespace {
-  private _config: OFAuthConfig;
-
-  constructor(config: OFAuthConfig) {
-    this._config = config;
-  }
-
-    /**
-     * List trial links
-     */
-    list(params: AccessPromotionsTrialLinksListParams): Promise<AccessPromotionsTrialLinksListResponseOption0 | Array<AccessPromotionsTrialLinksListResponseOption1Item>> {
-      return request<AccessPromotionsTrialLinksListResponseOption0 | Array<AccessPromotionsTrialLinksListResponseOption1Item>>(this._config, {
-        path: '/v2/access/promotions/trial-links',
-        method: 'GET',
-        query: {
-          'limit': params.limit,
-          'offset': params.offset,
-        },
-      });
-    }
-
-    /**
-     * Create trial link
-     */
-    create(params: AccessPromotionsTrialLinksCreateParams): Promise<AccessPromotionsTrialLinksCreateResponse> {
-      return request<AccessPromotionsTrialLinksCreateResponse>(this._config, {
-        path: '/v2/access/promotions/trial-links',
-        method: 'POST',
-        body: params.body,
-      });
-    }
-
-    /**
-     * Get trial link
-     */
-    get(params: AccessPromotionsTrialLinksGetParams): Promise<AccessPromotionsTrialLinksGetResponse> {
-      return request<AccessPromotionsTrialLinksGetResponse>(this._config, {
-        path: `/v2/access/promotions/trial-links/${encodeURIComponent(String(params.trialLinkId))}`,
-        method: 'GET',
-      });
-    }
-
-    /**
-     * Update trial link
-     */
-    replace(params: AccessPromotionsTrialLinksReplaceParams): Promise<AccessPromotionsTrialLinksReplaceResponse> {
-      return request<AccessPromotionsTrialLinksReplaceResponse>(this._config, {
-        path: `/v2/access/promotions/trial-links/${encodeURIComponent(String(params.trialLinkId))}`,
-        method: 'PUT',
-        body: params.body,
-      });
-    }
-
-    /**
-     * Delete trial link
-     */
-    delete(params: AccessPromotionsTrialLinksDeleteParams): Promise<AccessPromotionsTrialLinksDeleteResponse> {
-      return request<AccessPromotionsTrialLinksDeleteResponse>(this._config, {
-        path: `/v2/access/promotions/trial-links/${encodeURIComponent(String(params.trialLinkId))}`,
-        method: 'DELETE',
-      });
-    }
-
-    /**
-     * Share trial link access
-     */
-    createShareAccess(params: AccessPromotionsTrialLinksCreateShareAccessParams): Promise<AccessPromotionsTrialLinksCreateShareAccessResponse> {
-      return request<AccessPromotionsTrialLinksCreateShareAccessResponse>(this._config, {
-        path: '/v2/access/promotions/trial-links/share-access',
-        method: 'POST',
-        body: params.body,
-      });
-    }
-
-    /**
-     * Revoke trial link access
-     */
-    deleteShareAccess(params: AccessPromotionsTrialLinksDeleteShareAccessParams): Promise<AccessPromotionsTrialLinksDeleteShareAccessResponse> {
-      return request<AccessPromotionsTrialLinksDeleteShareAccessResponse>(this._config, {
-        path: '/v2/access/promotions/trial-links/share-access',
-        method: 'DELETE',
-        body: params.body,
-      });
-    }
-}
-
-class AccessPromotionsNamespace {
-  private _config: OFAuthConfig;
-
-  readonly trackingLinks: AccessPromotionsTrackingLinksNamespace;
-  readonly trialLinks: AccessPromotionsTrialLinksNamespace;
-
-  constructor(config: OFAuthConfig) {
-    this._config = config;
-    this.trackingLinks = new AccessPromotionsTrackingLinksNamespace(config);
-    this.trialLinks = new AccessPromotionsTrialLinksNamespace(config);
-  }
-
-    /**
-     * List promotions
-     */
-    list(params: AccessPromotionsListParams): Promise<Array<AccessPromotionsListResponseOption0Item> | AccessPromotionsListResponseOption1> {
-      return request<Array<AccessPromotionsListResponseOption0Item> | AccessPromotionsListResponseOption1>(this._config, {
-        path: '/v2/access/promotions',
-        method: 'GET',
-        query: {
-          'limit': params.limit,
-          'offset': params.offset,
-        },
-      });
-    }
-
-    /**
-     * Create promotion
-     */
-    create(params: AccessPromotionsCreateParams): Promise<Array<AccessPromotionsCreateResponseOption0Item> | AccessPromotionsCreateResponseOption1> {
-      return request<Array<AccessPromotionsCreateResponseOption0Item> | AccessPromotionsCreateResponseOption1>(this._config, {
-        path: '/v2/access/promotions',
-        method: 'POST',
-        body: params.body,
-      });
-    }
-
-    /**
-     * Update promotion
-     */
-    replace(params: AccessPromotionsReplaceParams): Promise<AccessPromotionsReplaceResponse> {
-      return request<AccessPromotionsReplaceResponse>(this._config, {
-        path: `/v2/access/promotions/${encodeURIComponent(String(params.promotionId))}`,
-        method: 'PUT',
-        body: params.body,
-      });
-    }
-
-    /**
-     * Delete promotion
-     */
-    delete(params: AccessPromotionsDeleteParams): Promise<AccessPromotionsDeleteResponse> {
-      return request<AccessPromotionsDeleteResponse>(this._config, {
-        path: `/v2/access/promotions/${encodeURIComponent(String(params.promotionId))}`,
-        method: 'DELETE',
-      });
-    }
-
-    /**
-     * Stop promotion
-     */
-    createStop(params: AccessPromotionsCreateStopParams): Promise<AccessPromotionsCreateStopResponse> {
-      return request<AccessPromotionsCreateStopResponse>(this._config, {
-        path: `/v2/access/promotions/${encodeURIComponent(String(params.promotionId))}/stop`,
-        method: 'POST',
-      });
-    }
-
-    /**
-     * List bundles
-     */
-    listBundles(params: AccessPromotionsListBundlesParams): Promise<Array<AccessPromotionsListBundlesResponseOption0Item> | AccessPromotionsListBundlesResponseOption1> {
-      return request<Array<AccessPromotionsListBundlesResponseOption0Item> | AccessPromotionsListBundlesResponseOption1>(this._config, {
-        path: '/v2/access/promotions/bundles',
-        method: 'GET',
-        query: {
-          'limit': params.limit,
-          'offset': params.offset,
-        },
-      });
-    }
-
-    /**
-     * Create bundle
-     */
-    createBundles(params: AccessPromotionsCreateBundlesParams): Promise<AccessPromotionsCreateBundlesResponse> {
-      return request<AccessPromotionsCreateBundlesResponse>(this._config, {
-        path: '/v2/access/promotions/bundles',
-        method: 'POST',
-        body: params.body,
-      });
-    }
-
-    /**
-     * Get bundle
-     */
-    getBundles(params: AccessPromotionsGetBundlesParams): Promise<AccessPromotionsGetBundlesResponse> {
-      return request<AccessPromotionsGetBundlesResponse>(this._config, {
-        path: `/v2/access/promotions/bundles/${encodeURIComponent(String(params.bundleId))}`,
-        method: 'GET',
-      });
-    }
-
-    /**
-     * Update bundle
-     */
-    replaceBundles(params: AccessPromotionsReplaceBundlesParams): Promise<AccessPromotionsReplaceBundlesResponse> {
-      return request<AccessPromotionsReplaceBundlesResponse>(this._config, {
-        path: `/v2/access/promotions/bundles/${encodeURIComponent(String(params.bundleId))}`,
-        method: 'PUT',
-        body: params.body,
-      });
-    }
-
-    /**
-     * Delete bundle
-     */
-    deleteBundles(params: AccessPromotionsDeleteBundlesParams): Promise<AccessPromotionsDeleteBundlesResponse> {
-      return request<AccessPromotionsDeleteBundlesResponse>(this._config, {
-        path: `/v2/access/promotions/bundles/${encodeURIComponent(String(params.bundleId))}`,
-        method: 'DELETE',
       });
     }
 }
@@ -8946,7 +7729,7 @@ class AccessSelfNamespace {
 	    }
 }
 
-class AccessSubscribersNamespace {
+class AccessEarningsNamespace {
   private _config: OFAuthConfig;
 
   constructor(config: OFAuthConfig) {
@@ -8954,135 +7737,468 @@ class AccessSubscribersNamespace {
   }
 
     /**
-     * List subscribers
+     * Get earnings chart
      */
-    list(params: AccessSubscribersListParams): Promise<AccessSubscribersListResponse> {
-      return request<AccessSubscribersListResponse>(this._config, {
-        path: '/v2/access/subscribers',
+    getChart(params: AccessEarningsGetChartParams): Promise<AccessEarningsGetChartResponse> {
+      return request<AccessEarningsGetChartResponse>(this._config, {
+        path: '/v2/access/earnings/chart',
         method: 'GET',
         query: {
-          'query': params.query,
-          'filter': params.filter,
-          'type': params.type,
           'startDate': params.startDate,
           'endDate': params.endDate,
-          'latestType': params.latestType,
-          'limit': params.limit,
-          'offset': params.offset,
+          'by': params.by,
+          'withTotal': params.withTotal,
+          'monthlyTotal': params.monthlyTotal,
         },
       });
     }
-	
-	    /**
-	     * List subscribers
-     * 
-     * Returns an async iterator that automatically paginates through all results.
-     */
-    async *iterate(params: Omit<AccessSubscribersListParams, 'limit' | 'offset' | 'marker'> & PaginationOptions): AsyncGenerator<AccessSubscribersListItem, void, unknown> {
-      let offset = 0;
-      let fetched = 0;
-      const limit = params?.pageSize ?? 20;
-      const maxItems = params?.maxItems ?? Infinity;
-      
-      while (fetched < maxItems) {
-        const response = await this.list({
-          ...params,
-          limit: Math.min(limit, maxItems - fetched),
-          offset,
-        } as AccessSubscribersListParams);
-        
-        for (const item of response.list) {
-          if (fetched >= maxItems) return;
-          yield item;
-          fetched++;
-	        }
-	        
-	        if (!response.hasMore) return;
-	        const nextOffset = (response as { nextOffset?: number | string | null }).nextOffset;
-	        offset =
-	          typeof nextOffset === 'number'
-	            ? nextOffset
-	            : typeof nextOffset === 'string' && nextOffset.trim() !== '' && Number.isFinite(Number(nextOffset))
-	              ? Number(nextOffset)
-	              : offset + response.list.length;
-	      }
-	    }
 
     /**
-     * Set custom name for subscriber
+     * List transactions
      */
-    setCustomName(params: AccessSubscribersSetCustomNameParams): Promise<Record<string, any>> {
-      return request<Record<string, any>>(this._config, {
-        path: `/v2/access/subscribers/${encodeURIComponent(String(params.userId))}/custom-name`,
-        method: 'PUT',
-        body: params.body,
-      });
-    }
-
-    /**
-     * Apply discount to subscriber
-     */
-    setDiscount(params: AccessSubscribersSetDiscountParams): Promise<Record<string, any>> {
-      return request<Record<string, any>>(this._config, {
-        path: `/v2/access/subscribers/${encodeURIComponent(String(params.userId))}/discount`,
-        method: 'PUT',
-        body: params.body,
-      });
-    }
-
-    /**
-     * Update subscriber note
-     */
-    setNote(params: AccessSubscribersSetNoteParams): Promise<Record<string, any>> {
-      return request<Record<string, any>>(this._config, {
-        path: `/v2/access/subscribers/${encodeURIComponent(String(params.userId))}/note`,
-        method: 'PUT',
-        body: params.body,
-      });
-    }
-}
-
-class AccessSubscriptionsNamespace {
-  private _config: OFAuthConfig;
-
-  constructor(config: OFAuthConfig) {
-    this._config = config;
-  }
-
-    /**
-     * List subscriptions
-     */
-    list(params: AccessSubscriptionsListParams): Promise<AccessSubscriptionsListResponse> {
-      return request<AccessSubscriptionsListResponse>(this._config, {
-        path: '/v2/access/subscriptions',
+    listTransactions(params: AccessEarningsListTransactionsParams): Promise<AccessEarningsListTransactionsResponse> {
+      return request<AccessEarningsListTransactionsResponse>(this._config, {
+        path: '/v2/access/earnings/transactions',
         method: 'GET',
         query: {
-          'limit': params.limit,
-          'offset': params.offset,
-          'query': params.query,
-          'filter': params.filter,
+          'startDate': params.startDate,
+          'marker': params.marker,
           'type': params.type,
+          'tipsSource': params.tipsSource,
         },
       });
     }
 	
 	    /**
-	     * List subscriptions
+	     * List transactions
      * 
      * Returns an async iterator that automatically paginates through all results.
      */
-    async *iterate(params: Omit<AccessSubscriptionsListParams, 'limit' | 'offset' | 'marker'> & PaginationOptions): AsyncGenerator<AccessSubscriptionsListItem, void, unknown> {
+    async *iterateTransactions(params: Omit<AccessEarningsListTransactionsParams, 'limit' | 'offset' | 'marker'> & PaginationOptions): AsyncGenerator<AccessEarningsListTransactionsItem, void, unknown> {
+      let marker: string | undefined;
+      let fetched = 0;
+      const maxItems = params?.maxItems ?? Infinity;
+      
+      while (fetched < maxItems) {
+        const response = await this.listTransactions({
+          ...params,
+          marker,
+        } as AccessEarningsListTransactionsParams);
+        
+        for (const item of response.list) {
+          if (fetched >= maxItems) return;
+          yield item;
+          fetched++;
+	        }
+	        
+	        if (!response.hasMore) return;
+	        marker = response.nextMarker == null ? undefined : String(response.nextMarker);
+	      }
+	    }
+
+    /**
+     * List chargebacks
+     */
+    listChargebacks(params: AccessEarningsListChargebacksParams): Promise<AccessEarningsListChargebacksResponse> {
+      return request<AccessEarningsListChargebacksResponse>(this._config, {
+        path: '/v2/access/earnings/chargebacks',
+        method: 'GET',
+        query: {
+          'startDate': params.startDate,
+          'endDate': params.endDate,
+          'marker': params.marker,
+        },
+      });
+    }
+	
+	    /**
+	     * List chargebacks
+     * 
+     * Returns an async iterator that automatically paginates through all results.
+     */
+    async *iterateChargebacks(params: Omit<AccessEarningsListChargebacksParams, 'limit' | 'offset' | 'marker'> & PaginationOptions): AsyncGenerator<AccessEarningsListChargebacksItem, void, unknown> {
+      let marker: string | undefined;
+      let fetched = 0;
+      const maxItems = params?.maxItems ?? Infinity;
+      
+      while (fetched < maxItems) {
+        const response = await this.listChargebacks({
+          ...params,
+          marker,
+        } as AccessEarningsListChargebacksParams);
+        
+        for (const item of response.list) {
+          if (fetched >= maxItems) return;
+          yield item;
+          fetched++;
+	        }
+	        
+	        if (!response.hasMore) return;
+	        marker = response.nextMarker == null ? undefined : String(response.nextMarker);
+	      }
+	    }
+}
+
+class AccessAnalyticsPostsNamespace {
+  private _config: OFAuthConfig;
+
+  constructor(config: OFAuthConfig) {
+    this._config = config;
+  }
+
+    /**
+     * Post stats
+     */
+    get(params: AccessAnalyticsPostsGetParams): Promise<AccessAnalyticsPostsGetResponse> {
+      return request<AccessAnalyticsPostsGetResponse>(this._config, {
+        path: `/v2/access/analytics/posts/${encodeURIComponent(String(params.postId))}`,
+        method: 'GET',
+      });
+    }
+
+    /**
+     * Posts chart
+     */
+    getChart(params: AccessAnalyticsPostsGetChartParams): Promise<Record<string, AccessAnalyticsPostsGetChartResponseValue>> {
+      return request<Record<string, AccessAnalyticsPostsGetChartResponseValue>>(this._config, {
+        path: '/v2/access/analytics/posts/chart',
+        method: 'GET',
+        query: {
+          'startDate': params.startDate,
+          'endDate': params.endDate,
+          'withTotal': params.withTotal,
+          'by': params.by,
+        },
+      });
+    }
+
+    /**
+     * Top posts
+     */
+    getTop(params: AccessAnalyticsPostsGetTopParams): Promise<AccessAnalyticsPostsGetTopResponse> {
+      return request<AccessAnalyticsPostsGetTopResponse>(this._config, {
+        path: '/v2/access/analytics/posts/top',
+        method: 'GET',
+        query: {
+          'by': params.by,
+          'startDate': params.startDate,
+          'endDate': params.endDate,
+          'limit': params.limit,
+          'offset': params.offset,
+        },
+      });
+    }
+}
+
+class AccessAnalyticsStreamsNamespace {
+  private _config: OFAuthConfig;
+
+  constructor(config: OFAuthConfig) {
+    this._config = config;
+  }
+
+    /**
+     * Streams chart
+     */
+    getChart(params: AccessAnalyticsStreamsGetChartParams): Promise<Record<string, AccessAnalyticsStreamsGetChartResponseValue>> {
+      return request<Record<string, AccessAnalyticsStreamsGetChartResponseValue>>(this._config, {
+        path: '/v2/access/analytics/streams/chart',
+        method: 'GET',
+        query: {
+          'startDate': params.startDate,
+          'endDate': params.endDate,
+          'withTotal': params.withTotal,
+          'by': params.by,
+        },
+      });
+    }
+
+    /**
+     * Top streams
+     */
+    getTop(params: AccessAnalyticsStreamsGetTopParams): Promise<AccessAnalyticsStreamsGetTopResponse> {
+      return request<AccessAnalyticsStreamsGetTopResponse>(this._config, {
+        path: '/v2/access/analytics/streams/top',
+        method: 'GET',
+        query: {
+          'by': params.by,
+          'startDate': params.startDate,
+          'endDate': params.endDate,
+          'limit': params.limit,
+          'offset': params.offset,
+        },
+      });
+    }
+}
+
+class AccessAnalyticsStoriesNamespace {
+  private _config: OFAuthConfig;
+
+  constructor(config: OFAuthConfig) {
+    this._config = config;
+  }
+
+    /**
+     * Stories chart
+     */
+    getChart(params: AccessAnalyticsStoriesGetChartParams): Promise<Record<string, AccessAnalyticsStoriesGetChartResponseValue>> {
+      return request<Record<string, AccessAnalyticsStoriesGetChartResponseValue>>(this._config, {
+        path: '/v2/access/analytics/stories/chart',
+        method: 'GET',
+        query: {
+          'startDate': params.startDate,
+          'endDate': params.endDate,
+          'withTotal': params.withTotal,
+          'by': params.by,
+        },
+      });
+    }
+
+    /**
+     * Top stories
+     */
+    getTop(params: AccessAnalyticsStoriesGetTopParams): Promise<AccessAnalyticsStoriesGetTopResponse> {
+      return request<AccessAnalyticsStoriesGetTopResponse>(this._config, {
+        path: '/v2/access/analytics/stories/top',
+        method: 'GET',
+        query: {
+          'by': params.by,
+          'startDate': params.startDate,
+          'endDate': params.endDate,
+          'limit': params.limit,
+          'offset': params.offset,
+        },
+      });
+    }
+}
+
+class AccessAnalyticsMassMessagesNamespace {
+  private _config: OFAuthConfig;
+
+  constructor(config: OFAuthConfig) {
+    this._config = config;
+  }
+
+    /**
+     * Mass messages chart
+     */
+    getChart(params: AccessAnalyticsMassMessagesGetChartParams): Promise<AccessAnalyticsMassMessagesGetChartResponse> {
+      return request<AccessAnalyticsMassMessagesGetChartResponse>(this._config, {
+        path: '/v2/access/analytics/mass-messages/chart',
+        method: 'GET',
+        query: {
+          'startDate': params.startDate,
+          'endDate': params.endDate,
+          'withTotal': params.withTotal,
+        },
+      });
+    }
+
+    /**
+     * Sent mass messages
+     */
+    getSent(params: AccessAnalyticsMassMessagesGetSentParams): Promise<AccessAnalyticsMassMessagesGetSentResponse> {
+      return request<AccessAnalyticsMassMessagesGetSentResponse>(this._config, {
+        path: '/v2/access/analytics/mass-messages/sent',
+        method: 'GET',
+        query: {
+          'startDate': params.startDate,
+          'endDate': params.endDate,
+          'limit': params.limit,
+        },
+      });
+    }
+
+    /**
+     * Mass messages purchased
+     */
+    getPurchased(params: AccessAnalyticsMassMessagesGetPurchasedParams): Promise<AccessAnalyticsMassMessagesGetPurchasedResponse> {
+      return request<AccessAnalyticsMassMessagesGetPurchasedResponse>(this._config, {
+        path: '/v2/access/analytics/mass-messages/purchased',
+        method: 'GET',
+        query: {
+          'limit': params.limit,
+          'offset': params.offset,
+        },
+      });
+    }
+
+    /**
+     * Mass message buyers
+     */
+    listBuyers(params: AccessAnalyticsMassMessagesListBuyersParams): Promise<AccessAnalyticsMassMessagesListBuyersResponse> {
+      return request<AccessAnalyticsMassMessagesListBuyersResponse>(this._config, {
+        path: `/v2/access/analytics/mass-messages/${encodeURIComponent(String(params.massMessageId))}/buyers`,
+        method: 'GET',
+        query: {
+          'limit': params.limit,
+          'offset': params.offset,
+          'marker': params.marker,
+        },
+      });
+    }
+	
+	    /**
+	     * Mass message buyers
+     * 
+     * Returns an async iterator that automatically paginates through all results.
+     */
+    async *iterateBuyers(params: Omit<AccessAnalyticsMassMessagesListBuyersParams, 'limit' | 'offset' | 'marker'> & PaginationOptions): AsyncGenerator<AccessAnalyticsMassMessagesListBuyersItem, void, unknown> {
+      let marker: string | undefined;
+      let fetched = 0;
+      const maxItems = params?.maxItems ?? Infinity;
+      
+      while (fetched < maxItems) {
+        const response = await this.listBuyers({
+          ...params,
+          marker,
+        } as AccessAnalyticsMassMessagesListBuyersParams);
+        
+        for (const item of response.list) {
+          if (fetched >= maxItems) return;
+          yield item;
+          fetched++;
+	        }
+	        
+	        if (!response.hasMore) return;
+	        marker = response.nextMarker == null ? undefined : String(response.nextMarker);
+	      }
+	    }
+}
+
+class AccessAnalyticsPromotionsNamespace {
+  private _config: OFAuthConfig;
+
+  constructor(config: OFAuthConfig) {
+    this._config = config;
+  }
+
+    /**
+     * Promotions chart
+     */
+    getChart(params: AccessAnalyticsPromotionsGetChartParams): Promise<Record<string, AccessAnalyticsPromotionsGetChartResponseValue>> {
+      return request<Record<string, AccessAnalyticsPromotionsGetChartResponseValue>>(this._config, {
+        path: '/v2/access/analytics/promotions/chart',
+        method: 'GET',
+        query: {
+          'startDate': params.startDate,
+          'endDate': params.endDate,
+          'withTotal': params.withTotal,
+        },
+      });
+    }
+
+    /**
+     * Top promotions
+     */
+    getTop(params: AccessAnalyticsPromotionsGetTopParams): Promise<AccessAnalyticsPromotionsGetTopResponse> {
+      return request<AccessAnalyticsPromotionsGetTopResponse>(this._config, {
+        path: '/v2/access/analytics/promotions/top',
+        method: 'GET',
+        query: {
+          'limit': params.limit,
+          'offset': params.offset,
+          'startDate': params.startDate,
+          'endDate': params.endDate,
+        },
+      });
+    }
+}
+
+class AccessAnalyticsTrialsNamespace {
+  private _config: OFAuthConfig;
+
+  constructor(config: OFAuthConfig) {
+    this._config = config;
+  }
+
+    /**
+     * Trials chart
+     */
+    getChart(params: AccessAnalyticsTrialsGetChartParams): Promise<Record<string, AccessAnalyticsTrialsGetChartResponseValue>> {
+      return request<Record<string, AccessAnalyticsTrialsGetChartResponseValue>>(this._config, {
+        path: '/v2/access/analytics/trials/chart',
+        method: 'GET',
+        query: {
+          'startDate': params.startDate,
+          'endDate': params.endDate,
+          'withTotal': params.withTotal,
+        },
+      });
+    }
+
+    /**
+     * Top trials
+     */
+    getTop(params: AccessAnalyticsTrialsGetTopParams): Promise<AccessAnalyticsTrialsGetTopResponse> {
+      return request<AccessAnalyticsTrialsGetTopResponse>(this._config, {
+        path: '/v2/access/analytics/trials/top',
+        method: 'GET',
+        query: {
+          'limit': params.limit,
+          'offset': params.offset,
+          'startDate': params.startDate,
+          'endDate': params.endDate,
+        },
+      });
+    }
+}
+
+class AccessAnalyticsCampaignsNamespace {
+  private _config: OFAuthConfig;
+
+  constructor(config: OFAuthConfig) {
+    this._config = config;
+  }
+
+    /**
+     * Campaigns chart
+     */
+    getChart(params: AccessAnalyticsCampaignsGetChartParams): Promise<Record<string, AccessAnalyticsCampaignsGetChartResponseValue>> {
+      return request<Record<string, AccessAnalyticsCampaignsGetChartResponseValue>>(this._config, {
+        path: '/v2/access/analytics/campaigns/chart',
+        method: 'GET',
+        query: {
+          'startDate': params.startDate,
+          'endDate': params.endDate,
+          'withTotal': params.withTotal,
+        },
+      });
+    }
+
+    /**
+     * Top campaigns
+     */
+    getTop(params: AccessAnalyticsCampaignsGetTopParams): Promise<AccessAnalyticsCampaignsGetTopResponse> {
+      return request<AccessAnalyticsCampaignsGetTopResponse>(this._config, {
+        path: '/v2/access/analytics/campaigns/top',
+        method: 'GET',
+        query: {
+          'limit': params.limit,
+          'offset': params.offset,
+          'startDate': params.startDate,
+          'endDate': params.endDate,
+        },
+      });
+    }
+	
+	    /**
+	     * Top campaigns
+     * 
+     * Returns an async iterator that automatically paginates through all results.
+     */
+    async *iterateTop(params: Omit<AccessAnalyticsCampaignsGetTopParams, 'limit' | 'offset' | 'marker'> & PaginationOptions): AsyncGenerator<AccessAnalyticsCampaignsGetTopItem, void, unknown> {
       let offset = 0;
       let fetched = 0;
       const limit = params?.pageSize ?? 20;
       const maxItems = params?.maxItems ?? Infinity;
       
       while (fetched < maxItems) {
-        const response = await this.list({
+        const response = await this.getTop({
           ...params,
           limit: Math.min(limit, maxItems - fetched),
           offset,
-        } as AccessSubscriptionsListParams);
+        } as AccessAnalyticsCampaignsGetTopParams);
         
         for (const item of response.list) {
           if (fetched >= maxItems) return;
@@ -9100,32 +8216,9 @@ class AccessSubscriptionsNamespace {
 	              : offset + response.list.length;
 	      }
 	    }
-
-    /**
-     * Get subscription history
-     */
-    getHistory(params: AccessSubscriptionsGetHistoryParams): Promise<AccessSubscriptionsGetHistoryResponse> {
-      return request<AccessSubscriptionsGetHistoryResponse>(this._config, {
-        path: `/v2/access/subscriptions/${encodeURIComponent(String(params.subscriptionId))}/history`,
-        method: 'GET',
-        query: {
-          'all': params.all,
-        },
-      });
-    }
-
-    /**
-     * Get subscription counts
-     */
-    getCount(): Promise<AccessSubscriptionsGetCountResponse> {
-      return request<AccessSubscriptionsGetCountResponse>(this._config, {
-        path: '/v2/access/subscriptions/count',
-        method: 'GET',
-      });
-    }
 }
 
-class AccessUploadsNamespace {
+class AccessAnalyticsVisitorCountriesNamespace {
   private _config: OFAuthConfig;
 
   constructor(config: OFAuthConfig) {
@@ -9133,57 +8226,59 @@ class AccessUploadsNamespace {
   }
 
     /**
-     * Upload single-part media and finalize (No need to call /complete after upload if using this endpoint)
+     * Visitor countries chart
      */
-    replace(params: AccessUploadsReplaceParams): Promise<AccessUploadsReplaceResponse> {
-      return request<AccessUploadsReplaceResponse>(this._config, {
-        path: `/v2/access/uploads/${encodeURIComponent(String(params.mediaUploadId))}`,
-        method: 'PUT',
+    getChart(params: AccessAnalyticsVisitorCountriesGetChartParams): Promise<AccessAnalyticsVisitorCountriesGetChartResponse> {
+      return request<AccessAnalyticsVisitorCountriesGetChartResponse>(this._config, {
+        path: '/v2/access/analytics/visitor-countries/chart',
+        method: 'GET',
+        query: {
+          'startDate': params.startDate,
+          'endDate': params.endDate,
+          'by': params.by,
+        },
       });
     }
 
     /**
-     * Upload chunk to managed media upload
+     * Top visitor countries
      */
-    replaceParts(params: AccessUploadsReplacePartsParams): Promise<AccessUploadsReplacePartsResponse> {
-      return request<AccessUploadsReplacePartsResponse>(this._config, {
-        path: `/v2/access/uploads/${encodeURIComponent(String(params.mediaUploadId))}/parts/${encodeURIComponent(String(params.partNumber))}`,
-        method: 'PUT',
+    getTop(params: AccessAnalyticsVisitorCountriesGetTopParams): Promise<AccessAnalyticsVisitorCountriesGetTopResponse> {
+      return request<AccessAnalyticsVisitorCountriesGetTopResponse>(this._config, {
+        path: '/v2/access/analytics/visitor-countries/top',
+        method: 'GET',
+        query: {
+          'startDate': params.startDate,
+          'endDate': params.endDate,
+          'by': params.by,
+        },
       });
     }
+}
 
-    /**
-     * Check if media already exists in vault
-     */
-    check(params: AccessUploadsCheckParams): Promise<AccessUploadsCheckResponse> {
-      return request<AccessUploadsCheckResponse>(this._config, {
-        path: '/v2/access/uploads/check',
-        method: 'POST',
-        body: params.body,
-      });
-    }
+class AccessAnalyticsNamespace {
+  private _config: OFAuthConfig;
 
-    /**
-     * Finalize media upload
-     */
-    complete(params: AccessUploadsCompleteParams): Promise<AccessUploadsCompleteResponse> {
-      return request<AccessUploadsCompleteResponse>(this._config, {
-        path: '/v2/access/uploads/complete',
-        method: 'POST',
-        body: params.body,
-      });
-    }
+  readonly posts: AccessAnalyticsPostsNamespace;
+  readonly streams: AccessAnalyticsStreamsNamespace;
+  readonly stories: AccessAnalyticsStoriesNamespace;
+  readonly massMessages: AccessAnalyticsMassMessagesNamespace;
+  readonly promotions: AccessAnalyticsPromotionsNamespace;
+  readonly trials: AccessAnalyticsTrialsNamespace;
+  readonly campaigns: AccessAnalyticsCampaignsNamespace;
+  readonly visitorCountries: AccessAnalyticsVisitorCountriesNamespace;
 
-    /**
-     * Initialize media upload
-     */
-    init(params: AccessUploadsInitParams): Promise<AccessUploadsInitResponse> {
-      return request<AccessUploadsInitResponse>(this._config, {
-        path: '/v2/access/uploads/init',
-        method: 'POST',
-        body: params.body,
-      });
-    }
+  constructor(config: OFAuthConfig) {
+    this._config = config;
+    this.posts = new AccessAnalyticsPostsNamespace(config);
+    this.streams = new AccessAnalyticsStreamsNamespace(config);
+    this.stories = new AccessAnalyticsStoriesNamespace(config);
+    this.massMessages = new AccessAnalyticsMassMessagesNamespace(config);
+    this.promotions = new AccessAnalyticsPromotionsNamespace(config);
+    this.trials = new AccessAnalyticsTrialsNamespace(config);
+    this.campaigns = new AccessAnalyticsCampaignsNamespace(config);
+    this.visitorCountries = new AccessAnalyticsVisitorCountriesNamespace(config);
+  }
 }
 
 class AccessUsersListsNamespace {
@@ -9192,17 +8287,6 @@ class AccessUsersListsNamespace {
   constructor(config: OFAuthConfig) {
     this._config = config;
   }
-
-    /**
-     * Add user to multiple lists
-     */
-    create(params: AccessUsersListsCreateParams): Promise<AccessUsersListsCreateResponse> {
-      return request<AccessUsersListsCreateResponse>(this._config, {
-        path: `/v2/access/users/${encodeURIComponent(String(params.userId))}/lists`,
-        method: 'POST',
-        body: params.body,
-      });
-    }
 
     /**
      * List user lists
@@ -9257,8 +8341,8 @@ class AccessUsersListsNamespace {
     /**
      * Create user list
      */
-    create2(params: AccessUsersListsCreate2Params): Promise<AccessUsersListsCreate2Response> {
-      return request<AccessUsersListsCreate2Response>(this._config, {
+    create(params: AccessUsersListsCreateParams): Promise<AccessUsersListsCreateResponse> {
+      return request<AccessUsersListsCreateResponse>(this._config, {
         path: '/v2/access/users/lists',
         method: 'POST',
         body: params.body,
@@ -9293,6 +8377,17 @@ class AccessUsersListsNamespace {
       return request<Record<string, any>>(this._config, {
         path: `/v2/access/users/lists/${encodeURIComponent(String(params.listId))}`,
         method: 'DELETE',
+      });
+    }
+
+    /**
+     * Add user to multiple lists
+     */
+    create2(params: AccessUsersListsCreate2Params): Promise<AccessUsersListsCreate2Response> {
+      return request<AccessUsersListsCreate2Response>(this._config, {
+        path: `/v2/access/users/${encodeURIComponent(String(params.userId))}/lists`,
+        method: 'POST',
+        body: params.body,
       });
     }
 
@@ -9405,26 +8500,6 @@ class AccessUsersNamespace {
     }
 
     /**
-     * Restrict user
-     */
-    restrict(params: AccessUsersRestrictParams): Promise<Record<string, any>> {
-      return request<Record<string, any>>(this._config, {
-        path: `/v2/access/users/${encodeURIComponent(String(params.userId))}/restrict`,
-        method: 'POST',
-      });
-    }
-
-    /**
-     * Unrestrict user
-     */
-    restrict2(params: AccessUsersRestrict2Params): Promise<Record<string, any>> {
-      return request<Record<string, any>>(this._config, {
-        path: `/v2/access/users/${encodeURIComponent(String(params.userId))}/restrict`,
-        method: 'DELETE',
-      });
-    }
-
-    /**
      * List restricted users
      */
     getRestrict(params: AccessUsersGetRestrictParams): Promise<AccessUsersGetRestrictResponse> {
@@ -9472,6 +8547,26 @@ class AccessUsersNamespace {
 	              : offset + response.list.length;
 	      }
 	    }
+
+    /**
+     * Restrict user
+     */
+    restrict(params: AccessUsersRestrictParams): Promise<Record<string, any>> {
+      return request<Record<string, any>>(this._config, {
+        path: `/v2/access/users/${encodeURIComponent(String(params.userId))}/restrict`,
+        method: 'POST',
+      });
+    }
+
+    /**
+     * Unrestrict user
+     */
+    restrict2(params: AccessUsersRestrict2Params): Promise<Record<string, any>> {
+      return request<Record<string, any>>(this._config, {
+        path: `/v2/access/users/${encodeURIComponent(String(params.userId))}/restrict`,
+        method: 'DELETE',
+      });
+    }
 
     /**
      * List blocked users
@@ -9547,6 +8642,720 @@ class AccessUsersNamespace {
           'offset': params.offset,
           'query': params.query,
         },
+      });
+    }
+}
+
+class AccessChatsNamespace {
+  private _config: OFAuthConfig;
+
+  constructor(config: OFAuthConfig) {
+    this._config = config;
+  }
+
+    /**
+     * Chats list
+     */
+    list(params: AccessChatsListParams): Promise<AccessChatsListResponse> {
+      return request<AccessChatsListResponse>(this._config, {
+        path: '/v2/access/chats',
+        method: 'GET',
+        query: {
+          'limit': params.limit,
+          'offset': params.offset,
+          'order': params.order,
+          'filter': params.filter,
+          'query': params.query,
+          'userListId': params.userListId,
+        },
+      });
+    }
+	
+	    /**
+	     * Chats list
+     * 
+     * Returns an async iterator that automatically paginates through all results.
+     */
+    async *iterate(params: Omit<AccessChatsListParams, 'limit' | 'offset' | 'marker'> & PaginationOptions): AsyncGenerator<AccessChatsListItem, void, unknown> {
+      let offset = 0;
+      let fetched = 0;
+      const limit = params?.pageSize ?? 20;
+      const maxItems = params?.maxItems ?? Infinity;
+      
+      while (fetched < maxItems) {
+        const response = await this.list({
+          ...params,
+          limit: Math.min(limit, maxItems - fetched),
+          offset,
+        } as AccessChatsListParams);
+        
+        for (const item of response.list) {
+          if (fetched >= maxItems) return;
+          yield item;
+          fetched++;
+	        }
+	        
+	        if (!response.hasMore) return;
+	        const nextOffset = (response as { nextOffset?: number | string | null }).nextOffset;
+	        offset =
+	          typeof nextOffset === 'number'
+	            ? nextOffset
+	            : typeof nextOffset === 'string' && nextOffset.trim() !== '' && Number.isFinite(Number(nextOffset))
+	              ? Number(nextOffset)
+	              : offset + response.list.length;
+	      }
+	    }
+
+    /**
+     * Chat messages
+     */
+    listMessages(params: AccessChatsListMessagesParams): Promise<AccessChatsListMessagesResponse> {
+      return request<AccessChatsListMessagesResponse>(this._config, {
+        path: `/v2/access/chats/${encodeURIComponent(String(params.userId))}/messages`,
+        method: 'GET',
+        query: {
+          'limit': params.limit,
+          'offset': params.offset,
+          'query': params.query,
+          'last_id': params.lastId,
+          'first_id': params.firstId,
+          'include_users': params.includeUsers,
+        },
+      });
+    }
+	
+	    /**
+	     * Chat messages
+     * 
+     * Returns an async iterator that automatically paginates through all results.
+     */
+    async *iterateMessages(params: Omit<AccessChatsListMessagesParams, 'limit' | 'offset' | 'marker'> & PaginationOptions): AsyncGenerator<AccessChatsListMessagesItem, void, unknown> {
+      let offset = 0;
+      let fetched = 0;
+      const limit = params?.pageSize ?? 20;
+      const maxItems = params?.maxItems ?? Infinity;
+      
+      while (fetched < maxItems) {
+        const response = await this.listMessages({
+          ...params,
+          limit: Math.min(limit, maxItems - fetched),
+          offset,
+        } as AccessChatsListMessagesParams);
+        
+        for (const item of response.list) {
+          if (fetched >= maxItems) return;
+          yield item;
+          fetched++;
+	        }
+	        
+	        if (!response.hasMore) return;
+	        const nextOffset = (response as { nextOffset?: number | string | null }).nextOffset;
+	        offset =
+	          typeof nextOffset === 'number'
+	            ? nextOffset
+	            : typeof nextOffset === 'string' && nextOffset.trim() !== '' && Number.isFinite(Number(nextOffset))
+	              ? Number(nextOffset)
+	              : offset + response.list.length;
+	      }
+	    }
+
+    /**
+     * Send chat message
+     */
+    createMessages(params: AccessChatsCreateMessagesParams): Promise<AccessChatsCreateMessagesResponse> {
+      return request<AccessChatsCreateMessagesResponse>(this._config, {
+        path: `/v2/access/chats/${encodeURIComponent(String(params.userId))}/messages`,
+        method: 'POST',
+        body: params.body,
+      });
+    }
+
+    /**
+     * Unsend chat message
+     */
+    deleteMessages(params: AccessChatsDeleteMessagesParams): Promise<AccessChatsDeleteMessagesResponse> {
+      return request<AccessChatsDeleteMessagesResponse>(this._config, {
+        path: `/v2/access/chats/${encodeURIComponent(String(params.userId))}/messages/${encodeURIComponent(String(params.messageId))}`,
+        method: 'DELETE',
+        body: params.body,
+      });
+    }
+
+    /**
+     * Get chat media
+     */
+    listMedia(params: AccessChatsListMediaParams): Promise<AccessChatsListMediaResponse> {
+      return request<AccessChatsListMediaResponse>(this._config, {
+        path: `/v2/access/chats/${encodeURIComponent(String(params.userId))}/media`,
+        method: 'GET',
+        query: {
+          'limit': params.limit,
+          'offset': params.offset,
+          'skip_users': params.skipUsers,
+          'last_id': params.lastId,
+          'opened': params.opened,
+          'type': params.type,
+        },
+      });
+    }
+	
+	    /**
+	     * Get chat media
+     * 
+     * Returns an async iterator that automatically paginates through all results.
+     */
+    async *iterateMedia(params: Omit<AccessChatsListMediaParams, 'limit' | 'offset' | 'marker'> & PaginationOptions): AsyncGenerator<AccessChatsListMediaItem, void, unknown> {
+      let offset = 0;
+      let fetched = 0;
+      const limit = params?.pageSize ?? 20;
+      const maxItems = params?.maxItems ?? Infinity;
+      
+      while (fetched < maxItems) {
+        const response = await this.listMedia({
+          ...params,
+          limit: Math.min(limit, maxItems - fetched),
+          offset,
+        } as AccessChatsListMediaParams);
+        
+        for (const item of response.list) {
+          if (fetched >= maxItems) return;
+          yield item;
+          fetched++;
+	        }
+	        
+	        if (!response.hasMore) return;
+	        const nextOffset = (response as { nextOffset?: number | string | null }).nextOffset;
+	        offset =
+	          typeof nextOffset === 'number'
+	            ? nextOffset
+	            : typeof nextOffset === 'string' && nextOffset.trim() !== '' && Number.isFinite(Number(nextOffset))
+	              ? Number(nextOffset)
+	              : offset + response.list.length;
+	      }
+	    }
+}
+
+class AccessSubscribersNamespace {
+  private _config: OFAuthConfig;
+
+  constructor(config: OFAuthConfig) {
+    this._config = config;
+  }
+
+    /**
+     * List subscribers
+     */
+    list(params: AccessSubscribersListParams): Promise<AccessSubscribersListResponse> {
+      return request<AccessSubscribersListResponse>(this._config, {
+        path: '/v2/access/subscribers',
+        method: 'GET',
+        query: {
+          'query': params.query,
+          'filter': params.filter,
+          'type': params.type,
+          'startDate': params.startDate,
+          'endDate': params.endDate,
+          'latestType': params.latestType,
+          'limit': params.limit,
+          'offset': params.offset,
+        },
+      });
+    }
+	
+	    /**
+	     * List subscribers
+     * 
+     * Returns an async iterator that automatically paginates through all results.
+     */
+    async *iterate(params: Omit<AccessSubscribersListParams, 'limit' | 'offset' | 'marker'> & PaginationOptions): AsyncGenerator<AccessSubscribersListItem, void, unknown> {
+      let offset = 0;
+      let fetched = 0;
+      const limit = params?.pageSize ?? 20;
+      const maxItems = params?.maxItems ?? Infinity;
+      
+      while (fetched < maxItems) {
+        const response = await this.list({
+          ...params,
+          limit: Math.min(limit, maxItems - fetched),
+          offset,
+        } as AccessSubscribersListParams);
+        
+        for (const item of response.list) {
+          if (fetched >= maxItems) return;
+          yield item;
+          fetched++;
+	        }
+	        
+	        if (!response.hasMore) return;
+	        const nextOffset = (response as { nextOffset?: number | string | null }).nextOffset;
+	        offset =
+	          typeof nextOffset === 'number'
+	            ? nextOffset
+	            : typeof nextOffset === 'string' && nextOffset.trim() !== '' && Number.isFinite(Number(nextOffset))
+	              ? Number(nextOffset)
+	              : offset + response.list.length;
+	      }
+	    }
+
+    /**
+     * Update subscriber note
+     */
+    setNote(params: AccessSubscribersSetNoteParams): Promise<Record<string, any>> {
+      return request<Record<string, any>>(this._config, {
+        path: `/v2/access/subscribers/${encodeURIComponent(String(params.userId))}/note`,
+        method: 'PUT',
+        body: params.body,
+      });
+    }
+
+    /**
+     * Apply discount to subscriber
+     */
+    setDiscount(params: AccessSubscribersSetDiscountParams): Promise<Record<string, any>> {
+      return request<Record<string, any>>(this._config, {
+        path: `/v2/access/subscribers/${encodeURIComponent(String(params.userId))}/discount`,
+        method: 'PUT',
+        body: params.body,
+      });
+    }
+
+    /**
+     * Set custom name for subscriber
+     */
+    setCustomName(params: AccessSubscribersSetCustomNameParams): Promise<Record<string, any>> {
+      return request<Record<string, any>>(this._config, {
+        path: `/v2/access/subscribers/${encodeURIComponent(String(params.userId))}/custom-name`,
+        method: 'PUT',
+        body: params.body,
+      });
+    }
+}
+
+class AccessSubscriptionsNamespace {
+  private _config: OFAuthConfig;
+
+  constructor(config: OFAuthConfig) {
+    this._config = config;
+  }
+
+    /**
+     * List subscriptions
+     */
+    list(params: AccessSubscriptionsListParams): Promise<AccessSubscriptionsListResponse> {
+      return request<AccessSubscriptionsListResponse>(this._config, {
+        path: '/v2/access/subscriptions',
+        method: 'GET',
+        query: {
+          'limit': params.limit,
+          'offset': params.offset,
+          'query': params.query,
+          'filter': params.filter,
+          'type': params.type,
+        },
+      });
+    }
+	
+	    /**
+	     * List subscriptions
+     * 
+     * Returns an async iterator that automatically paginates through all results.
+     */
+    async *iterate(params: Omit<AccessSubscriptionsListParams, 'limit' | 'offset' | 'marker'> & PaginationOptions): AsyncGenerator<AccessSubscriptionsListItem, void, unknown> {
+      let offset = 0;
+      let fetched = 0;
+      const limit = params?.pageSize ?? 20;
+      const maxItems = params?.maxItems ?? Infinity;
+      
+      while (fetched < maxItems) {
+        const response = await this.list({
+          ...params,
+          limit: Math.min(limit, maxItems - fetched),
+          offset,
+        } as AccessSubscriptionsListParams);
+        
+        for (const item of response.list) {
+          if (fetched >= maxItems) return;
+          yield item;
+          fetched++;
+	        }
+	        
+	        if (!response.hasMore) return;
+	        const nextOffset = (response as { nextOffset?: number | string | null }).nextOffset;
+	        offset =
+	          typeof nextOffset === 'number'
+	            ? nextOffset
+	            : typeof nextOffset === 'string' && nextOffset.trim() !== '' && Number.isFinite(Number(nextOffset))
+	              ? Number(nextOffset)
+	              : offset + response.list.length;
+	      }
+	    }
+
+    /**
+     * Get subscription counts
+     */
+    getCount(): Promise<AccessSubscriptionsGetCountResponse> {
+      return request<AccessSubscriptionsGetCountResponse>(this._config, {
+        path: '/v2/access/subscriptions/count',
+        method: 'GET',
+      });
+    }
+
+    /**
+     * Get subscription history
+     */
+    getHistory(params: AccessSubscriptionsGetHistoryParams): Promise<AccessSubscriptionsGetHistoryResponse> {
+      return request<AccessSubscriptionsGetHistoryResponse>(this._config, {
+        path: `/v2/access/subscriptions/${encodeURIComponent(String(params.subscriptionId))}/history`,
+        method: 'GET',
+        query: {
+          'all': params.all,
+        },
+      });
+    }
+}
+
+class AccessPromotionsTrackingLinksNamespace {
+  private _config: OFAuthConfig;
+
+  constructor(config: OFAuthConfig) {
+    this._config = config;
+  }
+
+    /**
+     * List tracking links
+     */
+    list(params: AccessPromotionsTrackingLinksListParams): Promise<AccessPromotionsTrackingLinksListResponse> {
+      return request<AccessPromotionsTrackingLinksListResponse>(this._config, {
+        path: '/v2/access/promotions/tracking-links',
+        method: 'GET',
+        query: {
+          'limit': params.limit,
+          'offset': params.offset,
+          'pagination': params.pagination,
+          'with_deleted': params.withDeleted,
+          'sorting_deleted': params.sortingDeleted,
+          'stats': params.stats,
+        },
+      });
+    }
+	
+	    /**
+	     * List tracking links
+     * 
+     * Returns an async iterator that automatically paginates through all results.
+     */
+    async *iterate(params: Omit<AccessPromotionsTrackingLinksListParams, 'limit' | 'offset' | 'marker'> & PaginationOptions): AsyncGenerator<AccessPromotionsTrackingLinksListItem, void, unknown> {
+      let offset = 0;
+      let fetched = 0;
+      const limit = params?.pageSize ?? 20;
+      const maxItems = params?.maxItems ?? Infinity;
+      
+      while (fetched < maxItems) {
+        const response = await this.list({
+          ...params,
+          limit: Math.min(limit, maxItems - fetched),
+          offset,
+        } as AccessPromotionsTrackingLinksListParams);
+        
+        for (const item of response.list) {
+          if (fetched >= maxItems) return;
+          yield item;
+          fetched++;
+	        }
+	        
+	        if (!response.hasMore) return;
+	        const nextOffset = (response as { nextOffset?: number | string | null }).nextOffset;
+	        offset =
+	          typeof nextOffset === 'number'
+	            ? nextOffset
+	            : typeof nextOffset === 'string' && nextOffset.trim() !== '' && Number.isFinite(Number(nextOffset))
+	              ? Number(nextOffset)
+	              : offset + response.list.length;
+	      }
+	    }
+
+    /**
+     * Create tracking link
+     */
+    create(params: AccessPromotionsTrackingLinksCreateParams): Promise<Array<AccessPromotionsTrackingLinksCreateResponseOption0Item> | AccessPromotionsTrackingLinksCreateResponseOption1> {
+      return request<Array<AccessPromotionsTrackingLinksCreateResponseOption0Item> | AccessPromotionsTrackingLinksCreateResponseOption1>(this._config, {
+        path: '/v2/access/promotions/tracking-links',
+        method: 'POST',
+        body: params.body,
+      });
+    }
+
+    /**
+     * Get tracking link
+     */
+    get(params: AccessPromotionsTrackingLinksGetParams): Promise<AccessPromotionsTrackingLinksGetResponse> {
+      return request<AccessPromotionsTrackingLinksGetResponse>(this._config, {
+        path: `/v2/access/promotions/tracking-links/${encodeURIComponent(String(params.trackingLinkId))}`,
+        method: 'GET',
+      });
+    }
+
+    /**
+     * Update tracking link
+     */
+    replace(params: AccessPromotionsTrackingLinksReplaceParams): Promise<AccessPromotionsTrackingLinksReplaceResponse> {
+      return request<AccessPromotionsTrackingLinksReplaceResponse>(this._config, {
+        path: `/v2/access/promotions/tracking-links/${encodeURIComponent(String(params.trackingLinkId))}`,
+        method: 'PUT',
+        body: params.body,
+      });
+    }
+
+    /**
+     * Delete tracking link
+     */
+    delete(params: AccessPromotionsTrackingLinksDeleteParams): Promise<AccessPromotionsTrackingLinksDeleteResponse> {
+      return request<AccessPromotionsTrackingLinksDeleteResponse>(this._config, {
+        path: `/v2/access/promotions/tracking-links/${encodeURIComponent(String(params.trackingLinkId))}`,
+        method: 'DELETE',
+      });
+    }
+
+    /**
+     * Share tracking link access
+     */
+    createShareAccess(params: AccessPromotionsTrackingLinksCreateShareAccessParams): Promise<AccessPromotionsTrackingLinksCreateShareAccessResponse> {
+      return request<AccessPromotionsTrackingLinksCreateShareAccessResponse>(this._config, {
+        path: '/v2/access/promotions/tracking-links/share-access',
+        method: 'POST',
+        body: params.body,
+      });
+    }
+
+    /**
+     * Revoke tracking link access
+     */
+    deleteShareAccess(params: AccessPromotionsTrackingLinksDeleteShareAccessParams): Promise<AccessPromotionsTrackingLinksDeleteShareAccessResponse> {
+      return request<AccessPromotionsTrackingLinksDeleteShareAccessResponse>(this._config, {
+        path: '/v2/access/promotions/tracking-links/share-access',
+        method: 'DELETE',
+        body: params.body,
+      });
+    }
+
+    /**
+     * Get tracking link claimers
+     */
+    listClaimers(params: AccessPromotionsTrackingLinksListClaimersParams): Promise<AccessPromotionsTrackingLinksListClaimersResponse> {
+      return request<AccessPromotionsTrackingLinksListClaimersResponse>(this._config, {
+        path: `/v2/access/promotions/tracking-links/${encodeURIComponent(String(params.trackingLinkId))}/claimers`,
+        method: 'GET',
+      });
+    }
+}
+
+class AccessPromotionsTrialLinksNamespace {
+  private _config: OFAuthConfig;
+
+  constructor(config: OFAuthConfig) {
+    this._config = config;
+  }
+
+    /**
+     * List trial links
+     */
+    list(params: AccessPromotionsTrialLinksListParams): Promise<AccessPromotionsTrialLinksListResponseOption0 | Array<AccessPromotionsTrialLinksListResponseOption1Item>> {
+      return request<AccessPromotionsTrialLinksListResponseOption0 | Array<AccessPromotionsTrialLinksListResponseOption1Item>>(this._config, {
+        path: '/v2/access/promotions/trial-links',
+        method: 'GET',
+        query: {
+          'limit': params.limit,
+          'offset': params.offset,
+        },
+      });
+    }
+
+    /**
+     * Create trial link
+     */
+    create(params: AccessPromotionsTrialLinksCreateParams): Promise<AccessPromotionsTrialLinksCreateResponse> {
+      return request<AccessPromotionsTrialLinksCreateResponse>(this._config, {
+        path: '/v2/access/promotions/trial-links',
+        method: 'POST',
+        body: params.body,
+      });
+    }
+
+    /**
+     * Get trial link
+     */
+    get(params: AccessPromotionsTrialLinksGetParams): Promise<AccessPromotionsTrialLinksGetResponse> {
+      return request<AccessPromotionsTrialLinksGetResponse>(this._config, {
+        path: `/v2/access/promotions/trial-links/${encodeURIComponent(String(params.trialLinkId))}`,
+        method: 'GET',
+      });
+    }
+
+    /**
+     * Update trial link
+     */
+    replace(params: AccessPromotionsTrialLinksReplaceParams): Promise<AccessPromotionsTrialLinksReplaceResponse> {
+      return request<AccessPromotionsTrialLinksReplaceResponse>(this._config, {
+        path: `/v2/access/promotions/trial-links/${encodeURIComponent(String(params.trialLinkId))}`,
+        method: 'PUT',
+        body: params.body,
+      });
+    }
+
+    /**
+     * Delete trial link
+     */
+    delete(params: AccessPromotionsTrialLinksDeleteParams): Promise<AccessPromotionsTrialLinksDeleteResponse> {
+      return request<AccessPromotionsTrialLinksDeleteResponse>(this._config, {
+        path: `/v2/access/promotions/trial-links/${encodeURIComponent(String(params.trialLinkId))}`,
+        method: 'DELETE',
+      });
+    }
+
+    /**
+     * Share trial link access
+     */
+    createShareAccess(params: AccessPromotionsTrialLinksCreateShareAccessParams): Promise<AccessPromotionsTrialLinksCreateShareAccessResponse> {
+      return request<AccessPromotionsTrialLinksCreateShareAccessResponse>(this._config, {
+        path: '/v2/access/promotions/trial-links/share-access',
+        method: 'POST',
+        body: params.body,
+      });
+    }
+
+    /**
+     * Revoke trial link access
+     */
+    deleteShareAccess(params: AccessPromotionsTrialLinksDeleteShareAccessParams): Promise<AccessPromotionsTrialLinksDeleteShareAccessResponse> {
+      return request<AccessPromotionsTrialLinksDeleteShareAccessResponse>(this._config, {
+        path: '/v2/access/promotions/trial-links/share-access',
+        method: 'DELETE',
+        body: params.body,
+      });
+    }
+}
+
+class AccessPromotionsNamespace {
+  private _config: OFAuthConfig;
+
+  readonly trackingLinks: AccessPromotionsTrackingLinksNamespace;
+  readonly trialLinks: AccessPromotionsTrialLinksNamespace;
+
+  constructor(config: OFAuthConfig) {
+    this._config = config;
+    this.trackingLinks = new AccessPromotionsTrackingLinksNamespace(config);
+    this.trialLinks = new AccessPromotionsTrialLinksNamespace(config);
+  }
+
+    /**
+     * List promotions
+     */
+    list(params: AccessPromotionsListParams): Promise<Array<AccessPromotionsListResponseOption0Item> | AccessPromotionsListResponseOption1> {
+      return request<Array<AccessPromotionsListResponseOption0Item> | AccessPromotionsListResponseOption1>(this._config, {
+        path: '/v2/access/promotions',
+        method: 'GET',
+        query: {
+          'limit': params.limit,
+          'offset': params.offset,
+        },
+      });
+    }
+
+    /**
+     * Create promotion
+     */
+    create(params: AccessPromotionsCreateParams): Promise<Array<AccessPromotionsCreateResponseOption0Item> | AccessPromotionsCreateResponseOption1> {
+      return request<Array<AccessPromotionsCreateResponseOption0Item> | AccessPromotionsCreateResponseOption1>(this._config, {
+        path: '/v2/access/promotions',
+        method: 'POST',
+        body: params.body,
+      });
+    }
+
+    /**
+     * Update promotion
+     */
+    replace(params: AccessPromotionsReplaceParams): Promise<AccessPromotionsReplaceResponse> {
+      return request<AccessPromotionsReplaceResponse>(this._config, {
+        path: `/v2/access/promotions/${encodeURIComponent(String(params.promotionId))}`,
+        method: 'PUT',
+        body: params.body,
+      });
+    }
+
+    /**
+     * Delete promotion
+     */
+    delete(params: AccessPromotionsDeleteParams): Promise<AccessPromotionsDeleteResponse> {
+      return request<AccessPromotionsDeleteResponse>(this._config, {
+        path: `/v2/access/promotions/${encodeURIComponent(String(params.promotionId))}`,
+        method: 'DELETE',
+      });
+    }
+
+    /**
+     * List bundles
+     */
+    listBundles(params: AccessPromotionsListBundlesParams): Promise<Array<AccessPromotionsListBundlesResponseOption0Item> | AccessPromotionsListBundlesResponseOption1> {
+      return request<Array<AccessPromotionsListBundlesResponseOption0Item> | AccessPromotionsListBundlesResponseOption1>(this._config, {
+        path: '/v2/access/promotions/bundles',
+        method: 'GET',
+        query: {
+          'limit': params.limit,
+          'offset': params.offset,
+        },
+      });
+    }
+
+    /**
+     * Create bundle
+     */
+    createBundles(params: AccessPromotionsCreateBundlesParams): Promise<AccessPromotionsCreateBundlesResponse> {
+      return request<AccessPromotionsCreateBundlesResponse>(this._config, {
+        path: '/v2/access/promotions/bundles',
+        method: 'POST',
+        body: params.body,
+      });
+    }
+
+    /**
+     * Get bundle
+     */
+    getBundles(params: AccessPromotionsGetBundlesParams): Promise<AccessPromotionsGetBundlesResponse> {
+      return request<AccessPromotionsGetBundlesResponse>(this._config, {
+        path: `/v2/access/promotions/bundles/${encodeURIComponent(String(params.bundleId))}`,
+        method: 'GET',
+      });
+    }
+
+    /**
+     * Update bundle
+     */
+    replaceBundles(params: AccessPromotionsReplaceBundlesParams): Promise<AccessPromotionsReplaceBundlesResponse> {
+      return request<AccessPromotionsReplaceBundlesResponse>(this._config, {
+        path: `/v2/access/promotions/bundles/${encodeURIComponent(String(params.bundleId))}`,
+        method: 'PUT',
+        body: params.body,
+      });
+    }
+
+    /**
+     * Delete bundle
+     */
+    deleteBundles(params: AccessPromotionsDeleteBundlesParams): Promise<AccessPromotionsDeleteBundlesResponse> {
+      return request<AccessPromotionsDeleteBundlesResponse>(this._config, {
+        path: `/v2/access/promotions/bundles/${encodeURIComponent(String(params.bundleId))}`,
+        method: 'DELETE',
+      });
+    }
+
+    /**
+     * Stop promotion
+     */
+    createStop(params: AccessPromotionsCreateStopParams): Promise<AccessPromotionsCreateStopResponse> {
+      return request<AccessPromotionsCreateStopResponse>(this._config, {
+        path: `/v2/access/promotions/${encodeURIComponent(String(params.promotionId))}/stop`,
+        method: 'POST',
       });
     }
 }
@@ -9770,125 +9579,94 @@ class AccessVaultNamespace {
 	    }
 }
 
-class AccessNamespace {
+class AccessUploadsNamespace {
   private _config: OFAuthConfig;
-
-  readonly analytics: AccessAnalyticsNamespace;
-  readonly chats: AccessChatsNamespace;
-  readonly earnings: AccessEarningsNamespace;
-  readonly promotions: AccessPromotionsNamespace;
-  readonly self: AccessSelfNamespace;
-  readonly subscribers: AccessSubscribersNamespace;
-  readonly subscriptions: AccessSubscriptionsNamespace;
-  readonly uploads: AccessUploadsNamespace;
-  readonly users: AccessUsersNamespace;
-  readonly vault: AccessVaultNamespace;
 
   constructor(config: OFAuthConfig) {
     this._config = config;
-    this.analytics = new AccessAnalyticsNamespace(config);
-    this.chats = new AccessChatsNamespace(config);
-    this.earnings = new AccessEarningsNamespace(config);
-    this.promotions = new AccessPromotionsNamespace(config);
-    this.self = new AccessSelfNamespace(config);
-    this.subscribers = new AccessSubscribersNamespace(config);
-    this.subscriptions = new AccessSubscriptionsNamespace(config);
-    this.uploads = new AccessUploadsNamespace(config);
-    this.users = new AccessUsersNamespace(config);
-    this.vault = new AccessVaultNamespace(config);
   }
 
     /**
-     * List mass messages
+     * Upload single-part media and finalize (No need to call /complete after upload if using this endpoint)
      */
-    listMassMessages(params: AccessListMassMessagesParams): Promise<AccessListMassMessagesResponse> {
-      return request<AccessListMassMessagesResponse>(this._config, {
-        path: '/v2/access/mass-messages',
-        method: 'GET',
-        query: {
-          'limit': params.limit,
-          'offset': params.offset,
-          'type': params.type,
-        },
+    replace(params: AccessUploadsReplaceParams): Promise<AccessUploadsReplaceResponse> {
+      return request<AccessUploadsReplaceResponse>(this._config, {
+        path: `/v2/access/uploads/${encodeURIComponent(String(params.mediaUploadId))}`,
+        method: 'PUT',
       });
     }
-	
-	    /**
-	     * List mass messages
-     * 
-     * Returns an async iterator that automatically paginates through all results.
-     */
-    async *iterateMassMessages(params: Omit<AccessListMassMessagesParams, 'limit' | 'offset' | 'marker'> & PaginationOptions): AsyncGenerator<AccessListMassMessagesItem, void, unknown> {
-      let offset = 0;
-      let fetched = 0;
-      const limit = params?.pageSize ?? 20;
-      const maxItems = params?.maxItems ?? Infinity;
-      
-      while (fetched < maxItems) {
-        const response = await this.listMassMessages({
-          ...params,
-          limit: Math.min(limit, maxItems - fetched),
-          offset,
-        } as AccessListMassMessagesParams);
-        
-        for (const item of response.list) {
-          if (fetched >= maxItems) return;
-          yield item;
-          fetched++;
-	        }
-	        
-	        if (!response.hasMore) return;
-	        const nextOffset = (response as { nextOffset?: number | string | null }).nextOffset;
-	        offset =
-	          typeof nextOffset === 'number'
-	            ? nextOffset
-	            : typeof nextOffset === 'string' && nextOffset.trim() !== '' && Number.isFinite(Number(nextOffset))
-	              ? Number(nextOffset)
-	              : offset + response.list.length;
-	      }
-	    }
 
     /**
-     * Create mass message
+     * Check if media already exists in vault
      */
-    createMassMessages(params: AccessCreateMassMessagesParams): Promise<AccessCreateMassMessagesResponse> {
-      return request<AccessCreateMassMessagesResponse>(this._config, {
-        path: '/v2/access/mass-messages',
+    check(params: AccessUploadsCheckParams): Promise<AccessUploadsCheckResponse> {
+      return request<AccessUploadsCheckResponse>(this._config, {
+        path: '/v2/access/uploads/check',
         method: 'POST',
         body: params.body,
       });
     }
 
     /**
-     * Get mass message
+     * Initialize media upload
      */
-    getMassMessages(params: AccessGetMassMessagesParams): Promise<AccessGetMassMessagesResponse> {
-      return request<AccessGetMassMessagesResponse>(this._config, {
-        path: `/v2/access/mass-messages/${encodeURIComponent(String(params.massMessageId))}`,
-        method: 'GET',
-      });
-    }
-
-    /**
-     * Update mass message
-     */
-    replaceMassMessages(params: AccessReplaceMassMessagesParams): Promise<AccessReplaceMassMessagesResponse> {
-      return request<AccessReplaceMassMessagesResponse>(this._config, {
-        path: `/v2/access/mass-messages/${encodeURIComponent(String(params.massMessageId))}`,
-        method: 'PUT',
+    init(params: AccessUploadsInitParams): Promise<AccessUploadsInitResponse> {
+      return request<AccessUploadsInitResponse>(this._config, {
+        path: '/v2/access/uploads/init',
+        method: 'POST',
         body: params.body,
       });
     }
 
     /**
-     * Delete mass message
+     * Upload chunk to managed media upload
      */
-    deleteMassMessages(params: AccessDeleteMassMessagesParams): Promise<AccessDeleteMassMessagesResponse> {
-      return request<AccessDeleteMassMessagesResponse>(this._config, {
-        path: `/v2/access/mass-messages/${encodeURIComponent(String(params.massMessageId))}`,
-        method: 'DELETE',
+    replaceParts(params: AccessUploadsReplacePartsParams): Promise<AccessUploadsReplacePartsResponse> {
+      return request<AccessUploadsReplacePartsResponse>(this._config, {
+        path: `/v2/access/uploads/${encodeURIComponent(String(params.mediaUploadId))}/parts/${encodeURIComponent(String(params.partNumber))}`,
+        method: 'PUT',
       });
     }
+
+    /**
+     * Finalize media upload
+     */
+    complete(params: AccessUploadsCompleteParams): Promise<AccessUploadsCompleteResponse> {
+      return request<AccessUploadsCompleteResponse>(this._config, {
+        path: '/v2/access/uploads/complete',
+        method: 'POST',
+        body: params.body,
+      });
+    }
+}
+
+class AccessNamespace {
+  private _config: OFAuthConfig;
+
+  readonly self: AccessSelfNamespace;
+  readonly earnings: AccessEarningsNamespace;
+  readonly analytics: AccessAnalyticsNamespace;
+  readonly users: AccessUsersNamespace;
+  readonly chats: AccessChatsNamespace;
+  readonly subscribers: AccessSubscribersNamespace;
+  readonly subscriptions: AccessSubscriptionsNamespace;
+  readonly promotions: AccessPromotionsNamespace;
+  readonly vault: AccessVaultNamespace;
+  readonly uploads: AccessUploadsNamespace;
+
+  constructor(config: OFAuthConfig) {
+    this._config = config;
+    this.self = new AccessSelfNamespace(config);
+    this.earnings = new AccessEarningsNamespace(config);
+    this.analytics = new AccessAnalyticsNamespace(config);
+    this.users = new AccessUsersNamespace(config);
+    this.chats = new AccessChatsNamespace(config);
+    this.subscribers = new AccessSubscribersNamespace(config);
+    this.subscriptions = new AccessSubscriptionsNamespace(config);
+    this.promotions = new AccessPromotionsNamespace(config);
+    this.vault = new AccessVaultNamespace(config);
+    this.uploads = new AccessUploadsNamespace(config);
+  }
 
     /**
      * List own posts
@@ -9949,207 +9727,46 @@ class AccessNamespace {
         method: 'DELETE',
       });
     }
-}
-
-class AccountConnectionsNamespace {
-  private _config: OFAuthConfig;
-
-  constructor(config: OFAuthConfig) {
-    this._config = config;
-  }
 
     /**
-     * List connections
+     * Create mass message
      */
-    list(params: AccountConnectionsListParams): Promise<AccountConnectionsListResponse> {
-      return request<AccountConnectionsListResponse>(this._config, {
-        path: '/v2/account/connections',
-        method: 'GET',
-        query: {
-          'status': params.status,
-          'imported': params.imported,
-          'limit': params.limit,
-          'offset': params.offset,
-        },
+    createMassMessages(params: AccessCreateMassMessagesParams): Promise<AccessCreateMassMessagesResponse> {
+      return request<AccessCreateMassMessagesResponse>(this._config, {
+        path: '/v2/access/mass-messages',
+        method: 'POST',
+        body: params.body,
       });
     }
-	
-	    /**
-	     * List connections
-     * 
-     * Returns an async iterator that automatically paginates through all results.
-     */
-    async *iterate(params: Omit<AccountConnectionsListParams, 'limit' | 'offset' | 'marker'> & PaginationOptions): AsyncGenerator<AccountConnectionsListItem, void, unknown> {
-      let offset = 0;
-      let fetched = 0;
-      const limit = params?.pageSize ?? 20;
-      const maxItems = params?.maxItems ?? Infinity;
-      
-      while (fetched < maxItems) {
-        const response = await this.list({
-          ...params,
-          limit: Math.min(limit, maxItems - fetched),
-          offset,
-        } as AccountConnectionsListParams);
-        
-        for (const item of response.list) {
-          if (fetched >= maxItems) return;
-          yield item;
-          fetched++;
-	        }
-	        
-	        if (!response.hasMore) return;
-	        const nextOffset = (response as { nextOffset?: number | string | null }).nextOffset;
-	        offset =
-	          typeof nextOffset === 'number'
-	            ? nextOffset
-	            : typeof nextOffset === 'string' && nextOffset.trim() !== '' && Number.isFinite(Number(nextOffset))
-	              ? Number(nextOffset)
-	              : offset + response.list.length;
-	      }
-	    }
 
     /**
-     * Disconnect connection
+     * Get mass message
      */
-    delete(params: AccountConnectionsDeleteParams): Promise<unknown> {
-      return request<unknown>(this._config, {
-        path: `/v2/account/connections/${encodeURIComponent(String(params.connectionId))}`,
+    getMassMessages(params: AccessGetMassMessagesParams): Promise<AccessGetMassMessagesResponse> {
+      return request<AccessGetMassMessagesResponse>(this._config, {
+        path: `/v2/access/mass-messages/${encodeURIComponent(String(params.massMessageId))}`,
+        method: 'GET',
+      });
+    }
+
+    /**
+     * Update mass message
+     */
+    replaceMassMessages(params: AccessReplaceMassMessagesParams): Promise<AccessReplaceMassMessagesResponse> {
+      return request<AccessReplaceMassMessagesResponse>(this._config, {
+        path: `/v2/access/mass-messages/${encodeURIComponent(String(params.massMessageId))}`,
+        method: 'PUT',
+        body: params.body,
+      });
+    }
+
+    /**
+     * Delete mass message
+     */
+    deleteMassMessages(params: AccessDeleteMassMessagesParams): Promise<AccessDeleteMassMessagesResponse> {
+      return request<AccessDeleteMassMessagesResponse>(this._config, {
+        path: `/v2/access/mass-messages/${encodeURIComponent(String(params.massMessageId))}`,
         method: 'DELETE',
-      });
-    }
-
-    /**
-     * Import connection
-     */
-    createImport(params: AccountConnectionsCreateImportParams): Promise<AccountConnectionsCreateImportResponse> {
-      return request<AccountConnectionsCreateImportResponse>(this._config, {
-        path: '/v2/account/connections/import',
-        method: 'POST',
-        body: params.body,
-      });
-    }
-
-    /**
-     * Update imported connection session
-     */
-    updateImport(params: AccountConnectionsUpdateImportParams): Promise<AccountConnectionsUpdateImportResponse> {
-      return request<AccountConnectionsUpdateImportResponse>(this._config, {
-        path: `/v2/account/connections/import/${encodeURIComponent(String(params.connectionId))}`,
-        method: 'PATCH',
-        body: params.body,
-      });
-    }
-
-    /**
-     * Invalidate connection
-     */
-    invalidate(params: AccountConnectionsInvalidateParams): Promise<unknown> {
-      return request<unknown>(this._config, {
-        path: `/v2/account/connections/${encodeURIComponent(String(params.connectionId))}/invalidate`,
-        method: 'POST',
-      });
-    }
-
-    /**
-     * Get connection settings
-     */
-    getSettings(params: AccountConnectionsGetSettingsParams): Promise<AccountConnectionsGetSettingsResponse> {
-      return request<AccountConnectionsGetSettingsResponse>(this._config, {
-        path: `/v2/account/connections/${encodeURIComponent(String(params.connectionId))}/settings`,
-        method: 'GET',
-      });
-    }
-
-    /**
-     * Update connection settings
-     */
-    updateSettings(params: AccountConnectionsUpdateSettingsParams): Promise<AccountConnectionsUpdateSettingsResponse> {
-      return request<AccountConnectionsUpdateSettingsResponse>(this._config, {
-        path: `/v2/account/connections/${encodeURIComponent(String(params.connectionId))}/settings`,
-        method: 'PATCH',
-        body: params.body,
-      });
-    }
-}
-
-class AccountNamespace {
-  private _config: OFAuthConfig;
-
-  readonly connections: AccountConnectionsNamespace;
-
-  constructor(config: OFAuthConfig) {
-    this._config = config;
-    this.connections = new AccountConnectionsNamespace(config);
-  }
-
-    /**
-     * Get organization settings
-     */
-    getSettings(): Promise<AccountGetSettingsResponse> {
-      return request<AccountGetSettingsResponse>(this._config, {
-        path: '/v2/account/settings',
-        method: 'GET',
-      });
-    }
-
-    /**
-     * Update organization settings
-     */
-    updateSettings(params: AccountUpdateSettingsParams): Promise<AccountUpdateSettingsResponse> {
-      return request<AccountUpdateSettingsResponse>(this._config, {
-        path: '/v2/account/settings',
-        method: 'PATCH',
-        body: params.body,
-      });
-    }
-
-    /**
-     * Whoami
-     */
-    whoami(): Promise<AccountWhoamiResponse> {
-      return request<AccountWhoamiResponse>(this._config, {
-        path: '/v2/account/whoami',
-        method: 'GET',
-      });
-    }
-}
-
-class DynamicRulesNamespace {
-  private _config: OFAuthConfig;
-
-  constructor(config: OFAuthConfig) {
-    this._config = config;
-  }
-
-    /**
-     * Get dynamic rules
-     */
-    list(): Promise<DynamicRulesListResponse> {
-      return request<DynamicRulesListResponse>(this._config, {
-        path: '/v2/dynamic-rules',
-        method: 'GET',
-      });
-    }
-
-    /**
-     * Generate sign headers for a request
-     */
-    sign(params: DynamicRulesSignParams): Promise<DynamicRulesSignResponse> {
-      return request<DynamicRulesSignResponse>(this._config, {
-        path: '/v2/dynamic-rules/sign',
-        method: 'POST',
-        body: params.body,
-      });
-    }
-
-    /**
-     * Get dynamic rules status
-     */
-    getStatus(): Promise<DynamicRulesGetStatusResponse> {
-      return request<DynamicRulesGetStatusResponse>(this._config, {
-        path: '/v2/dynamic-rules/status',
-        method: 'GET',
       });
     }
 }
@@ -10193,6 +9810,45 @@ class LinkNamespace {
     }
 }
 
+class DynamicRulesNamespace {
+  private _config: OFAuthConfig;
+
+  constructor(config: OFAuthConfig) {
+    this._config = config;
+  }
+
+    /**
+     * Get dynamic rules
+     */
+    list(): Promise<DynamicRulesListResponse> {
+      return request<DynamicRulesListResponse>(this._config, {
+        path: '/v2/dynamic-rules',
+        method: 'GET',
+      });
+    }
+
+    /**
+     * Generate sign headers for a request
+     */
+    sign(params: DynamicRulesSignParams): Promise<DynamicRulesSignResponse> {
+      return request<DynamicRulesSignResponse>(this._config, {
+        path: '/v2/dynamic-rules/sign',
+        method: 'POST',
+        body: params.body,
+      });
+    }
+
+    /**
+     * Get dynamic rules status
+     */
+    getStatus(): Promise<DynamicRulesGetStatusResponse> {
+      return request<DynamicRulesGetStatusResponse>(this._config, {
+        path: '/v2/dynamic-rules/status',
+        method: 'GET',
+      });
+    }
+}
+
 class VaultPlusStoreNamespace {
   private _config: OFAuthConfig;
 
@@ -10212,16 +9868,6 @@ class VaultPlusStoreNamespace {
     }
 
     /**
-     * Get organization vault stats
-     */
-    getStats(): Promise<VaultPlusStoreGetStatsResponse> {
-      return request<VaultPlusStoreGetStatsResponse>(this._config, {
-        path: '/v2/vault-plus/store/stats',
-        method: 'GET',
-      });
-    }
-
-    /**
      * Get storage status for a connection
      */
     getStatus(params: VaultPlusStoreGetStatusParams): Promise<VaultPlusStoreGetStatusResponse> {
@@ -10229,6 +9875,16 @@ class VaultPlusStoreNamespace {
         path: '/v2/vault-plus/store/status',
         method: 'GET',
         connectionId: params.connectionId,
+      });
+    }
+
+    /**
+     * Get organization vault stats
+     */
+    getStats(): Promise<VaultPlusStoreGetStatsResponse> {
+      return request<VaultPlusStoreGetStatsResponse>(this._config, {
+        path: '/v2/vault-plus/store/stats',
+        method: 'GET',
       });
     }
 }
@@ -10310,18 +9966,18 @@ class VaultPlusNamespace {
 class OFAuthClient {
   private _config: OFAuthConfig;
 
-  readonly access: AccessNamespace;
   readonly account: AccountNamespace;
-  readonly dynamicRules: DynamicRulesNamespace;
+  readonly access: AccessNamespace;
   readonly link: LinkNamespace;
+  readonly dynamicRules: DynamicRulesNamespace;
   readonly vaultPlus: VaultPlusNamespace;
 
   constructor(config: OFAuthConfig) {
     this._config = config;
-    this.access = new AccessNamespace(config);
     this.account = new AccountNamespace(config);
-    this.dynamicRules = new DynamicRulesNamespace(config);
+    this.access = new AccessNamespace(config);
     this.link = new LinkNamespace(config);
+    this.dynamicRules = new DynamicRulesNamespace(config);
     this.vaultPlus = new VaultPlusNamespace(config);
   }
 

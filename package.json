@@ -1,6 +1,6 @@
 {
   "name": "@ofauth/onlyfans-sdk",
-  "version": "2.3.0",
+  "version": "3.0.0",
   "description": "OFAuth API TypeScript SDK v2 - Nested client structure",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",

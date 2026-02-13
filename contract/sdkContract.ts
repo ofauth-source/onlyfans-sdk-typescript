@@ -114,7 +114,7 @@ function defaultQueryForGetRoute(route: string, fixtures?: Record<string, string
     route === '/subscribers' ||
     route === '/subscriptions' ||
     route === '/chats' ||
-    route === '/mass-messages' ||
+    route === '/analytics/mass-messages/sent' ||
     route === '/analytics/mass-messages/purchased' ||
     route === '/earnings/transactions' ||
     route === '/earnings/chargebacks' ||
@@ -274,7 +274,7 @@ export async function runSdkGetContract(
     }
 
     if (name === 'massMessageId') {
-      const msgs: any = await sdkGet('/v2/access/mass-messages', { limit: 1 });
+      const msgs: any = await sdkGet('/v2/access/analytics/mass-messages/sent', { limit: 1 });
       assertNotRawString(msgs);
       const first = msgs?.list?.[0] ?? msgs?.items?.[0];
       const id = first?.id ?? first?.massMessageId;
@@ -400,7 +400,7 @@ export async function runSdkNonGetContract(
     }
 
     if (name === 'massMessageId') {
-      const msgs: any = await sdkGet('/v2/access/mass-messages', { limit: 1 });
+      const msgs: any = await sdkGet('/v2/access/analytics/mass-messages/sent', { limit: 1 });
       assertNotRawString(msgs);
       const first = msgs?.list?.[0] ?? msgs?.items?.[0];
       const id = first?.id ?? first?.massMessageId;
