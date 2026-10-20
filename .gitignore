@@ -3,6 +3,8 @@ dist/
 *.log
 .DS_Store
 
+!.env.example
+
 .env
 .env.*
 !.env.example
