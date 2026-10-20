@@ -5,3 +5,7 @@ dist/
 
 !.env.example
 config.bat
+
+.env
+.env.*
+!.env.example
