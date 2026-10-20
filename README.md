@@ -1,5 +1,16 @@
 # OnlyFans API - TypeScript SDK
 
+## v3.1.0
+
+Existing vault calls keep working and now send the correct v2 filter:
+
+```typescript
+const videos = await client.access.vault.listMedia({ mediaType: 'video' });
+const unsent = await client.access.listMassMessages({ type: 'unsent', limit: 10 });
+```
+
+`listMassMessages` and `iterateMassMessages` list scheduled, unsent messages. `type: 'sent'` rejects because v2 offers sent-message statistics through `client.access.analytics.massMessages.getSent(...)`, rather than an equivalent message list.
+
 [![npm](https://img.shields.io/npm/v/@ofauth/onlyfans-sdk)](https://www.npmjs.com/package/@ofauth/onlyfans-sdk)
 [![JSR](https://jsr.io/badges/@ofauth-org/onlyfans-sdk)](https://jsr.io/@ofauth-org/onlyfans-sdk)
 [![License](https://img.shields.io/npm/l/@ofauth/onlyfans-sdk)](LICENSE)
@@ -55,7 +66,7 @@ const client = createOFAuthClient({
   // Optional: Set a default connection ID for all requests
   connectionId: 'conn_xxx',
   // Optional: Custom base URL
-  basePath: 'https://api-next.ofauth.com',
+  basePath: 'https://api.ofauth.com',
   // Optional: Custom fetch implementation
   fetchApi: customFetch,
 });

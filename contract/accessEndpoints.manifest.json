@@ -13,24 +13,6 @@
   },
   {
     "method": "get",
-    "route": "/analytics/earnings/chargebacks",
-    "tag": "Analytics",
-    "summary": "Chargebacks"
-  },
-  {
-    "method": "get",
-    "route": "/analytics/earnings/chart",
-    "tag": "Analytics",
-    "summary": "Earnings chart"
-  },
-  {
-    "method": "get",
-    "route": "/analytics/earnings/transactions",
-    "tag": "Analytics",
-    "summary": "Transactions"
-  },
-  {
-    "method": "get",
     "route": "/analytics/mass-messages/:massMessageId/buyers",
     "tag": "Analytics",
     "summary": "Mass message buyers"
@@ -43,9 +25,9 @@
   },
   {
     "method": "get",
-    "route": "/analytics/mass-messages/purchased",
+    "route": "/analytics/mass-messages/sent",
     "tag": "Analytics",
-    "summary": "Mass messages purchased"
+    "summary": "Sent mass messages"
   },
   {
     "method": "get",
@@ -174,12 +156,6 @@
     "summary": "List transactions"
   },
   {
-    "method": "get",
-    "route": "/mass-messages",
-    "tag": "Messages",
-    "summary": "List mass messages"
-  },
-  {
     "method": "post",
     "route": "/mass-messages",
     "tag": "Messages",
@@ -202,6 +178,12 @@
     "route": "/mass-messages/:massMessageId",
     "tag": "Messages",
     "summary": "Update mass message"
+  },
+  {
+    "method": "get",
+    "route": "/mass-messages/scheduled",
+    "tag": "Mass Messages",
+    "summary": "List scheduled mass messages"
   },
   {
     "method": "get",

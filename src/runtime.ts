@@ -4,7 +4,7 @@
  * TypeScript SDK v2 - Nested client structure
  */
 
-export const BASE_PATH = "https://api-next.ofauth.com";
+export const BASE_PATH = "https://api.ofauth.com";
 
 export interface OFAuthConfig {
   apiKey: string;
