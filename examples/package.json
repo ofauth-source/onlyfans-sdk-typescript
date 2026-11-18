@@ -4,19 +4,26 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "basic": "tsx basic.ts",
-    "import-connection": "tsx import-connection.ts",
+    "oauth-server": "tsx oauth-server.ts",
+    "facade-server": "tsx facade-server.ts",
+    "express-app": "tsx express-app.ts",
     "access-api": "tsx access-api.ts",
-    "pagination": "tsx pagination.ts",
-    "proxy": "tsx proxy.ts",
-    "error-handling": "tsx error-handling.ts"
+    "error-handling": "tsx error-handling.ts",
+    "retries-and-debugging": "tsx retries-and-debugging.ts",
+    "webhooks": "tsx webhooks.ts",
+    "webhook-tests": "tsx webhook-tests.ts",
+    "realtime-and-upload": "tsx realtime-and-upload.ts",
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@ofauth/sdk": "file:..",
-    "dotenv": "^16.4.5"
+    "@ofauth/onlyfans-sdk": "file:..",
+    "dotenv": "^16.4.5",
+    "express": "^5.1.0"
   },
   "devDependencies": {
-    "@types/node": "^25.0.10",
-    "tsx": "^4.7.0"
+    "@types/express": "^5.0.0",
+    "@types/node": "^22.0.0",
+    "tsx": "^4.7.0",
+    "typescript": "^5.3.0"
   }
 }

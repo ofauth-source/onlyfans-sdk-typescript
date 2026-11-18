@@ -1,614 +1,2266 @@
 [
   {
     "method": "get",
-    "route": "/analytics/campaigns/chart",
+    "route": "/analytics/mass-messages/{massMessageId}/buyers",
     "tag": "Analytics",
-    "summary": "Campaigns chart"
-  },
-  {
-    "method": "get",
-    "route": "/analytics/campaigns/top",
-    "tag": "Analytics",
-    "summary": "Top campaigns"
-  },
-  {
-    "method": "get",
-    "route": "/analytics/mass-messages/:massMessageId/buyers",
-    "tag": "Analytics",
-    "summary": "Mass message buyers"
-  },
-  {
-    "method": "get",
-    "route": "/analytics/mass-messages/chart",
-    "tag": "Analytics",
-    "summary": "Mass messages chart"
+    "summary": "Mass message buyers",
+    "scope": "analytics:read",
+    "sdk": "access.analytics.massMessages.listBuyers"
   },
   {
     "method": "get",
     "route": "/analytics/mass-messages/sent",
     "tag": "Analytics",
-    "summary": "Sent mass messages"
+    "summary": "Sent mass messages",
+    "scope": "analytics:read",
+    "sdk": "access.analytics.massMessages.listSent"
   },
   {
     "method": "get",
-    "route": "/analytics/posts/:postId",
+    "route": "/analytics/posts/{postId}",
     "tag": "Analytics",
-    "summary": "Post stats"
+    "summary": "Post stats",
+    "scope": "analytics:read",
+    "sdk": "access.analytics.posts.get"
   },
   {
     "method": "get",
-    "route": "/analytics/posts/chart",
+    "route": "/analytics/posts/rankings/views",
     "tag": "Analytics",
-    "summary": "Posts chart"
+    "summary": "Posts ranked by views",
+    "scope": "analytics:read",
+    "sdk": "access.analytics.posts.rankings.listViews"
   },
   {
     "method": "get",
     "route": "/analytics/posts/top",
     "tag": "Analytics",
-    "summary": "Top posts"
+    "summary": "Top posts",
+    "scope": "analytics:read",
+    "sdk": "access.analytics.posts.listTop"
   },
   {
     "method": "get",
-    "route": "/analytics/promotions/chart",
+    "route": "/analytics/profile/messages/direct",
     "tag": "Analytics",
-    "summary": "Promotions chart"
+    "summary": "Direct message stats",
+    "scope": "analytics:read",
+    "sdk": "access.analytics.profile.messages.listDirect"
+  },
+  {
+    "method": "get",
+    "route": "/analytics/profile/overview",
+    "tag": "Analytics",
+    "summary": "Stats overview",
+    "scope": "analytics:read",
+    "sdk": "access.analytics.profile.getOverview"
+  },
+  {
+    "method": "get",
+    "route": "/analytics/profile/today-activity",
+    "tag": "Analytics",
+    "summary": "Today activity stats",
+    "scope": "analytics:read",
+    "sdk": "access.analytics.profile.getTodayActivity"
+  },
+  {
+    "method": "get",
+    "route": "/analytics/profile/top/fans",
+    "tag": "Analytics",
+    "summary": "Top fan stats",
+    "scope": "analytics:read",
+    "sdk": "access.analytics.profile.top.getFans"
+  },
+  {
+    "method": "get",
+    "route": "/analytics/profile/top/messages",
+    "tag": "Analytics",
+    "summary": "Top message stats",
+    "scope": "analytics:read",
+    "sdk": "access.analytics.profile.top.getMessages"
+  },
+  {
+    "method": "get",
+    "route": "/analytics/profile/top/posts",
+    "tag": "Analytics",
+    "summary": "Top post stats",
+    "scope": "analytics:read",
+    "sdk": "access.analytics.profile.top.getPosts"
+  },
+  {
+    "method": "get",
+    "route": "/analytics/profile/top/stories",
+    "tag": "Analytics",
+    "summary": "Top story stats",
+    "scope": "analytics:read",
+    "sdk": "access.analytics.profile.top.getStories"
+  },
+  {
+    "method": "get",
+    "route": "/analytics/profile/top/streams",
+    "tag": "Analytics",
+    "summary": "Top stream stats",
+    "scope": "analytics:read",
+    "sdk": "access.analytics.profile.top.getStreams"
+  },
+  {
+    "method": "get",
+    "route": "/analytics/profile/views/qr",
+    "tag": "Analytics",
+    "summary": "Profile views QR stats",
+    "scope": "analytics:read",
+    "sdk": "access.analytics.profile.views.getQr"
   },
   {
     "method": "get",
     "route": "/analytics/promotions/top",
     "tag": "Analytics",
-    "summary": "Top promotions"
-  },
-  {
-    "method": "get",
-    "route": "/analytics/stories/chart",
-    "tag": "Analytics",
-    "summary": "Stories chart"
+    "summary": "Top promotions",
+    "scope": "analytics:read",
+    "sdk": "access.analytics.promotions.listTop"
   },
   {
     "method": "get",
     "route": "/analytics/stories/top",
     "tag": "Analytics",
-    "summary": "Top stories"
-  },
-  {
-    "method": "get",
-    "route": "/analytics/streams/chart",
-    "tag": "Analytics",
-    "summary": "Streams chart"
+    "summary": "Top stories",
+    "scope": "analytics:read",
+    "sdk": "access.analytics.stories.listTop"
   },
   {
     "method": "get",
     "route": "/analytics/streams/top",
     "tag": "Analytics",
-    "summary": "Top streams"
+    "summary": "Top streams",
+    "scope": "analytics:read",
+    "sdk": "access.analytics.streams.listTop"
   },
   {
     "method": "get",
-    "route": "/analytics/trials/chart",
+    "route": "/analytics/timeseries/engagement/messages",
     "tag": "Analytics",
-    "summary": "Trials chart"
+    "summary": "Mass messages chart",
+    "scope": "analytics:read",
+    "sdk": "access.analytics.timeseries.engagement.messages.get"
   },
   {
     "method": "get",
-    "route": "/analytics/trials/top",
+    "route": "/analytics/timeseries/engagement/messages/direct-purchases",
     "tag": "Analytics",
-    "summary": "Top trials"
+    "summary": "Direct message purchases over time",
+    "scope": "analytics:read",
+    "sdk": "access.analytics.timeseries.engagement.messages.getDirectPurchases"
   },
   {
     "method": "get",
-    "route": "/analytics/visitor-countries/chart",
+    "route": "/analytics/timeseries/engagement/messages/sent",
     "tag": "Analytics",
-    "summary": "Visitor countries chart"
+    "summary": "Mass messages over time",
+    "scope": "analytics:read",
+    "sdk": "access.analytics.timeseries.engagement.messages.getSent"
+  },
+  {
+    "method": "get",
+    "route": "/analytics/timeseries/engagement/posts",
+    "tag": "Analytics",
+    "summary": "Posts chart",
+    "scope": "analytics:read",
+    "sdk": "access.analytics.timeseries.engagement.posts.get"
+  },
+  {
+    "method": "get",
+    "route": "/analytics/timeseries/engagement/posts/count",
+    "tag": "Analytics",
+    "summary": "Posts over time",
+    "scope": "analytics:read",
+    "sdk": "access.analytics.timeseries.engagement.posts.getCount"
+  },
+  {
+    "method": "get",
+    "route": "/analytics/timeseries/engagement/posts/views",
+    "tag": "Analytics",
+    "summary": "Post views over time",
+    "scope": "analytics:read",
+    "sdk": "access.analytics.timeseries.engagement.posts.getViews"
+  },
+  {
+    "method": "get",
+    "route": "/analytics/timeseries/engagement/stories",
+    "tag": "Analytics",
+    "summary": "Stories chart",
+    "scope": "analytics:read",
+    "sdk": "access.analytics.timeseries.engagement.getStories"
+  },
+  {
+    "method": "get",
+    "route": "/analytics/timeseries/engagement/streams",
+    "tag": "Analytics",
+    "summary": "Streams chart",
+    "scope": "analytics:read",
+    "sdk": "access.analytics.timeseries.engagement.getStreams"
+  },
+  {
+    "method": "get",
+    "route": "/analytics/timeseries/promotions",
+    "tag": "Analytics",
+    "summary": "Promotions chart",
+    "scope": "analytics:read",
+    "sdk": "access.analytics.timeseries.getPromotions"
+  },
+  {
+    "method": "get",
+    "route": "/analytics/timeseries/subscribers",
+    "tag": "Analytics",
+    "summary": "Subscribers over time",
+    "scope": "analytics:read",
+    "sdk": "access.analytics.timeseries.getSubscribers"
+  },
+  {
+    "method": "get",
+    "route": "/analytics/timeseries/tracking-links",
+    "tag": "Analytics",
+    "summary": "Tracking link performance over time",
+    "scope": "analytics:read",
+    "sdk": "access.analytics.timeseries.getTrackingLinks"
+  },
+  {
+    "method": "get",
+    "route": "/analytics/timeseries/trial-links",
+    "tag": "Analytics",
+    "summary": "Trial links chart",
+    "scope": "analytics:read",
+    "sdk": "access.analytics.timeseries.getTrialLinks"
+  },
+  {
+    "method": "get",
+    "route": "/analytics/timeseries/visitor-countries",
+    "tag": "Analytics",
+    "summary": "Visitor countries chart",
+    "scope": "analytics:read",
+    "sdk": "access.analytics.timeseries.getVisitorCountries"
+  },
+  {
+    "method": "get",
+    "route": "/analytics/tracking-links/rankings",
+    "tag": "Analytics",
+    "summary": "Top tracking links",
+    "scope": "analytics:read",
+    "sdk": "access.analytics.trackingLinks.listRankings"
+  },
+  {
+    "method": "get",
+    "route": "/analytics/traffic/countries/rankings/total",
+    "tag": "Analytics",
+    "summary": "Countries ranked by traffic",
+    "scope": "analytics:read",
+    "sdk": "access.analytics.traffic.countries.rankings.getTotal"
+  },
+  {
+    "method": "get",
+    "route": "/analytics/trial-links/top",
+    "tag": "Analytics",
+    "summary": "Top trial links",
+    "scope": "analytics:read",
+    "sdk": "access.analytics.trialLinks.listTop"
   },
   {
     "method": "get",
     "route": "/analytics/visitor-countries/top",
     "tag": "Analytics",
-    "summary": "Top visitor countries"
+    "summary": "Top visitor countries",
+    "scope": "analytics:read",
+    "sdk": "access.analytics.visitorCountries.getTop"
   },
   {
     "method": "get",
     "route": "/chats",
     "tag": "Messages",
-    "summary": "Chats list"
-  },
-  {
-    "method": "get",
-    "route": "/chats/:userId/media",
-    "tag": "Messages",
-    "summary": "Get chat media"
-  },
-  {
-    "method": "get",
-    "route": "/chats/:userId/messages",
-    "tag": "Messages",
-    "summary": "Chat messages"
-  },
-  {
-    "method": "post",
-    "route": "/chats/:userId/messages",
-    "tag": "Messages",
-    "summary": "Send chat message"
+    "summary": "Chats list",
+    "scope": "messages:read",
+    "sdk": "access.chats.list"
   },
   {
     "method": "delete",
-    "route": "/chats/:userId/messages/:messageId",
-    "tag": "Messages",
-    "summary": "Unsend chat message"
-  },
-  {
-    "method": "get",
-    "route": "/earnings/chargebacks",
-    "tag": "Earnings",
-    "summary": "List chargebacks"
-  },
-  {
-    "method": "get",
-    "route": "/earnings/chart",
-    "tag": "Earnings",
-    "summary": "Get earnings chart"
-  },
-  {
-    "method": "get",
-    "route": "/earnings/transactions",
-    "tag": "Earnings",
-    "summary": "List transactions"
+    "route": "/chats/{userId}",
+    "tag": "Chats",
+    "summary": "Chat thread",
+    "scope": "messages:write",
+    "sdk": "access.chats.delete"
   },
   {
     "method": "post",
-    "route": "/mass-messages",
-    "tag": "Messages",
-    "summary": "Create mass message"
-  },
-  {
-    "method": "delete",
-    "route": "/mass-messages/:massMessageId",
-    "tag": "Messages",
-    "summary": "Delete mass message"
+    "route": "/chats/{userId}/hide",
+    "tag": "Chats",
+    "summary": "Chat thread hide",
+    "scope": "messages:write",
+    "sdk": "access.chats.hide"
   },
   {
     "method": "get",
-    "route": "/mass-messages/:massMessageId",
+    "route": "/chats/{userId}/media",
     "tag": "Messages",
-    "summary": "Get mass message"
+    "summary": "Chat thread media",
+    "scope": "messages:read",
+    "sdk": "access.chats.media.list"
+  },
+  {
+    "method": "get",
+    "route": "/chats/{userId}/media/audios",
+    "tag": "Messages",
+    "summary": "Chat thread audio files",
+    "scope": "messages:read",
+    "sdk": "access.chats.media.listAudios"
+  },
+  {
+    "method": "get",
+    "route": "/chats/{userId}/media/photos",
+    "tag": "Messages",
+    "summary": "Chat thread photos",
+    "scope": "messages:read",
+    "sdk": "access.chats.media.listPhotos"
+  },
+  {
+    "method": "get",
+    "route": "/chats/{userId}/media/videos",
+    "tag": "Messages",
+    "summary": "Chat thread videos",
+    "scope": "messages:read",
+    "sdk": "access.chats.media.listVideos"
+  },
+  {
+    "method": "get",
+    "route": "/chats/{userId}/messages",
+    "tag": "Messages",
+    "summary": "Chat thread messages",
+    "scope": "messages:read",
+    "sdk": "access.chats.messages.list"
+  },
+  {
+    "method": "post",
+    "route": "/chats/{userId}/messages",
+    "tag": "Messages",
+    "summary": "Chat thread send message",
+    "scope": "messages:write",
+    "sdk": "access.chats.messages.send"
+  },
+  {
+    "method": "delete",
+    "route": "/chats/{userId}/messages/{messageId}",
+    "tag": "Messages",
+    "summary": "Chat thread unsend message",
+    "scope": "messages:write",
+    "sdk": "access.chats.messages.unsend"
+  },
+  {
+    "method": "delete",
+    "route": "/chats/{userId}/messages/pin",
+    "tag": "Chats",
+    "summary": "Chat thread unpin message",
+    "scope": "messages:write",
+    "sdk": "access.chats.messages.unpinAll"
+  },
+  {
+    "method": "delete",
+    "route": "/chats/{userId}/mute",
+    "tag": "Chats",
+    "summary": "Chat thread unmute",
+    "scope": "messages:write",
+    "sdk": "access.chats.unmute"
+  },
+  {
+    "method": "post",
+    "route": "/chats/{userId}/mute",
+    "tag": "Chats",
+    "summary": "Chat thread mute",
+    "scope": "messages:write",
+    "sdk": "access.chats.mute"
+  },
+  {
+    "method": "post",
+    "route": "/chats/mark-all-as-read",
+    "tag": "Chats",
+    "summary": "Mark all chats as read",
+    "scope": "messages:write",
+    "sdk": "access.chats.markAllAsRead"
+  },
+  {
+    "method": "post",
+    "route": "/chats/mass-messages",
+    "tag": "Messages",
+    "summary": "Create mass message broadcast",
+    "scope": "messages:write",
+    "sdk": "access.chats.massMessages.create"
+  },
+  {
+    "method": "get",
+    "route": "/chats/mass-messages/{massMessageId}",
+    "tag": "Chats",
+    "summary": "Mass message broadcast details",
+    "scope": "messages:read",
+    "sdk": "access.chats.massMessages.get"
   },
   {
     "method": "put",
-    "route": "/mass-messages/:massMessageId",
+    "route": "/chats/mass-messages/{massMessageId}",
     "tag": "Messages",
-    "summary": "Update mass message"
-  },
-  {
-    "method": "get",
-    "route": "/mass-messages/scheduled",
-    "tag": "Mass Messages",
-    "summary": "List scheduled mass messages"
-  },
-  {
-    "method": "get",
-    "route": "/posts",
-    "tag": "Posts",
-    "summary": "List own posts"
-  },
-  {
-    "method": "post",
-    "route": "/posts",
-    "tag": "Posts",
-    "summary": "Create post"
+    "summary": "Update mass message broadcast",
+    "scope": "messages:write",
+    "sdk": "access.chats.massMessages.update"
   },
   {
     "method": "delete",
-    "route": "/posts/:postId",
-    "tag": "Posts",
-    "summary": "Delete post"
-  },
-  {
-    "method": "get",
-    "route": "/posts/:postId",
-    "tag": "Posts",
-    "summary": "Get post"
-  },
-  {
-    "method": "put",
-    "route": "/posts/:postId",
-    "tag": "Posts",
-    "summary": "Edit post"
-  },
-  {
-    "method": "get",
-    "route": "/promotions",
-    "tag": "Promotions",
-    "summary": "List promotions"
+    "route": "/chats/messages/{messageId}/like",
+    "tag": "Chats",
+    "summary": "Unlike chat message",
+    "scope": "messages:write",
+    "sdk": "access.chats.messages.unlike"
   },
   {
     "method": "post",
-    "route": "/promotions",
-    "tag": "Promotions",
-    "summary": "Create promotion"
+    "route": "/chats/messages/{messageId}/like",
+    "tag": "Chats",
+    "summary": "Like chat message",
+    "scope": "messages:write",
+    "sdk": "access.chats.messages.like"
   },
   {
     "method": "delete",
-    "route": "/promotions/:promotionId",
-    "tag": "Promotions",
-    "summary": "Delete promotion"
-  },
-  {
-    "method": "put",
-    "route": "/promotions/:promotionId",
-    "tag": "Promotions",
-    "summary": "Update promotion"
+    "route": "/chats/messages/{messageId}/pin/user/{userId}",
+    "tag": "Chats",
+    "summary": "Unpin message for user",
+    "scope": "messages:write",
+    "sdk": "access.chats.messages.unpinForUser"
   },
   {
     "method": "post",
-    "route": "/promotions/:promotionId/stop",
-    "tag": "Promotions",
-    "summary": "Stop promotion"
+    "route": "/chats/messages/{messageId}/pin/user/{userId}",
+    "tag": "Chats",
+    "summary": "Pin message for user",
+    "scope": "messages:write",
+    "sdk": "access.chats.messages.pinForUser"
   },
   {
     "method": "get",
-    "route": "/promotions/bundles",
-    "tag": "Promotions",
-    "summary": "List bundles"
-  },
-  {
-    "method": "post",
-    "route": "/promotions/bundles",
-    "tag": "Promotions",
-    "summary": "Create bundle"
+    "route": "/chats/messages/templates",
+    "tag": "Chats",
+    "summary": "Message templates",
+    "scope": "messages:read",
+    "sdk": "access.chats.messages.templates.list"
   },
   {
     "method": "delete",
-    "route": "/promotions/bundles/:bundleId",
-    "tag": "Promotions",
-    "summary": "Delete bundle"
-  },
-  {
-    "method": "get",
-    "route": "/promotions/bundles/:bundleId",
-    "tag": "Promotions",
-    "summary": "Get bundle"
-  },
-  {
-    "method": "put",
-    "route": "/promotions/bundles/:bundleId",
-    "tag": "Promotions",
-    "summary": "Update bundle"
-  },
-  {
-    "method": "get",
-    "route": "/promotions/tracking-links",
-    "tag": "Promotions",
-    "summary": "List tracking links"
+    "route": "/chats/messages/templates/reply_on_subscribe",
+    "tag": "Chats",
+    "summary": "Delete reply-on-subscribe message template",
+    "scope": "messages:write",
+    "sdk": "access.chats.messages.templates.deleteReplyOnSubscribe"
   },
   {
     "method": "post",
-    "route": "/promotions/tracking-links",
-    "tag": "Promotions",
-    "summary": "Create tracking link"
-  },
-  {
-    "method": "delete",
-    "route": "/promotions/tracking-links/:trackingLinkId",
-    "tag": "Promotions",
-    "summary": "Delete tracking link"
+    "route": "/chats/messages/templates/reply_on_subscribe",
+    "tag": "Chats",
+    "summary": "Create reply-on-subscribe message template",
+    "scope": "messages:write",
+    "sdk": "access.chats.messages.templates.setReplyOnSubscribe"
   },
   {
     "method": "get",
-    "route": "/promotions/tracking-links/:trackingLinkId",
-    "tag": "Promotions",
-    "summary": "Get tracking link"
-  },
-  {
-    "method": "put",
-    "route": "/promotions/tracking-links/:trackingLinkId",
-    "tag": "Promotions",
-    "summary": "Update tracking link"
+    "route": "/chats/priority",
+    "tag": "Messages",
+    "summary": "Priority chats",
+    "scope": "messages:read",
+    "sdk": "access.chats.listPriority"
   },
   {
     "method": "get",
-    "route": "/promotions/tracking-links/:trackingLinkId/claimers",
-    "tag": "Promotions",
-    "summary": "Get tracking link claimers"
-  },
-  {
-    "method": "delete",
-    "route": "/promotions/tracking-links/share-access",
-    "tag": "Promotions",
-    "summary": "Revoke tracking link access"
-  },
-  {
-    "method": "post",
-    "route": "/promotions/tracking-links/share-access",
-    "tag": "Promotions",
-    "summary": "Share tracking link access"
+    "route": "/chats/unread",
+    "tag": "Messages",
+    "summary": "Unread chats",
+    "scope": "messages:read",
+    "sdk": "access.chats.listUnread"
   },
   {
     "method": "get",
-    "route": "/promotions/trial-links",
-    "tag": "Promotions",
-    "summary": "List trial links"
-  },
-  {
-    "method": "post",
-    "route": "/promotions/trial-links",
-    "tag": "Promotions",
-    "summary": "Create trial link"
-  },
-  {
-    "method": "delete",
-    "route": "/promotions/trial-links/:trialLinkId",
-    "tag": "Promotions",
-    "summary": "Delete trial link"
+    "route": "/chats/with-tips",
+    "tag": "Messages",
+    "summary": "Chats with tips",
+    "scope": "messages:read",
+    "sdk": "access.chats.listWithTips"
   },
   {
     "method": "get",
-    "route": "/promotions/trial-links/:trialLinkId",
-    "tag": "Promotions",
-    "summary": "Get trial link"
-  },
-  {
-    "method": "put",
-    "route": "/promotions/trial-links/:trialLinkId",
-    "tag": "Promotions",
-    "summary": "Update trial link"
-  },
-  {
-    "method": "delete",
-    "route": "/promotions/trial-links/share-access",
-    "tag": "Promotions",
-    "summary": "Revoke trial link access"
-  },
-  {
-    "method": "post",
-    "route": "/promotions/trial-links/share-access",
-    "tag": "Promotions",
-    "summary": "Share trial link access"
+    "route": "/finances/earnings/chargebacks",
+    "tag": "Finances",
+    "summary": "List chargebacks",
+    "scope": "finances:read",
+    "sdk": "access.finances.earnings.listChargebacks"
   },
   {
     "method": "get",
-    "route": "/self",
+    "route": "/finances/earnings/timeseries",
+    "tag": "Finances",
+    "summary": "Get earnings chart",
+    "scope": "finances:read",
+    "sdk": "access.finances.earnings.timeseries.get"
+  },
+  {
+    "method": "get",
+    "route": "/finances/earnings/timeseries/messages",
+    "tag": "Finances",
+    "summary": "Message earnings over time",
+    "scope": "finances:read",
+    "sdk": "access.finances.earnings.timeseries.getMessages"
+  },
+  {
+    "method": "get",
+    "route": "/finances/earnings/timeseries/posts",
+    "tag": "Finances",
+    "summary": "Post earnings over time",
+    "scope": "finances:read",
+    "sdk": "access.finances.earnings.timeseries.getPosts"
+  },
+  {
+    "method": "get",
+    "route": "/finances/earnings/timeseries/profile-tips",
+    "tag": "Finances",
+    "summary": "Profile tips over time",
+    "scope": "finances:read",
+    "sdk": "access.finances.earnings.timeseries.getProfileTips"
+  },
+  {
+    "method": "get",
+    "route": "/finances/earnings/timeseries/streams",
+    "tag": "Finances",
+    "summary": "Stream earnings over time",
+    "scope": "finances:read",
+    "sdk": "access.finances.earnings.timeseries.getStreams"
+  },
+  {
+    "method": "get",
+    "route": "/finances/earnings/timeseries/subscriptions",
+    "tag": "Finances",
+    "summary": "Subscription earnings over time",
+    "scope": "finances:read",
+    "sdk": "access.finances.earnings.timeseries.getSubscriptions"
+  },
+  {
+    "method": "get",
+    "route": "/finances/earnings/timeseries/total",
+    "tag": "Finances",
+    "summary": "Total earnings over time",
+    "scope": "finances:read",
+    "sdk": "access.finances.earnings.timeseries.getTotal"
+  },
+  {
+    "method": "get",
+    "route": "/finances/earnings/transactions",
+    "tag": "Finances",
+    "summary": "List transactions",
+    "scope": "finances:read",
+    "sdk": "access.finances.earnings.transactions.list"
+  },
+  {
+    "method": "get",
+    "route": "/finances/earnings/transactions/messages",
+    "tag": "Finances",
+    "summary": "Message transactions",
+    "scope": "finances:read",
+    "sdk": "access.finances.earnings.transactions.listMessages"
+  },
+  {
+    "method": "get",
+    "route": "/finances/earnings/transactions/tips",
+    "tag": "Finances",
+    "summary": "Tip transactions",
+    "scope": "finances:read",
+    "sdk": "access.finances.earnings.transactions.listTips"
+  },
+  {
+    "method": "get",
+    "route": "/finances/payouts/balances",
+    "tag": "Finances",
+    "summary": "Payout balances",
+    "scope": "finances:read",
+    "sdk": "access.finances.payouts.getBalances"
+  },
+  {
+    "method": "get",
+    "route": "/finances/payouts/chargebacks/ratio",
+    "tag": "Finances",
+    "summary": "Chargeback ratio",
+    "scope": "finances:read",
+    "sdk": "access.finances.payouts.chargebacks.getRatio"
+  },
+  {
+    "method": "get",
+    "route": "/finances/payouts/check-receive",
+    "tag": "Finances",
+    "summary": "Check payout receive status",
+    "scope": "finances:read",
+    "sdk": "access.finances.payouts.getCheckReceive"
+  },
+  {
+    "method": "get",
+    "route": "/finances/payouts/requests",
+    "tag": "Finances",
+    "summary": "Payout requests",
+    "scope": "finances:read",
+    "sdk": "access.finances.payouts.listRequests"
+  },
+  {
+    "method": "get",
+    "route": "/finances/payouts/stats",
+    "tag": "Finances",
+    "summary": "Payout stats",
+    "scope": "finances:read",
+    "sdk": "access.finances.payouts.listStats"
+  },
+  {
+    "method": "get",
+    "route": "/finances/referrals",
     "tag": "Self",
-    "summary": "Get current user"
+    "summary": "Referrals",
+    "scope": "profile:read",
+    "sdk": "access.finances.referrals.list"
+  },
+  {
+    "method": "get",
+    "route": "/finances/referrals/balance",
+    "tag": "Finances",
+    "summary": "Referral balance",
+    "scope": "finances:read",
+    "sdk": "access.finances.referrals.getBalance"
+  },
+  {
+    "method": "get",
+    "route": "/finances/referrals/payout-requests",
+    "tag": "Finances",
+    "summary": "Referral payout requests",
+    "scope": "finances:read",
+    "sdk": "access.finances.referrals.listPayoutRequests"
+  },
+  {
+    "method": "get",
+    "route": "/finances/referrals/timeseries",
+    "tag": "Finances",
+    "summary": "Referrals over time",
+    "scope": "finances:read",
+    "sdk": "access.finances.referrals.listTimeseries"
+  },
+  {
+    "method": "get",
+    "route": "/finances/timeseries/chargebacks",
+    "tag": "Finances",
+    "summary": "Chargebacks over time",
+    "scope": "finances:read",
+    "sdk": "access.finances.timeseries.listChargebacks"
+  },
+  {
+    "method": "get",
+    "route": "/labels",
+    "tag": "Posts",
+    "summary": "List post labels",
+    "scope": "posts:read",
+    "sdk": "access.listLabels"
+  },
+  {
+    "method": "get",
+    "route": "/lists",
+    "tag": "Lists",
+    "summary": "List user lists",
+    "scope": "lists:read",
+    "sdk": "access.lists.list"
+  },
+  {
+    "method": "post",
+    "route": "/lists",
+    "tag": "Lists",
+    "summary": "Create list",
+    "scope": "lists:write",
+    "sdk": "access.lists.create"
+  },
+  {
+    "method": "delete",
+    "route": "/lists/{listId}",
+    "tag": "Lists",
+    "summary": "Delete list",
+    "scope": "lists:write",
+    "sdk": "access.lists.delete"
+  },
+  {
+    "method": "get",
+    "route": "/lists/{listId}",
+    "tag": "Lists",
+    "summary": "Get list",
+    "scope": "lists:read",
+    "sdk": "access.lists.get"
   },
   {
     "method": "patch",
-    "route": "/self",
-    "tag": "Self",
-    "summary": "Update current user profile"
+    "route": "/lists/{listId}",
+    "tag": "Lists",
+    "summary": "Update list",
+    "scope": "lists:write",
+    "sdk": "access.lists.update"
   },
   {
     "method": "get",
-    "route": "/self/notifications",
-    "tag": "Self",
-    "summary": "List notifications"
+    "route": "/lists/{listId}/posts",
+    "tag": "Lists",
+    "summary": "List posts in list",
+    "scope": "lists:read",
+    "sdk": "access.lists.listPosts"
+  },
+  {
+    "method": "post",
+    "route": "/lists/{listId}/sort",
+    "tag": "Lists",
+    "summary": "Sort list",
+    "scope": "lists:write",
+    "sdk": "access.lists.sortItems"
+  },
+  {
+    "method": "delete",
+    "route": "/lists/{listId}/users",
+    "tag": "Lists",
+    "summary": "Clear list users",
+    "scope": "lists:write",
+    "sdk": "access.lists.users.clear"
   },
   {
     "method": "get",
-    "route": "/self/release-forms",
-    "tag": "Self",
-    "summary": "List release forms"
+    "route": "/lists/{listId}/users",
+    "tag": "Lists",
+    "summary": "List users in user list",
+    "scope": "lists:read",
+    "sdk": "access.lists.users.list"
+  },
+  {
+    "method": "delete",
+    "route": "/lists/{listId}/users/{userId}",
+    "tag": "Lists",
+    "summary": "Remove user from list",
+    "scope": "lists:write",
+    "sdk": "access.lists.users.remove"
+  },
+  {
+    "method": "post",
+    "route": "/lists/{listId}/users/{userId}",
+    "tag": "Lists",
+    "summary": "Add user to list",
+    "scope": "lists:write",
+    "sdk": "access.lists.users.add"
+  },
+  {
+    "method": "post",
+    "route": "/lists/{listId}/users/{userId}/pin",
+    "tag": "Lists",
+    "summary": "Pin list user",
+    "scope": "lists:write",
+    "sdk": "access.lists.users.pin"
   },
   {
     "method": "get",
-    "route": "/self/tagged-friend-users",
+    "route": "/lists/{listId}/users/pinned",
+    "tag": "Lists",
+    "summary": "Pinned list users",
+    "scope": "lists:read",
+    "sdk": "access.lists.users.listPinned"
+  },
+  {
+    "method": "get",
+    "route": "/lists/fans",
+    "tag": "Lists",
+    "summary": "Fan lists",
+    "scope": "lists:read",
+    "sdk": "access.lists.getFans"
+  },
+  {
+    "method": "get",
+    "route": "/lists/following",
+    "tag": "Lists",
+    "summary": "Following lists",
+    "scope": "lists:read",
+    "sdk": "access.lists.getFollowing"
+  },
+  {
+    "method": "post",
+    "route": "/lists/sort",
+    "tag": "Lists",
+    "summary": "Sort lists",
+    "scope": "lists:write",
+    "sdk": "access.lists.sort"
+  },
+  {
+    "method": "post",
+    "route": "/lists/users",
+    "tag": "Lists",
+    "summary": "Create list users",
+    "scope": "lists:write",
+    "sdk": "access.lists.users.addToLists"
+  },
+  {
+    "method": "get",
+    "route": "/notifications",
     "tag": "Self",
-    "summary": "List tagged friend users"
+    "summary": "List notifications",
+    "scope": "notifications:read",
+    "sdk": "access.notifications.list"
+  },
+  {
+    "method": "get",
+    "route": "/notifications/count",
+    "tag": "Self",
+    "summary": "Notification count",
+    "scope": "notifications:read",
+    "sdk": "access.notifications.getCount"
+  },
+  {
+    "method": "post",
+    "route": "/notifications/read",
+    "tag": "Self",
+    "summary": "Mark notifications read",
+    "scope": "notifications:write",
+    "sdk": "access.notifications.markRead"
+  },
+  {
+    "method": "get",
+    "route": "/posts",
+    "tag": "Posts",
+    "summary": "List own posts",
+    "scope": "posts:read",
+    "sdk": "access.posts.list"
+  },
+  {
+    "method": "post",
+    "route": "/posts",
+    "tag": "Posts",
+    "summary": "Create post",
+    "scope": "posts:write",
+    "sdk": "access.posts.create"
+  },
+  {
+    "method": "delete",
+    "route": "/posts/{postId}",
+    "tag": "Posts",
+    "summary": "Delete post",
+    "scope": "posts:write",
+    "sdk": "access.posts.delete"
+  },
+  {
+    "method": "get",
+    "route": "/posts/{postId}",
+    "tag": "Posts",
+    "summary": "Get post",
+    "scope": "posts:read",
+    "sdk": "access.posts.get"
+  },
+  {
+    "method": "put",
+    "route": "/posts/{postId}",
+    "tag": "Posts",
+    "summary": "Edit post",
+    "scope": "posts:write",
+    "sdk": "access.posts.update"
+  },
+  {
+    "method": "post",
+    "route": "/posts/{postId}/archive",
+    "tag": "Posts",
+    "summary": "Archive post",
+    "scope": "posts:write",
+    "sdk": "access.posts.archive"
+  },
+  {
+    "method": "delete",
+    "route": "/posts/{postId}/bookmarks",
+    "tag": "Posts",
+    "summary": "Delete post bookmarks",
+    "scope": "posts:write",
+    "sdk": "access.posts.bookmarks.remove"
+  },
+  {
+    "method": "post",
+    "route": "/posts/{postId}/bookmarks/{bookmarkId}",
+    "tag": "Posts",
+    "summary": "Create post bookmark",
+    "scope": "posts:write",
+    "sdk": "access.posts.bookmarks.add"
+  },
+  {
+    "method": "get",
+    "route": "/posts/{postId}/buyers",
+    "tag": "Posts",
+    "summary": "Post buyers",
+    "scope": "posts:read",
+    "sdk": "access.posts.listBuyers"
+  },
+  {
+    "method": "get",
+    "route": "/posts/{postId}/comments",
+    "tag": "Posts",
+    "summary": "Post comments",
+    "scope": "posts:read",
+    "sdk": "access.posts.comments.list"
+  },
+  {
+    "method": "post",
+    "route": "/posts/{postId}/comments",
+    "tag": "Posts",
+    "summary": "Create post comment",
+    "scope": "posts:write",
+    "sdk": "access.posts.comments.create"
+  },
+  {
+    "method": "get",
+    "route": "/posts/{postId}/favorites",
+    "tag": "Posts",
+    "summary": "Post favorites",
+    "scope": "posts:read",
+    "sdk": "access.posts.listFavorites"
+  },
+  {
+    "method": "post",
+    "route": "/posts/{postId}/favorites/{authorId}",
+    "tag": "Posts",
+    "summary": "Favorite post for author",
+    "scope": "posts:write",
+    "sdk": "access.posts.favorites.add"
+  },
+  {
+    "method": "get",
+    "route": "/posts/{postId}/fund-raising-contributors/count",
+    "tag": "Posts",
+    "summary": "Fundraising contributors count",
+    "scope": "posts:read",
+    "sdk": "access.posts.fundRaisingContributors.getCount"
+  },
+  {
+    "method": "post",
+    "route": "/posts/{postId}/pin",
+    "tag": "Posts",
+    "summary": "Pin post",
+    "scope": "posts:write",
+    "sdk": "access.posts.pin"
+  },
+  {
+    "method": "get",
+    "route": "/posts/{postId}/tips",
+    "tag": "Posts",
+    "summary": "Post tips",
+    "scope": "posts:read",
+    "sdk": "access.posts.listTips"
+  },
+  {
+    "method": "post",
+    "route": "/posts/{postId}/unarchive",
+    "tag": "Posts",
+    "summary": "Unarchive post",
+    "scope": "posts:write",
+    "sdk": "access.posts.unarchive"
+  },
+  {
+    "method": "post",
+    "route": "/posts/{postId}/vote",
+    "tag": "Posts",
+    "summary": "Vote on post",
+    "scope": "posts:write",
+    "sdk": "access.posts.vote"
+  },
+  {
+    "method": "get",
+    "route": "/posts/{postId}/voters",
+    "tag": "Posts",
+    "summary": "Post voters",
+    "scope": "posts:read",
+    "sdk": "access.posts.listVoters"
+  },
+  {
+    "method": "get",
+    "route": "/posts/{postId}/voters/{optionId}",
+    "tag": "Posts",
+    "summary": "Post voters by option",
+    "scope": "posts:read",
+    "sdk": "access.posts.voters.listByOption"
+  },
+  {
+    "method": "get",
+    "route": "/posts/bookmarks",
+    "tag": "Posts",
+    "summary": "Post bookmarks",
+    "scope": "posts:read",
+    "sdk": "access.posts.bookmarks.list"
+  },
+  {
+    "method": "get",
+    "route": "/posts/bookmarks/{bookmarkType}",
+    "tag": "Posts",
+    "summary": "Post bookmarks by type",
+    "scope": "posts:read",
+    "sdk": "access.posts.bookmarks.listByType"
+  },
+  {
+    "method": "get",
+    "route": "/posts/bookmarks/{bookmarkType}/{categoryId}",
+    "tag": "Posts",
+    "summary": "Post bookmarks by type and category",
+    "scope": "posts:read",
+    "sdk": "access.posts.bookmarks.listByCategory"
+  },
+  {
+    "method": "get",
+    "route": "/posts/bookmarks/categories",
+    "tag": "Posts",
+    "summary": "Post bookmark categories",
+    "scope": "posts:read",
+    "sdk": "access.posts.bookmarks.categories.list"
+  },
+  {
+    "method": "post",
+    "route": "/posts/bookmarks/categories",
+    "tag": "Posts",
+    "summary": "Create post bookmark category",
+    "scope": "posts:write",
+    "sdk": "access.posts.bookmarks.categories.create"
+  },
+  {
+    "method": "delete",
+    "route": "/posts/bookmarks/categories/{categoryId}",
+    "tag": "Posts",
+    "summary": "Delete post bookmark category",
+    "scope": "posts:write",
+    "sdk": "access.posts.bookmarks.categories.delete"
+  },
+  {
+    "method": "delete",
+    "route": "/posts/bookmarks/categories/{categoryId}/{postId}",
+    "tag": "Posts",
+    "summary": "Remove post from bookmark category",
+    "scope": "posts:write",
+    "sdk": "access.posts.bookmarks.categories.removePost"
+  },
+  {
+    "method": "post",
+    "route": "/posts/bookmarks/categories/{categoryId}/{postId}",
+    "tag": "Posts",
+    "summary": "Add post to bookmark category",
+    "scope": "posts:write",
+    "sdk": "access.posts.bookmarks.categories.addPost"
+  },
+  {
+    "method": "delete",
+    "route": "/posts/comments/{commentId}",
+    "tag": "Posts",
+    "summary": "Delete post comment",
+    "scope": "posts:write",
+    "sdk": "access.posts.comments.delete"
+  },
+  {
+    "method": "delete",
+    "route": "/posts/comments/{commentId}/like",
+    "tag": "Posts",
+    "summary": "Unlike post comment",
+    "scope": "posts:write",
+    "sdk": "access.posts.comments.unlike"
+  },
+  {
+    "method": "post",
+    "route": "/posts/comments/{commentId}/like",
+    "tag": "Posts",
+    "summary": "Like post comment",
+    "scope": "posts:write",
+    "sdk": "access.posts.comments.like"
+  },
+  {
+    "method": "delete",
+    "route": "/posts/comments/{commentId}/pin",
+    "tag": "Posts",
+    "summary": "Unpin post comment",
+    "scope": "posts:write",
+    "sdk": "access.posts.comments.unpin"
+  },
+  {
+    "method": "post",
+    "route": "/posts/comments/{commentId}/pin",
+    "tag": "Posts",
+    "summary": "Pin post comment",
+    "scope": "posts:write",
+    "sdk": "access.posts.comments.pin"
+  },
+  {
+    "method": "get",
+    "route": "/posts/tagged-friend-users",
+    "tag": "Posts",
+    "summary": "List tagged friend users",
+    "scope": "posts:read",
+    "sdk": "access.posts.listTaggedFriendUsers"
+  },
+  {
+    "method": "get",
+    "route": "/profile",
+    "tag": "Self",
+    "summary": "Current account",
+    "scope": "profile:read",
+    "sdk": "access.profile.get"
+  },
+  {
+    "method": "patch",
+    "route": "/profile",
+    "tag": "Self",
+    "summary": "Update current account",
+    "scope": "profile:write",
+    "sdk": "access.profile.update"
+  },
+  {
+    "method": "get",
+    "route": "/profile/capabilities",
+    "tag": "Self",
+    "summary": "Account capabilities",
+    "scope": "profile:read",
+    "sdk": "access.profile.getCapabilities"
+  },
+  {
+    "method": "get",
+    "route": "/profile/counts",
+    "tag": "Self",
+    "summary": "Profile counts",
+    "scope": "profile:read",
+    "sdk": "access.profile.getCounts"
+  },
+  {
+    "method": "get",
+    "route": "/profile/links",
+    "tag": "Self",
+    "summary": "Account links",
+    "scope": "profile:read",
+    "sdk": "access.profile.links.list"
+  },
+  {
+    "method": "put",
+    "route": "/profile/links",
+    "tag": "Self",
+    "summary": "Update account links",
+    "scope": "profile:write",
+    "sdk": "access.profile.links.update"
+  },
+  {
+    "method": "delete",
+    "route": "/profile/links/{linkId}",
+    "tag": "Self",
+    "summary": "Delete account link",
+    "scope": "profile:write",
+    "sdk": "access.profile.links.delete"
+  },
+  {
+    "method": "get",
+    "route": "/profile/social-buttons",
+    "tag": "Self",
+    "summary": "Social buttons",
+    "scope": "profile:read",
+    "sdk": "access.profile.socialButtons.list"
+  },
+  {
+    "method": "put",
+    "route": "/profile/social-buttons",
+    "tag": "Self",
+    "summary": "Update social buttons",
+    "scope": "profile:write",
+    "sdk": "access.profile.socialButtons.update"
+  },
+  {
+    "method": "delete",
+    "route": "/profile/social-buttons/{buttonId}",
+    "tag": "Self",
+    "summary": "Delete social button",
+    "scope": "profile:write",
+    "sdk": "access.profile.socialButtons.delete"
+  },
+  {
+    "method": "post",
+    "route": "/profile/validate",
+    "tag": "Self",
+    "summary": "Validate profile data",
+    "scope": "profile:write",
+    "sdk": "access.profile.validate"
+  },
+  {
+    "method": "get",
+    "route": "/promotions",
+    "tag": "Promotions",
+    "summary": "List promotions",
+    "scope": "promotions:read",
+    "sdk": "access.promotions.list"
+  },
+  {
+    "method": "post",
+    "route": "/promotions",
+    "tag": "Promotions",
+    "summary": "Create promotion",
+    "scope": "promotions:write",
+    "sdk": "access.promotions.create"
+  },
+  {
+    "method": "delete",
+    "route": "/promotions/{promotionId}",
+    "tag": "Promotions",
+    "summary": "Delete promotion",
+    "scope": "promotions:write",
+    "sdk": "access.promotions.delete"
+  },
+  {
+    "method": "post",
+    "route": "/promotions/{promotionId}/end",
+    "tag": "Promotions",
+    "summary": "End promotion",
+    "scope": "promotions:write",
+    "sdk": "access.promotions.end"
+  },
+  {
+    "method": "get",
+    "route": "/promotions/bundles",
+    "tag": "Promotions",
+    "summary": "List bundles",
+    "scope": "promotions:read",
+    "sdk": "access.promotions.bundles.list"
+  },
+  {
+    "method": "post",
+    "route": "/promotions/bundles",
+    "tag": "Promotions",
+    "summary": "Create bundle",
+    "scope": "promotions:write",
+    "sdk": "access.promotions.bundles.create"
+  },
+  {
+    "method": "delete",
+    "route": "/promotions/bundles/{bundleId}",
+    "tag": "Promotions",
+    "summary": "Delete bundle",
+    "scope": "promotions:write",
+    "sdk": "access.promotions.bundles.delete"
+  },
+  {
+    "method": "get",
+    "route": "/promotions/bundles/{bundleId}",
+    "tag": "Promotions",
+    "summary": "Get bundle",
+    "scope": "promotions:read",
+    "sdk": "access.promotions.bundles.get"
+  },
+  {
+    "method": "get",
+    "route": "/promotions/offers",
+    "tag": "Promotions",
+    "summary": "Promotion offers",
+    "scope": "promotions:read",
+    "sdk": "access.promotions.getOffers"
+  },
+  {
+    "method": "post",
+    "route": "/promotions/offers/hide",
+    "tag": "Promotions",
+    "summary": "Hide promotion offers",
+    "scope": "promotions:write",
+    "sdk": "access.promotions.hideOffers"
+  },
+  {
+    "method": "get",
+    "route": "/promotions/tracking-links",
+    "tag": "Promotions",
+    "summary": "List tracking links",
+    "scope": "promotions:read",
+    "sdk": "access.promotions.trackingLinks.list"
+  },
+  {
+    "method": "post",
+    "route": "/promotions/tracking-links",
+    "tag": "Promotions",
+    "summary": "Create tracking link",
+    "scope": "promotions:write",
+    "sdk": "access.promotions.trackingLinks.create"
+  },
+  {
+    "method": "delete",
+    "route": "/promotions/tracking-links/{trackingLinkId}",
+    "tag": "Promotions",
+    "summary": "Delete tracking link",
+    "scope": "promotions:write",
+    "sdk": "access.promotions.trackingLinks.delete"
+  },
+  {
+    "method": "get",
+    "route": "/promotions/tracking-links/{trackingLinkId}/claimed-users",
+    "tag": "Promotions",
+    "summary": "Tracking link claimed users",
+    "scope": "promotions:read",
+    "sdk": "access.promotions.trackingLinks.listClaimedUsers"
+  },
+  {
+    "method": "delete",
+    "route": "/promotions/tracking-links/{trackingLinkId}/shared-users/{userId}",
+    "tag": "Promotions",
+    "summary": "Revoke tracking link access",
+    "scope": "promotions:write",
+    "sdk": "access.promotions.trackingLinks.unshare"
+  },
+  {
+    "method": "put",
+    "route": "/promotions/tracking-links/{trackingLinkId}/shared-users/{userId}",
+    "tag": "Promotions",
+    "summary": "Share tracking link access",
+    "scope": "promotions:write",
+    "sdk": "access.promotions.trackingLinks.share"
+  },
+  {
+    "method": "get",
+    "route": "/promotions/tracking-links/{trackingLinkId}/shared-with-me",
+    "tag": "Promotions",
+    "summary": "Tracking link shared with me",
+    "scope": "promotions:read",
+    "sdk": "access.promotions.trackingLinks.listSharedWithMe"
+  },
+  {
+    "method": "get",
+    "route": "/promotions/trial-links",
+    "tag": "Promotions",
+    "summary": "List trial links",
+    "scope": "promotions:read",
+    "sdk": "access.promotions.trialLinks.list"
+  },
+  {
+    "method": "post",
+    "route": "/promotions/trial-links",
+    "tag": "Promotions",
+    "summary": "Create trial link",
+    "scope": "promotions:write",
+    "sdk": "access.promotions.trialLinks.create"
+  },
+  {
+    "method": "post",
+    "route": "/promotions/trial-links/{trialLinkId}/deactivate",
+    "tag": "Promotions",
+    "summary": "Deactivate trial link",
+    "scope": "promotions:write",
+    "sdk": "access.promotions.trialLinks.deactivate"
+  },
+  {
+    "method": "delete",
+    "route": "/promotions/trial-links/{trialLinkId}/shared-users/{userId}",
+    "tag": "Promotions",
+    "summary": "Revoke trial link access",
+    "scope": "promotions:write",
+    "sdk": "access.promotions.trialLinks.unshare"
+  },
+  {
+    "method": "put",
+    "route": "/promotions/trial-links/{trialLinkId}/shared-users/{userId}",
+    "tag": "Promotions",
+    "summary": "Share trial link access",
+    "scope": "promotions:write",
+    "sdk": "access.promotions.trialLinks.share"
+  },
+  {
+    "method": "get",
+    "route": "/promotions/trial-links/{trialLinkId}/shared-with-me",
+    "tag": "Promotions",
+    "summary": "Trial link shared with me",
+    "scope": "promotions:read",
+    "sdk": "access.promotions.trialLinks.listSharedWithMe"
+  },
+  {
+    "method": "delete",
+    "route": "/queue/messages/{queueMessageId}",
+    "tag": "Queue",
+    "summary": "Delete queued message",
+    "scope": "queue:write",
+    "sdk": "access.queue.deleteMessage"
+  },
+  {
+    "method": "get",
+    "route": "/queue/messages/{queueMessageId}",
+    "tag": "Queue",
+    "summary": "Queued message",
+    "scope": "queue:read",
+    "sdk": "access.queue.getMessage"
+  },
+  {
+    "method": "get",
+    "route": "/queue/posts",
+    "tag": "Queue",
+    "summary": "Queued posts",
+    "scope": "queue:read",
+    "sdk": "access.queue.listPosts"
+  },
+  {
+    "method": "get",
+    "route": "/queue/saved/posts",
+    "tag": "Queue",
+    "summary": "Saved-for-later posts",
+    "scope": "queue:read",
+    "sdk": "access.queue.saved.listPosts"
+  },
+  {
+    "method": "get",
+    "route": "/queue/schedules",
+    "tag": "Queue",
+    "summary": "Queued schedules",
+    "scope": "queue:read",
+    "sdk": "access.queue.schedules.list"
+  },
+  {
+    "method": "put",
+    "route": "/queue/schedules/{scheduleId}/publish",
+    "tag": "Queue",
+    "summary": "Publish queued schedule",
+    "scope": "queue:write",
+    "sdk": "access.queue.schedules.publish"
+  },
+  {
+    "method": "get",
+    "route": "/queue/schedules/counters",
+    "tag": "Queue",
+    "summary": "Schedule counters",
+    "scope": "queue:read",
+    "sdk": "access.queue.schedules.listCounters"
+  },
+  {
+    "method": "get",
+    "route": "/queue/schedules/saved-for-later/chats",
+    "tag": "Queue",
+    "summary": "Saved-for-later chat schedules",
+    "scope": "queue:read",
+    "sdk": "access.queue.schedules.savedForLater.listChats"
+  },
+  {
+    "method": "get",
+    "route": "/queue/schedules/saved-for-later/posts",
+    "tag": "Queue",
+    "summary": "Saved-for-later post schedules",
+    "scope": "queue:read",
+    "sdk": "access.queue.schedules.savedForLater.listPosts"
+  },
+  {
+    "method": "get",
+    "route": "/release-forms",
+    "tag": "Release Forms",
+    "summary": "List release forms",
+    "scope": "profile:read",
+    "sdk": "access.releaseForms.list"
+  },
+  {
+    "method": "patch",
+    "route": "/release-forms/{releaseFormId}",
+    "tag": "Release Forms",
+    "summary": "Update release form",
+    "scope": "profile:write",
+    "sdk": "access.releaseForms.update"
+  },
+  {
+    "method": "patch",
+    "route": "/release-forms/{releaseFormId}/toggle-visibility",
+    "tag": "Release Forms",
+    "summary": "Toggle release form visibility",
+    "scope": "profile:write",
+    "sdk": "access.releaseForms.toggleVisibility"
+  },
+  {
+    "method": "post",
+    "route": "/release-forms/links",
+    "tag": "Release Forms",
+    "summary": "Create release form link",
+    "scope": "profile:write",
+    "sdk": "access.releaseForms.createLink"
+  },
+  {
+    "method": "get",
+    "route": "/settings",
+    "tag": "Self",
+    "summary": "Account settings",
+    "scope": "profile:read",
+    "sdk": "access.settings.get"
+  },
+  {
+    "method": "patch",
+    "route": "/settings/{settingId}",
+    "tag": "Self",
+    "summary": "Patch account setting",
+    "scope": "profile:write",
+    "sdk": "access.settings.update"
+  },
+  {
+    "method": "put",
+    "route": "/settings/{settingId}",
+    "tag": "Self",
+    "summary": "Replace account setting",
+    "scope": "profile:write",
+    "sdk": "access.settings.replace"
+  },
+  {
+    "method": "get",
+    "route": "/stories",
+    "tag": "Self",
+    "summary": "Own stories",
+    "scope": "stories:read",
+    "sdk": "access.stories.list"
+  },
+  {
+    "method": "post",
+    "route": "/stories",
+    "tag": "Stories",
+    "summary": "Create story",
+    "scope": "stories:write",
+    "sdk": "access.stories.create"
+  },
+  {
+    "method": "delete",
+    "route": "/stories/{storyId}",
+    "tag": "Stories",
+    "summary": "Delete story",
+    "scope": "stories:write",
+    "sdk": "access.stories.delete"
+  },
+  {
+    "method": "get",
+    "route": "/stories/{storyId}/answer",
+    "tag": "Stories",
+    "summary": "Story answer",
+    "scope": "stories:read",
+    "sdk": "access.stories.listAnswers"
+  },
+  {
+    "method": "delete",
+    "route": "/stories/{storyId}/like",
+    "tag": "Stories",
+    "summary": "Unlike story",
+    "scope": "stories:write",
+    "sdk": "access.stories.unlike"
+  },
+  {
+    "method": "post",
+    "route": "/stories/{storyId}/like",
+    "tag": "Stories",
+    "summary": "Like story",
+    "scope": "stories:write",
+    "sdk": "access.stories.like"
+  },
+  {
+    "method": "get",
+    "route": "/stories/{storyId}/stats",
+    "tag": "Stories",
+    "summary": "Story stats",
+    "scope": "stories:read",
+    "sdk": "access.stories.getStats"
+  },
+  {
+    "method": "get",
+    "route": "/stories/{storyId}/viewers",
+    "tag": "Stories",
+    "summary": "Story viewers",
+    "scope": "stories:read",
+    "sdk": "access.stories.listViewers"
+  },
+  {
+    "method": "put",
+    "route": "/stories/{storyId}/watched",
+    "tag": "Stories",
+    "summary": "Mark story watched",
+    "scope": "stories:write",
+    "sdk": "access.stories.markWatched"
+  },
+  {
+    "method": "get",
+    "route": "/stories/archive",
+    "tag": "Stories",
+    "summary": "Story archive",
+    "scope": "stories:read",
+    "sdk": "access.stories.listArchive"
+  },
+  {
+    "method": "post",
+    "route": "/stories/highlights",
+    "tag": "Stories",
+    "summary": "Create story highlight",
+    "scope": "stories:write",
+    "sdk": "access.stories.highlights.create"
+  },
+  {
+    "method": "delete",
+    "route": "/stories/highlights/{highlightId}",
+    "tag": "Stories",
+    "summary": "Delete story highlight",
+    "scope": "stories:write",
+    "sdk": "access.stories.highlights.delete"
+  },
+  {
+    "method": "get",
+    "route": "/stories/highlights/{highlightId}",
+    "tag": "Stories",
+    "summary": "Get story highlight",
+    "scope": "stories:read",
+    "sdk": "access.stories.highlights.get"
+  },
+  {
+    "method": "patch",
+    "route": "/stories/highlights/{highlightId}",
+    "tag": "Stories",
+    "summary": "Update story highlight",
+    "scope": "stories:write",
+    "sdk": "access.stories.highlights.update"
+  },
+  {
+    "method": "put",
+    "route": "/stories/highlights/{highlightId}",
+    "tag": "Stories",
+    "summary": "Replace story highlight",
+    "scope": "stories:write",
+    "sdk": "access.stories.highlights.replace"
+  },
+  {
+    "method": "delete",
+    "route": "/stories/highlights/{highlightId}/{storyId}",
+    "tag": "Stories",
+    "summary": "Remove story from highlight",
+    "scope": "stories:write",
+    "sdk": "access.stories.highlights.removeStory"
+  },
+  {
+    "method": "delete",
+    "route": "/stories/users/{userId}/block",
+    "tag": "Stories",
+    "summary": "Unblock story user",
+    "scope": "stories:write",
+    "sdk": "access.stories.users.unblock"
+  },
+  {
+    "method": "post",
+    "route": "/stories/users/{userId}/block",
+    "tag": "Stories",
+    "summary": "Block story user",
+    "scope": "stories:write",
+    "sdk": "access.stories.users.block"
+  },
+  {
+    "method": "get",
+    "route": "/stories/users/blocked",
+    "tag": "Stories",
+    "summary": "Blocked story users",
+    "scope": "stories:read",
+    "sdk": "access.stories.users.listBlocked"
   },
   {
     "method": "get",
     "route": "/subscribers",
     "tag": "Subscribers",
-    "summary": "List subscribers"
+    "summary": "Subscribers",
+    "scope": "subscribers:read",
+    "sdk": "access.subscribers.list"
   },
   {
     "method": "put",
-    "route": "/subscribers/:userId/custom-name",
+    "route": "/subscribers/{subscriberId}/discount",
     "tag": "Subscribers",
-    "summary": "Set custom name for subscriber"
+    "summary": "Apply discount to subscriber",
+    "scope": "subscribers:write",
+    "sdk": "access.subscribers.updateDiscount"
   },
   {
     "method": "put",
-    "route": "/subscribers/:userId/discount",
+    "route": "/subscribers/{subscriberId}/display-name",
     "tag": "Subscribers",
-    "summary": "Apply discount to subscriber"
+    "summary": "Set subscriber display name",
+    "scope": "subscribers:write",
+    "sdk": "access.subscribers.updateDisplayName"
+  },
+  {
+    "method": "delete",
+    "route": "/subscribers/{subscriberId}/note",
+    "tag": "Subscribers",
+    "summary": "Clear subscriber note",
+    "scope": "subscribers:write",
+    "sdk": "access.subscribers.deleteNote"
   },
   {
     "method": "put",
-    "route": "/subscribers/:userId/note",
+    "route": "/subscribers/{subscriberId}/note",
     "tag": "Subscribers",
-    "summary": "Update subscriber note"
+    "summary": "Update subscriber note",
+    "scope": "subscribers:write",
+    "sdk": "access.subscribers.updateNote"
+  },
+  {
+    "method": "get",
+    "route": "/subscribers/{subscriberId}/subscription-history",
+    "tag": "Subscribers",
+    "summary": "Subscriber history entries",
+    "scope": "subscribers:read",
+    "sdk": "access.subscribers.listSubscriptionHistory"
+  },
+  {
+    "method": "get",
+    "route": "/subscribers/active",
+    "tag": "Subscribers",
+    "summary": "Active subscribers",
+    "scope": "subscribers:read",
+    "sdk": "access.subscribers.listActive"
+  },
+  {
+    "method": "get",
+    "route": "/subscribers/activity",
+    "tag": "Subscribers",
+    "summary": "Recent subscriber activity events",
+    "scope": "subscribers:read",
+    "sdk": "access.subscribers.activity.list"
+  },
+  {
+    "method": "get",
+    "route": "/subscribers/activity/new",
+    "tag": "Subscribers",
+    "summary": "New subscribers",
+    "scope": "subscribers:read",
+    "sdk": "access.subscribers.activity.listNew"
+  },
+  {
+    "method": "get",
+    "route": "/subscribers/activity/promotions/{promotionId}",
+    "tag": "Subscribers",
+    "summary": "Promotion subscribers",
+    "scope": "subscribers:read",
+    "sdk": "access.subscribers.activity.listByPromotion"
+  },
+  {
+    "method": "get",
+    "route": "/subscribers/activity/renewals",
+    "tag": "Subscribers",
+    "summary": "Subscriber renewals",
+    "scope": "subscribers:read",
+    "sdk": "access.subscribers.activity.listRenewals"
+  },
+  {
+    "method": "get",
+    "route": "/subscribers/activity/trial-links/{trialLinkId}",
+    "tag": "Subscribers",
+    "summary": "Trial link subscribers",
+    "scope": "subscribers:read",
+    "sdk": "access.subscribers.activity.listByTrialLink"
+  },
+  {
+    "method": "get",
+    "route": "/subscribers/awards",
+    "tag": "Subscribers",
+    "summary": "Subscriber awards",
+    "scope": "subscribers:read",
+    "sdk": "access.subscribers.awards.list"
+  },
+  {
+    "method": "get",
+    "route": "/subscribers/awards/count",
+    "tag": "Subscribers",
+    "summary": "Subscriber awards count",
+    "scope": "subscribers:read",
+    "sdk": "access.subscribers.awards.getCount"
+  },
+  {
+    "method": "get",
+    "route": "/subscribers/count",
+    "tag": "Subscribers",
+    "summary": "Subscriber count",
+    "scope": "subscribers:read",
+    "sdk": "access.subscribers.getCount"
+  },
+  {
+    "method": "get",
+    "route": "/subscribers/expired",
+    "tag": "Subscribers",
+    "summary": "Expired subscribers",
+    "scope": "subscribers:read",
+    "sdk": "access.subscribers.listExpired"
+  },
+  {
+    "method": "get",
+    "route": "/subscribers/recent-expired",
+    "tag": "Subscribers",
+    "summary": "Recently expired subscribers",
+    "scope": "subscribers:read",
+    "sdk": "access.subscribers.listRecentExpired"
+  },
+  {
+    "method": "get",
+    "route": "/subscribers/top",
+    "tag": "Subscribers",
+    "summary": "Top subscribers",
+    "scope": "subscribers:read",
+    "sdk": "access.subscribers.listTop"
   },
   {
     "method": "get",
     "route": "/subscriptions",
     "tag": "Subscriptions",
-    "summary": "List subscriptions"
+    "summary": "Subscriptions",
+    "scope": "subscriptions:read",
+    "sdk": "access.subscriptions.list"
+  },
+  {
+    "method": "delete",
+    "route": "/subscriptions/{subscriptionId}/hide-posts",
+    "tag": "Subscriptions",
+    "summary": "Unhide subscription posts",
+    "scope": "subscriptions:write",
+    "sdk": "access.subscriptions.unhidePosts"
+  },
+  {
+    "method": "put",
+    "route": "/subscriptions/{subscriptionId}/hide-posts",
+    "tag": "Subscriptions",
+    "summary": "Hide subscription posts",
+    "scope": "subscriptions:write",
+    "sdk": "access.subscriptions.hidePosts"
   },
   {
     "method": "get",
-    "route": "/subscriptions/:subscriptionId/history",
+    "route": "/subscriptions/active",
     "tag": "Subscriptions",
-    "summary": "Get subscription history"
+    "summary": "Active subscriptions",
+    "scope": "subscriptions:read",
+    "sdk": "access.subscriptions.listActive"
   },
   {
     "method": "get",
     "route": "/subscriptions/count",
     "tag": "Subscriptions",
-    "summary": "Get subscription counts"
-  },
-  {
-    "method": "put",
-    "route": "/uploads/:mediaUploadId",
-    "tag": "Upload",
-    "summary": "Upload single-part media and finalize (No need to call /complete after upload if using this endpoint)"
-  },
-  {
-    "method": "put",
-    "route": "/uploads/:mediaUploadId/parts/:partNumber",
-    "tag": "Upload",
-    "summary": "Upload chunk to managed media upload"
-  },
-  {
-    "method": "post",
-    "route": "/uploads/check",
-    "tag": "Upload",
-    "summary": "Check if media already exists in vault"
-  },
-  {
-    "method": "post",
-    "route": "/uploads/complete",
-    "tag": "Upload",
-    "summary": "Finalize media upload"
-  },
-  {
-    "method": "post",
-    "route": "/uploads/init",
-    "tag": "Upload",
-    "summary": "Initialize media upload"
+    "summary": "Subscription counts",
+    "scope": "subscriptions:read",
+    "sdk": "access.subscriptions.getCount"
   },
   {
     "method": "get",
-    "route": "/users/:userId",
+    "route": "/subscriptions/expired",
+    "tag": "Subscriptions",
+    "summary": "Expired subscriptions",
+    "scope": "subscriptions:read",
+    "sdk": "access.subscriptions.listExpired"
+  },
+  {
+    "method": "get",
+    "route": "/subscriptions/subscribes/count",
+    "tag": "Subscriptions",
+    "summary": "Subscribed creator count",
+    "scope": "subscriptions:read",
+    "sdk": "access.subscriptions.getSubscribedCount"
+  },
+  {
+    "method": "post",
+    "route": "/uploads/finalize",
+    "tag": "Upload",
+    "summary": "Finalize uploads",
+    "scope": "vault:write",
+    "sdk": "access.uploads.finalize"
+  },
+  {
+    "method": "post",
+    "route": "/uploads/start",
+    "tag": "Upload",
+    "summary": "Start upload",
+    "scope": "vault:write",
+    "sdk": "access.uploads.start"
+  },
+  {
+    "method": "get",
+    "route": "/users",
     "tag": "Users",
-    "summary": "Get user"
-  },
-  {
-    "method": "post",
-    "route": "/users/:userId/lists",
-    "tag": "User Lists",
-    "summary": "Add user to multiple lists"
+    "summary": "List users",
+    "scope": "users:read",
+    "sdk": "access.users.list"
   },
   {
     "method": "get",
-    "route": "/users/:userId/posts",
-    "tag": "Posts",
-    "summary": "List user posts"
+    "route": "/users/{userId}",
+    "tag": "Users",
+    "summary": "Get user",
+    "scope": "users:read",
+    "sdk": "access.users.get"
   },
   {
     "method": "delete",
-    "route": "/users/:userId/restrict",
+    "route": "/users/{userId}/block",
     "tag": "Users",
-    "summary": "Unrestrict user"
+    "summary": "Unblock user",
+    "scope": "users:write",
+    "sdk": "access.users.unblock"
   },
   {
     "method": "post",
-    "route": "/users/:userId/restrict",
+    "route": "/users/{userId}/block",
     "tag": "Users",
-    "summary": "Restrict user"
+    "summary": "Block user",
+    "scope": "users:write",
+    "sdk": "access.users.block"
+  },
+  {
+    "method": "get",
+    "route": "/users/{userId}/friends",
+    "tag": "Users",
+    "summary": "User friends",
+    "scope": "users:read",
+    "sdk": "access.users.friends.list"
+  },
+  {
+    "method": "get",
+    "route": "/users/{userId}/friends/pinned",
+    "tag": "Users",
+    "summary": "Pinned user friends",
+    "scope": "users:read",
+    "sdk": "access.users.friends.listPinned"
+  },
+  {
+    "method": "get",
+    "route": "/users/{userId}/labels",
+    "tag": "Users",
+    "summary": "User labels",
+    "scope": "lists:read",
+    "sdk": "access.users.labels.listForUser"
+  },
+  {
+    "method": "get",
+    "route": "/users/{userId}/links",
+    "tag": "Users",
+    "summary": "Public user links",
+    "scope": "users:read",
+    "sdk": "access.users.listLinks"
+  },
+  {
+    "method": "post",
+    "route": "/users/{userId}/lists",
+    "tag": "User Lists",
+    "summary": "Add user to multiple lists",
+    "scope": "lists:write",
+    "sdk": "access.users.addToLists"
+  },
+  {
+    "method": "get",
+    "route": "/users/{userId}/media/purchased",
+    "tag": "Users",
+    "summary": "Purchased user media",
+    "scope": "users:read",
+    "sdk": "access.users.media.getPurchased"
+  },
+  {
+    "method": "get",
+    "route": "/users/{userId}/posts",
+    "tag": "Posts",
+    "summary": "List user posts",
+    "scope": "posts:read",
+    "sdk": "access.users.listPosts"
+  },
+  {
+    "method": "delete",
+    "route": "/users/{userId}/restrict",
+    "tag": "Users",
+    "summary": "Unrestrict user",
+    "scope": "users:write",
+    "sdk": "access.users.unrestrict"
+  },
+  {
+    "method": "post",
+    "route": "/users/{userId}/restrict",
+    "tag": "Users",
+    "summary": "Restrict user",
+    "scope": "users:write",
+    "sdk": "access.users.restrict"
+  },
+  {
+    "method": "get",
+    "route": "/users/{userId}/social/buttons",
+    "tag": "Users",
+    "summary": "User social buttons",
+    "scope": "users:read",
+    "sdk": "access.users.social.listButtons"
+  },
+  {
+    "method": "get",
+    "route": "/users/{userId}/stories",
+    "tag": "Stories",
+    "summary": "List user stories",
+    "scope": "stories:read",
+    "sdk": "access.users.stories.list"
+  },
+  {
+    "method": "get",
+    "route": "/users/{userId}/stories/highlights",
+    "tag": "Users",
+    "summary": "User story highlights",
+    "scope": "stories:read",
+    "sdk": "access.users.stories.listHighlights"
+  },
+  {
+    "method": "get",
+    "route": "/users/{userId}/streams",
+    "tag": "Users",
+    "summary": "User streams",
+    "scope": "users:read",
+    "sdk": "access.users.streams.list"
+  },
+  {
+    "method": "get",
+    "route": "/users/{userId}/streams/scheduled",
+    "tag": "Users",
+    "summary": "Scheduled user streams",
+    "scope": "users:read",
+    "sdk": "access.users.streams.listScheduled"
+  },
+  {
+    "method": "post",
+    "route": "/users/{userId}/subscribe",
+    "tag": "Users",
+    "summary": "Subscribe to user",
+    "scope": "subscriptions:write",
+    "sdk": "access.users.subscribe"
+  },
+  {
+    "method": "post",
+    "route": "/users/batch",
+    "tag": "Users",
+    "summary": "Batch get users",
+    "scope": "users:read",
+    "sdk": "access.users.batch"
   },
   {
     "method": "get",
     "route": "/users/blocked",
     "tag": "Users",
-    "summary": "List blocked users"
+    "summary": "List blocked users",
+    "scope": "users:read",
+    "sdk": "access.users.listBlocked"
   },
   {
-    "method": "get",
-    "route": "/users/list",
+    "method": "post",
+    "route": "/users/exists",
     "tag": "Users",
-    "summary": "List users by IDs"
+    "summary": "Check users exist",
+    "scope": "users:read",
+    "sdk": "access.users.exists"
   },
   {
     "method": "get",
-    "route": "/users/lists",
-    "tag": "User Lists",
-    "summary": "List user lists"
+    "route": "/users/hints",
+    "tag": "Users",
+    "summary": "User hints",
+    "scope": "users:read",
+    "sdk": "access.users.listHints"
+  },
+  {
+    "method": "get",
+    "route": "/users/labels",
+    "tag": "Users",
+    "summary": "Labels",
+    "scope": "lists:read",
+    "sdk": "access.users.labels.list"
   },
   {
     "method": "post",
-    "route": "/users/lists",
-    "tag": "User Lists",
-    "summary": "Create user list"
+    "route": "/users/labels",
+    "tag": "Users",
+    "summary": "Create label",
+    "scope": "lists:write",
+    "sdk": "access.users.labels.create"
   },
   {
     "method": "delete",
-    "route": "/users/lists/:listId",
-    "tag": "User Lists",
-    "summary": "Delete user list"
+    "route": "/users/labels/{labelId}",
+    "tag": "Users",
+    "summary": "Delete label",
+    "scope": "lists:write",
+    "sdk": "access.users.labels.delete"
   },
   {
     "method": "get",
-    "route": "/users/lists/:listId",
-    "tag": "User Lists",
-    "summary": "Get user list"
-  },
-  {
-    "method": "patch",
-    "route": "/users/lists/:listId",
-    "tag": "User Lists",
-    "summary": "Update user list"
+    "route": "/users/labels/{labelId}",
+    "tag": "Users",
+    "summary": "Get label",
+    "scope": "lists:read",
+    "sdk": "access.users.labels.get"
   },
   {
     "method": "get",
-    "route": "/users/lists/:listId/users",
-    "tag": "User Lists",
-    "summary": "List users in user list"
+    "route": "/users/mention",
+    "tag": "Users",
+    "summary": "Mention users",
+    "scope": "users:read",
+    "sdk": "access.users.listMentionable"
   },
   {
-    "method": "delete",
-    "route": "/users/lists/:listId/users/:userId",
-    "tag": "User Lists",
-    "summary": "Remove user from user list"
+    "method": "get",
+    "route": "/users/promotions",
+    "tag": "Users",
+    "summary": "User promotions",
+    "scope": "profile:read",
+    "sdk": "access.users.listPromotions"
   },
   {
-    "method": "post",
-    "route": "/users/lists/:listId/users/:userId",
-    "tag": "User Lists",
-    "summary": "Add user to list"
+    "method": "get",
+    "route": "/users/recommends",
+    "tag": "Users",
+    "summary": "Recommended users",
+    "scope": "users:read",
+    "sdk": "access.users.listRecommends"
   },
   {
     "method": "get",
     "route": "/users/restrict",
     "tag": "Users",
-    "summary": "List restricted users"
+    "summary": "List restricted users",
+    "scope": "users:read",
+    "sdk": "access.users.listRestricted"
   },
   {
     "method": "get",
     "route": "/users/search",
     "tag": "Users",
-    "summary": "Search performers"
+    "summary": "Search performers",
+    "scope": "users:read",
+    "sdk": "access.users.search"
   },
   {
     "method": "get",
     "route": "/vault/lists",
     "tag": "Vault Lists",
-    "summary": "List vault folders"
+    "summary": "List vault folders",
+    "scope": "vault:read",
+    "sdk": "access.vault.lists.list"
   },
   {
     "method": "post",
     "route": "/vault/lists",
     "tag": "Vault Lists",
-    "summary": "Create vault list"
+    "summary": "Create vault list",
+    "scope": "vault:write",
+    "sdk": "access.vault.lists.create"
   },
   {
     "method": "delete",
-    "route": "/vault/lists/:listId",
+    "route": "/vault/lists/{listId}",
     "tag": "Vault Lists",
-    "summary": "Delete vault list"
-  },
-  {
-    "method": "patch",
-    "route": "/vault/lists/:listId",
-    "tag": "Vault Lists",
-    "summary": "Update vault list"
+    "summary": "Delete vault list",
+    "scope": "vault:write",
+    "sdk": "access.vault.lists.delete"
   },
   {
     "method": "get",
-    "route": "/vault/lists/:listId/media",
+    "route": "/vault/lists/{listId}",
+    "tag": "Vault",
+    "summary": "Vault list",
+    "scope": "vault:read",
+    "sdk": "access.vault.lists.get"
+  },
+  {
+    "method": "patch",
+    "route": "/vault/lists/{listId}",
     "tag": "Vault Lists",
-    "summary": "List media in vault list"
+    "summary": "Update vault list",
+    "scope": "vault:write",
+    "sdk": "access.vault.lists.update"
+  },
+  {
+    "method": "delete",
+    "route": "/vault/lists/{listId}/media",
+    "tag": "Vault",
+    "summary": "Remove vault list media",
+    "scope": "vault:write",
+    "sdk": "access.vault.lists.media.delete"
+  },
+  {
+    "method": "get",
+    "route": "/vault/lists/{listId}/media",
+    "tag": "Vault Lists",
+    "summary": "List media in vault list",
+    "scope": "vault:read",
+    "sdk": "access.vault.lists.media.list"
   },
   {
     "method": "post",
-    "route": "/vault/lists/:listId/media",
+    "route": "/vault/lists/{listId}/media",
     "tag": "Vault Lists",
-    "summary": "Add media to vault list"
+    "summary": "Add media to vault list",
+    "scope": "vault:write",
+    "sdk": "access.vault.lists.media.create"
+  },
+  {
+    "method": "post",
+    "route": "/vault/lists/sort",
+    "tag": "Vault",
+    "summary": "Sort vault lists",
+    "scope": "vault:write",
+    "sdk": "access.vault.lists.sort"
   },
   {
     "method": "get",
     "route": "/vault/media",
     "tag": "Vault",
-    "summary": "List vault media"
+    "summary": "List vault media",
+    "scope": "vault:read",
+    "sdk": "access.vault.media.list"
+  },
+  {
+    "method": "get",
+    "route": "/vault/media/{mediaId}",
+    "tag": "Vault",
+    "summary": "Vault media item",
+    "scope": "vault:read",
+    "sdk": "access.vault.media.get"
+  },
+  {
+    "method": "get",
+    "route": "/vault/media/{mediaId}/posts",
+    "tag": "Vault",
+    "summary": "Vault media posts",
+    "scope": "vault:read",
+    "sdk": "access.vault.media.listPosts"
+  },
+  {
+    "method": "get",
+    "route": "/vault/media/{mediaId}/release-forms",
+    "tag": "Vault",
+    "summary": "Get vault media release forms",
+    "scope": "vault:read",
+    "sdk": "access.vault.media.listReleaseForms"
+  },
+  {
+    "method": "put",
+    "route": "/vault/media/hidden",
+    "tag": "Vault",
+    "summary": "Hide vault media",
+    "scope": "vault:write",
+    "sdk": "access.vault.media.hide"
+  },
+  {
+    "method": "get",
+    "route": "/vault/media/processing",
+    "tag": "Vault",
+    "summary": "Vault media processing",
+    "scope": "vault:read",
+    "sdk": "access.vault.media.listProcessing"
+  },
+  {
+    "method": "get",
+    "route": "/vault/media/types",
+    "tag": "Vault",
+    "summary": "Vault media types",
+    "scope": "vault:read",
+    "sdk": "access.vault.media.getTypes"
+  },
+  {
+    "method": "post",
+    "route": "/vault/uploads",
+    "tag": "Vault",
+    "summary": "Create vault upload session",
+    "scope": "vault:write",
+    "sdk": "access.vault.uploads.create"
+  },
+  {
+    "method": "get",
+    "route": "/vault/uploads/{batchId}",
+    "tag": "Vault",
+    "summary": "Vault upload session status",
+    "scope": "vault:write",
+    "sdk": "access.vault.uploads.get"
   }
 ]

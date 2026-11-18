@@ -1,23 +1,27 @@
-import { describe, it, expect } from "vitest";
-import { readFileSync } from "node:fs";
-import { resolve } from "node:path";
+import { readFileSync } from 'node:fs';
+import { resolve } from 'node:path';
+import { describe, expect, it } from 'vitest';
+import { OFAuthClient } from '../src/client';
+import { resolveSdkMethod, type AccessEndpointSpec } from './sdkResolve';
 
-describe("accessEndpoints.manifest.json", () => {
-  it("exists and contains a non-trivial set of Access API endpoints", () => {
-    const manifestPath = resolve(__dirname, "./accessEndpoints.manifest.json");
-    const raw = readFileSync(manifestPath, "utf8");
-    const manifest = JSON.parse(raw) as Array<{ method: string; route: string }>;
+const manifest = JSON.parse(
+  readFileSync(resolve(__dirname, 'accessEndpoints.manifest.json'), 'utf8'),
+) as AccessEndpointSpec[];
 
-    expect(Array.isArray(manifest)).toBe(true);
-    expect(manifest.length).toBeGreaterThan(20);
-
-    // Spot-check some known endpoints.
+describe('access endpoints manifest', () => {
+  it('lists V3 Access routes', () => {
+    expect(manifest.length).toBeGreaterThan(200);
     expect(manifest).toEqual(
       expect.arrayContaining([
-        expect.objectContaining({ method: "get", route: "/self" }),
-        expect.objectContaining({ method: "get", route: "/analytics/posts/top" }),
+        expect.objectContaining({ method: 'get', route: '/profile', sdk: 'access.profile.get' }),
+        expect.objectContaining({ method: 'post', route: '/chats/{userId}/messages', sdk: 'access.chats.messages.send' }),
       ]),
     );
   });
-});
 
+  it('maps every route to an SDK method', () => {
+    const client = new OFAuthClient({ accessToken: 'unused' });
+    const missing = manifest.filter((entry) => !resolveSdkMethod(client, entry.sdk)).map((e) => e.sdk);
+    expect(missing).toEqual([]);
+  });
+});

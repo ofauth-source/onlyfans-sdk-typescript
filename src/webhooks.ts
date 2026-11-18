@@ -1,445 +1,298 @@
 /* eslint-disable */
 /**
- * OFAuth Webhook Verification & Routing
- * Svix-compatible HMAC-SHA256 signature verification
+ * OFAuth webhook verification and routing.
+ *
+ * Deliveries follow Standard Webhooks (https://www.standardwebhooks.com): the
+ * `webhook-id`, `webhook-timestamp`, and `webhook-signature` headers, with an
+ * HMAC-SHA256 signature over `${id}.${timestamp}.${body}` keyed by the
+ * destination's `whsec_` secret. `svix-*` headers are accepted too.
  */
 
-import * as crypto from "node:crypto";
+import { OFAuthError } from './runtime';
+import type { LifecycleWebhookEventEnvelope, RealtimeWebhookEventEnvelope } from './models';
 
-// ============================================================================
-// Types
-// ============================================================================
+/** Every event a destination can receive: lifecycle and Realtime. */
+export type WebhookEvent = RealtimeWebhookEventEnvelope;
+/** `authorization.*` and `linked_account.*` events. */
+export type LifecycleWebhookEvent = LifecycleWebhookEventEnvelope;
+/** `realtime.*` events. */
+export type RealtimeWebhookEvent = Exclude<WebhookEvent, LifecycleWebhookEvent>;
+export type WebhookEventType = WebhookEvent['type'];
+/** The event for one type, e.g. `WebhookEventOf<'authorization.revoked'>`. */
+export type WebhookEventOf<T extends WebhookEventType> = Extract<WebhookEvent, { type: T }>;
 
-/** Svix webhook headers */
 export interface WebhookHeaders {
-  "svix-id": string;
-  "svix-timestamp": string;
-  "svix-signature": string;
-}
-
-/** Options for webhook verification */
-export interface WebhookVerificationOptions {
-  /** Webhook signing secret (with or without whsec_ prefix) */
-  secret: string;
-  /** Maximum allowed timestamp age in seconds (default: 300 = 5 minutes) */
-  tolerance?: number;
-}
-
-/** User data from OnlyFans */
-export interface WebhookUserData {
-  userId: string;
-  name: string;
-  username: string;
-  avatar: string;
-}
-
-/** Connection object in webhook events */
-export interface WebhookConnection {
   id: string;
-  platformUserId: string;
-  status: "active" | "awaiting_2fa" | "expired";
-  userData?: WebhookUserData;
-  permissions?: string[];
+  timestamp: string;
+  signature: string;
 }
 
-/** Dynamic rules configuration */
-export interface WebhookDynamicRules {
-  static_param: string;
-  format: string;
-  start: string;
-  end: string;
-  prefix: string;
-  suffix: string;
-  checksum_constant: number;
-  checksum_indexes: number[];
-  app_token: string;
-  revision: string;
-}
-
-/** Base webhook event */
-export interface BaseWebhookEvent {
-  eventType: string;
-  live: boolean;
-  data: Record<string, any>;
-}
-
-/** connection.created event */
-export interface ConnectionCreatedEvent extends BaseWebhookEvent {
-  eventType: "connection.created";
-  data: {
-    connection: WebhookConnection;
-    clientReferenceId: string | null;
-  };
-}
-
-/** connection.updated event */
-export interface ConnectionUpdatedEvent extends BaseWebhookEvent {
-  eventType: "connection.updated";
-  data: {
-    connection: WebhookConnection;
-    clientReferenceId: string | null;
-  };
-}
-
-/** connection.expired event */
-export interface ConnectionExpiredEvent extends BaseWebhookEvent {
-  eventType: "connection.expired";
-  data: {
-    connection: {
-      id: string;
-      platformUserId: string;
-      status: "expired";
-    };
-    clientReferenceId: string | null;
-  };
-}
-
-/** rules.updated event */
-export interface RulesUpdatedEvent extends BaseWebhookEvent {
-  eventType: "rules.updated";
-  data: {
-    rules: WebhookDynamicRules;
-    revision: string;
-  };
-}
-
-/** Union of all webhook event types */
-export type WebhookEvent =
-  | ConnectionCreatedEvent
-  | ConnectionUpdatedEvent
-  | ConnectionExpiredEvent
-  | RulesUpdatedEvent;
-
-/** String literal union of event type names */
-export type WebhookEventType = WebhookEvent["eventType"];
-
-/** Extract the data shape for a given event type */
-export type WebhookEventData<T extends WebhookEventType> = Extract<
-  WebhookEvent,
-  { eventType: T }
->["data"];
-
-/** Handler function for a specific event type */
-export type WebhookHandler<T extends WebhookEventType = WebhookEventType> = (
-  event: Extract<WebhookEvent, { eventType: T }>
-) => Promise<void> | void;
-
-/** Configuration for WebhookRouter */
-export interface WebhookRouterConfig {
-  secret: string;
+export interface WebhookVerificationOptions {
+  /** Maximum age of the delivery in seconds. Defaults to 300. */
   tolerance?: number;
-  handlers?: Partial<Record<WebhookEventType, WebhookHandler>>;
-  defaultHandler?: WebhookHandler;
-  errorHandler?: (error: Error, event?: WebhookEvent) => void;
 }
 
-// ============================================================================
-// Errors
-// ============================================================================
+export type WebhookVerificationErrorCode =
+  | 'MISSING_HEADERS'
+  | 'INVALID_TIMESTAMP'
+  | 'TIMESTAMP_OUT_OF_TOLERANCE'
+  | 'NO_VALID_SIGNATURES'
+  | 'SIGNATURE_MISMATCH'
+  | 'INVALID_JSON';
 
-/** Error thrown when webhook verification fails */
-export class WebhookVerificationError extends Error {
-  constructor(message: string, public code: string) {
+/** The delivery failed verification. Respond with 400 or 401 and do not process it. */
+export class WebhookVerificationError extends OFAuthError {
+  readonly code: WebhookVerificationErrorCode;
+
+  constructor(message: string, code: WebhookVerificationErrorCode) {
     super(message);
-    this.name = "WebhookVerificationError";
+    this.name = 'WebhookVerificationError';
+    this.code = code;
   }
 }
 
-/** Type guard for WebhookVerificationError */
-export function isWebhookVerificationError(
-  error: unknown
-): error is WebhookVerificationError {
+export function isWebhookVerificationError(error: unknown): error is WebhookVerificationError {
   return error instanceof WebhookVerificationError;
 }
 
-// ============================================================================
-// Verification
-// ============================================================================
+type HeaderInput = Headers | Record<string, string | string[] | undefined>;
 
-/**
- * Extract and validate Svix webhook headers from a request.
- * Accepts either a plain object or a `Headers` instance.
- */
-export function extractWebhookHeaders(
-  headers: Record<string, string> | Headers
-): WebhookHeaders {
-  const get = (name: string): string | null => {
-    if (headers instanceof Headers) return headers.get(name);
-    return headers[name] || headers[name.toLowerCase()] || null;
-  };
+function headerValue(headers: HeaderInput, name: string): string | undefined {
+  if (typeof (headers as Headers).get === 'function') return (headers as Headers).get(name) ?? undefined;
+  const record = headers as Record<string, string | string[] | undefined>;
+  const key = Object.keys(record).find((k) => k.toLowerCase() === name);
+  const value = key === undefined ? undefined : record[key];
+  return Array.isArray(value) ? value[0] : value;
+}
 
-  const svixId = get("svix-id");
-  const svixTimestamp = get("svix-timestamp");
-  const svixSignature = get("svix-signature");
-
-  if (!svixId || !svixTimestamp || !svixSignature) {
+/** Read the signature headers from a `Headers` object or a Node-style header record. */
+export function extractWebhookHeaders(headers: HeaderInput): WebhookHeaders {
+  const id = headerValue(headers, 'webhook-id') ?? headerValue(headers, 'svix-id');
+  const timestamp = headerValue(headers, 'webhook-timestamp') ?? headerValue(headers, 'svix-timestamp');
+  const signature = headerValue(headers, 'webhook-signature') ?? headerValue(headers, 'svix-signature');
+  if (!id || !timestamp || !signature) {
     throw new WebhookVerificationError(
-      "Missing required webhook headers (svix-id, svix-timestamp, svix-signature)",
-      "MISSING_HEADERS"
+      'Missing webhook-id, webhook-timestamp, or webhook-signature header',
+      'MISSING_HEADERS',
     );
   }
+  return { id, timestamp, signature };
+}
 
-  return {
-    "svix-id": svixId,
-    "svix-timestamp": svixTimestamp,
-    "svix-signature": svixSignature,
-  };
+function base64ToBytes(value: string): Uint8Array {
+  const binary = atob(value);
+  const bytes = new Uint8Array(binary.length);
+  for (let i = 0; i < binary.length; i++) bytes[i] = binary.charCodeAt(i);
+  return bytes;
+}
+
+function bytesToBase64(bytes: Uint8Array): string {
+  let binary = '';
+  for (const byte of bytes) binary += String.fromCharCode(byte);
+  return btoa(binary);
+}
+
+function timingSafeEqual(a: string, b: string): boolean {
+  if (a.length !== b.length) return false;
+  let diff = 0;
+  for (let i = 0; i < a.length; i++) diff |= a.charCodeAt(i) ^ b.charCodeAt(i);
+  return diff === 0;
+}
+
+function toText(payload: string | Uint8Array): string {
+  return typeof payload === 'string' ? payload : new TextDecoder().decode(payload);
 }
 
 /**
- * Verify a webhook signature using the Svix HMAC-SHA256 protocol.
- *
- * @returns true if the signature is valid
- * @throws WebhookVerificationError on failure
+ * The base64 HMAC-SHA256 signature of `${id}.${timestamp}.${payload}` (without the `v1,` prefix).
+ * Use `signWebhook` from `@ofauth/onlyfans-sdk/testing` to build complete test deliveries.
  */
-export function verifyWebhookSignature(
-  payload: string,
+export async function computeWebhookSignature(
+  secret: string,
+  id: string,
+  timestamp: string | number,
+  payload: string | Uint8Array,
+): Promise<string> {
+  const key = await globalThis.crypto.subtle.importKey(
+    'raw',
+    base64ToBytes(secret.startsWith('whsec_') ? secret.slice(6) : secret) as BufferSource,
+    { name: 'HMAC', hash: 'SHA-256' },
+    false,
+    ['sign'],
+  );
+  const signed = new TextEncoder().encode(`${id}.${timestamp}.${toText(payload)}`);
+  return bytesToBase64(new Uint8Array(await globalThis.crypto.subtle.sign('HMAC', key, signed)));
+}
+
+/**
+ * Verify a delivery's signature against the raw request body.
+ * Resolves to true, or throws {@link WebhookVerificationError}.
+ */
+export async function verifyWebhookSignature(
+  payload: string | Uint8Array,
   headers: WebhookHeaders,
-  options: WebhookVerificationOptions
-): boolean {
-  const { secret, tolerance = 300 } = options;
-
-  // --- timestamp check ---
-  const ts = parseInt(headers["svix-timestamp"], 10);
-  if (isNaN(ts)) {
-    throw new WebhookVerificationError("Invalid timestamp format", "INVALID_TIMESTAMP");
+  secret: string,
+  options: WebhookVerificationOptions = {},
+): Promise<true> {
+  const tolerance = options.tolerance ?? 300;
+  const timestamp = Number(headers.timestamp);
+  if (!Number.isInteger(timestamp)) {
+    throw new WebhookVerificationError('Invalid webhook-timestamp', 'INVALID_TIMESTAMP');
   }
-  if (Math.abs(Math.floor(Date.now() / 1000) - ts) > tolerance) {
-    throw new WebhookVerificationError("Webhook timestamp too old", "TIMESTAMP_TOO_OLD");
-  }
-
-  // --- compute expected signature ---
-  const cleanSecret = secret.startsWith("whsec_") ? secret.slice(6) : secret;
-  const key = Buffer.from(cleanSecret, "base64");
-  const signed = `${headers["svix-id"]}.${headers["svix-timestamp"]}.${payload}`;
-  const expected = crypto.createHmac("sha256", key).update(signed).digest("base64");
-
-  // --- compare against provided signatures ---
-  const sigs = headers["svix-signature"]
-    .split(" ")
-    .map((s) => {
-      const [version, signature] = s.split(",");
-      return { version, signature };
-    })
-    .filter((s) => s.version === "v1");
-
-  if (sigs.length === 0) {
-    throw new WebhookVerificationError("No valid v1 signatures found", "NO_VALID_SIGNATURES");
+  if (Math.abs(Math.floor(Date.now() / 1000) - timestamp) > tolerance) {
+    throw new WebhookVerificationError('Webhook timestamp is outside the tolerance', 'TIMESTAMP_OUT_OF_TOLERANCE');
   }
 
-  const isValid = sigs.some((s) => {
-    try {
-      return crypto.timingSafeEqual(
-        Buffer.from(expected, "base64"),
-        Buffer.from(s.signature, "base64")
-      );
-    } catch {
-      return false;
-    }
-  });
-
-  if (!isValid) {
-    throw new WebhookVerificationError("Signature verification failed", "SIGNATURE_MISMATCH");
+  const signatures = headers.signature
+    .split(' ')
+    .map((entry) => entry.split(','))
+    .filter(([version, value]) => version === 'v1' && value)
+    .map(([, value]) => value);
+  if (signatures.length === 0) {
+    throw new WebhookVerificationError('No v1 signature in webhook-signature', 'NO_VALID_SIGNATURES');
   }
 
+  const expected = await computeWebhookSignature(secret, headers.id, headers.timestamp, payload);
+
+  if (!signatures.some((signature) => timingSafeEqual(signature, expected))) {
+    throw new WebhookVerificationError('Webhook signature does not match', 'SIGNATURE_MISMATCH');
+  }
   return true;
 }
 
 /**
- * Verify a webhook from a `Request` object (Cloudflare Workers, Deno, etc.).
- * Returns the parsed event payload.
+ * Verify a delivery and parse its event. Pass the raw body exactly as received.
+ *
+ * @example
+ * ```ts
+ * // Express: app.post('/webhooks/ofauth', express.raw({ type: 'application/json' }), ...)
+ * const event = await verifyWebhook(req.body, req.headers, process.env.OFAUTH_WEBHOOK_SECRET!)
+ * ```
  */
-export async function verifyWebhookRequest<T = WebhookEvent>(
-  request: Request,
+export async function verifyWebhook<T = WebhookEvent>(
+  payload: string | Uint8Array,
+  headers: HeaderInput,
   secret: string,
-  tolerance?: number
+  options?: WebhookVerificationOptions,
 ): Promise<T> {
-  const headers = extractWebhookHeaders(request.headers);
-  const payload = await request.text();
-  verifyWebhookSignature(payload, headers, { secret, tolerance });
+  await verifyWebhookSignature(payload, extractWebhookHeaders(headers), secret, options);
   try {
-    return JSON.parse(payload) as T;
+    return JSON.parse(toText(payload)) as T;
   } catch {
-    throw new WebhookVerificationError("Failed to parse webhook payload as JSON", "INVALID_JSON");
+    throw new WebhookVerificationError('Webhook body is not valid JSON', 'INVALID_JSON');
   }
 }
 
-/**
- * Verify a webhook from a raw payload + headers (Express.js, Node.js HTTP, etc.).
- * Returns the parsed event payload.
- */
-export function verifyWebhookPayload<T = WebhookEvent>(
-  payload: string | Buffer,
-  headers: Record<string, string>,
+/** Verify a `Request` (Workers, Deno, Bun, Next.js route handlers) and parse its event. */
+export async function verifyWebhookRequest<T = WebhookEvent>(
+  request: Request,
   secret: string,
-  tolerance?: number
-): T {
-  const payloadStr = typeof payload === "string" ? payload : payload.toString("utf8");
-  const webhookHeaders = extractWebhookHeaders(headers);
-  verifyWebhookSignature(payloadStr, webhookHeaders, { secret, tolerance });
-  try {
-    return JSON.parse(payloadStr) as T;
-  } catch {
-    throw new WebhookVerificationError("Failed to parse webhook payload as JSON", "INVALID_JSON");
-  }
+  options?: WebhookVerificationOptions,
+): Promise<T> {
+  return verifyWebhook<T>(await request.text(), request.headers, secret, options);
 }
 
 // ============================================================================
 // Router
 // ============================================================================
 
+export type WebhookHandler<T extends WebhookEvent = WebhookEvent> = (event: T) => void | Promise<void>;
+
+export interface WebhookRouterConfig {
+  /** The destination's `whsec_` signing secret. */
+  secret: string;
+  tolerance?: number;
+  /** Called for events without a specific handler. */
+  defaultHandler?: WebhookHandler;
+}
+
 /**
- * Routes verified webhook events to registered handler functions.
+ * Verifies deliveries and dispatches them by `type`.
+ *
+ * Deduplicate on `eventId`, and apply events per `linkedAccountId` in `order`:
+ * retried deliveries can arrive out of order.
  *
  * @example
  * ```ts
- * const router = createWebhookRouter({
- *   secret: "whsec_...",
- *   handlers: {
- *     "connection.created": async (event) => { ... },
- *   },
- * });
+ * const router = new WebhookRouter({ secret: process.env.OFAUTH_WEBHOOK_SECRET! })
+ *   .on('authorization.revoked', async (event) => deleteTokens(event.authorizationId))
+ *   .on('realtime.chat_message.received', async (event) => handleMessage(event.data))
+ * export default { fetch: createFetchWebhookHandler(router) }
  * ```
  */
 export class WebhookRouter {
-  private handlers: Partial<Record<WebhookEventType, WebhookHandler>> = {};
-  private defaultHandler?: WebhookHandler;
-  private errorHandler?: (error: Error, event?: WebhookEvent) => void;
+  private readonly handlers = new Map<string, WebhookHandler<any>>();
   private secret: string;
-  private tolerance: number;
+  private readonly tolerance?: number;
+  private defaultHandler?: WebhookHandler;
 
   constructor(config: WebhookRouterConfig) {
     this.secret = config.secret;
-    this.tolerance = config.tolerance ?? 300;
-    if (config.handlers) this.handlers = { ...config.handlers };
+    this.tolerance = config.tolerance;
     this.defaultHandler = config.defaultHandler;
-    this.errorHandler = config.errorHandler;
   }
 
-  /** Register a handler for a specific event type */
-  on<T extends WebhookEventType>(eventType: T, handler: WebhookHandler<T>): this {
-    this.handlers[eventType] = handler as unknown as WebhookHandler;
+  /** Handle one event type. */
+  on<T extends WebhookEventType>(type: T, handler: WebhookHandler<WebhookEventOf<T>>): this {
+    this.handlers.set(type, handler);
     return this;
   }
 
-  /** Register a default handler for unmatched event types */
+  /** Handle events without a specific handler. */
   onDefault(handler: WebhookHandler): this {
     this.defaultHandler = handler;
     return this;
   }
 
-  /** Register an error handler */
-  onError(handler: (error: Error, event?: WebhookEvent) => void): this {
-    this.errorHandler = handler;
-    return this;
-  }
-
-  /** Handle a `Request` object (Cloudflare Workers, Deno, Bun, Node 18+) */
-  async handleRequest(request: Request): Promise<void> {
-    try {
-      const event = await verifyWebhookRequest<WebhookEvent>(
-        request,
-        this.secret,
-        this.tolerance
-      );
-      await this.processEvent(event);
-    } catch (error) {
-      if (this.errorHandler) this.errorHandler(error as Error);
-      else throw error;
-    }
-  }
-
-  /** Handle a raw payload + headers (Express.js, Fastify, etc.) */
-  async handlePayload(
-    payload: string | Buffer,
-    headers: Record<string, string>
-  ): Promise<void> {
-    try {
-      const event = verifyWebhookPayload<WebhookEvent>(
-        payload,
-        headers,
-        this.secret,
-        this.tolerance
-      );
-      await this.processEvent(event);
-    } catch (error) {
-      if (this.errorHandler) this.errorHandler(error as Error);
-      else throw error;
-    }
-  }
-
-  /** Update the webhook secret at runtime */
-  updateSecret(secret: string): void {
+  /** Rotate the signing secret. */
+  setSecret(secret: string): void {
     this.secret = secret;
   }
 
-  /** Update the timestamp tolerance at runtime */
-  updateTolerance(tolerance: number): void {
-    this.tolerance = tolerance;
+  /** Verify and dispatch a raw delivery. Returns the event. */
+  async handle(payload: string | Uint8Array, headers: HeaderInput): Promise<WebhookEvent> {
+    const event = await verifyWebhook<WebhookEvent>(payload, headers, this.secret, { tolerance: this.tolerance });
+    await this.dispatch(event);
+    return event;
   }
 
-  private async processEvent(event: WebhookEvent): Promise<void> {
-    try {
-      const handler = this.handlers[event.eventType] || this.defaultHandler;
-      if (!handler) {
-        console.warn(`No handler registered for webhook event type: ${event.eventType}`);
-        return;
-      }
-      await handler(event);
-    } catch (error) {
-      if (this.errorHandler) this.errorHandler(error as Error, event);
-      else throw error;
-    }
+  /** Verify and dispatch a `Request`. Returns the event. */
+  async handleRequest(request: Request): Promise<WebhookEvent> {
+    return this.handle(await request.text(), request.headers);
+  }
+
+  /** Dispatch an already verified event. */
+  async dispatch(event: WebhookEvent): Promise<void> {
+    const handler = this.handlers.get(event.type) ?? this.defaultHandler;
+    if (handler) await handler(event);
   }
 }
 
-/** Create a new WebhookRouter */
-export function createWebhookRouter(config: WebhookRouterConfig): WebhookRouter {
-  return new WebhookRouter(config);
-}
-
-// ============================================================================
-// Framework Helpers
-// ============================================================================
-
-/**
- * Create a fetch-style handler (Cloudflare Workers, Deno, Bun).
- * Returns a `Response` with appropriate status codes.
- */
-export function createFetchWebhookHandler(
-  router: WebhookRouter
-): (request: Request) => Promise<Response> {
-  return async (request: Request): Promise<Response> => {
+/** A fetch-style handler: 200 on success, 401 on failed verification, 500 when a handler throws. */
+export function createFetchWebhookHandler(router: WebhookRouter): (request: Request) => Promise<Response> {
+  return async (request) => {
     try {
       await router.handleRequest(request);
-      return new Response("OK", { status: 200 });
+      return new Response(null, { status: 200 });
     } catch (error) {
       if (isWebhookVerificationError(error)) {
-        return new Response(
-          JSON.stringify({ error: error.message, code: error.code }),
-          { status: 401, headers: { "Content-Type": "application/json" } }
-        );
+        return Response.json({ error: error.code }, { status: 401 });
       }
-      console.error("Webhook processing error:", error);
-      return new Response("Internal server error", { status: 500 });
+      return Response.json({ error: 'handler_failed' }, { status: 500 });
     }
   };
 }
 
-/**
- * Create an Express.js middleware for webhook handling.
- * Expects `express.raw({ type: "application/json" })` to be applied first.
- */
-export function createExpressWebhookMiddleware(router: WebhookRouter): (req: any, res: any, next: any) => Promise<void> {
-  return async (req: any, res: any, next: any) => {
+/** Express middleware. Mount it after `express.raw({ type: 'application/json' })`. */
+export function createExpressWebhookMiddleware(router: WebhookRouter) {
+  return async (req: any, res: any, next: (error?: unknown) => void): Promise<void> => {
     try {
-      await router.handlePayload(req.body, req.headers);
-      res.status(200).send("OK");
+      await router.handle(req.body, req.headers);
+      res.status(200).end();
     } catch (error) {
       if (isWebhookVerificationError(error)) {
-        res.status(401).json({ error: error.message, code: error.code });
+        res.status(401).json({ error: error.code });
       } else {
-        res.status(500).json({ error: "Internal server error" });
         next(error);
       }
     }

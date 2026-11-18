@@ -1,0 +1,22 @@
+{
+  "$schema": "https://typedoc.org/schema.json",
+  "name": "@ofauth/onlyfans-sdk",
+  "entryPoints": [
+    "src/index.ts",
+    "src/testing.ts",
+    "src/realtime-browser.ts"
+  ],
+  "out": "docs",
+  "readme": "README.md",
+  "excludePrivate": true,
+  "excludeInternal": true,
+  "includeVersion": true,
+  "sort": [
+    "kind",
+    "alphabetical"
+  ],
+  "validation": {
+    "notExported": false,
+    "invalidLink": false
+  }
+}

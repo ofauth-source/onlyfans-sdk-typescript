@@ -1,0 +1,86 @@
+{
+  "fetch": {
+    "denialPropagatedWithoutExchange": true,
+    "foreignCallbacks": [
+      400,
+      400,
+      400
+    ],
+    "completedOnce": true,
+    "tamperedExpiredReusedRejected": true,
+    "exchangeCount": 1
+  },
+  "express": {
+    "denialPropagatedWithoutExchange": true,
+    "foreignCallbacks": [
+      400,
+      400,
+      400
+    ],
+    "completedOnce": true,
+    "tamperedExpiredReusedRejected": true,
+    "exchangeCount": 1
+  },
+  "persistence": {
+    "refreshRequests": 1,
+    "callbacks": 5,
+    "restartAfterSave": true,
+    "restartBeforeSaveBlocked": true
+  },
+  "expiryRecovery": {
+    "elapsedOutageMs": 120000,
+    "responseLifetimeMs": 60000,
+    "refreshRequests": 2,
+    "persistedReplacementUsedForRenewal": true,
+    "exposedTokenActuallyFresh": true
+  },
+  "acknowledgmentRecovery": {
+    "refreshRequests": 1,
+    "originalManagerRecovered": true,
+    "restartUsesSameReplacement": true,
+    "callbacks": 2
+  },
+  "delayedRejection": {
+    "rejectedOldRequests": 2,
+    "refreshRequests": 1,
+    "bothRequestsUseSameReplacement": true
+  },
+  "postgres": {
+    "concurrentRefreshRequests": 1,
+    "sameReplacement": true,
+    "lostResponseRequests": 1,
+    "restartRetryBlocked": true,
+    "lockFailureBeforeExchange": true,
+    "connectionLossSaveRejected": true,
+    "connectionLossReplayBlocked": true,
+    "lockPolicy": "session-scoped; no lease expiry"
+  },
+  "selection": {
+    "multiPageSelectionRequired": true,
+    "outboundWriteTargets": [
+      "account-b",
+      "account-b",
+      "account-a"
+    ],
+    "selectedRemovalRecovery": "select_linked_account"
+  },
+  "facadeExpiry": [
+    {
+      "mode": "authorization-code",
+      "lockWaitMs": 720000,
+      "originalTokenExpiredByMs": 120000,
+      "renewedBeforeUse": true
+    },
+    {
+      "mode": "sandbox",
+      "lockWaitMs": 720000,
+      "originalTokenExpiredByMs": 120000,
+      "renewedBeforeUse": true
+    }
+  ],
+  "offline": {
+    "facadeRequestsOffline": true,
+    "deniedOfflineNotPersisted": true,
+    "accessOnlyLowerLevelSucceeds": true
+  }
+}
